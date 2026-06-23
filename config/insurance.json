@@ -1,0 +1,37 @@
+{
+  "profiles": {
+    "low": {
+      "null_values": 0.005,
+      "duplicate_records": 0.003,
+      "datatype_mismatch": 0.002,
+      "foreign_key_break": 0.001,
+      "invalid_dates": 0.001,
+      "negative_values": 0.001,
+      "outliers": 0.001,
+      "missing_records": 0.001,
+      "schema_drift": 0.002
+    },
+    "medium": {
+      "null_values": 0.02,
+      "duplicate_records": 0.01,
+      "datatype_mismatch": 0.01,
+      "foreign_key_break": 0.005,
+      "invalid_dates": 0.005,
+      "negative_values": 0.005,
+      "outliers": 0.005,
+      "missing_records": 0.003,
+      "schema_drift": 0.01
+    },
+    "high": {
+      "null_values": 0.05,
+      "duplicate_records": 0.03,
+      "datatype_mismatch": 0.03,
+      "foreign_key_break": 0.02,
+      "invalid_dates": 0.02,
+      "negative_values": 0.02,
+      "outliers": 0.02,
+      "missing_records": 0.01,
+      "schema_drift": 0.03
+    }
+  }
+}

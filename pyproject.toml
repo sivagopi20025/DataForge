@@ -1,0 +1,28 @@
+[project]
+name = "dataforge"
+version = "0.6.0"
+description = "Deterministic multi-domain test-data generation, issue injection, validation, and export"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "psycopg>=3.2",
+  "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+parquet = ["pyarrow>=14"]
+
+[project.scripts]
+dataforge = "dataforge.cli:main"
+dataforge-retail = "dataforge.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "backend/tests"]
