@@ -24,5 +24,13 @@ class GeneratedFileRepository:
         self.db.flush()
         return generated
 
+    def get_for_run(self, *, run_id: str, file_id: str) -> GeneratedFile | None:
+        return self.db.scalar(
+            select(GeneratedFile).where(
+                GeneratedFile.id == file_id,
+                GeneratedFile.run_id == run_id,
+            )
+        )
+
     def count(self) -> int:
         return int(self.db.scalar(select(func.count(GeneratedFile.id))) or 0)

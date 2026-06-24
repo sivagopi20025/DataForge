@@ -11,6 +11,8 @@ class GenerateRequest(BaseModel):
     load_type: str = "bulk"
     format: str = Field(default="csv", pattern="^(csv|json|parquet)$")
     records: int = Field(default=1000, ge=1)
+    selected_tables: list[str] | None = None
+    issues: dict[str, float] = Field(default_factory=dict)
     user_email: str = "anonymous@dataforge.local"
 
 

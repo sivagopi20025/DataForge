@@ -6,6 +6,7 @@ import uuid
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError
 
 from backend.app.analytics import AnalyticsAggregator
@@ -22,6 +23,13 @@ def create_app() -> FastAPI:
     configure_logging(settings.log_level)
     app = FastAPI(title="DataForge Backend", version="0.6.0")
     app.state.SessionLocal = SessionLocal
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     @app.middleware("http")
     async def request_context(request: Request, call_next):

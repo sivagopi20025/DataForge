@@ -90,6 +90,29 @@ python3 retail_generator.py \
 `retail_generator.py` is kept as the compatibility entry point. If installed as
 a package, the new script name is `dataforge`.
 
+## Phase 1 UI
+
+The Next.js frontend lives in `frontend/`.
+
+Run the backend:
+
+```bash
+uvicorn backend.app.main:app --reload --port 8010
+```
+
+Run the UI:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The UI reads `NEXT_PUBLIC_API_BASE_URL` and defaults to
+`http://127.0.0.1:8010`. Phase 1 includes the functional Data Generator,
+Run Results, Personalization, Settings, and Admin Analytics pages. Stream APIs,
+Test Packages, and Dashboards are visible as professional Coming Soon pages.
+
 ## Select generated files
 
 Generate every table:
@@ -304,7 +327,7 @@ alembic -c backend/alembic.ini upgrade head
 Run the API:
 
 ```bash
-uvicorn backend.app.main:app --reload
+uvicorn backend.app.main:app --reload --port 8010
 ```
 
 Key endpoints:
