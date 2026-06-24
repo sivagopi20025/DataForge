@@ -1,10 +1,15 @@
 import axios from "axios";
-import type { AnalyticsOverview, CatalogResponse, Domain, GeneratePayload, GenerateResponse, RunDetail } from "@/types/api";
+import type { AnalyticsOverview, CatalogResponse, Domain, GeneratePayload, GenerateResponse, JobStatus, RunDetail } from "@/types/api";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8010",
   timeout: 120000,
 });
+
+const browserApiKey = process.env.NEXT_PUBLIC_DATAFORGE_API_KEY;
+if (browserApiKey) {
+  api.defaults.headers.common["X-API-Key"] = browserApiKey;
+}
 
 api.interceptors.response.use(
   (response) => response,
@@ -27,6 +32,26 @@ export async function generateDataset(payload: GeneratePayload) {
 export async function getRun(runId: string) {
   const { data } = await api.get<RunDetail>(`/api/v1/runs/${runId}`);
   return data;
+}
+
+export async function getJob(jobId: string) {
+  const { data } = await api.get<JobStatus>(`/api/v1/jobs/${jobId}`);
+  return data;
+}
+
+export async function waitForJob(jobId: string, timeoutMs = 120000) {
+  const started = Date.now();
+  while (Date.now() - started < timeoutMs) {
+    const job = await getJob(jobId);
+    if (job.status === "completed") {
+      return job;
+    }
+    if (job.status === "failed") {
+      throw new Error(job.error_message ?? "Generation job failed.");
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 1200));
+  }
+  throw new Error("Generation job timed out. Check run history for status.");
 }
 
 export function getDownloadUrl(runId: string, fileId: string) {

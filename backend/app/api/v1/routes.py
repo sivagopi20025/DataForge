@@ -1,26 +1,32 @@
 from __future__ import annotations
 
-from pathlib import Path
-
-from fastapi import APIRouter, Depends, Query
-from fastapi.responses import FileResponse
+from fastapi import APIRouter, BackgroundTasks, Depends, Query, Request
+from fastapi.responses import Response
 from sqlalchemy.orm import Session
 
 from backend.app.analytics import AnalyticsService
-from backend.app.core.config import get_settings
+from backend.app.core.security import require_api_key
 from backend.app.db.session import get_db
-from backend.app.repositories import DatasetRunRepository, GeneratedFileRepository
-from backend.app.schemas.api import GenerateRequest, GenerateResponse, PaginatedRuns, RunDetail, RunSummary, ValidateRequest
-from backend.app.services.generation import DatasetGenerationService
+from backend.app.repositories import DatasetRunRepository, GeneratedFileRepository, GenerationJobRepository
+from backend.app.schemas.api import GenerateRequest, GenerateResponse, JobStatusResponse, PaginatedRuns, RunDetail, RunSummary, ValidateRequest
+from backend.app.services.jobs import GenerationJobService, run_generation_job
+from backend.app.services.storage import get_storage_service
 from dataforge.domains import DOMAIN_SPECS
 from backend.app.services.validation import ValidationService
 
 router = APIRouter(prefix="/api/v1")
 
 
-@router.post("/generate", response_model=GenerateResponse)
-def generate_dataset(payload: GenerateRequest, db: Session = Depends(get_db)) -> dict[str, str]:
-    return DatasetGenerationService(db).generate(payload)
+@router.post("/generate", response_model=GenerateResponse, dependencies=[Depends(require_api_key)])
+def generate_dataset(
+    payload: GenerateRequest,
+    background_tasks: BackgroundTasks,
+    request: Request,
+    db: Session = Depends(get_db),
+) -> dict[str, str | None]:
+    response = GenerationJobService(db).enqueue(payload)
+    background_tasks.add_task(run_generation_job, response["job_id"], request.app.state.SessionLocal)
+    return response
 
 
 @router.get("/catalog/tables/{domain}")
@@ -49,7 +55,7 @@ def catalog_tables(domain: str) -> dict:
     }
 
 
-@router.post("/validate")
+@router.post("/validate", dependencies=[Depends(require_api_key)])
 def validate_dataset(payload: ValidateRequest, db: Session = Depends(get_db)) -> dict:
     return ValidationService(db).validate_run(payload.run_id)
 
@@ -59,6 +65,7 @@ def list_runs(
     limit: int = Query(default=50, ge=1, le=200),
     offset: int = Query(default=0, ge=0),
     db: Session = Depends(get_db),
+    _: None = Depends(require_api_key),
 ) -> dict:
     repo = DatasetRunRepository(db)
     runs = repo.list(limit=limit, offset=offset)
@@ -71,7 +78,7 @@ def list_runs(
 
 
 @router.get("/runs/{run_id}", response_model=RunDetail)
-def get_run(run_id: str, db: Session = Depends(get_db)) -> dict:
+def get_run(run_id: str, db: Session = Depends(get_db), _: None = Depends(require_api_key)) -> dict:
     run = DatasetRunRepository(db).get(run_id)
     if not run:
         raise ValueError(f"Run not found: {run_id}")
@@ -82,8 +89,12 @@ def get_run(run_id: str, db: Session = Depends(get_db)) -> dict:
                 "id": item.id,
                 "file_name": item.file_name,
                 "file_path": item.file_path,
+                "storage_backend": item.storage_backend,
+                "object_key": item.object_key,
                 "file_format": item.file_format,
+                "size_bytes": item.size_bytes,
                 "file_size_mb": item.file_size_mb,
+                "content_type": item.content_type,
                 "created_at": item.created_at.isoformat(),
             }
             for item in run.generated_files
@@ -113,64 +124,72 @@ def get_run(run_id: str, db: Session = Depends(get_db)) -> dict:
     }
 
 
-@router.get("/runs/{run_id}/files/{file_id}/download")
-def download_generated_file(run_id: str, file_id: str, db: Session = Depends(get_db)) -> FileResponse:
+@router.get("/jobs/{job_id}", response_model=JobStatusResponse)
+def get_job(job_id: str, db: Session = Depends(get_db), _: None = Depends(require_api_key)) -> dict:
+    job = GenerationJobRepository(db).get(job_id)
+    if not job:
+        raise ValueError(f"Generation job not found: {job_id}")
+    run_detail = get_run(job.run_id, db, None) if job.run_id else None
+    return {
+        "job_id": job.id,
+        "status": job.status,
+        "run_id": job.run_id,
+        "error_message": job.error_message,
+        "queued_at": job.queued_at.isoformat(),
+        "started_at": job.started_at.isoformat() if job.started_at else None,
+        "completed_at": job.completed_at.isoformat() if job.completed_at else None,
+        "run": run_detail,
+    }
+
+
+@router.get("/runs/{run_id}/files/{file_id}/download", dependencies=[Depends(require_api_key)])
+def download_generated_file(run_id: str, file_id: str, db: Session = Depends(get_db)) -> Response:
     generated_file = GeneratedFileRepository(db).get_for_run(run_id=run_id, file_id=file_id)
     if not generated_file:
         raise ValueError(f"Generated file not found for run: {run_id}")
-    path = Path(generated_file.file_path).resolve()
-    output_root = get_settings().output_dir.resolve()
-    if not path.is_relative_to(output_root):
-        raise ValueError(f"Generated file path is outside the configured output directory: {generated_file.file_name}")
-    if not path.exists() or not path.is_file():
-        raise ValueError(f"Generated file is no longer available: {generated_file.file_name}")
-    return FileResponse(
-        path=path,
-        filename=generated_file.file_name,
-        media_type="application/octet-stream",
-    )
+    return get_storage_service().download_response(generated_file)
 
 
-@router.get("/admin/analytics/overview")
+@router.get("/admin/analytics/overview", dependencies=[Depends(require_api_key)])
 def analytics_overview(db: Session = Depends(get_db)) -> dict:
     return AnalyticsService(db).overview()
 
 
-@router.get("/admin/analytics/domains")
+@router.get("/admin/analytics/domains", dependencies=[Depends(require_api_key)])
 def analytics_domains(db: Session = Depends(get_db)) -> dict[str, int]:
     return AnalyticsService(db).domains()
 
 
-@router.get("/admin/analytics/formats")
+@router.get("/admin/analytics/formats", dependencies=[Depends(require_api_key)])
 def analytics_formats(db: Session = Depends(get_db)) -> dict[str, int]:
     return AnalyticsService(db).formats()
 
 
-@router.get("/admin/analytics/load-types")
+@router.get("/admin/analytics/load-types", dependencies=[Depends(require_api_key)])
 def analytics_load_types(db: Session = Depends(get_db)) -> dict[str, int]:
     return AnalyticsService(db).load_types()
 
 
-@router.get("/admin/analytics/quality/domains")
+@router.get("/admin/analytics/quality/domains", dependencies=[Depends(require_api_key)])
 def analytics_quality_domains(db: Session = Depends(get_db)) -> dict[str, float]:
     return AnalyticsService(db).quality_by_domain()
 
 
-@router.get("/admin/analytics/quality/load-types")
+@router.get("/admin/analytics/quality/load-types", dependencies=[Depends(require_api_key)])
 def analytics_quality_load_types(db: Session = Depends(get_db)) -> dict[str, float]:
     return AnalyticsService(db).quality_by_load_type()
 
 
-@router.get("/admin/analytics/quality/trends")
+@router.get("/admin/analytics/quality/trends", dependencies=[Depends(require_api_key)])
 def analytics_quality_trends(db: Session = Depends(get_db)) -> list[dict]:
     return AnalyticsService(db).quality_trends()
 
 
-@router.get("/admin/analytics/quality/lowest-runs")
+@router.get("/admin/analytics/quality/lowest-runs", dependencies=[Depends(require_api_key)])
 def analytics_lowest_quality_runs(db: Session = Depends(get_db)) -> list[dict]:
     return AnalyticsService(db).ranked_quality_runs(lowest=True)
 
 
-@router.get("/admin/analytics/quality/highest-runs")
+@router.get("/admin/analytics/quality/highest-runs", dependencies=[Depends(require_api_key)])
 def analytics_highest_quality_runs(db: Session = Depends(get_db)) -> list[dict]:
     return AnalyticsService(db).ranked_quality_runs(lowest=False)

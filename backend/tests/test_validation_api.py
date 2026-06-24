@@ -3,6 +3,7 @@ def test_validation_api_persists_results(client):
         "/api/v1/generate",
         json={"domain": "healthcare", "load_type": "bulk", "format": "json", "records": 10},
     ).json()
+    generated = client.get(f"/api/v1/jobs/{generated['job_id']}").json()
 
     response = client.post("/api/v1/validate", json={"run_id": generated["run_id"]})
     assert response.status_code == 200

@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from backend.app.core.config import get_settings
 from backend.app.repositories import DatasetRunRepository, GeneratedFileRepository, IssueManifestRepository, UserRepository, ValidationResultRepository
 from backend.app.schemas.api import GenerateRequest
+from backend.app.services.storage import get_storage_service
 from dataforge.domains import DOMAIN_GENERATORS, DOMAIN_SPECS
 from dataforge.exporter import export_run
 from dataforge.injector import FailureInjector
@@ -90,8 +91,12 @@ class DatasetGenerationService:
             }
             export_run(output_dir, artifacts, [request.format], metadata, reports, failures)
             exported_metadata = json.loads((output_dir / "metadata.json").read_text(encoding="utf-8"))
+            storage = get_storage_service()
             for relative_path, artifact in exported_metadata["artifacts"].items():
-                self.files.create(run_id=run.id, path=output_dir / relative_path, file_format=artifact["format"])
+                source_path = output_dir / relative_path
+                object_key = f"{run.id}/{Path(relative_path).as_posix()}"
+                stored_object = storage.save_generated_file(source_path, object_key=object_key)
+                self.files.create(run_id=run.id, path=source_path, file_format=artifact["format"], stored_object=stored_object)
             for issue_type, count in self._issue_counts(output_dir).items():
                 self.issues.create(run_id=run.id, issue_type=issue_type, issue_count=count, issue_percentage=round(issue_rates.get(issue_type, 0.0) * 100, 3))
             self._persist_validation_results(run.id, quality)

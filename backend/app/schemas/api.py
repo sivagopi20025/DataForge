@@ -17,8 +17,9 @@ class GenerateRequest(BaseModel):
 
 
 class GenerateResponse(BaseModel):
-    run_id: str
+    job_id: str
     status: str
+    run_id: str | None = None
 
 
 class ValidateRequest(BaseModel):
@@ -47,3 +48,14 @@ class RunDetail(RunSummary):
     generated_files: list[dict[str, Any]]
     issue_manifest: list[dict[str, Any]]
     validation_results: list[dict[str, Any]]
+
+
+class JobStatusResponse(BaseModel):
+    job_id: str
+    status: str
+    run_id: str | None
+    error_message: str | None
+    queued_at: datetime
+    started_at: datetime | None
+    completed_at: datetime | None
+    run: RunDetail | None = None

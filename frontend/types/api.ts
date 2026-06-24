@@ -25,8 +25,9 @@ export type GeneratePayload = {
 };
 
 export type GenerateResponse = {
-  run_id: string;
+  job_id: string;
   status: string;
+  run_id: string | null;
 };
 
 export type RunSummary = {
@@ -45,8 +46,12 @@ export type RunDetail = RunSummary & {
     id: string;
     file_name: string;
     file_path: string;
+    storage_backend: string;
+    object_key: string;
     file_format: OutputFormat;
+    size_bytes: number;
     file_size_mb: number;
+    content_type: string;
     created_at: string;
   }[];
   issue_manifest: {
@@ -65,6 +70,17 @@ export type RunDetail = RunSummary & {
     actual_value: string;
     created_at: string;
   }[];
+};
+
+export type JobStatus = {
+  job_id: string;
+  status: "queued" | "running" | "completed" | "failed" | string;
+  run_id: string | null;
+  error_message: string | null;
+  queued_at: string;
+  started_at: string | null;
+  completed_at: string | null;
+  run: RunDetail | null;
 };
 
 export type AnalyticsOverview = {

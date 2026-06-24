@@ -7,6 +7,8 @@ run through the same shared framework.
 
 Current version: `0.6.0`.
 
+Deployment readiness notes are in [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Supported domains
 
 - `retail`

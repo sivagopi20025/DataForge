@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Database, Info } from "lucide-react";
-import { generateDataset, getCatalogTables } from "@/lib/api";
+import { generateDataset, getCatalogTables, waitForJob } from "@/lib/api";
 import { useGeneratorStore } from "@/store/generator-store";
 import { usePreferencesStore } from "@/store/preferences-store";
 import { useUiStore } from "@/store/ui-store";
@@ -33,17 +33,22 @@ export default function GeneratorPage() {
   );
 
   const generateMutation = useMutation({
-    mutationFn: () =>
-      generateDataset({
+    mutationFn: async () => {
+      const response = await generateDataset({
         domain: store.domain,
         load_type: store.loadType,
         format: store.format,
         records: store.records,
         selected_tables: selectedTables,
         issues: selectedIssues,
-      }),
+      });
+      return response.run_id ? response : waitForJob(response.job_id);
+    },
     onSuccess: (response) => {
       addRecentDomain(store.domain);
+      if (!response.run_id) {
+        throw new Error("Generation completed without a run id.");
+      }
       toast({ title: "Dataset generated", description: `Run ${response.run_id} completed successfully.` });
       router.push(`/runs/${response.run_id}`);
     },

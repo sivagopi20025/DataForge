@@ -31,6 +31,9 @@ The default local database URL is:
 DATABASE_URL=postgresql+psycopg://dataforge:dataforge123@127.0.0.1:55434/dataforge
 ```
 
+For deployment, set `DATAFORGE_API_KEY` to require `X-API-Key` on protected
+generation, validation, run history, download, and admin endpoints.
+
 If you see `password authentication failed for user "dataforge"`, the
 PostgreSQL server or Docker volume on the configured port was probably
 initialized with a different password. For a disposable local development
@@ -77,6 +80,25 @@ curl -X POST http://127.0.0.1:8010/api/v1/generate \
   -d '{"domain":"logistics","load_type":"bulk","format":"csv","records":1000}'
 ```
 
+The generate endpoint returns immediately with a background job:
+
+```json
+{
+  "job_id": "<job-id>",
+  "status": "queued",
+  "run_id": null
+}
+```
+
+Check completion status:
+
+```bash
+curl http://127.0.0.1:8010/api/v1/jobs/<job-id>
+```
+
+Completed jobs include `run_id`, validation results, and generated file
+metadata. Failed jobs include `error_message`.
+
 Validate:
 
 ```bash
@@ -109,6 +131,7 @@ Implemented in this phase:
 - `/health`
 - `/api/v1/catalog/tables/{domain}`
 - `/api/v1/generate`
+- `/api/v1/jobs/{job_id}`
 - `/api/v1/validate`
 - `/api/v1/runs`
 - `/api/v1/runs/{run_id}`

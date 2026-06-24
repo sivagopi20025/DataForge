@@ -5,10 +5,14 @@ def test_generate_api_persists_run_and_files(client):
     )
     assert response.status_code == 200
     payload = response.json()
-    assert payload["status"] == "completed"
-    assert payload["run_id"]
+    assert payload["status"] == "queued"
+    assert payload["job_id"]
 
-    detail = client.get(f"/api/v1/runs/{payload['run_id']}").json()
+    job = client.get(f"/api/v1/jobs/{payload['job_id']}").json()
+    assert job["status"] == "completed"
+    assert job["run_id"]
+
+    detail = client.get(f"/api/v1/runs/{job['run_id']}").json()
     assert detail["domain"] == "logistics"
     assert detail["format"] == "json"
     assert detail["generated_files"]
@@ -22,9 +26,14 @@ def test_generated_file_download_api_streams_file(client):
         json={"domain": "logistics", "load_type": "bulk", "format": "json", "records": 10, "selected_tables": ["customers"]},
     )
     assert response.status_code == 200
-    run_id = response.json()["run_id"]
+    job = client.get(f"/api/v1/jobs/{response.json()['job_id']}").json()
+    run_id = job["run_id"]
     detail = client.get(f"/api/v1/runs/{run_id}").json()
     generated_file = detail["generated_files"][0]
+    assert generated_file["storage_backend"] == "local"
+    assert generated_file["object_key"].endswith(generated_file["file_name"])
+    assert generated_file["size_bytes"] > 0
+    assert generated_file["content_type"] == "application/json"
 
     download = client.get(f"/api/v1/runs/{run_id}/files/{generated_file['id']}/download")
 
@@ -34,13 +43,16 @@ def test_generated_file_download_api_streams_file(client):
     assert download.content
 
 
-def test_generate_api_rejects_unknown_domain(client):
+def test_generate_api_stores_failed_job_for_unknown_domain(client):
     response = client.post(
         "/api/v1/generate",
         json={"domain": "unknown", "load_type": "bulk", "format": "json", "records": 10},
     )
-    assert response.status_code == 400
-    assert response.json()["code"] == "DATAFORGE_ERROR"
+    assert response.status_code == 200
+    job = client.get(f"/api/v1/jobs/{response.json()['job_id']}")
+    assert job.status_code == 200
+    assert job.json()["status"] == "failed"
+    assert "Unsupported domain" in job.json()["error_message"]
 
 
 def test_catalog_tables_api_returns_domain_tables(client):
@@ -67,7 +79,22 @@ def test_generate_api_accepts_selected_tables_and_issue_rates(client):
     assert response.status_code == 200
     payload = response.json()
 
-    detail = client.get(f"/api/v1/runs/{payload['run_id']}").json()
+    job = client.get(f"/api/v1/jobs/{payload['job_id']}").json()
+    detail = client.get(f"/api/v1/runs/{job['run_id']}").json()
     generated_names = {file["file_name"] for file in detail["generated_files"]}
     assert generated_names == {"customers.json", "deposit_accounts.json"}
     assert {issue["issue_type"] for issue in detail["issue_manifest"]}.intersection({"null_values", "duplicate_records"})
+
+
+def test_job_status_endpoint_returns_completed_run_details(client):
+    response = client.post(
+        "/api/v1/generate",
+        json={"domain": "retail", "load_type": "bulk", "format": "json", "records": 8, "selected_tables": ["customers"]},
+    )
+    job = client.get(f"/api/v1/jobs/{response.json()['job_id']}")
+    assert job.status_code == 200
+    payload = job.json()
+    assert payload["status"] == "completed"
+    assert payload["run_id"]
+    assert payload["run"]["generated_files"]
+    assert payload["run"]["validation_results"]

@@ -30,6 +30,8 @@ def test_quality_analytics_average_scores_by_run_not_check_count(client):
         "/api/v1/generate",
         json={"domain": "healthcare", "load_type": "bulk", "format": "json", "records": 8, "selected_tables": ["patients"], "issues": {"schema_drift": 1}},
     ).json()
+    first = client.get(f"/api/v1/jobs/{first['job_id']}").json()
+    second = client.get(f"/api/v1/jobs/{second['job_id']}").json()
 
     first_score = client.get(f"/api/v1/runs/{first['run_id']}").json()["validation_results"][0]["quality_score"]
     second_score = client.get(f"/api/v1/runs/{second['run_id']}").json()["validation_results"][0]["quality_score"]
