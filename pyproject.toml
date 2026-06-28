@@ -16,6 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 parquet = ["pyarrow>=14"]
+e2e = ["selenium>=4.22"]
 
 [project.scripts]
 dataforge = "dataforge.cli:main"
@@ -25,6 +26,10 @@ dataforge-cleanup = "backend.app.services.retention:main"
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["dataforge*", "backend*"]
+exclude = ["config*", "deploy*", "frontend*", "output*", "tests*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "backend/tests"]

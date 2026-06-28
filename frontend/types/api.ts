@@ -41,6 +41,13 @@ export type RunSummary = {
   completed_at: string | null;
 };
 
+export type PaginatedRuns = {
+  total: number;
+  limit: number;
+  offset: number;
+  items: RunSummary[];
+};
+
 export type RunDetail = RunSummary & {
   generated_files: {
     id: string;

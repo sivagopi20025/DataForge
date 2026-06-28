@@ -29,18 +29,18 @@ export function GenerationSummary({
 }) {
   const enabledIssues = Object.entries(issues).filter(([, config]) => config.enabled);
   return (
-    <Card className="sticky top-6">
-      <CardHeader>
+    <Card className="sticky top-5">
+      <CardHeader className="p-4">
         <CardTitle>Generation Summary</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-5">
+      <CardContent className="space-y-3 p-4 pt-0">
         <SummaryRow label="Domain" value={titleCase(domain)} />
         <SummaryRow label="Load Type" value={titleCase(loadType)} />
         <SummaryRow label="Format" value={format.toUpperCase()} />
         <SummaryRow label="Records" value={formatNumber(records)} />
         <SummaryRow label="Selected Tables" value={tables.length ? `${tables.length} tables` : "All tables"} />
         <SummaryRow label="Estimated Files" value={`${Math.max(tables.length, 1)} files`} />
-        <SummaryRow label="Estimated Size" value={`${estimateSize(records, tables.length || 6, format).toFixed(1)} MB`} />
+        <SummaryRow label="Estimated Total Size" value={`${estimateSize(records, tables, format, domain).toFixed(1)} MB`} />
 
         <div>
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">Issues</p>
@@ -53,7 +53,7 @@ export function GenerationSummary({
           </div>
         </div>
 
-        <Button className="h-[52px] w-full text-base" onClick={onGenerate} disabled={generating}>
+        <Button className="h-11 w-full text-sm" onClick={onGenerate} disabled={generating}>
           {generating ? "Generating..." : "Generate Dataset"}
         </Button>
       </CardContent>
@@ -64,8 +64,8 @@ export function GenerationSummary({
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4">
-      <span className="text-sm text-muted-foreground">{label}</span>
-      <span className="text-right text-sm font-semibold">{value}</span>
+      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className="text-right text-xs font-semibold">{value}</span>
     </div>
   );
 }

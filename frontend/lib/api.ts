@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { AnalyticsOverview, CatalogResponse, Domain, GeneratePayload, GenerateResponse, JobStatus, RunDetail } from "@/types/api";
+import type { AnalyticsOverview, CatalogResponse, Domain, GeneratePayload, GenerateResponse, JobStatus, PaginatedRuns, RunDetail } from "@/types/api";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8010",
@@ -31,6 +31,11 @@ export async function generateDataset(payload: GeneratePayload) {
 
 export async function getRun(runId: string) {
   const { data } = await api.get<RunDetail>(`/api/v1/runs/${runId}`);
+  return data;
+}
+
+export async function getRuns(limit = 25, offset = 0) {
+  const { data } = await api.get<PaginatedRuns>("/api/v1/runs", { params: { limit, offset } });
   return data;
 }
 

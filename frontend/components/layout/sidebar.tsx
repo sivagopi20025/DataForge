@@ -3,12 +3,13 @@
 import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, Boxes, FlaskConical, Gauge, Settings, SlidersHorizontal, Sparkles, Waves } from "lucide-react";
+import { BarChart3, Boxes, FlaskConical, Gauge, History, Settings, SlidersHorizontal, Sparkles, Waves } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const primaryNav = [
   { href: "/generator", label: "Data Generator", icon: Boxes },
+  { href: "/history", label: "Run History", icon: History },
   { href: "/streams", label: "Stream APIs", icon: Waves, soon: true },
   { href: "/test-packages", label: "Test Packages", icon: FlaskConical, soon: true },
   { href: "/dashboards", label: "Dashboards", icon: BarChart3, soon: true },

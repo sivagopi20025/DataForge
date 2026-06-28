@@ -3,7 +3,7 @@ from __future__ import annotations
 from alembic import op
 import sqlalchemy as sa
 
-revision = "0004_generated_file_storage_metadata"
+revision = "0004_file_storage_metadata"
 down_revision = "0003_generation_jobs"
 branch_labels = None
 depends_on = None

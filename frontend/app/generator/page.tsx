@@ -60,24 +60,45 @@ export default function GeneratorPage() {
     store.setSelectedTables(current.includes(table) ? current.filter((item) => item !== table) : [...current, table]);
   }
 
+  if (generateMutation.isPending) {
+    return (
+      <div className="space-y-5">
+        <header className="rounded-2xl border border-border bg-white/70 p-5 text-center shadow-sm backdrop-blur">
+          <Badge>Phase 1 · Functional</Badge>
+          <h1 className="mt-3 text-3xl font-bold tracking-tight">Generate Enterprise Datasets</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Your selected files are being generated now.</p>
+        </header>
+
+        <GenerationProgress
+          active
+          domain={store.domain}
+          loadType={store.loadType}
+          format={store.format}
+          records={store.records}
+          tableCount={selectedTables.length}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
-      <header className="rounded-3xl border border-border bg-white/70 p-8 shadow-sm backdrop-blur">
+    <div className="space-y-5">
+      <header className="rounded-2xl border border-border bg-white/70 p-5 shadow-sm backdrop-blur">
         <Badge>Phase 1 · Functional</Badge>
-        <h1 className="mt-4 text-4xl font-bold tracking-tight">Generate Enterprise Datasets</h1>
-        <p className="mt-3 max-w-3xl text-lg text-muted-foreground">
+        <h1 className="mt-3 text-3xl font-bold tracking-tight">Generate Enterprise Datasets</h1>
+        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
           Generate realistic datasets, inject issues, validate quality, and export results.
         </p>
       </header>
 
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_380px]">
-        <div className="space-y-8">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="space-y-5">
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>1. Domain Selection</CardTitle>
               <CardDescription>Choose the business shape for the dataset.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-2 2xl:grid-cols-3">
               {domains.map((domain) => (
                 <SelectionCard
                   key={domain.id}
@@ -92,11 +113,11 @@ export default function GeneratorPage() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>2. Load Type</CardTitle>
               <CardDescription>Match the way your pipeline receives data.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4 md:grid-cols-2 2xl:grid-cols-5">
+            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-2 2xl:grid-cols-5">
               {loadTypes.map((loadType) => (
                 <SelectionCard
                   key={loadType.id}
@@ -110,11 +131,11 @@ export default function GeneratorPage() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>3. Format</CardTitle>
               <CardDescription>Pick the export format for generated files.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4 md:grid-cols-3">
+            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-3">
               {formats.map((format) => (
                 <SelectionCard
                   key={format.id}
@@ -128,13 +149,13 @@ export default function GeneratorPage() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>4. Table Selection</CardTitle>
               <CardDescription>Loaded dynamically from the backend domain catalog.</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4 pt-0">
               {catalogQuery.isLoading ? (
-                <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">{Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} className="h-24" />)}</div>
+                <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} className="h-20" />)}</div>
               ) : catalogQuery.isError ? (
                 <div className="flex items-center gap-3 rounded-2xl border border-danger/30 bg-danger/5 p-4 text-sm text-danger">
                   <AlertCircle className="h-4 w-4" />
@@ -144,22 +165,24 @@ export default function GeneratorPage() {
                   </span>
                 </div>
               ) : (
-                <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-3">
+                <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
                   {catalogQuery.data?.tables.map((table) => (
                     <button
                       key={table.name}
                       type="button"
                       onClick={() => toggleTable(table.name)}
                       className={cn(
-                        "rounded-2xl border bg-card p-4 text-left transition hover:shadow-glow",
+                        "group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
                         selectedTables.includes(table.name) ? "border-primary ring-4 ring-primary/10" : "border-border",
                       )}
                     >
-                      <div className="flex items-start gap-3">
-                        <div className="rounded-xl bg-muted p-2 text-muted-foreground"><Database className="h-4 w-4" /></div>
-                        <div>
-                          <p className="font-semibold">{titleCase(table.name)}</p>
-                          <p className="mt-1 text-xs text-muted-foreground">PK: {table.primary_key} · {table.columns.length} columns</p>
+                      <div className="flex items-start gap-2.5">
+                        <div className="rounded-lg bg-muted p-1.5 text-muted-foreground"><Database className="h-4 w-4" /></div>
+                        <div className="relative min-w-0">
+                          <p className="text-sm font-semibold">{titleCase(table.name)}</p>
+                          <p className="pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                            PK: {table.primary_key} · {table.columns.length} columns
+                          </p>
                         </div>
                       </div>
                     </button>
@@ -170,11 +193,13 @@ export default function GeneratorPage() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>5. Record Count</CardTitle>
-              <CardDescription>Estimate: {estimateSize(store.records, selectedTables.length || 6, store.format).toFixed(1)} MB output.</CardDescription>
+              <CardDescription>
+                Estimated total output: {estimateSize(store.records, selectedTables, store.format, store.domain).toFixed(1)} MB across selected files.
+              </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4 md:grid-cols-4">
+            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-4">
               {recordCounts.map((count) => (
                 <SelectionCard
                   key={count.value}
@@ -188,13 +213,13 @@ export default function GeneratorPage() {
           </Card>
 
           <Card>
-            <CardHeader>
+            <CardHeader className="p-4">
               <CardTitle>6. Issue Injection</CardTitle>
               <CardDescription>Inject realistic quality problems before validation.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4 lg:grid-cols-2">
+            <CardContent className="grid gap-3 p-4 pt-0 lg:grid-cols-2">
               {Object.entries(store.issues).map(([issue, config]) => (
-                <div key={issue} className="rounded-2xl border border-border bg-muted/30 p-4">
+                <div key={issue} className="rounded-xl border border-border bg-muted/30 p-3">
                   <div className="flex items-center justify-between gap-4">
                     <div>
                       <p className="font-semibold">{issueLabels[issue]}</p>
@@ -209,7 +234,7 @@ export default function GeneratorPage() {
                     </button>
                   </div>
                   <input
-                    className="mt-4 w-full accent-primary"
+                    className="mt-3 w-full accent-primary"
                     type="range"
                     min={1}
                     max={15}
@@ -221,8 +246,6 @@ export default function GeneratorPage() {
               ))}
             </CardContent>
           </Card>
-
-          <GenerationProgress active={generateMutation.isPending} />
         </div>
 
         <GenerationSummary
