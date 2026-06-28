@@ -18,7 +18,7 @@ jobs:
       - name: Install backend
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[parquet]"
+          python -m pip install -e ".[parquet,tests]"
       - name: Run tests
         run: python -m pytest -q
       - name: Check Alembic migrations
