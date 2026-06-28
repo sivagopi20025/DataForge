@@ -16,7 +16,7 @@ dependencies = [
 
 [project.optional-dependencies]
 parquet = ["pyarrow>=14"]
-tests = ["pytest>=8"]
+tests = ["httpx2>=2.5", "pytest>=8"]
 e2e = ["selenium>=4.22"]
 
 [project.scripts]
