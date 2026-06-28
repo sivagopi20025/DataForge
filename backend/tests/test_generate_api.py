@@ -43,6 +43,45 @@ def test_generated_file_download_api_streams_file(client):
     assert download.content
 
 
+def test_run_download_api_streams_zip_with_all_files(client):
+    response = client.post(
+        "/api/v1/generate",
+        json={"domain": "healthcare", "load_type": "bulk", "format": "csv", "records": 10, "selected_tables": ["patients", "visits"]},
+    )
+    assert response.status_code == 200
+    job = client.get(f"/api/v1/jobs/{response.json()['job_id']}").json()
+    run_id = job["run_id"]
+
+    download = client.get(f"/api/v1/runs/{run_id}/download")
+
+    assert download.status_code == 200
+    assert "attachment" in download.headers["content-disposition"]
+    assert download.headers["content-type"].startswith("application/zip")
+    assert b"patients.csv" in download.content
+    assert b"visits.csv" in download.content
+
+
+def test_generated_file_preview_api_returns_table_rows(client):
+    response = client.post(
+        "/api/v1/generate",
+        json={"domain": "healthcare", "load_type": "bulk", "format": "json", "records": 10, "selected_tables": ["patients"]},
+    )
+    assert response.status_code == 200
+    job = client.get(f"/api/v1/jobs/{response.json()['job_id']}").json()
+    detail = client.get(f"/api/v1/runs/{job['run_id']}").json()
+    generated_file = detail["generated_files"][0]
+
+    preview = client.get(f"/api/v1/runs/{job['run_id']}/files/{generated_file['id']}/preview", params={"rows": 5})
+
+    assert preview.status_code == 200
+    payload = preview.json()
+    assert payload["file_name"] == generated_file["file_name"]
+    assert payload["row_count"] <= 5
+    assert "patient_id" in payload["columns"]
+    assert payload["rows"]
+    assert "patient_id" in payload["rows"][0]
+
+
 def test_generate_api_stores_failed_job_for_unknown_domain(client):
     response = client.post(
         "/api/v1/generate",

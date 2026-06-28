@@ -43,7 +43,7 @@ export const useGeneratorStore = create<GeneratorState>()(
       setDomain: (domain) => set({ domain, selectedTables: [] }),
       setLoadType: (loadType) => set({ loadType }),
       setFormat: (format) => set({ format }),
-      setRecords: (records) => set({ records }),
+      setRecords: (records) => set({ records: Math.min(500_000, Math.max(1, Math.floor(records))) }),
       setSelectedTables: (selectedTables) => set({ selectedTables }),
       toggleIssue: (issue) =>
         set((state) => ({
@@ -60,6 +60,10 @@ export const useGeneratorStore = create<GeneratorState>()(
           },
         })),
     }),
-    { name: "dataforge-generator" },
+    {
+      name: "dataforge-generator",
+      version: 2,
+      migrate: (persisted) => ({ ...(persisted as GeneratorState), selectedTables: [] }),
+    },
   ),
 );

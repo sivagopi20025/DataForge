@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { AnalyticsOverview, CatalogResponse, Domain, GeneratePayload, GenerateResponse, JobStatus, PaginatedRuns, RunDetail } from "@/types/api";
+import type { AnalyticsOverview, CatalogResponse, Domain, FilePreview, GeneratePayload, GenerateResponse, JobStatus, PaginatedRuns, RunDetail } from "@/types/api";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://127.0.0.1:8010",
@@ -62,6 +62,16 @@ export async function waitForJob(jobId: string, timeoutMs = 120000) {
 export function getDownloadUrl(runId: string, fileId: string) {
   const baseUrl = api.defaults.baseURL ?? "";
   return `${baseUrl}/api/v1/runs/${runId}/files/${fileId}/download`;
+}
+
+export function getRunDownloadUrl(runId: string) {
+  const baseUrl = api.defaults.baseURL ?? "";
+  return `${baseUrl}/api/v1/runs/${runId}/download`;
+}
+
+export async function getFilePreview(runId: string, fileId: string, rows = 50) {
+  const { data } = await api.get<FilePreview>(`/api/v1/runs/${runId}/files/${fileId}/preview`, { params: { rows } });
+  return data;
 }
 
 export async function getAnalyticsOverview() {

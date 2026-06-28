@@ -63,11 +63,14 @@ def cleanup_stored_generated_files(
     storage: StorageService | None = None,
     dry_run: bool = True,
     now: datetime | None = None,
+    delete_run_records: bool = False,
 ) -> CleanupResult:
     """Delete expired generated objects through the configured storage backend.
 
-    This intentionally leaves database rows in place for audit/history. Missing
-    objects are counted as scanned but not deleted.
+    By default this leaves database rows in place for audit/history. When
+    `delete_run_records` is true, expired dataset runs are deleted after their
+    generated objects are removed, which also removes related generated file,
+    issue, and validation rows through ORM cascades.
     """
 
     if retention_days < 1:
@@ -94,8 +97,33 @@ def cleanup_stored_generated_files(
             if deleted_bytes:
                 deleted += 1
                 freed_bytes += deleted_bytes
+        if delete_run_records and not dry_run:
+            db.delete(run)
+
+    if delete_run_records and not dry_run:
+        db.flush()
 
     return CleanupResult(scanned=scanned, deleted=deleted, freed_bytes=freed_bytes)
+
+
+def cleanup_expired_run_history(
+    db: Session,
+    retention_days: int,
+    *,
+    storage: StorageService | None = None,
+    dry_run: bool = True,
+    now: datetime | None = None,
+) -> CleanupResult:
+    """Delete expired generated files and their run history rows."""
+
+    return cleanup_stored_generated_files(
+        db,
+        retention_days,
+        storage=storage,
+        dry_run=dry_run,
+        now=now,
+        delete_run_records=True,
+    )
 
 
 def main(argv: list[str] | None = None) -> int:

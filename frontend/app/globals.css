@@ -32,3 +32,27 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.timed-hover-popup {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.timed-hover-group:hover .timed-hover-popup,
+.timed-hover-group:focus-within .timed-hover-popup {
+  visibility: visible;
+  animation: timed-popup 7s ease-in forwards;
+}
+
+@keyframes timed-popup {
+  0%,
+  82% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

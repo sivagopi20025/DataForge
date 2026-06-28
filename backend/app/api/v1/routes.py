@@ -1,16 +1,24 @@
 from __future__ import annotations
 
+import tempfile
+import zipfile
+from pathlib import Path
+
 from fastapi import APIRouter, BackgroundTasks, Depends, Query, Request
-from fastapi.responses import Response
+from fastapi.responses import FileResponse, Response
+from starlette.background import BackgroundTask
 from sqlalchemy.orm import Session
 
 from backend.app.analytics import AnalyticsService
+from backend.app.core.config import get_settings
 from backend.app.core.security import require_api_key
 from backend.app.db.session import get_db
 from backend.app.repositories import DatasetRunRepository, GeneratedFileRepository, GenerationJobRepository
 from backend.app.schemas.api import GenerateRequest, GenerateResponse, JobStatusResponse, PaginatedRuns, RunDetail, RunSummary, ValidateRequest
+from backend.app.services.file_preview import preview_generated_file
 from backend.app.services.jobs import GenerationJobService, run_generation_job
-from backend.app.services.storage import get_storage_service
+from backend.app.services.retention import cleanup_expired_run_history
+from backend.app.services.storage import LocalStorageService, get_storage_service
 from dataforge.domains import DOMAIN_SPECS
 from backend.app.services.validation import ValidationService
 
@@ -67,6 +75,9 @@ def list_runs(
     db: Session = Depends(get_db),
     _: None = Depends(require_api_key),
 ) -> dict:
+    settings = get_settings()
+    cleanup_expired_run_history(db, settings.generated_file_retention_days, dry_run=False)
+    db.commit()
     repo = DatasetRunRepository(db)
     runs = repo.list(limit=limit, offset=offset)
     return {
@@ -148,6 +159,47 @@ def download_generated_file(run_id: str, file_id: str, db: Session = Depends(get
     if not generated_file:
         raise ValueError(f"Generated file not found for run: {run_id}")
     return get_storage_service().download_response(generated_file)
+
+
+@router.get("/runs/{run_id}/download", dependencies=[Depends(require_api_key)])
+def download_run_files(run_id: str, db: Session = Depends(get_db)) -> Response:
+    run = DatasetRunRepository(db).get(run_id)
+    if not run:
+        raise ValueError(f"Run not found: {run_id}")
+    if not run.generated_files:
+        raise ValueError(f"No generated files are available for run: {run_id}")
+
+    storage = get_storage_service()
+    if not isinstance(storage, LocalStorageService):
+        raise ValueError("Run ZIP downloads are currently available for local generated files only")
+
+    temp_file = tempfile.NamedTemporaryFile(prefix=f"dataforge-{run_id}-", suffix=".zip", delete=False)
+    temp_path = Path(temp_file.name)
+    temp_file.close()
+
+    try:
+        with zipfile.ZipFile(temp_path, mode="w", compression=zipfile.ZIP_DEFLATED) as archive:
+            for generated_file in run.generated_files:
+                source = storage.resolve_path(generated_file)
+                archive.write(source, arcname=generated_file.file_name)
+    except Exception:
+        temp_path.unlink(missing_ok=True)
+        raise
+
+    return FileResponse(
+        path=temp_path,
+        filename=f"dataforge-{run.domain}-{run_id}.zip",
+        media_type="application/zip",
+        background=BackgroundTask(temp_path.unlink, missing_ok=True),
+    )
+
+
+@router.get("/runs/{run_id}/files/{file_id}/preview", dependencies=[Depends(require_api_key)])
+def preview_file(run_id: str, file_id: str, rows: int = Query(default=50, ge=1, le=100), db: Session = Depends(get_db)) -> dict:
+    generated_file = GeneratedFileRepository(db).get_for_run(run_id=run_id, file_id=file_id)
+    if not generated_file:
+        raise ValueError(f"Generated file not found for run: {run_id}")
+    return preview_generated_file(generated_file, get_storage_service(), max_rows=rows)
 
 
 @router.get("/admin/analytics/overview", dependencies=[Depends(require_api_key)])

@@ -19,7 +19,7 @@ export function SelectionCard({
       type="button"
       onClick={onClick}
       className={cn(
-        "group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
+        "timed-hover-group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
         selected ? "border-primary ring-4 ring-primary/10" : "border-border",
       )}
     >
@@ -28,7 +28,7 @@ export function SelectionCard({
         <div className="relative min-w-0">
           <div className="text-sm font-semibold">{title}</div>
           {description ? (
-            <p className="pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+            <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
               {description}
             </p>
           ) : null}

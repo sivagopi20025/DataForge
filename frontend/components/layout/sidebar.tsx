@@ -3,16 +3,17 @@
 import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BarChart3, Boxes, FlaskConical, Gauge, History, Settings, SlidersHorizontal, Sparkles, Waves } from "lucide-react";
+import { BarChart3, Boxes, FlaskConical, Gauge, History, Home, Settings, SlidersHorizontal, Sparkles, Waves } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const primaryNav = [
+  { href: "/", label: "Home", icon: Home },
   { href: "/generator", label: "Data Generator", icon: Boxes },
-  { href: "/history", label: "Run History", icon: History },
   { href: "/streams", label: "Stream APIs", icon: Waves, soon: true },
   { href: "/test-packages", label: "Test Packages", icon: FlaskConical, soon: true },
   { href: "/dashboards", label: "Dashboards", icon: BarChart3, soon: true },
+  { href: "/history", label: "Run History", icon: History },
   { href: "/admin", label: "Admin Analytics", icon: Gauge },
 ];
 
@@ -25,7 +26,7 @@ export function Sidebar() {
   const pathname = usePathname();
   return (
     <aside className="fixed inset-y-0 left-0 z-40 hidden w-[280px] border-r border-border bg-white/88 px-4 py-5 backdrop-blur-xl lg:flex lg:flex-col">
-      <Link href="/generator" className="flex items-center gap-3 rounded-2xl px-2 py-2">
+      <Link href="/" className="flex items-center gap-3 rounded-2xl px-2 py-2">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-glow">
           <Sparkles className="h-5 w-5" />
         </div>
@@ -38,7 +39,7 @@ export function Sidebar() {
       <div className="my-6 h-px bg-border" />
       <nav className="space-y-1">
         {primaryNav.map((item) => (
-          <NavItem key={item.href} active={pathname.startsWith(item.href)} {...item} />
+          <NavItem key={item.href} active={item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)} {...item} />
         ))}
       </nav>
       <div className="my-6 h-px bg-border" />

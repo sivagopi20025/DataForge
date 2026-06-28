@@ -90,6 +90,16 @@ export type JobStatus = {
   run: RunDetail | null;
 };
 
+export type FilePreview = {
+  file_id: string;
+  file_name: string;
+  file_format: OutputFormat;
+  columns: string[];
+  rows: Record<string, unknown>[];
+  row_count: number;
+  max_rows: number;
+};
+
 export type AnalyticsOverview = {
   datasets_generated: number;
   validation_runs: number;

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { AlertCircle, Database, Info } from "lucide-react";
@@ -8,13 +9,13 @@ import { useGeneratorStore } from "@/store/generator-store";
 import { usePreferencesStore } from "@/store/preferences-store";
 import { useUiStore } from "@/store/ui-store";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { SelectionCard } from "@/components/generator/selection-card";
 import { GenerationSummary } from "@/components/generator/generation-summary";
 import { GenerationProgress } from "@/components/generator/generation-progress";
-import { domains, formats, issueLabels, loadTypes, recordCounts } from "@/components/generator/options";
+import { domains, formats, issueLabels, loadTypes } from "@/components/generator/options";
 import { cn, estimateSize, titleCase } from "@/lib/utils";
+import type { Domain, LoadType, OutputFormat } from "@/types/api";
 
 export default function GeneratorPage() {
   const router = useRouter();
@@ -27,13 +28,16 @@ export default function GeneratorPage() {
     queryFn: () => getCatalogTables(store.domain),
   });
 
-  const selectedTables = store.selectedTables.length ? store.selectedTables : catalogQuery.data?.tables.map((table) => table.name) ?? [];
+  const selectedTables = store.selectedTables;
   const selectedIssues = Object.fromEntries(
     Object.entries(store.issues).filter(([, config]) => config.enabled).map(([issue, config]) => [issue, config.percentage]),
   );
 
   const generateMutation = useMutation({
     mutationFn: async () => {
+      if (!selectedTables.length) {
+        throw new Error("Select at least one table before generating files.");
+      }
       const response = await generateDataset({
         domain: store.domain,
         load_type: store.loadType,
@@ -56,7 +60,7 @@ export default function GeneratorPage() {
   });
 
   function toggleTable(table: string) {
-    const current = store.selectedTables.length ? store.selectedTables : catalogQuery.data?.tables.map((item) => item.name) ?? [];
+    const current = store.selectedTables;
     store.setSelectedTables(current.includes(table) ? current.filter((item) => item !== table) : [...current, table]);
   }
 
@@ -85,73 +89,46 @@ export default function GeneratorPage() {
     <div className="space-y-5">
       <header className="rounded-2xl border border-border bg-white/70 p-5 shadow-sm backdrop-blur">
         <Badge>Phase 1 · Functional</Badge>
-        <h1 className="mt-3 text-3xl font-bold tracking-tight">Generate Enterprise Datasets</h1>
-        <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-          Generate realistic datasets, inject issues, validate quality, and export results.
-        </p>
+        <HoverHelp
+          className="mt-3"
+          title="Generate Enterprise Datasets"
+          titleClassName="text-3xl font-bold tracking-tight"
+          description="Generate realistic datasets, inject issues, validate quality, and export results."
+        />
       </header>
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
         <div className="space-y-5">
-          <Card>
+          <Card id="dataset-setup" className="scroll-mt-6">
             <CardHeader className="p-4">
-              <CardTitle>1. Domain Selection</CardTitle>
-              <CardDescription>Choose the business shape for the dataset.</CardDescription>
+              <HoverHelp title="1. Dataset Setup" description="Select domain, load type, and format in one place." />
             </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-2 2xl:grid-cols-3">
-              {domains.map((domain) => (
-                <SelectionCard
-                  key={domain.id}
-                  selected={store.domain === domain.id}
-                  title={domain.name}
-                  description={domain.description}
-                  icon={<domain.icon className="h-5 w-5" />}
-                  onClick={() => store.setDomain(domain.id)}
-                />
-              ))}
+            <CardContent className="grid gap-3 p-4 pt-0 lg:grid-cols-4">
+              <ConfigSelect
+                label="Domain"
+                value={store.domain}
+                options={domains}
+                onChange={(value) => store.setDomain(value as Domain)}
+              />
+              <ConfigSelect
+                label="Load Type"
+                value={store.loadType}
+                options={loadTypes}
+                onChange={(value) => store.setLoadType(value as LoadType)}
+              />
+              <ConfigSelect
+                label="Format"
+                value={store.format}
+                options={formats}
+                onChange={(value) => store.setFormat(value as OutputFormat)}
+              />
+              <RecordCountInput value={store.records} onChange={store.setRecords} />
             </CardContent>
           </Card>
 
-          <Card>
+          <Card id="tables" className="scroll-mt-6">
             <CardHeader className="p-4">
-              <CardTitle>2. Load Type</CardTitle>
-              <CardDescription>Match the way your pipeline receives data.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-2 2xl:grid-cols-5">
-              {loadTypes.map((loadType) => (
-                <SelectionCard
-                  key={loadType.id}
-                  selected={store.loadType === loadType.id}
-                  title={loadType.name}
-                  description={loadType.description}
-                  onClick={() => store.setLoadType(loadType.id)}
-                />
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="p-4">
-              <CardTitle>3. Format</CardTitle>
-              <CardDescription>Pick the export format for generated files.</CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-3">
-              {formats.map((format) => (
-                <SelectionCard
-                  key={format.id}
-                  selected={store.format === format.id}
-                  title={format.name}
-                  description={format.description}
-                  onClick={() => store.setFormat(format.id)}
-                />
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="p-4">
-              <CardTitle>4. Table Selection</CardTitle>
-              <CardDescription>Loaded dynamically from the backend domain catalog.</CardDescription>
+              <HoverHelp title="2. Table Selection" description="Loaded dynamically from the backend domain catalog." />
             </CardHeader>
             <CardContent className="p-4 pt-0">
               {catalogQuery.isLoading ? (
@@ -166,64 +143,52 @@ export default function GeneratorPage() {
                 </div>
               ) : (
                 <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
-                  {catalogQuery.data?.tables.map((table) => (
-                    <button
-                      key={table.name}
-                      type="button"
-                      onClick={() => toggleTable(table.name)}
-                      className={cn(
-                        "group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
-                        selectedTables.includes(table.name) ? "border-primary ring-4 ring-primary/10" : "border-border",
-                      )}
-                    >
-                      <div className="flex items-start gap-2.5">
+                  {catalogQuery.data?.tables.map((table) => {
+                    const isSelected = selectedTables.includes(table.name);
+                    return (
+                      <label
+                        key={table.name}
+                        className={cn(
+                          "timed-hover-group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
+                          isSelected ? "border-primary ring-4 ring-primary/10" : "border-border",
+                        )}
+                      >
+                        <div className="flex items-start gap-2.5">
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => toggleTable(table.name)}
+                          className="mt-2 h-4 w-4 rounded border-border accent-primary"
+                        />
                         <div className="rounded-lg bg-muted p-1.5 text-muted-foreground"><Database className="h-4 w-4" /></div>
                         <div className="relative min-w-0">
                           <p className="text-sm font-semibold">{titleCase(table.name)}</p>
-                          <p className="pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                          <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
                             PK: {table.primary_key} · {table.columns.length} columns
                           </p>
                         </div>
                       </div>
-                    </button>
-                  ))}
+                    </label>
+                    );
+                  })}
                 </div>
               )}
             </CardContent>
           </Card>
 
-          <Card>
+          <Card id="issues" className="scroll-mt-6">
             <CardHeader className="p-4">
-              <CardTitle>5. Record Count</CardTitle>
-              <CardDescription>
-                Estimated total output: {estimateSize(store.records, selectedTables, store.format, store.domain).toFixed(1)} MB across selected files.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 md:grid-cols-4">
-              {recordCounts.map((count) => (
-                <SelectionCard
-                  key={count.value}
-                  selected={store.records === count.value}
-                  title={count.label}
-                  description={`${count.value.toLocaleString()} records`}
-                  onClick={() => store.setRecords(count.value)}
-                />
-              ))}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="p-4">
-              <CardTitle>6. Issue Injection</CardTitle>
-              <CardDescription>Inject realistic quality problems before validation.</CardDescription>
+              <HoverHelp title="3. Issue Injection" description="Inject realistic quality problems before validation." />
             </CardHeader>
             <CardContent className="grid gap-3 p-4 pt-0 lg:grid-cols-2">
               {Object.entries(store.issues).map(([issue, config]) => (
                 <div key={issue} className="rounded-xl border border-border bg-muted/30 p-3">
                   <div className="flex items-center justify-between gap-4">
-                    <div>
+                    <div className="timed-hover-group relative">
                       <p className="font-semibold">{issueLabels[issue]}</p>
-                      <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><Info className="h-3 w-3" /> {config.percentage}% target rate</p>
+                      <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 flex w-max max-w-64 items-center gap-1 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
+                        <Info className="h-3 w-3" /> {config.percentage}% target rate
+                      </p>
                     </div>
                     <button
                       onClick={() => store.toggleIssue(issue)}
@@ -256,9 +221,122 @@ export default function GeneratorPage() {
           tables={selectedTables}
           issues={store.issues}
           generating={generateMutation.isPending}
+          canGenerate={selectedTables.length > 0}
+          disabledReason="Select at least one table"
           onGenerate={() => generateMutation.mutate()}
         />
       </div>
     </div>
+  );
+}
+
+function RecordCountInput({ value, onChange }: { value: number; onChange: (records: number) => void }) {
+  const presetValues = [1000, 10000, 100000, 500000];
+  const [customMode, setCustomMode] = useState(!presetValues.includes(value));
+  const selectedPreset = customMode || !presetValues.includes(value) ? "custom" : String(value);
+
+  function updateRecords(rawValue: string) {
+    const parsed = Math.floor(Number(rawValue));
+    if (!Number.isFinite(parsed)) return;
+    onChange(Math.min(500_000, Math.max(1, parsed)));
+  }
+
+  return (
+    <label className="timed-hover-group relative block rounded-xl border border-border bg-muted/20 p-3">
+      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Record Count</span>
+      <div className="mt-2 grid gap-2">
+        <select
+          className="h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+          value={selectedPreset}
+          onChange={(event) => {
+            if (event.target.value === "custom") {
+              setCustomMode(true);
+              return;
+            }
+            setCustomMode(false);
+            updateRecords(event.target.value);
+          }}
+        >
+          {presetValues.map((preset) => (
+            <option key={preset} value={preset}>
+              {preset}
+            </option>
+          ))}
+          <option value="custom">Custom</option>
+        </select>
+        {selectedPreset === "custom" ? (
+          <input
+            className="h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+            type="number"
+            min={1}
+            max={500000}
+            step={1}
+            value={value}
+            onChange={(event) => updateRecords(event.target.value)}
+            aria-label="Custom record count"
+          />
+        ) : null}
+      </div>
+      <span className="timed-hover-popup pointer-events-none absolute left-3 top-full z-40 mt-2 block w-max max-w-72 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
+        Pick 1000, 10000, 100000, 500000, or enter a custom value from 1 to 500000.
+      </span>
+    </label>
+  );
+}
+
+function HoverHelp({
+  title,
+  description,
+  className,
+  titleClassName = "text-lg font-semibold tracking-tight",
+}: {
+  title: string;
+  description: string;
+  className?: string;
+  titleClassName?: string;
+}) {
+  return (
+    <div className={cn("timed-hover-group relative inline-block", className)}>
+      <CardTitle className={titleClassName}>{title}</CardTitle>
+      <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-40 mt-2 w-max max-w-80 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function ConfigSelect({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  options: { id: string; name: string; description: string }[];
+  onChange: (value: string) => void;
+}) {
+  const selected = options.find((option) => option.id === value);
+
+  return (
+    <label className="timed-hover-group relative block rounded-xl border border-border bg-muted/20 p-3">
+      <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{label}</span>
+      <select
+        className="mt-2 h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      >
+        {options.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
+        ))}
+      </select>
+      {selected ? (
+        <span className="timed-hover-popup pointer-events-none absolute left-3 top-full z-40 mt-2 block w-max max-w-72 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
+          {selected.description}
+        </span>
+      ) : null}
+    </label>
   );
 }

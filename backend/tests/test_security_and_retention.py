@@ -13,7 +13,7 @@ from backend.app.db.base import Base
 from backend.app.db.session import get_db
 from backend.app.main import create_app
 from backend.app.models import DatasetRun, GeneratedFile, User
-from backend.app.services.retention import cleanup_generated_files, cleanup_stored_generated_files
+from backend.app.services.retention import cleanup_expired_run_history, cleanup_generated_files, cleanup_stored_generated_files
 
 
 def test_api_key_is_required_when_configured(tmp_path, monkeypatch):
@@ -209,6 +209,179 @@ def test_storage_aware_retention_deletes_local_generated_files(db_session, tmp_p
     assert result.freed_bytes == 3
     assert not old_file.exists()
     assert new_file.exists()
+
+
+def test_expired_run_history_cleanup_deletes_files_and_run_rows(db_session, tmp_path):
+    output_dir = tmp_path / "backend-output"
+    old_file = output_dir / "old-run" / "customers.json"
+    old_file.parent.mkdir(parents=True)
+    old_file.write_text("old", encoding="utf-8")
+    new_file = output_dir / "new-run" / "customers.json"
+    new_file.parent.mkdir(parents=True)
+    new_file.write_text("new", encoding="utf-8")
+    user = User(email="history-retention@example.test", plan="free")
+    db_session.add(user)
+    db_session.flush()
+    old_run = DatasetRun(
+        user_id=user.id,
+        domain="retail",
+        load_type="bulk",
+        format="json",
+        record_count=1,
+        status="completed",
+        started_at=datetime.now(timezone.utc) - timedelta(days=10),
+        completed_at=datetime.now(timezone.utc) - timedelta(days=10),
+    )
+    new_run = DatasetRun(
+        user_id=user.id,
+        domain="banking",
+        load_type="bulk",
+        format="json",
+        record_count=1,
+        status="completed",
+        started_at=datetime.now(timezone.utc),
+        completed_at=datetime.now(timezone.utc),
+    )
+    db_session.add_all([old_run, new_run])
+    db_session.flush()
+    db_session.add_all(
+        [
+            GeneratedFile(
+                run_id=old_run.id,
+                file_name="customers.json",
+                file_path=str(old_file),
+                storage_backend="local",
+                object_key="old-run/customers.json",
+                file_format="json",
+                size_bytes=old_file.stat().st_size,
+                file_size_mb=0.0,
+                content_type="application/json",
+            ),
+            GeneratedFile(
+                run_id=new_run.id,
+                file_name="customers.json",
+                file_path=str(new_file),
+                storage_backend="local",
+                object_key="new-run/customers.json",
+                file_format="json",
+                size_bytes=new_file.stat().st_size,
+                file_size_mb=0.0,
+                content_type="application/json",
+            ),
+        ]
+    )
+    db_session.commit()
+
+    from backend.app.services.storage import LocalStorageService
+
+    result = cleanup_expired_run_history(
+        db_session,
+        retention_days=7,
+        storage=LocalStorageService(output_dir),
+        dry_run=False,
+        now=datetime.now(timezone.utc),
+    )
+    db_session.commit()
+
+    assert result.scanned == 1
+    assert result.deleted == 1
+    assert not old_file.exists()
+    assert new_file.exists()
+    assert db_session.get(DatasetRun, old_run.id) is None
+    assert db_session.get(DatasetRun, new_run.id) is not None
+
+
+def test_runs_api_removes_history_older_than_retention(tmp_path, monkeypatch):
+    output_dir = tmp_path / "backend-output"
+    old_file = output_dir / "old-run" / "customers.json"
+    old_file.parent.mkdir(parents=True)
+    old_file.write_text("old", encoding="utf-8")
+    new_file = output_dir / "new-run" / "customers.json"
+    new_file.parent.mkdir(parents=True)
+    new_file.write_text("new", encoding="utf-8")
+    monkeypatch.setenv("OUTPUT_DIR", str(output_dir))
+    monkeypatch.setenv("GENERATED_FILE_RETENTION_DAYS", "7")
+    get_settings.cache_clear()
+    engine = create_engine(f"sqlite:///{tmp_path / 'history_retention.db'}", connect_args={"check_same_thread": False})
+    TestingSessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False, expire_on_commit=False)
+    Base.metadata.create_all(bind=engine)
+
+    db = TestingSessionLocal()
+    user = User(email="history-api-retention@example.test", plan="free")
+    db.add(user)
+    db.flush()
+    old_run = DatasetRun(
+        user_id=user.id,
+        domain="retail",
+        load_type="bulk",
+        format="json",
+        record_count=1,
+        status="completed",
+        started_at=datetime.now(timezone.utc) - timedelta(days=10),
+        completed_at=datetime.now(timezone.utc) - timedelta(days=10),
+    )
+    new_run = DatasetRun(
+        user_id=user.id,
+        domain="banking",
+        load_type="bulk",
+        format="json",
+        record_count=1,
+        status="completed",
+        started_at=datetime.now(timezone.utc),
+        completed_at=datetime.now(timezone.utc),
+    )
+    db.add_all([old_run, new_run])
+    db.flush()
+    db.add_all(
+        [
+            GeneratedFile(
+                run_id=old_run.id,
+                file_name="customers.json",
+                file_path=str(old_file),
+                storage_backend="local",
+                object_key="old-run/customers.json",
+                file_format="json",
+                size_bytes=old_file.stat().st_size,
+                file_size_mb=0.0,
+                content_type="application/json",
+            ),
+            GeneratedFile(
+                run_id=new_run.id,
+                file_name="customers.json",
+                file_path=str(new_file),
+                storage_backend="local",
+                object_key="new-run/customers.json",
+                file_format="json",
+                size_bytes=new_file.stat().st_size,
+                file_size_mb=0.0,
+                content_type="application/json",
+            ),
+        ]
+    )
+    db.commit()
+    db.close()
+
+    def override_get_db():
+        session: Session = TestingSessionLocal()
+        try:
+            yield session
+        finally:
+            session.close()
+
+    app = create_app()
+    app.state.SessionLocal = TestingSessionLocal
+    app.dependency_overrides[get_db] = override_get_db
+    with TestClient(app) as client:
+        response = client.get("/api/v1/runs")
+
+    assert response.status_code == 200
+    domains = {item["domain"] for item in response.json()["items"]}
+    assert domains == {"banking"}
+    assert not old_file.exists()
+    assert new_file.exists()
+
+    Base.metadata.drop_all(bind=engine)
+    get_settings.cache_clear()
 
 
 def test_storage_aware_retention_deletes_mocked_s3_generated_files(db_session):

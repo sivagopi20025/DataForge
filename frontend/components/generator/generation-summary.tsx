@@ -16,6 +16,8 @@ export function GenerationSummary({
   tables,
   issues,
   generating,
+  canGenerate = true,
+  disabledReason,
   onGenerate,
 }: {
   domain: Domain;
@@ -25,6 +27,8 @@ export function GenerationSummary({
   tables: string[];
   issues: Record<string, IssueConfig>;
   generating: boolean;
+  canGenerate?: boolean;
+  disabledReason?: string;
   onGenerate: () => void;
 }) {
   const enabledIssues = Object.entries(issues).filter(([, config]) => config.enabled);
@@ -38,8 +42,8 @@ export function GenerationSummary({
         <SummaryRow label="Load Type" value={titleCase(loadType)} />
         <SummaryRow label="Format" value={format.toUpperCase()} />
         <SummaryRow label="Records" value={formatNumber(records)} />
-        <SummaryRow label="Selected Tables" value={tables.length ? `${tables.length} tables` : "All tables"} />
-        <SummaryRow label="Estimated Files" value={`${Math.max(tables.length, 1)} files`} />
+        <SummaryRow label="Selected Tables" value={tables.length ? `${tables.length} tables` : "0 selected"} />
+        <SummaryRow label="Estimated Files" value={`${tables.length} files`} />
         <SummaryRow label="Estimated Total Size" value={`${estimateSize(records, tables, format, domain).toFixed(1)} MB`} />
 
         <div>
@@ -53,8 +57,8 @@ export function GenerationSummary({
           </div>
         </div>
 
-        <Button className="h-11 w-full text-sm" onClick={onGenerate} disabled={generating}>
-          {generating ? "Generating..." : "Generate Dataset"}
+        <Button className="h-11 w-full text-sm" onClick={onGenerate} disabled={generating || !canGenerate}>
+          {generating ? "Generating..." : canGenerate ? "Generate Dataset" : disabledReason ?? "Select tables"}
         </Button>
       </CardContent>
     </Card>

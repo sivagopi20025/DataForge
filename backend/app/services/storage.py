@@ -61,6 +61,14 @@ class LocalStorageService(StorageService):
         )
 
     def download_response(self, generated_file: GeneratedFile) -> FileResponse:
+        path = self.resolve_path(generated_file)
+        return FileResponse(
+            path=path,
+            filename=generated_file.file_name,
+            media_type=generated_file.content_type or "application/octet-stream",
+        )
+
+    def resolve_path(self, generated_file: GeneratedFile) -> Path:
         object_key = generated_file.object_key or _legacy_local_object_key(generated_file.file_path, self.output_dir)
         safe_key = self._safe_object_key(object_key)
         path = (self.output_dir / safe_key).resolve()
@@ -68,11 +76,7 @@ class LocalStorageService(StorageService):
             raise ValueError(f"Generated file path is outside the configured output directory: {generated_file.file_name}")
         if not path.exists() or not path.is_file():
             raise ValueError(f"Generated file is no longer available: {generated_file.file_name}")
-        return FileResponse(
-            path=path,
-            filename=generated_file.file_name,
-            media_type=generated_file.content_type or "application/octet-stream",
-        )
+        return path
 
     def delete_generated_file(self, generated_file: GeneratedFile) -> int:
         object_key = generated_file.object_key or _legacy_local_object_key(generated_file.file_path, self.output_dir)
