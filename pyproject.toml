@@ -9,20 +9,28 @@ dependencies = [
   "pydantic-settings>=2.6",
   "sqlalchemy>=2.0",
   "alembic>=1.13",
-  "psycopg>=3.2",
+  "psycopg[binary]>=3.2",
   "uvicorn>=0.30",
+  "boto3>=1.34",
 ]
 
 [project.optional-dependencies]
 parquet = ["pyarrow>=14"]
+tests = ["httpx2>=2.5", "pytest>=8"]
+e2e = ["selenium>=4.22"]
 
 [project.scripts]
 dataforge = "dataforge.cli:main"
 dataforge-retail = "dataforge.cli:main"
+dataforge-cleanup = "backend.app.services.retention:main"
 
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["dataforge*", "backend*"]
+exclude = ["config*", "deploy*", "frontend*", "output*", "tests*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests", "backend/tests"]

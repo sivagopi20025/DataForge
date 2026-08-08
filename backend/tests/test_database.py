@@ -9,6 +9,7 @@ def test_database_metadata_contains_required_tables(db_session):
         "users",
         "dataset_runs",
         "generated_files",
+        "generation_jobs",
         "issue_manifests",
         "validation_results",
         "admin_metrics",

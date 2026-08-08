@@ -132,10 +132,15 @@ class BankingGenerator:
         if need("transfers"):
             data["transfers"] = []
             active_accounts = [row for row in data["deposit_accounts"] if row["account_status"] == "Active"]
+            active_accounts_by_currency: dict[str, list[dict]] = {}
+            for account in active_accounts:
+                active_accounts_by_currency.setdefault(account["currency"], []).append(account)
             for i in range(1, max(1, self.payment_records // 2) + 1):
                 source = active_accounts[i % len(active_accounts)]
-                candidates = [row for row in active_accounts if row["currency"] == source["currency"] and row["account_id"] != source["account_id"]]
-                destination = candidates[(i * 3) % len(candidates)] if candidates else active_accounts[(i + 1) % len(active_accounts)]
+                same_currency_accounts = active_accounts_by_currency[source["currency"]]
+                destination = same_currency_accounts[(i * 3) % len(same_currency_accounts)]
+                if destination["account_id"] == source["account_id"]:
+                    destination = same_currency_accounts[(i * 3 + 1) % len(same_currency_accounts)] if len(same_currency_accounts) > 1 else active_accounts[(i + 1) % len(active_accounts)]
                 recon = RECONCILIATION_SCENARIOS[i % len(RECONCILIATION_SCENARIOS)] if i % 149 == 0 else ""
                 amount = Decimal(50 + (i % 20000)) + Decimal(self.rng.randrange(0, 100)) / 100
                 data["transfers"].append({

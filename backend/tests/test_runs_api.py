@@ -1,5 +1,6 @@
 def test_runs_api_lists_and_returns_details(client):
-    first = client.post("/api/v1/generate", json={"domain": "finance", "load_type": "bulk", "format": "csv", "records": 8}).json()
+    first_job = client.post("/api/v1/generate", json={"domain": "finance", "load_type": "bulk", "format": "csv", "records": 8}).json()
+    first = client.get(f"/api/v1/jobs/{first_job['job_id']}").json()
     client.post("/api/v1/generate", json={"domain": "banking", "load_type": "bulk", "format": "json", "records": 8})
 
     response = client.get("/api/v1/runs?limit=1&offset=0")

@@ -1,0 +1,52 @@
+services:
+  - type: web
+    name: dataforge-backend
+    runtime: docker
+    dockerContext: .
+    dockerfilePath: ./backend/Dockerfile
+    plan: starter
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dataforge-postgres
+          property: connectionString
+      - key: DATAFORGE_API_KEY
+        generateValue: true
+      - key: OUTPUT_DIR
+        value: /var/lib/dataforge/output
+      - key: CORS_ORIGINS
+        value: https://your-frontend-domain.example
+      - key: GENERATED_FILE_RETENTION_DAYS
+        value: "7"
+      - key: STORAGE_BACKEND
+        value: local
+      - key: OBJECT_STORAGE_BUCKET
+        value: ""
+      - key: OBJECT_STORAGE_BASE_URL
+        value: ""
+      - key: OBJECT_STORAGE_ENDPOINT_URL
+        value: ""
+      - key: OBJECT_STORAGE_REGION
+        value: us-east-1
+      - key: OBJECT_STORAGE_ACCESS_KEY_ID
+        value: ""
+      - key: OBJECT_STORAGE_SECRET_ACCESS_KEY
+        value: ""
+      - key: OBJECT_STORAGE_PRESIGN_SECONDS
+        value: "300"
+      - key: RATE_LIMIT_ENABLED
+        value: "true"
+      - key: RATE_LIMIT_REQUESTS
+        value: "120"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "60"
+
+databases:
+  - name: dataforge-postgres
+    plan: starter

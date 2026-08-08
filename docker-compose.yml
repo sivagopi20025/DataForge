@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: dataforge
       POSTGRES_PASSWORD: dataforge123
     ports:
-      - "5432:5432"
+      - "55434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -23,7 +23,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@dataforge.local
       PGADMIN_DEFAULT_PASSWORD: dataforge123
     ports:
-      - "5050:80"
+      - "5051:80"
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     depends_on:

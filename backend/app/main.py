@@ -4,8 +4,9 @@ import logging
 import time
 import uuid
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.exc import SQLAlchemyError
 
 from backend.app.analytics import AnalyticsAggregator
@@ -22,6 +23,13 @@ def create_app() -> FastAPI:
     configure_logging(settings.log_level)
     app = FastAPI(title="DataForge Backend", version="0.6.0")
     app.state.SessionLocal = SessionLocal
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.cors_origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
     @app.middleware("http")
     async def request_context(request: Request, call_next):
@@ -56,6 +64,11 @@ def create_app() -> FastAPI:
     @app.exception_handler(ValueError)
     async def value_error_handler(_: Request, exc: ValueError) -> JSONResponse:
         return JSONResponse(status_code=400, content={"error": str(exc), "code": "DATAFORGE_ERROR"})
+
+    @app.exception_handler(HTTPException)
+    async def http_error_handler(_: Request, exc: HTTPException) -> JSONResponse:
+        content = exc.detail if isinstance(exc.detail, dict) else {"error": str(exc.detail), "code": "HTTP_ERROR"}
+        return JSONResponse(status_code=exc.status_code, content=content, headers=exc.headers)
 
     @app.exception_handler(SQLAlchemyError)
     async def database_error_handler(_: Request, exc: SQLAlchemyError) -> JSONResponse:

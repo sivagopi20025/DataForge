@@ -41,4 +41,10 @@ class ValidationResultRepository:
         return int(self.db.scalar(select(func.count(ValidationResult.id))) or 0)
 
     def average_score(self) -> float:
-        return float(self.db.scalar(select(func.coalesce(func.avg(ValidationResult.quality_score), 0))) or 0)
+        run_scores = (
+            select(ValidationResult.run_id, func.max(ValidationResult.quality_score).label("quality_score"))
+            .where(ValidationResult.quality_score.is_not(None))
+            .group_by(ValidationResult.run_id)
+            .subquery()
+        )
+        return float(self.db.scalar(select(func.coalesce(func.avg(run_scores.c.quality_score), 0))) or 0)
