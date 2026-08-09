@@ -24,6 +24,7 @@ LOG_LEVEL=INFO
 DATABASE_URL=postgresql+psycopg://<user>:<password>@<host>:5432/<db>
 DATAFORGE_API_KEY=<long-random-secret>
 OUTPUT_DIR=/var/lib/dataforge/output
+MAX_BATCH_RECORDS=500000
 CORS_ORIGINS=https://<frontend-domain>
 GENERATED_FILE_RETENTION_DAYS=7
 STORAGE_BACKEND=local
@@ -37,6 +38,8 @@ OBJECT_STORAGE_PRESIGN_SECONDS=300
 RATE_LIMIT_ENABLED=true
 RATE_LIMIT_REQUESTS=120
 RATE_LIMIT_WINDOW_SECONDS=60
+STREAM_QUERY_TOKEN_ENABLED=false
+WEBHOOK_ALLOWED_DOMAINS=hooks.example.com
 ```
 
 Frontend:
@@ -44,6 +47,7 @@ Frontend:
 ```bash
 NEXT_PUBLIC_API_BASE_URL=https://<backend-domain>
 # Internal/demo deployments only; public browser env vars are visible.
+NEXT_PUBLIC_ENABLE_DEMO_API_KEY=false
 NEXT_PUBLIC_DATAFORGE_API_KEY=
 ```
 
@@ -67,9 +71,12 @@ Protected endpoint groups:
 
 This is a foundation only. Before public beta, replace or augment this with
 user/session-based auth if multiple users need separate access control.
-For an internal demo UI, `NEXT_PUBLIC_DATAFORGE_API_KEY` can send the header
-from the browser. Do not rely on a public browser-exposed key for real
-multi-user authorization.
+For an internal demo UI, set `NEXT_PUBLIC_ENABLE_DEMO_API_KEY=true` and
+`NEXT_PUBLIC_DATAFORGE_API_KEY=<demo-key>` to send the header from the browser.
+Do not enable this for public users. Public browser-exposed keys are not real
+authorization. For beta/public multi-user access, place Supabase/Auth.js/Clerk
+or another identity provider in front of the backend and validate user sessions
+server-side before allowing run history, downloads, admin APIs, or stream access.
 
 ## Rate limiting
 
@@ -97,6 +104,42 @@ The response status is `429` and includes the `Retry-After` header.
 Production note: this limiter is process-local. It is enough for a single
 backend instance. Multi-instance deployments should move the same policy to a
 shared store such as Redis or to the platform edge/proxy.
+
+## Streaming token and webhook security
+
+Use stream tokens only in headers:
+
+```http
+Authorization: Bearer <stream_token>
+```
+
+In production set:
+
+```bash
+STREAM_QUERY_TOKEN_ENABLED=false
+```
+
+Query-string stream tokens are rejected automatically when `APP_ENV=production`.
+
+Webhook push mode is protected by these rules:
+
+- `webhook_url` must use `https://`.
+- localhost, private IP ranges, link-local IPs, reserved IPs, and cloud metadata
+  IPs are blocked.
+- production requires `WEBHOOK_ALLOWED_DOMAINS`.
+- webhook redirects are not followed automatically.
+- webhook secrets are not persisted in plaintext; they are held only in memory
+  long enough for the current background stream task, while the database keeps
+  only a hash.
+
+## Batch generation resource guard
+
+`MAX_BATCH_RECORDS` protects the backend from accidental or abusive large batch
+requests. The default is `500000`, matching the current UI limit. Requests above
+this value are rejected before a background job is queued.
+
+Raise this only after moving generation to stronger worker/runtime capacity and
+verifying memory, disk, and object-storage throughput for the larger target.
 
 ## Async/background generation strategy
 

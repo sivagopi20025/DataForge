@@ -40,6 +40,33 @@ def test_injected_dataset_is_reproducible_and_fails_validation():
     assert validate(first)["overall_status"] == "FAIL"
 
 
+def test_foreign_key_break_respects_configured_rate():
+    clean = RetailGenerator(1000, seed=19).generate()
+    injected, events = FailureInjector({"foreign_key_break": 0.05}, seed=19).apply(clean, {"sales"})
+    valid_store_ids = {row["store_id"] for row in clean["stores"]}
+    broken_sales_rows = [row for row in injected["sales"] if row["store_id"] not in valid_store_ids]
+    fk_events = [event for event in events if event.failure_type == "foreign_key_break" and event.table == "sales"]
+
+    assert len(fk_events) == 1
+    assert fk_events[0].count == 50
+    assert fk_events[0].details["requested_rate"] == 0.05
+    assert len(broken_sales_rows) == 50
+    assert len(broken_sales_rows) < len(injected["sales"])
+
+
+def test_schema_drift_does_not_recreate_renamed_column_as_blank_null_target():
+    clean = RetailGenerator(100, seed=20).generate()
+    injected, events = FailureInjector({"schema_drift": 0.05, "null_values": 0.05}, seed=20).apply(clean, {"customers"})
+    renamed_events = [event for event in events if event.failure_type == "schema_drift_COLUMN_RENAMED" and event.table == "customers"]
+
+    assert renamed_events
+    renamed_from = renamed_events[0].column
+    renamed_to = renamed_events[0].details["renamed_to"]
+    assert renamed_to not in injected["customers"][0]
+    assert renamed_from in injected["customers"][0]
+    assert injected["customers"][0].keys() == clean["customers"][0].keys()
+
+
 @pytest.mark.parametrize(
     ("load_type", "expected_prefix", "expected_count"),
     [
@@ -64,15 +91,63 @@ def test_cli_exports_timestamped_run_and_all_reports(tmp_path):
     run_directory = run_directories[0]
     for table in SCHEMAS:
         assert (run_directory / "bulk" / f"{table}.csv").exists()
-    for report in ("metadata.json", "quality_report.json", "failure_report.json", "relationship_report.json", "schema_report.json", "reconciliation_report.json"):
+    for report in (
+        "metadata.json",
+        "quality_report.json",
+        "failure_report.json",
+        "relationship_report.json",
+        "schema_report.json",
+        "reconciliation_report.json",
+        "validation_report.json",
+        "issue_manifest.json",
+        "run_summary.json",
+        "alignment_report.json",
+        "realism_report.json",
+        "README.md",
+    ):
         assert (run_directory / report).exists()
     metadata = json.loads((run_directory / "metadata.json").read_text())
     failures = json.loads((run_directory / "failure_report.json").read_text())
+    summary = json.loads((run_directory / "run_summary.json").read_text())
+    realism = json.loads((run_directory / "realism_report.json").read_text())
+    readme = (run_directory / "README.md").read_text()
     assert metadata["artifacts"]["bulk/sales.csv"]["rows"] >= 100
     assert metadata["run_id"] == run_directory.name
+    assert summary["realism_profile"] == "realistic"
+    assert realism["engine"]["overall_realism_status"] == "PASS"
+    assert "No public/reference dataset rows are copied" in readme
     assert failures["total_injected"] > 0
     with (run_directory / "bulk" / "sales.csv").open() as handle:
         assert len(list(csv.DictReader(handle))) >= 100
+
+
+@pytest.mark.parametrize("records", ["-1"])
+def test_cli_rejects_non_positive_records_cleanly(records, tmp_path, capsys):
+    with pytest.raises(SystemExit) as exc_info:
+        main(["--records", records, "--output", str(tmp_path)])
+
+    captured = capsys.readouterr()
+    assert exc_info.value.code != 0
+    assert "Error: argument --records: records must be at least 0" in captured.err
+    assert "Traceback" not in captured.err
+    assert not any(tmp_path.iterdir())
+
+
+def test_cli_invalid_domain_reports_cleanly(tmp_path, capsys):
+    with pytest.raises(SystemExit) as exc_info:
+        main(["--domain", "unknown", "--records", "10", "--output", str(tmp_path)])
+
+    captured = capsys.readouterr()
+    assert exc_info.value.code != 0
+    assert "Error: argument --domain: invalid choice" in captured.err
+    assert "Traceback" not in captured.err
+    assert not any(tmp_path.iterdir())
+
+
+def test_cli_valid_generation_still_works_after_boundary_validation(tmp_path):
+    assert main(["--records", "1", "--tables", "sales", "--output", str(tmp_path), "--dataset-name", "valid-boundary"]) == 0
+    run = next((tmp_path / "valid-boundary").iterdir())
+    assert (run / "bulk" / "sales.csv").exists()
 
 
 def test_json_export_and_run_directory_name(tmp_path):

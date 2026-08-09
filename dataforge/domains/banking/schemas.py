@@ -11,11 +11,12 @@ BASE_SCHEMAS: dict[str, TableSchema] = {
     "deposit_accounts": TableSchema("account_id", ("account_id", "customer_id", "branch_id", "account_type", "currency", "balance", "account_status", "opened_date"), (ForeignKey("customer_id", "customers", "customer_id"), ForeignKey("branch_id", "branches", "branch_id"))),
     "payments": TableSchema("payment_id", ("payment_id", "account_id", "payment_type", "amount", "currency", "payment_status", "payment_timestamp", "fraud_scenario", "is_fraud_scenario", "reconciliation_scenario", "is_reconciliation_scenario"), (ForeignKey("account_id", "deposit_accounts", "account_id"),)),
     "transfers": TableSchema("transfer_id", ("transfer_id", "source_account_id", "destination_account_id", "transfer_amount", "currency", "transfer_status", "transfer_timestamp", "reconciliation_scenario", "is_reconciliation_scenario"), (ForeignKey("source_account_id", "deposit_accounts", "account_id"), ForeignKey("destination_account_id", "deposit_accounts", "account_id"))),
+    "card_authorizations": TableSchema("card_authorization_id", ("card_authorization_id", "account_id", "customer_id", "branch_id", "merchant_name", "authorization_amount", "currency", "authorization_timestamp", "authorization_status", "response_code", "reason_code", "expires_at", "captured_at", "external_reference", "capture_reference"), (ForeignKey("account_id", "deposit_accounts", "account_id"), ForeignKey("customer_id", "customers", "customer_id"), ForeignKey("branch_id", "branches", "branch_id"))),
     "treasury_positions": TableSchema("position_id", ("position_id", "branch_id", "position_date", "currency", "cash_position", "liquidity_ratio", "market_value"), (ForeignKey("branch_id", "branches", "branch_id"),)),
     "treasury_transactions": TableSchema("treasury_txn_id", ("treasury_txn_id", "position_id", "transaction_type", "transaction_amount", "transaction_date"), (ForeignKey("position_id", "treasury_positions", "position_id"),)),
 }
 
-FACT_TABLES = {"payments", "transfers", "treasury_positions", "treasury_transactions"}
+FACT_TABLES = {"payments", "transfers", "card_authorizations", "treasury_positions", "treasury_transactions"}
 DIMENSION_TABLES = {"customers", "branches", "deposit_accounts"}
 
 
@@ -28,6 +29,7 @@ BANKING_SPEC = DomainSpec(
     timestamp_sources={
         "payments": "payment_timestamp",
         "transfers": "transfer_timestamp",
+        "card_authorizations": "authorization_timestamp",
         "treasury_positions": "position_date",
         "treasury_transactions": "transaction_date",
     },
@@ -37,9 +39,10 @@ BANKING_SPEC = DomainSpec(
     event_definitions=(
         EventDefinition("payment_event", "payments", "PAYMENT_COMPLETED", "payment_id", "payment_timestamp"),
         EventDefinition("transfer_event", "transfers", "TRANSFER_COMPLETED", "transfer_id", "transfer_timestamp"),
+        EventDefinition("card_authorization_event", "card_authorizations", "CARD_AUTHORIZATION_UPDATED", "card_authorization_id", "authorization_timestamp"),
         EventDefinition("treasury_event", "treasury_transactions", "TREASURY_UPDATED", "treasury_txn_id", "transaction_date"),
         EventDefinition("fraud_event", "payments", "FRAUD_SIGNAL", "payment_id", "payment_timestamp", sample_every=25),
     ),
-    cdc_tables=("deposit_accounts", "payments", "transfers", "treasury_positions", "treasury_transactions"),
+    cdc_tables=("deposit_accounts", "payments", "transfers", "card_authorizations", "treasury_positions", "treasury_transactions"),
     business_rules=BUSINESS_RULES,
 )

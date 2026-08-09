@@ -6,12 +6,12 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session, selectinload
 
 from backend.app.core.config import get_settings
 from backend.app.db.session import SessionLocal
-from backend.app.models import DatasetRun
+from backend.app.models import DatasetRun, GenerationJob
 from backend.app.services.storage import StorageService, get_storage_service
 
 
@@ -93,11 +93,15 @@ def cleanup_stored_generated_files(
                 deleted += 1
                 freed_bytes += int(generated_file.size_bytes or 0)
                 continue
-            deleted_bytes = active_storage.delete_generated_file(generated_file)
+            try:
+                deleted_bytes = active_storage.delete_generated_file(generated_file)
+            except ValueError:
+                deleted_bytes = 0
             if deleted_bytes:
                 deleted += 1
                 freed_bytes += deleted_bytes
         if delete_run_records and not dry_run:
+            db.execute(update(GenerationJob).where(GenerationJob.run_id == run.id).values(run_id=None))
             db.delete(run)
 
     if delete_run_records and not dry_run:

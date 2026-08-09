@@ -1,0 +1,37 @@
+version: 1.4.0
+purpose: Batch 9 selective Manufacturing-native column depth results.
+remaining_scenarios_before_batch_9: 238
+executable_scenarios_gained_by_physical_schema_changes: 9
+newly_executable_by_domain:
+  manufacturing: 9
+newly_executable_by_table:
+  production_lines: 1
+  work_orders: 2
+  quality_checks: 4
+  factories: 2
+newly_executable_scenario_ids:
+- manufacturing_capacity_production_line_retry_burst_06
+- manufacturing_downtime_work_order_retry_burst_06
+- manufacturing_inventory_work_order_inventory_oversell_06
+- manufacturing_quality_quality_check_missing_child_record_03
+- manufacturing_reconciliation_factorie_aggregate_mismatch_01
+- manufacturing_suppliers_quality_check_calculation_error_01
+- manufacturing_suppliers_quality_check_duplicate_retry_06
+- manufacturing_suppliers_quality_check_retry_burst_05
+- manufacturing_work_orders_factorie_duplicate_retry_04
+columns_implemented_this_batch:
+- manufacturing.production_lines.risk_score
+- manufacturing.production_lines.idempotency_key
+- manufacturing.suppliers.idempotency_key
+- manufacturing.work_orders.expected_amount
+- manufacturing.work_orders.actual_amount
+- manufacturing.work_orders.risk_score
+- manufacturing.work_orders.idempotency_key
+- manufacturing.quality_checks.scenario_status_code
+- manufacturing.quality_checks.risk_score
+- manufacturing.quality_checks.idempotency_key
+tables_added_this_batch: []
+selection_rationale: Manufacturing was the only domain below 60% runtime-capable coverage;
+  small domain-native operational columns promoted retry, reconciliation, risk, and
+  status scenarios without adding artificial tables.
+remaining_specification_only: 229

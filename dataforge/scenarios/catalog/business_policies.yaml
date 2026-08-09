@@ -1,0 +1,18 @@
+version: 1.0.0
+description: Reusable structured business-policy profiles for generic policy violations.
+policies:
+  generic_upper_bound:
+    policy_type: upper_bound
+    rule: observed field must be less than or equal to configured limit
+    supported_by:
+    - policy_violation
+    - policy_validator
+  generic_non_negative:
+    policy_type: lower_bound
+    rule: observed numeric field must be greater than or equal to zero
+    supported_by:
+    - negative_numeric_value
+    - policy_validator
+notes:
+  - Batch 4 uses primitive-created baseline rows when scenario specs do not yet reference explicit policy IDs.
+  - Domain-specific policy catalogs should be introduced only when they unlock multiple scenarios without generic-field pollution.

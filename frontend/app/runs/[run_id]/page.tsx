@@ -45,16 +45,16 @@ export default function RunDetailPage() {
   const generatedAt = formatDateTime(run.completed_at ?? run.started_at);
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between gap-4">
-        <div>
+    <div className="min-w-0 space-y-8">
+      <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="min-w-0">
           <Link href="/generator" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
             <ArrowLeft className="h-4 w-4" /> Back to generator
           </Link>
           <h1 className="mt-3 text-4xl font-bold tracking-tight">Run Results</h1>
-          <p className="mt-2 text-muted-foreground">Run ID: {run.id}</p>
+          <p className="mt-2 truncate text-muted-foreground">Run ID: {run.id}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3">
           <Link href="/history">
             <Button variant="secondary">View history</Button>
           </Link>
@@ -62,24 +62,25 @@ export default function RunDetailPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3 2xl:grid-cols-6">
+      <div className="grid min-w-0 gap-4 md:grid-cols-3 2xl:grid-cols-6">
         <Metric label="Domain" value={titleCase(run.domain)} />
         <Metric label="Load Type" value={titleCase(run.load_type)} />
-        <Metric label="Format" value={run.format.toUpperCase()} />
+        <Metric label="Format" value={run.format === "database" ? "Database" : run.format.toUpperCase()} />
         <Metric label="Records" value={formatNumber(run.record_count)} />
         <Metric label="Generated At" value={generatedAt} />
         <Metric label="Quality Score" value={`${Math.round(qualityScore)}`} />
       </div>
 
-      <div className="grid gap-5 xl:grid-cols-[390px_minmax(0,1fr)]">
-        <Card>
+      <div className="grid min-w-0 gap-5 xl:grid-cols-[minmax(280px,390px)_minmax(0,1fr)]">
+        <Card className="min-w-0">
           <CardHeader>
             <CardTitle>Generated Files</CardTitle>
-            <CardDescription>Hover a file to preview or download.</CardDescription>
+            <CardDescription>Hover a file to preview or download. Database outputs are downloadable DDL ZIP packages.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="min-w-0 space-y-2">
             {run.generated_files.map((file) => {
               const isPreviewed = file.id === previewFileId;
+              const canPreview = file.file_format !== "database";
               return (
                 <div
                   key={file.id}
@@ -88,23 +89,25 @@ export default function RunDetailPage() {
                     isPreviewed ? "border-primary ring-4 ring-primary/10" : "border-border",
                   ].join(" ")}
                 >
-                  <button type="button" onClick={() => setPreviewFileId(file.id)} className="flex min-w-0 flex-1 items-center gap-3 text-left">
+                  <button type="button" onClick={() => canPreview && setPreviewFileId(file.id)} className="flex min-w-0 flex-1 items-center gap-3 text-left">
                     <FileArchive className="h-5 w-5 shrink-0 text-primary" />
                     <div className="min-w-0">
                       <p className="truncate text-sm font-semibold">{file.file_name}</p>
-                      <p className="text-xs text-muted-foreground">{file.file_format.toUpperCase()} · {file.file_size_mb.toFixed(3)} MB</p>
+                      <p className="truncate text-xs text-muted-foreground">{fileLabel(file)} · {file.file_size_mb.toFixed(3)} MB</p>
                     </div>
                   </button>
                   <div className="flex shrink-0 items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                    <button
-                      type="button"
-                      onClick={() => setPreviewFileId(file.id)}
-                      className="rounded-lg p-2 text-muted-foreground transition hover:bg-card hover:text-primary"
-                      aria-label={`Preview ${file.file_name}`}
-                      title="Preview"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </button>
+                    {canPreview ? (
+                      <button
+                        type="button"
+                        onClick={() => setPreviewFileId(file.id)}
+                        className="rounded-lg p-2 text-muted-foreground transition hover:bg-card hover:text-primary"
+                        aria-label={`Preview ${file.file_name}`}
+                        title="Preview"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                    ) : null}
                     <a
                       href={getDownloadUrl(run.id, file.id)}
                       download
@@ -140,6 +143,16 @@ export default function RunDetailPage() {
   );
 }
 
+function fileLabel(file: { file_format: string; file_name: string }) {
+  if (file.file_format === "database") {
+    if (file.file_name.includes("_postgresql_")) return "PostgreSQL DDL Package";
+    if (file.file_name.includes("_mssql_")) return "MSSQL DDL Package";
+    if (file.file_name.includes("_mysql_")) return "MySQL DDL Package";
+    return "Database DDL Package";
+  }
+  return file.file_format.toUpperCase();
+}
+
 function FilePreviewPanel({
   isLoading,
   error,
@@ -171,9 +184,9 @@ function FilePreviewPanel({
 
   return (
     <div className="min-w-0">
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div>
-          <p className="font-semibold">{preview.file_name}</p>
+      <div className="mb-3 flex min-w-0 items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="truncate font-semibold">{preview.file_name}</p>
           <p className="text-xs text-muted-foreground">Showing {preview.row_count} of up to {preview.max_rows} preview rows</p>
         </div>
       </div>
@@ -213,10 +226,10 @@ function formatPreviewValue(value: unknown) {
 
 function Metric({ label, value }: { label: string; value: string }) {
   return (
-    <Card>
+    <Card className="min-w-0">
       <CardContent className="p-5">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{label}</p>
-        <p className="mt-2 text-2xl font-bold">{value}</p>
+        <p className="mt-2 truncate text-2xl font-bold" title={value}>{value}</p>
       </CardContent>
     </Card>
   );

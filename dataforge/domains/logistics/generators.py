@@ -5,6 +5,7 @@ from datetime import date, datetime, timedelta
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import full_name, unique_email
 from .schemas import LOGISTICS_SPEC
 
 
@@ -40,9 +41,9 @@ class LogisticsGenerator:
         def need(table: str) -> bool:
             return full or table in selected
 
-        need_shipments = full or bool(selected & {"shipments", "delivery_records", "tracking_events"})
-        need_customers = full or bool(selected & {"customers", "shipments", "delivery_records", "tracking_events"})
-        need_warehouses = full or bool(selected & {"warehouses", "shipments", "delivery_records", "tracking_events"})
+        need_shipments = full or bool(selected & {"shipments", "delivery_records", "tracking_events", "exception_alerts"})
+        need_customers = full or bool(selected & {"customers", "shipments", "delivery_records", "tracking_events", "exception_alerts"})
+        need_warehouses = full or bool(selected & {"warehouses", "shipments", "delivery_records", "tracking_events", "exception_alerts"})
         need_drivers = full or bool(selected & {"drivers", "vehicles", "delivery_records", "gps_events"})
         need_vehicles = full or bool(selected & {"vehicles", "gps_events"})
         counts = {
@@ -60,7 +61,7 @@ class LogisticsGenerator:
                     "customer_id": 900000 + i,
                     "customer_name": f"Logistics Customer {i:06d}",
                     "customer_type": ("retail", "enterprise", "marketplace")[i % 3],
-                    "email": f"logistics.customer.{i}@example.test",
+                    "email": unique_email("logistics", "customer", 900000 + i, "logistics.customer"),
                     "phone": f"555-{i % 1000:03d}-{(i * 19) % 10000:04d}",
                     "country": "USA",
                     "state": state,
@@ -88,7 +89,7 @@ class LogisticsGenerator:
             for i in range(1, counts["drivers"] + 1):
                 data["drivers"].append({
                     "driver_id": 800000 + i,
-                    "driver_name": NAMES[i % len(NAMES)],
+                    "driver_name": full_name(i, "logistics.driver"),
                     "license_number": f"DL-{i:09d}",
                     "phone": f"555-{(i * 3) % 1000:03d}-{(i * 23) % 10000:04d}",
                     "status": ("available", "assigned", "off_duty")[i % 3],
@@ -138,7 +139,7 @@ class LogisticsGenerator:
                     "delivery_status": "delivered",
                     "delivery_time_minutes": 60 * (18 + i % 72),
                 })
-        if need("tracking_events"):
+        if need("tracking_events") or need("exception_alerts"):
             data["tracking_events"] = []
             event_id = 1
             for shipment in data["shipments"]:
@@ -155,6 +156,43 @@ class LogisticsGenerator:
                         "location": CITIES[(shipment["shipment_id"] + offset) % len(CITIES)][0],
                     })
                     event_id += 1
+        if need("exception_alerts"):
+            data["exception_alerts"] = []
+            alert_count = min(len(data["shipments"]), max(1, int(self.shipment_records * 0.12)))
+            alert_profiles = (
+                ("delay", "carrier_delay", "medium", 125.00),
+                ("temperature_breach", "temperature_excursion", "critical", 750.00),
+                ("address_issue", "invalid_address", "low", 45.00),
+                ("customs_hold", "customs_documentation", "high", 425.00),
+                ("damage", "package_damage", "high", 350.00),
+                ("lost_scan", "tracking_gap", "medium", 90.00),
+            )
+            events_by_shipment: dict[int, list[dict]] = {}
+            for event in data.get("tracking_events", []):
+                events_by_shipment.setdefault(event["shipment_id"], []).append(event)
+            for i in range(1, alert_count + 1):
+                shipment = data["shipments"][(i * 7 - 1) % len(data["shipments"])]
+                alert_type, reason_code, severity, base_cost = alert_profiles[i % len(alert_profiles)]
+                source_events = events_by_shipment.get(shipment["shipment_id"], [])
+                source_event = source_events[min(len(source_events) - 1, 1)] if source_events else None
+                anchor_time = datetime.fromisoformat(source_event["event_timestamp"]) if source_event else datetime.fromisoformat(shipment["created_at"])
+                alert_timestamp = anchor_time + timedelta(hours=1 + i % 12)
+                status = "resolved" if i % 5 else ("acknowledged" if i % 2 else "open")
+                resolved_at = alert_timestamp + timedelta(hours=2 + i % 36)
+                data["exception_alerts"].append({
+                    "exception_alert_id": 9000000 + i,
+                    "shipment_id": shipment["shipment_id"],
+                    "source_event_id": source_event["event_id"] if source_event else "",
+                    "alert_type": alert_type,
+                    "alert_timestamp": alert_timestamp.isoformat(),
+                    "severity": severity,
+                    "status": status,
+                    "exception_reason": reason_code.replace("_", " "),
+                    "reason_code": reason_code,
+                    "estimated_impact_cost": round(base_cost + (i % 250) * 1.75, 2),
+                    "resolved_at": resolved_at.isoformat() if status == "resolved" else "not_applicable",
+                    "created_at": alert_timestamp.isoformat(),
+                })
         if need("gps_events"):
             data["gps_events"] = []
             gps_count = max(self.shipment_records, self._count(1.5, 25))

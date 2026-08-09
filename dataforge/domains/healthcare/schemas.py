@@ -11,11 +11,12 @@ BASE_SCHEMAS: dict[str, TableSchema] = {
     "visits": TableSchema("visit_id", ("visit_id", "patient_id", "provider_id", "visit_date", "visit_type", "visit_status"), (ForeignKey("patient_id", "patients", "patient_id"), ForeignKey("provider_id", "providers", "provider_id"))),
     "diagnoses": TableSchema("diagnosis_id", ("diagnosis_id", "visit_id", "icd10_code", "diagnosis_description", "severity"), (ForeignKey("visit_id", "visits", "visit_id"),)),
     "procedures": TableSchema("procedure_id", ("procedure_id", "visit_id", "cpt_code", "procedure_description", "procedure_cost"), (ForeignKey("visit_id", "visits", "visit_id"),)),
+    "prior_authorizations": TableSchema("prior_authorization_id", ("prior_authorization_id", "patient_id", "provider_id", "procedure_id", "procedure_code", "requested_at", "approved_at", "authorization_status", "approved_amount", "expiration_date", "denial_reason"), (ForeignKey("patient_id", "patients", "patient_id"), ForeignKey("provider_id", "providers", "provider_id"), ForeignKey("procedure_id", "procedures", "procedure_id"))),
     "claims": TableSchema("claim_id", ("claim_id", "patient_id", "visit_id", "provider_id", "claim_amount", "claim_status", "submitted_date"), (ForeignKey("visit_id", "visits", "visit_id"), ForeignKey("patient_id", "patients", "patient_id"), ForeignKey("provider_id", "providers", "provider_id"))),
     "payments": TableSchema("payment_id", ("payment_id", "claim_id", "payment_amount", "payment_date", "payment_status"), (ForeignKey("claim_id", "claims", "claim_id"),)),
 }
 
-FACT_TABLES = {"visits", "diagnoses", "procedures", "claims", "payments"}
+FACT_TABLES = {"visits", "diagnoses", "procedures", "prior_authorizations", "claims", "payments"}
 DIMENSION_TABLES = {"patients", "providers"}
 
 
@@ -27,6 +28,7 @@ HEALTHCARE_SPEC = DomainSpec(
     dimension_tables=DIMENSION_TABLES,
     timestamp_sources={
         "visits": "visit_date",
+        "prior_authorizations": "requested_at",
         "claims": "submitted_date",
         "payments": "payment_date",
     },
@@ -35,9 +37,10 @@ HEALTHCARE_SPEC = DomainSpec(
     type_mismatch_columns=TYPE_MISMATCH_COLUMNS,
     event_definitions=(
         EventDefinition("visit_event", "visits", "VISIT_UPDATED", "visit_id", "visit_date"),
+        EventDefinition("prior_authorization_event", "prior_authorizations", "PRIOR_AUTH_UPDATED", "prior_authorization_id", "requested_at"),
         EventDefinition("claim_event", "claims", "CLAIM_UPDATED", "claim_id", "submitted_date"),
         EventDefinition("payment_event", "payments", "PAYMENT_UPDATED", "payment_id", "payment_date"),
     ),
-    cdc_tables=("patients", "visits", "claims", "payments"),
+    cdc_tables=("patients", "visits", "prior_authorizations", "claims", "payments"),
     business_rules=BUSINESS_RULES,
 )

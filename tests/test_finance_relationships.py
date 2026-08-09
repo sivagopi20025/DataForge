@@ -7,7 +7,7 @@ def test_finance_relationships_have_no_orphans():
     data = FinanceGenerator(150, seed=43).generate()
     report = relationship_report(data, FINANCE_SPEC)
     assert report["overall_status"] == "PASS"
-    assert len(report["relationships"]) == 7
+    assert len(report["relationships"]) == 13
 
 
 def test_finance_relationship_validation_catches_transaction_without_account():

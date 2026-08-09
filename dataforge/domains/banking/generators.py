@@ -6,9 +6,13 @@ from decimal import Decimal
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import business_name, full_name
 from .constants import (
     ACCOUNT_STATUSES,
     ACCOUNT_TYPES,
+    CARD_AUTHORIZATION_STATUSES,
+    CARD_DECLINE_REASONS,
+    CARD_RESPONSE_CODES,
     BRANCH_STATUSES,
     CITIES,
     CURRENCIES,
@@ -46,15 +50,16 @@ class BankingGenerator:
         def need(table: str) -> bool:
             return full or table in selected
 
-        need_customers = full or bool(selected & {"customers", "deposit_accounts", "payments", "transfers"})
-        need_branches = full or bool(selected & {"branches", "deposit_accounts", "payments", "transfers", "treasury_positions", "treasury_transactions"})
-        need_accounts = full or bool(selected & {"deposit_accounts", "payments", "transfers"})
+        need_customers = full or bool(selected & {"customers", "deposit_accounts", "payments", "transfers", "card_authorizations"})
+        need_branches = full or bool(selected & {"branches", "deposit_accounts", "payments", "transfers", "card_authorizations", "treasury_positions", "treasury_transactions"})
+        need_accounts = full or bool(selected & {"deposit_accounts", "payments", "transfers", "card_authorizations"})
         need_positions = full or bool(selected & {"treasury_positions", "treasury_transactions"})
 
         customer_count = min(75000, self._count(0.20, 100))
         branch_count = min(5000, self._count(0.01, 20))
         account_count = min(125000, self._count(0.35, 150))
         position_count = min(50000, self._count(0.08, 25))
+        authorization_count = min(200000, self._count(0.60, 40))
         start = datetime(2026, 6, 21) if self.load_type in {"incremental", "delta", "cdc", "event", "event_stream"} else datetime(2026, 1, 1)
         data: Dataset = {}
 
@@ -65,7 +70,7 @@ class BankingGenerator:
                 data["customers"].append({
                     "customer_id": 1300000 + i,
                     "customer_type": CUSTOMER_TYPES[i % len(CUSTOMER_TYPES)],
-                    "customer_name": f"Banking Customer {i:06d}",
+                    "customer_name": full_name(i, "banking.customer") if CUSTOMER_TYPES[i % len(CUSTOMER_TYPES)] == "Individual" else business_name(i, "banking.business", "Client"),
                     "country": country,
                     "state": state,
                     "city": city,
@@ -153,6 +158,52 @@ class BankingGenerator:
                     "transfer_timestamp": (start + timedelta(seconds=i * 11)).isoformat(),
                     "reconciliation_scenario": recon or "none",
                     "is_reconciliation_scenario": bool(recon),
+                })
+
+        if need("card_authorizations"):
+            data["card_authorizations"] = []
+            active_accounts = [row for row in data["deposit_accounts"] if row["account_status"] == "Active"]
+            customers_by_id = {row["customer_id"]: row for row in data["customers"]}
+            merchant_categories = ("grocery", "fuel", "travel", "restaurant", "electronics", "healthcare")
+            for i in range(1, authorization_count + 1):
+                account = active_accounts[(i - 1) % len(active_accounts)]
+                customer = customers_by_id[account["customer_id"]]
+                authorized_at = start + timedelta(seconds=i * 7)
+                base_amount = Decimal(5 + (i % 1800)) + Decimal(self.rng.randrange(0, 100)) / 100
+                if i % 97 == 0:
+                    status = "Declined"
+                    response_code = CARD_RESPONSE_CODES[i % len(CARD_RESPONSE_CODES)]
+                    reason_code = CARD_DECLINE_REASONS[(i % (len(CARD_DECLINE_REASONS) - 1)) + 1]
+                elif i % 31 == 0:
+                    status = "Expired"
+                    response_code = "00"
+                    reason_code = "not_applicable"
+                elif i % 23 == 0:
+                    status = "Reversed"
+                    response_code = "00"
+                    reason_code = "not_applicable"
+                else:
+                    status = "Captured" if i % 3 else "Approved"
+                    response_code = "00"
+                    reason_code = "not_applicable"
+                expires_at = authorized_at + timedelta(days=7)
+                captured_at = authorized_at + timedelta(minutes=5 + i % 240)
+                data["card_authorizations"].append({
+                    "card_authorization_id": 8300000 + i,
+                    "account_id": account["account_id"],
+                    "customer_id": customer["customer_id"],
+                    "branch_id": account["branch_id"],
+                    "merchant_name": f"{merchant_categories[i % len(merchant_categories)].title()} Merchant {i % 5000:04d}",
+                    "authorization_amount": str(base_amount.quantize(Decimal("0.01"))),
+                    "currency": account["currency"],
+                    "authorization_timestamp": authorized_at.isoformat(),
+                    "authorization_status": status,
+                    "response_code": response_code,
+                    "reason_code": reason_code,
+                    "expires_at": expires_at.isoformat(),
+                    "captured_at": captured_at.isoformat() if status == "Captured" else "not_applicable",
+                    "external_reference": f"AUTH-{authorized_at:%Y%m%d}-{i:010d}",
+                    "capture_reference": f"CAP-{i:010d}" if status == "Captured" else "not_applicable",
                 })
 
         if need_positions:

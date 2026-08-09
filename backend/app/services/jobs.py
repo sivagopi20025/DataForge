@@ -12,6 +12,8 @@ from backend.app.db.session import SessionLocal
 from backend.app.repositories import GenerationJobRepository
 from backend.app.schemas.api import GenerateRequest
 from backend.app.services.generation import DatasetGenerationService
+from dataforge.domains import DOMAIN_SPECS
+from dataforge.modes import normalize_load_type
 
 logger = logging.getLogger(__name__)
 
@@ -22,9 +24,22 @@ class GenerationJobService:
         self.jobs = GenerationJobRepository(db)
 
     def enqueue(self, payload: GenerateRequest) -> dict[str, Any]:
+        self._validate_request(payload)
         job = self.jobs.create(request_payload=payload.model_dump())
         self.db.commit()
         return {"job_id": job.id, "status": job.status, "run_id": job.run_id}
+
+    @staticmethod
+    def _validate_request(payload: GenerateRequest) -> None:
+        if payload.domain not in DOMAIN_SPECS:
+            raise ValueError(f"Unsupported domain: {payload.domain}")
+        load_type = normalize_load_type(payload.load_type)
+        if load_type not in {"bulk", "incremental", "delta", "cdc", "event_stream"}:
+            raise ValueError(f"Unsupported load type: {payload.load_type}")
+        selected_tables = set(payload.selected_tables or [])
+        invalid_tables = selected_tables.difference(DOMAIN_SPECS[payload.domain].schemas)
+        if invalid_tables:
+            raise ValueError(f"Unsupported tables for {payload.domain}: {sorted(invalid_tables)}")
 
 
 def run_generation_job(job_id: str, session_factory: Callable[[], Session] = SessionLocal) -> None:

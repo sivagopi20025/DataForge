@@ -16,6 +16,7 @@ class Settings(BaseSettings):
         alias="DATABASE_URL",
     )
     output_dir: Path = Field(default=Path("output/backend"), alias="OUTPUT_DIR")
+    max_batch_records: int = Field(default=500_000, ge=0, alias="MAX_BATCH_RECORDS")
     generated_file_retention_days: int = Field(default=7, alias="GENERATED_FILE_RETENTION_DAYS")
     storage_backend: str = Field(default="local", alias="STORAGE_BACKEND")
     object_storage_bucket: str | None = Field(default=None, alias="OBJECT_STORAGE_BUCKET")
@@ -28,6 +29,13 @@ class Settings(BaseSettings):
     rate_limit_enabled: bool = Field(default=True, alias="RATE_LIMIT_ENABLED")
     rate_limit_requests: int = Field(default=120, ge=1, alias="RATE_LIMIT_REQUESTS")
     rate_limit_window_seconds: int = Field(default=60, ge=1, alias="RATE_LIMIT_WINDOW_SECONDS")
+    stream_query_token_enabled: bool = Field(default=True, alias="STREAM_QUERY_TOKEN_ENABLED")
+    benchmark_detector_upload_max_bytes: int = Field(default=5_000_000, ge=1, alias="BENCHMARK_DETECTOR_UPLOAD_MAX_BYTES")
+    benchmark_runs_per_period: int = Field(default=25, ge=1, alias="BENCHMARK_RUNS_PER_PERIOD")
+    benchmark_run_period_seconds: int = Field(default=3600, ge=1, alias="BENCHMARK_RUN_PERIOD_SECONDS")
+    benchmark_concurrent_runs: int = Field(default=2, ge=1, alias="BENCHMARK_CONCURRENT_RUNS")
+    benchmark_artifact_retention_days: int = Field(default=30, ge=1, alias="BENCHMARK_ARTIFACT_RETENTION_DAYS")
+    webhook_allowed_domains_raw: str = Field(default="", alias="WEBHOOK_ALLOWED_DOMAINS")
     cors_origins_raw: str = Field(
         default="http://localhost:3000,http://127.0.0.1:3000",
         alias="CORS_ORIGINS",
@@ -38,6 +46,10 @@ class Settings(BaseSettings):
     @property
     def cors_origins(self) -> list[str]:
         return [origin.strip() for origin in self.cors_origins_raw.split(",") if origin.strip()]
+
+    @property
+    def webhook_allowed_domains(self) -> list[str]:
+        return [domain.strip().lower() for domain in self.webhook_allowed_domains_raw.split(",") if domain.strip()]
 
 
 @lru_cache

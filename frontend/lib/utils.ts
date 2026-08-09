@@ -23,6 +23,14 @@ export function estimateSize(records: number, tables: number | string[], format:
     return 0;
   }
 
+  if (format === "database") {
+    return Math.max(0.05, tableCount * 0.025);
+  }
+
+  if (records === 0) {
+    return Math.max(0.001, tableCount * 0.001);
+  }
+
   if (domain === "healthcare" && selectedTables.length) {
     const rowCount = selectedTables.reduce((total, table) => total + estimateHealthcareRows(records, table), 0);
     const bytesPerRow = format === "json" ? 911 : format === "parquet" ? 95 : 372;

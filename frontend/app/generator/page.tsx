@@ -13,9 +13,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GenerationSummary } from "@/components/generator/generation-summary";
 import { GenerationProgress } from "@/components/generator/generation-progress";
-import { domains, formats, issueLabels, loadTypes } from "@/components/generator/options";
+import { databaseTypes, domains, formats, issueLabels, loadTypes, recordCounts } from "@/components/generator/options";
 import { cn, estimateSize, titleCase } from "@/lib/utils";
-import type { Domain, LoadType, OutputFormat } from "@/types/api";
+import type { DatabaseType, Domain, LoadType, OutputFormat } from "@/types/api";
 
 export default function GeneratorPage() {
   const router = useRouter();
@@ -42,6 +42,7 @@ export default function GeneratorPage() {
         domain: store.domain,
         load_type: store.loadType,
         format: store.format,
+        database_type: store.format === "database" ? store.databaseType : undefined,
         records: store.records,
         selected_tables: selectedTables,
         issues: selectedIssues,
@@ -66,9 +67,9 @@ export default function GeneratorPage() {
 
   if (generateMutation.isPending) {
     return (
-      <div className="space-y-5">
-        <header className="rounded-2xl border border-border bg-white/70 p-5 text-center shadow-sm backdrop-blur">
-          <Badge>Phase 1 · Functional</Badge>
+      <div className="min-w-0 space-y-5">
+        <header className="min-w-0 overflow-hidden rounded-2xl border border-border bg-white/70 p-5 text-center shadow-sm backdrop-blur">
+          <Badge>Batch Engine · Beta-ready</Badge>
           <h1 className="mt-3 text-3xl font-bold tracking-tight">Generate Enterprise Datasets</h1>
           <p className="mt-2 text-sm text-muted-foreground">Your selected files are being generated now.</p>
         </header>
@@ -78,6 +79,7 @@ export default function GeneratorPage() {
           domain={store.domain}
           loadType={store.loadType}
           format={store.format}
+          databaseType={store.format === "database" ? store.databaseType : undefined}
           records={store.records}
           tableCount={selectedTables.length}
         />
@@ -86,9 +88,9 @@ export default function GeneratorPage() {
   }
 
   return (
-    <div className="space-y-5">
-      <header className="rounded-2xl border border-border bg-white/70 p-5 shadow-sm backdrop-blur">
-        <Badge>Phase 1 · Functional</Badge>
+    <div className="min-w-0 space-y-5">
+      <header className="min-w-0 overflow-hidden rounded-2xl border border-border bg-white/70 p-5 shadow-sm backdrop-blur">
+        <Badge>Batch Engine · Beta-ready</Badge>
         <HoverHelp
           className="mt-3"
           title="Generate Enterprise Datasets"
@@ -97,13 +99,13 @@ export default function GeneratorPage() {
         />
       </header>
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
-        <div className="space-y-5">
+      <div className="grid min-w-0 gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
+        <div className="min-w-0 space-y-5">
           <Card id="dataset-setup" className="scroll-mt-6">
             <CardHeader className="p-4">
               <HoverHelp title="1. Dataset Setup" description="Select domain, load type, and format in one place." />
             </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 lg:grid-cols-4">
+            <CardContent className={cn("grid min-w-0 gap-3 p-4 pt-0", store.format === "database" ? "lg:grid-cols-5" : "lg:grid-cols-4")}>
               <ConfigSelect
                 label="Domain"
                 value={store.domain}
@@ -122,6 +124,14 @@ export default function GeneratorPage() {
                 options={formats}
                 onChange={(value) => store.setFormat(value as OutputFormat)}
               />
+              {store.format === "database" ? (
+                <ConfigSelect
+                  label="Database Type"
+                  value={store.databaseType}
+                  options={databaseTypes}
+                  onChange={(value) => store.setDatabaseType(value as DatabaseType)}
+                />
+              ) : null}
               <RecordCountInput value={store.records} onChange={store.setRecords} />
             </CardContent>
           </Card>
@@ -132,7 +142,7 @@ export default function GeneratorPage() {
             </CardHeader>
             <CardContent className="p-4 pt-0">
               {catalogQuery.isLoading ? (
-                <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} className="h-20" />)}</div>
+                <div className="grid min-w-0 gap-3 md:grid-cols-2 2xl:grid-cols-3">{Array.from({ length: 6 }).map((_, index) => <Skeleton key={index} className="h-20" />)}</div>
               ) : catalogQuery.isError ? (
                 <div className="flex items-center gap-3 rounded-2xl border border-danger/30 bg-danger/5 p-4 text-sm text-danger">
                   <AlertCircle className="h-4 w-4" />
@@ -142,33 +152,33 @@ export default function GeneratorPage() {
                   </span>
                 </div>
               ) : (
-                <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">
+                <div className="grid min-w-0 gap-3 md:grid-cols-2 2xl:grid-cols-3">
                   {catalogQuery.data?.tables.map((table) => {
                     const isSelected = selectedTables.includes(table.name);
                     return (
                       <label
                         key={table.name}
                         className={cn(
-                          "timed-hover-group relative rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
+                          "timed-hover-group relative min-w-0 rounded-xl border bg-card p-3 text-left transition hover:shadow-glow",
                           isSelected ? "border-primary ring-4 ring-primary/10" : "border-border",
                         )}
                       >
-                        <div className="flex items-start gap-2.5">
-                        <input
-                          type="checkbox"
-                          checked={isSelected}
-                          onChange={() => toggleTable(table.name)}
-                          className="mt-2 h-4 w-4 rounded border-border accent-primary"
-                        />
-                        <div className="rounded-lg bg-muted p-1.5 text-muted-foreground"><Database className="h-4 w-4" /></div>
-                        <div className="relative min-w-0">
-                          <p className="text-sm font-semibold">{titleCase(table.name)}</p>
-                          <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
-                            PK: {table.primary_key} · {table.columns.length} columns
-                          </p>
+                        <div className="flex min-w-0 items-start gap-2.5">
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() => toggleTable(table.name)}
+                            className="mt-2 h-4 w-4 shrink-0 rounded border-border accent-primary"
+                          />
+                          <div className="rounded-lg bg-muted p-1.5 text-muted-foreground"><Database className="h-4 w-4" /></div>
+                          <div className="relative min-w-0">
+                            <p className="truncate text-sm font-semibold">{titleCase(table.name)}</p>
+                            <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 w-max max-w-64 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
+                              PK: {table.primary_key} · {table.columns.length} columns
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </label>
+                      </label>
                     );
                   })}
                 </div>
@@ -180,12 +190,12 @@ export default function GeneratorPage() {
             <CardHeader className="p-4">
               <HoverHelp title="3. Issue Injection" description="Inject realistic quality problems before validation." />
             </CardHeader>
-            <CardContent className="grid gap-3 p-4 pt-0 lg:grid-cols-2">
+            <CardContent className="grid min-w-0 gap-3 p-4 pt-0 lg:grid-cols-2">
               {Object.entries(store.issues).map(([issue, config]) => (
-                <div key={issue} className="rounded-xl border border-border bg-muted/30 p-3">
+                <div key={issue} className="min-w-0 rounded-xl border border-border bg-muted/30 p-3">
                   <div className="flex items-center justify-between gap-4">
-                    <div className="timed-hover-group relative">
-                      <p className="font-semibold">{issueLabels[issue]}</p>
+                    <div className="timed-hover-group relative min-w-0">
+                      <p className="truncate font-semibold">{issueLabels[issue]}</p>
                       <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-30 mt-2 flex w-max max-w-64 items-center gap-1 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
                         <Info className="h-3 w-3" /> {config.percentage}% target rate
                       </p>
@@ -217,6 +227,7 @@ export default function GeneratorPage() {
           domain={store.domain}
           loadType={store.loadType}
           format={store.format}
+          databaseType={store.format === "database" ? store.databaseType : undefined}
           records={store.records}
           tables={selectedTables}
           issues={store.issues}
@@ -231,19 +242,20 @@ export default function GeneratorPage() {
 }
 
 function RecordCountInput({ value, onChange }: { value: number; onChange: (records: number) => void }) {
-  const presetValues = [1000, 10000, 100000, 500000];
+  const presetValues = recordCounts.map((item) => item.value);
   const [customMode, setCustomMode] = useState(!presetValues.includes(value));
   const selectedPreset = customMode || !presetValues.includes(value) ? "custom" : String(value);
 
   function updateRecords(rawValue: string) {
     const parsed = Math.floor(Number(rawValue));
     if (!Number.isFinite(parsed)) return;
-    onChange(Math.min(500_000, Math.max(1, parsed)));
+    onChange(Math.min(500_000, Math.max(0, parsed)));
   }
 
   return (
-    <label className="timed-hover-group relative block rounded-xl border border-border bg-muted/20 p-3">
+    <label className="timed-hover-group relative block min-w-0 rounded-xl border border-border bg-muted/20 p-3">
       <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Record Count</span>
+      <p className="mt-1 text-xs text-muted-foreground">0 = Generate schema-only empty files</p>
       <div className="mt-2 grid gap-2">
         <select
           className="h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
@@ -257,9 +269,9 @@ function RecordCountInput({ value, onChange }: { value: number; onChange: (recor
             updateRecords(event.target.value);
           }}
         >
-          {presetValues.map((preset) => (
-            <option key={preset} value={preset}>
-              {preset}
+          {recordCounts.map((preset) => (
+            <option key={preset.value} value={preset.value}>
+              {preset.label}
             </option>
           ))}
           <option value="custom">Custom</option>
@@ -268,7 +280,7 @@ function RecordCountInput({ value, onChange }: { value: number; onChange: (recor
           <input
             className="h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"
             type="number"
-            min={1}
+            min={0}
             max={500000}
             step={1}
             value={value}
@@ -278,7 +290,7 @@ function RecordCountInput({ value, onChange }: { value: number; onChange: (recor
         ) : null}
       </div>
       <span className="timed-hover-popup pointer-events-none absolute left-3 top-full z-40 mt-2 block w-max max-w-72 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
-        Pick 1000, 10000, 100000, 500000, or enter a custom value from 1 to 500000.
+        Empty schema creates valid header/schema-only files. Pick 0, 100, 10000, 100000, 500000, or enter a custom value from 0 to 500000.
       </span>
     </label>
   );
@@ -296,7 +308,7 @@ function HoverHelp({
   titleClassName?: string;
 }) {
   return (
-    <div className={cn("timed-hover-group relative inline-block", className)}>
+    <div className={cn("timed-hover-group relative inline-block max-w-full", className)}>
       <CardTitle className={titleClassName}>{title}</CardTitle>
       <p className="timed-hover-popup pointer-events-none absolute left-0 top-full z-40 mt-2 w-max max-w-80 rounded-xl border border-border bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-lg">
         {description}
@@ -319,7 +331,7 @@ function ConfigSelect({
   const selected = options.find((option) => option.id === value);
 
   return (
-    <label className="timed-hover-group relative block rounded-xl border border-border bg-muted/20 p-3">
+    <label className="timed-hover-group relative block min-w-0 rounded-xl border border-border bg-muted/20 p-3">
       <span className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">{label}</span>
       <select
         className="mt-2 h-11 w-full rounded-xl border border-border bg-card px-3 text-sm font-semibold text-foreground outline-none transition focus:border-primary focus:ring-4 focus:ring-primary/10"

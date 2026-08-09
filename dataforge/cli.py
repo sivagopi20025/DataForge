@@ -2,14 +2,24 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .canonical import empty_dataset, realism_report
 from .domains import DOMAIN_GENERATORS, DOMAIN_SPECS
-from .exporter import export_run
+from .exporter import alignment_report, export_run
 from .injector import FailureInjector
 from .modes import build_artifacts, normalize_load_type
+from .realism import apply_realism
+from .schema_drift import export_schema_versions
 from .validation import reconciliation_report, relationship_report, schema_report, validate
+
+
+class DataForgeArgumentParser(argparse.ArgumentParser):
+    def error(self, message: str) -> None:
+        self.print_usage(sys.stderr)
+        self.exit(2, f"Error: {message}\n")
 
 
 def boolean(value: str) -> bool:
@@ -21,10 +31,20 @@ def boolean(value: str) -> bool:
     raise argparse.ArgumentTypeError("expected true or false")
 
 
+def positive_records(value: str) -> int:
+    try:
+        records = int(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError("records must be an integer") from exc
+    if records < 0:
+        raise argparse.ArgumentTypeError("records must be at least 0")
+    return records
+
+
 def parser() -> argparse.ArgumentParser:
-    result = argparse.ArgumentParser(description="Generate DataForge domain test data")
+    result = DataForgeArgumentParser(description="Generate DataForge domain test data")
     result.add_argument("--domain", choices=tuple(sorted(DOMAIN_SPECS)), default="retail")
-    result.add_argument("--records", type=int, default=10_000, help="number of primary fact records: sales for retail, shipments for logistics")
+    result.add_argument("--records", type=positive_records, default=10_000, help="number of primary fact records: sales for retail, shipments for logistics")
     result.add_argument("--load-type", choices=("bulk", "incremental", "delta", "cdc", "event", "event_stream"), default="bulk")
     result.add_argument("--inject-failures", type=boolean, default=False)
     result.add_argument("--failure-profile", choices=("low", "medium", "high"), default="medium")
@@ -85,13 +105,18 @@ def main(argv: list[str] | None = None) -> int:
     if normalized_load_type == "incremental" and not args.last_successful_load_timestamp:
         args.last_successful_load_timestamp = "2026-06-21T00:00:00+00:00"
 
-    generator = generator_type(args.records, args.seed, normalized_load_type, args.scd_type)
-    if hasattr(generator, "selected_tables") and selected_tables != set(spec.schemas):
-        generator.selected_tables = selected_tables
-    clean = generator.generate()
+    if args.records == 0:
+        clean = empty_dataset(spec, selected_tables)
+    else:
+        generator = generator_type(args.records, args.seed, normalized_load_type, args.scd_type)
+        if hasattr(generator, "selected_tables") and selected_tables != set(spec.schemas):
+            generator.selected_tables = selected_tables
+        clean = generator.generate()
+    clean, realism_engine_report = apply_realism(clean, spec, profile="realistic", seed=args.seed, selected_tables=selected_tables)
     data = clean
     failures = []
-    if args.inject_failures:
+    issue_rates = _profile(args.domain, args.failure_profile) if args.inject_failures and args.records > 0 else {}
+    if args.inject_failures and args.records > 0:
         data, failures = FailureInjector(_profile(args.domain, args.failure_profile), args.seed, spec).apply(clean, selected_tables)
 
     full_selection = selected_tables == set(spec.schemas)
@@ -101,6 +126,8 @@ def main(argv: list[str] | None = None) -> int:
     schemas = schema_report(data, spec, report_selection)
     reconciliation = reconciliation_report(data, spec, report_selection)
     artifacts = build_artifacts(data, normalized_load_type, args.seed, selected_tables, spec)
+    clean_counts = {table: len(rows) for table, rows in clean.items()}
+    final_counts = {table: len(rows) for table, rows in data.items()}
     metadata = {
         "generator": "dataforge",
         "version": "0.6.0",
@@ -116,14 +143,21 @@ def main(argv: list[str] | None = None) -> int:
         "scd_type": args.scd_type,
         "last_successful_load_timestamp": args.last_successful_load_timestamp,
         "failure_profile": args.failure_profile if args.inject_failures else None,
+        "realism_profile": "realistic",
     }
+    canonical_realism = realism_report(spec, profile="realistic", requested_records=args.records, actual_counts=final_counts)
     reports = {
         "quality_report.json": quality,
         "relationship_report.json": relationships,
         "schema_report.json": schemas,
         "reconciliation_report.json": reconciliation,
+        "alignment_report.json": alignment_report(clean_counts=clean_counts, final_counts=final_counts, failures=failures, artifacts=artifacts, spec=spec),
+        "realism_report.json": {**canonical_realism, "engine": realism_engine_report},
     }
-    export_run(run_output, artifacts, args.output_format, metadata, reports, failures)
+    if args.records == 0 and args.inject_failures:
+        reports["issue_skip_report.json"] = {"status": "SKIPPED", "reason": "records=0; no eligible rows", "requested_profile": args.failure_profile}
+    export_run(run_output, artifacts, args.output_format, metadata, reports, failures, spec)
+    export_schema_versions(run_output, artifacts, args.output_format, spec, failures)
     file_count = len(artifacts) * len(args.output_format)
     print(f"Generated {len(artifacts)} {normalized_load_type} {args.domain} datasets in {len(args.output_format)} format(s) ({file_count} files) in {run_output.resolve()}")
     print(f"Quality status: {quality['overall_status']}; injected failures: {sum(e.count for e in failures)}")

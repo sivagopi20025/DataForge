@@ -23,7 +23,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 const featureCards = [
   {
     title: "Generate Datasets",
-    description: "Create realistic domain datasets across Retail, Logistics, Healthcare, Finance, Insurance, and Banking.",
+    description: "Create realistic domain datasets across 10 enterprise domains including Retail, Banking, Healthcare, Manufacturing, Telecom, Logistics, Finance, Insurance, Education, and E-commerce.",
     href: "/generator",
     icon: Database,
     cta: "Open generator",
@@ -44,10 +44,17 @@ const featureCards = [
   },
   {
     title: "Validate & Score",
-    description: "Run standard validation reports with quality scores, checks, issues, and pass/fail status.",
+    description: "Run standard validation, realism, alignment, and scenario reports with quality scores and evidence-based reconciliation.",
     href: "/history",
     icon: ShieldCheck,
     cta: "Review results",
+  },
+  {
+    title: "Run Scenario Tests",
+    description: "Execute enterprise data-quality scenarios such as duplicate transfers, ghost providers, defect spikes, settlement delays, and inventory oversells.",
+    href: "/scenarios",
+    icon: FlaskConical,
+    cta: "Browse scenarios",
   },
   {
     title: "Preview & Download Files",
@@ -107,7 +114,8 @@ const routeCards = [
   { label: "Data Generator", href: "/generator", icon: Database, status: "Ready" },
   { label: "Run History", href: "/history", icon: History, status: "Ready" },
   { label: "Admin Analytics", href: "/admin", icon: Gauge, status: "Ready" },
-  { label: "Stream APIs", href: "/streams", icon: Waves, status: "Soon" },
+  { label: "Scenario Library", href: "/scenarios", icon: FlaskConical, status: "Ready" },
+  { label: "Stream APIs", href: "/streams", icon: Waves, status: "Ready" },
   { label: "Test Packages", href: "/test-packages", icon: FlaskConical, status: "Soon" },
   { label: "Dashboards", href: "/dashboards", icon: BarChart3, status: "Soon" },
 ];
@@ -118,7 +126,7 @@ export default function HomePage() {
       <section className="overflow-hidden rounded-[2rem] border border-border bg-card shadow-sm">
         <div className="grid gap-8 p-8 lg:grid-cols-[1.25fr_0.75fr] lg:p-10">
           <div className="max-w-4xl">
-            <Badge>DataForge v0.6.0 · Demo-ready backend foundation</Badge>
+            <Badge>DataForge v0.9 beta · Batch + scenarios + streaming MVP</Badge>
             <h1 className="mt-5 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
               Generate, break, validate, preview, and download enterprise test data.
             </h1>
@@ -138,7 +146,7 @@ export default function HomePage() {
               <CardDescription>What is already available in the app today.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              {["6 enterprise domains", "CSV, JSON, Parquet exports", "Background generation jobs", "Validation reports + quality scores", "Run history + file preview", "Admin analytics APIs"].map((item) => (
+              {["10 enterprise domains", "50 scenario definitions", "CSV, JSON, Parquet, and database DDL exports", "Background generation jobs", "Validation + realism + scenario reports", "Run history + file preview + ZIP downloads"].map((item) => (
                 <div key={item} className="flex items-center gap-3 rounded-2xl bg-card px-4 py-3 text-sm font-semibold">
                   <CheckCircle2 className="h-4 w-4 text-success" />
                   {item}
@@ -246,8 +254,8 @@ export default function HomePage() {
               <Clock3 className="h-4 w-4" />
               Recommended demo path
             </div>
-            <h2 className="mt-2 text-2xl font-bold">Generate a small Healthcare JSON dataset, preview a table, then show the run history.</h2>
-            <p className="mt-2 text-muted-foreground">This highlights generation, table selection, background jobs, preview, downloads, validation, and history in one smooth story.</p>
+            <h2 className="mt-2 text-2xl font-bold">Generate a small Healthcare JSON dataset, then run a scenario and show the evidence report.</h2>
+            <p className="mt-2 text-muted-foreground">This highlights generation, table selection, background jobs, preview, downloads, validation, scenario evidence, and history in one smooth story.</p>
           </div>
           <PrimaryLink href="/generator">Run the demo</PrimaryLink>
         </div>

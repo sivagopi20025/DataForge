@@ -1,0 +1,29 @@
+version: 1.0.0
+description: Reusable generic state-machine profiles for scenario execution metadata.
+state_machines:
+  generic_lifecycle:
+    states:
+    - created
+    - pending
+    - processing
+    - completed
+    - cancelled
+    terminal_states:
+    - completed
+    - cancelled
+    valid_transitions:
+      created:
+      - pending
+      - cancelled
+      pending:
+      - processing
+      - cancelled
+      processing:
+      - completed
+      - cancelled
+      completed: []
+      cancelled: []
+    supported_by:
+    - invalid_state_transition
+    - state_transition_validator
+    note: Batch 3 generic execution uses row-level baseline evidence when scenario-specific state-machine IDs are not yet present.

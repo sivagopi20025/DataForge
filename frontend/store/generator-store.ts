@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Domain, LoadType, OutputFormat } from "@/types/api";
+import type { DatabaseType, Domain, LoadType, OutputFormat } from "@/types/api";
 
 export type IssueConfig = { enabled: boolean; percentage: number };
 
@@ -10,12 +10,14 @@ type GeneratorState = {
   domain: Domain;
   loadType: LoadType;
   format: OutputFormat;
+  databaseType: DatabaseType;
   records: number;
   selectedTables: string[];
   issues: Record<string, IssueConfig>;
   setDomain: (domain: Domain) => void;
   setLoadType: (loadType: LoadType) => void;
   setFormat: (format: OutputFormat) => void;
+  setDatabaseType: (databaseType: DatabaseType) => void;
   setRecords: (records: number) => void;
   setSelectedTables: (tables: string[]) => void;
   toggleIssue: (issue: string) => void;
@@ -37,13 +39,15 @@ export const useGeneratorStore = create<GeneratorState>()(
       domain: "retail",
       loadType: "bulk",
       format: "csv",
+      databaseType: "postgresql",
       records: 1000,
       selectedTables: [],
       issues: defaultIssues,
       setDomain: (domain) => set({ domain, selectedTables: [] }),
       setLoadType: (loadType) => set({ loadType }),
       setFormat: (format) => set({ format }),
-      setRecords: (records) => set({ records: Math.min(500_000, Math.max(1, Math.floor(records))) }),
+      setDatabaseType: (databaseType) => set({ databaseType }),
+      setRecords: (records) => set({ records: Math.min(500_000, Math.max(0, Math.floor(records))) }),
       setSelectedTables: (selectedTables) => set({ selectedTables }),
       toggleIssue: (issue) =>
         set((state) => ({
@@ -62,7 +66,7 @@ export const useGeneratorStore = create<GeneratorState>()(
     }),
     {
       name: "dataforge-generator",
-      version: 2,
+      version: 4,
       migrate: (persisted) => ({ ...(persisted as GeneratorState), selectedTables: [] }),
     },
   ),

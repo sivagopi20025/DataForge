@@ -1,0 +1,50 @@
+version: 1.3.0
+remaining_column_blockers:
+  amount: 75
+  reason_code: 70
+  event_timestamp: 66
+  idempotency_key: 42
+  actual_amount: 37
+  expected_amount: 37
+  scenario_status_code: 34
+  risk_score: 34
+  card_authorization_id: 12
+  network_qos_sample_id: 10
+  exception_alert_id: 8
+  status: 7
+  refund_event_id: 7
+  reconciliation_group_id: 6
+  claim_document_id: 6
+remaining_table_blockers:
+  banking.ledger_entries: 7
+  ecommerce.product_views: 7
+  education.fee_payments: 7
+  retail.refund_events: 7
+  insurance.claim_documents: 6
+  banking.transactions: 5
+  ecommerce.refunds: 5
+  education.online_activity: 5
+  logistics.routes: 5
+  manufacturing.inventory_items: 5
+  manufacturing.production_orders: 5
+  telecommunications.network_qos_samples: 5
+  telecommunications.subscribers: 5
+  ecommerce.customers: 4
+  finance.portfolios: 4
+  manufacturing.maintenance_records: 4
+  finance.orders: 3
+  logistics.carriers: 3
+  manufacturing.downtime_events: 3
+  ecommerce.products: 2
+  ecommerce.payment_attempts: 2
+remaining_primitive_blockers:
+  distribution_shift: 7
+  format_corruption: 5
+  identity_mismatch: 5
+  schema_change: 4
+  rare_high_value_activity: 3
+remaining_validator_blockers:
+  distribution_validator: 10
+  identity_validator: 5
+  reconciliation_validator: 4
+  schema_validator: 4

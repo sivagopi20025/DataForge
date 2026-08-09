@@ -3,7 +3,7 @@ from __future__ import annotations
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from .constants import ACCOUNT_STATUSES, ACCOUNT_TYPES, CARD_STATUSES, CARD_TYPES, LOAN_STATUSES, PAYMENT_STATUSES, TRANSACTION_STATUSES, TRANSACTION_TYPES
+from .constants import ACCOUNT_STATUSES, ACCOUNT_TYPES, CARD_STATUSES, CARD_TYPES, LOAN_STATUSES, MARKET_STATUSES, PAYMENT_STATUSES, POSITION_STATUSES, RISK_CATEGORIES, RISK_STATUSES, TRADE_STATUSES, TRANSACTION_STATUSES, TRANSACTION_TYPES
 
 
 def account_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
@@ -95,10 +95,65 @@ def loan_payment_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[
     ]
 
 
+def investment_market_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
+    invalid_trade_status = sum(1 for row in data.get("trades", []) if row.get("trade_status") not in TRADE_STATUSES)
+    trade_reason_mismatch = sum(
+        1
+        for row in data.get("trades", [])
+        if (row.get("trade_status") == "Rejected" and row.get("rejection_reason") == "not_applicable")
+        or (row.get("trade_status") != "Rejected" and row.get("rejection_reason") != "not_applicable")
+    )
+    invalid_market_status = sum(1 for row in data.get("market_data", []) if row.get("market_status") not in MARKET_STATUSES)
+    invalid_position_status = sum(1 for row in data.get("positions", []) if row.get("position_status") not in POSITION_STATUSES)
+    position_reason_mismatch = sum(
+        1
+        for row in data.get("positions", [])
+        if (row.get("position_status") in {"Closed", "Restricted"} and row.get("position_reason") == "not_applicable")
+        or (row.get("position_status") == "Open" and row.get("position_reason") != "not_applicable")
+    )
+    invalid_risk_status = sum(1 for row in data.get("risk_events", []) if row.get("risk_status") not in RISK_STATUSES)
+    invalid_risk_category = sum(1 for row in data.get("risk_events", []) if row.get("risk_category") not in RISK_CATEGORIES)
+    invalid_bid_ask = 0
+    invalid_risk_score = 0
+    negative_amounts = 0
+    for quote in data.get("market_data", []):
+        try:
+            invalid_bid_ask += Decimal(str(quote["bid_price"])) > Decimal(str(quote["price"])) or Decimal(str(quote["ask_price"])) < Decimal(str(quote["price"]))
+        except InvalidOperation:
+            invalid_bid_ask += 1
+    for event in data.get("risk_events", []):
+        try:
+            score = Decimal(str(event["risk_score"]))
+            exposure = Decimal(str(event["exposure_amount"]))
+            invalid_risk_score += score < 0 or score > 100
+            negative_amounts += exposure < 0
+        except InvalidOperation:
+            invalid_risk_score += 1
+    for table, column in (("trades", "notional_amount"), ("positions", "market_value")):
+        for row in data.get(table, []):
+            try:
+                negative_amounts += Decimal(str(row[column])) < 0
+            except InvalidOperation:
+                negative_amounts += 1
+    return [
+        {"check": "trade_status_valid", "table": "trades", "failures": invalid_trade_status},
+        {"check": "rejection_reason_matches_rejected_trades", "table": "trades", "failures": trade_reason_mismatch},
+        {"check": "market_status_valid", "table": "market_data", "failures": invalid_market_status},
+        {"check": "bid_ask_brackets_price", "table": "market_data", "failures": invalid_bid_ask},
+        {"check": "position_status_valid", "table": "positions", "failures": invalid_position_status},
+        {"check": "position_reason_matches_position_status", "table": "positions", "failures": position_reason_mismatch},
+        {"check": "risk_status_valid", "table": "risk_events", "failures": invalid_risk_status},
+        {"check": "risk_category_valid", "table": "risk_events", "failures": invalid_risk_category},
+        {"check": "risk_score_between_0_and_100", "table": "risk_events", "failures": invalid_risk_score},
+        {"check": "investment_amounts_non_negative", "table": "finance_investment_tables", "failures": negative_amounts},
+    ]
+
+
 BUSINESS_RULES = (
     account_validation,
     transaction_validation,
     card_validation,
     loan_validation,
     loan_payment_validation,
+    investment_market_validation,
 )

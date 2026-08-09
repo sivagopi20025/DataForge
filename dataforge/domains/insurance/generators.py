@@ -6,6 +6,7 @@ from decimal import Decimal
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import full_name, person_name, unique_email
 from .constants import (
     AGENT_STATUSES,
     CITIES,
@@ -39,7 +40,7 @@ class InsuranceGenerator:
         return min(value, maximum) if maximum else value
 
     def _person(self, number: int) -> tuple[str, str]:
-        return FIRST_NAMES[number % len(FIRST_NAMES)], LAST_NAMES[(number * 3) % len(LAST_NAMES)]
+        return person_name(number, "insurance")
 
     def generate(self) -> Dataset:
         selected = self.selected_tables
@@ -73,7 +74,7 @@ class InsuranceGenerator:
                     "last_name": last,
                     "dob": dob.isoformat(),
                     "gender": genders[i % len(genders)],
-                    "email": f"{first}.{last}.{i}@insurance.example.test".lower(),
+                    "email": unique_email(first, last, 1200000 + i, "insurance.customer"),
                     "phone": f"555-{i % 1000:03d}-{(i * 37) % 10000:04d}",
                     "city": city,
                     "state": state,
@@ -86,10 +87,9 @@ class InsuranceGenerator:
             data["agents"] = []
             for i in range(1, agent_count + 1):
                 _, _, region, _ = CITIES[i % len(CITIES)]
-                first, last = self._person(i + 4)
                 data["agents"].append({
                     "agent_id": 2200000 + i,
-                    "agent_name": f"{first} {last}",
+                    "agent_name": full_name(i + 4, "insurance.agent"),
                     "agent_region": region,
                     "agent_status": AGENT_STATUSES[i % len(AGENT_STATUSES)] if i % 23 == 0 else "Active",
                     "hire_date": str(self.today - timedelta(days=100 + i % 2600)),

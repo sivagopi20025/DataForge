@@ -7,6 +7,10 @@ DATE_COLUMNS = {
     "cards": "issued_date",
     "loans": "start_date",
     "payments": "payment_date",
+    "trades": "trade_timestamp",
+    "market_data": "quote_timestamp",
+    "positions": "position_date",
+    "risk_events": "event_timestamp",
 }
 
 NUMERIC_COLUMNS = {
@@ -14,6 +18,10 @@ NUMERIC_COLUMNS = {
     "transactions": "transaction_amount",
     "loans": "loan_amount",
     "payments": "payment_amount",
+    "trades": "notional_amount",
+    "market_data": "price",
+    "positions": "market_value",
+    "risk_events": "exposure_amount",
 }
 
 TYPE_MISMATCH_COLUMNS = {
@@ -23,4 +31,8 @@ TYPE_MISMATCH_COLUMNS = {
     "cards": "card_status",
     "loans": "interest_rate",
     "payments": "payment_status",
+    "trades": "trade_status",
+    "market_data": "market_status",
+    "positions": "position_status",
+    "risk_events": "risk_status",
 }

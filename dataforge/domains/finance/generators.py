@@ -6,6 +6,7 @@ from decimal import Decimal
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import person_name, unique_email
 from .constants import (
     ACCOUNT_STATUSES,
     ACCOUNT_TYPES,
@@ -16,11 +17,19 @@ from .constants import (
     CUSTOMER_SEGMENTS,
     FIRST_NAMES,
     FRAUD_SCENARIOS,
+    INSTRUMENT_SYMBOLS,
     LAST_NAMES,
     LOAN_STATUSES,
     LOAN_TYPES,
+    MARKET_STATUSES,
     MERCHANTS,
     PAYMENT_STATUSES,
+    POSITION_STATUSES,
+    RISK_CATEGORIES,
+    RISK_REASONS,
+    RISK_STATUSES,
+    TRADE_SIDES,
+    TRADE_STATUSES,
     TRANSACTION_STATUSES,
     TRANSACTION_TYPES,
 )
@@ -43,7 +52,7 @@ class FinanceGenerator:
         return min(value, maximum) if maximum else value
 
     def _person(self, number: int) -> tuple[str, str]:
-        return FIRST_NAMES[number % len(FIRST_NAMES)], LAST_NAMES[(number * 3) % len(LAST_NAMES)]
+        return person_name(number, "finance")
 
     def generate(self) -> Dataset:
         selected = self.selected_tables
@@ -52,14 +61,19 @@ class FinanceGenerator:
         def need(table: str) -> bool:
             return full or table in selected
 
-        need_customers = full or bool(selected & {"customers", "accounts", "transactions", "cards", "loans", "payments"})
-        need_accounts = full or bool(selected & {"accounts", "transactions", "cards"})
+        need_customers = full or bool(selected & {"customers", "accounts", "transactions", "cards", "loans", "payments", "trades", "market_data", "positions", "risk_events"})
+        need_accounts = full or bool(selected & {"accounts", "transactions", "cards", "trades", "market_data", "positions", "risk_events"})
         need_loans = full or bool(selected & {"loans", "payments"})
+        need_risk_events = full or bool(selected & {"risk_events", "trades", "market_data", "positions"})
 
         customer_count = min(75000, self._count(0.20, 100))
         account_count = min(125000, self._count(0.35, 150))
         card_count = min(100000, self._count(0.20, 80))
         loan_count = min(75000, self._count(0.12, 40))
+        risk_event_count = min(25000, self._count(0.04, 20))
+        trade_count = self.transaction_records if full or need("trades") else 0
+        market_data_count = min(50000, self._count(0.30, 100))
+        position_count = min(75000, self._count(0.18, 80))
         start = datetime(2026, 6, 21) if self.load_type in {"incremental", "delta", "cdc", "event", "event_stream"} else datetime(2026, 1, 1)
         data: Dataset = {}
 
@@ -77,7 +91,7 @@ class FinanceGenerator:
                     "last_name": last,
                     "dob": dob.isoformat(),
                     "gender": genders[i % len(genders)],
-                    "email": f"{first}.{last}.{i}@bank.example.test".lower(),
+                    "email": unique_email(first, last, 1100000 + i, "finance.customer"),
                     "phone": f"555-{i % 1000:03d}-{(i * 31) % 10000:04d}",
                     "city": city,
                     "state": state,
@@ -164,6 +178,97 @@ class FinanceGenerator:
                     "payment_amount": str(amount if status != "Failed" else Decimal("0.00")),
                     "payment_date": (start + timedelta(minutes=i * 17)).isoformat(),
                     "payment_status": status,
+                })
+
+        if need_risk_events:
+            data["risk_events"] = []
+            for i in range(1, risk_event_count + 1):
+                account = data["accounts"][i % len(data["accounts"])]
+                score = 5 + (i * 7) % 96
+                category = "Critical" if score >= 85 else "High" if score >= 70 else "Medium" if score >= 40 else "Low"
+                status = "Reviewed" if score >= 70 else RISK_STATUSES[i % len(RISK_STATUSES)]
+                exposure = Decimal(500 + (i % 50000)) + Decimal(self.rng.randrange(0, 100)) / 100
+                data["risk_events"].append({
+                    "risk_event_id": 7100000 + i,
+                    "account_id": account["account_id"],
+                    "event_timestamp": (start + timedelta(minutes=i * 11)).isoformat(),
+                    "risk_score": score,
+                    "risk_category": category,
+                    "risk_status": status,
+                    "risk_reason": RISK_REASONS[i % len(RISK_REASONS)],
+                    "exposure_amount": str(exposure.quantize(Decimal("0.01"))),
+                })
+
+        if need("trades"):
+            data["trades"] = []
+            active_accounts = [row for row in data["accounts"] if row["account_status"] == "Active"]
+            risk_events = data.get("risk_events", [])
+            for i in range(1, trade_count + 1):
+                account = active_accounts[i % len(active_accounts)]
+                symbol = INSTRUMENT_SYMBOLS[i % len(INSTRUMENT_SYMBOLS)]
+                quantity = Decimal(1 + (i % 750))
+                price = Decimal(20 + (i % 350)) + Decimal(self.rng.randrange(0, 100)) / 100
+                notional = (quantity * price).quantize(Decimal("0.01"))
+                status = "Executed" if i % 17 else TRADE_STATUSES[i % len(TRADE_STATUSES)]
+                risk_event_id = risk_events[i % len(risk_events)]["risk_event_id"] if risk_events and i % 37 == 0 else None
+                data["trades"].append({
+                    "trade_id": 8100000 + i,
+                    "account_id": account["account_id"],
+                    "instrument_symbol": symbol,
+                    "trade_side": TRADE_SIDES[i % len(TRADE_SIDES)],
+                    "quantity": str(quantity),
+                    "price": str(price.quantize(Decimal("0.01"))),
+                    "notional_amount": str(notional),
+                    "trade_timestamp": (start + timedelta(seconds=i * 13)).isoformat(),
+                    "trade_status": status,
+                    "rejection_reason": RISK_REASONS[i % len(RISK_REASONS)] if status == "Rejected" else "not_applicable",
+                    "risk_event_id": risk_event_id,
+                })
+
+        if need("market_data"):
+            data["market_data"] = []
+            risk_events = data.get("risk_events", [])
+            for i in range(1, market_data_count + 1):
+                symbol = INSTRUMENT_SYMBOLS[i % len(INSTRUMENT_SYMBOLS)]
+                price = Decimal(20 + (i % 350)) + Decimal(self.rng.randrange(0, 100)) / 100
+                spread = Decimal("0.05") + Decimal(i % 20) / Decimal("100")
+                status = "Open" if i % 23 else MARKET_STATUSES[i % len(MARKET_STATUSES)]
+                risk_event_id = risk_events[i % len(risk_events)]["risk_event_id"] if risk_events and status == "Halted" else None
+                data["market_data"].append({
+                    "market_data_id": 9100000 + i,
+                    "instrument_symbol": symbol,
+                    "quote_timestamp": (start + timedelta(seconds=i * 5)).isoformat(),
+                    "price": str(price.quantize(Decimal("0.01"))),
+                    "bid_price": str((price - spread).quantize(Decimal("0.01"))),
+                    "ask_price": str((price + spread).quantize(Decimal("0.01"))),
+                    "market_status": status,
+                    "market_event_reason": RISK_REASONS[i % len(RISK_REASONS)] if status == "Halted" else "not_applicable",
+                    "risk_event_id": risk_event_id,
+                })
+
+        if need("positions"):
+            data["positions"] = []
+            active_accounts = [row for row in data["accounts"] if row["account_status"] == "Active"]
+            risk_events = data.get("risk_events", [])
+            for i in range(1, position_count + 1):
+                account = active_accounts[i % len(active_accounts)]
+                symbol = INSTRUMENT_SYMBOLS[i % len(INSTRUMENT_SYMBOLS)]
+                quantity = Decimal(1 + (i % 1000))
+                average_cost = Decimal(15 + (i % 300)) + Decimal(self.rng.randrange(0, 100)) / 100
+                market_value = (quantity * average_cost * Decimal("1.03")).quantize(Decimal("0.01"))
+                status = "Open" if i % 29 else POSITION_STATUSES[i % len(POSITION_STATUSES)]
+                risk_event_id = risk_events[i % len(risk_events)]["risk_event_id"] if risk_events and i % 41 == 0 else None
+                data["positions"].append({
+                    "position_id": 10100000 + i,
+                    "account_id": account["account_id"],
+                    "instrument_symbol": symbol,
+                    "quantity": str(quantity),
+                    "average_cost": str(average_cost.quantize(Decimal("0.01"))),
+                    "market_value": str(market_value),
+                    "position_date": (start + timedelta(minutes=i * 19)).isoformat(),
+                    "position_status": status,
+                    "position_reason": RISK_REASONS[i % len(RISK_REASONS)] if status in {"Closed", "Restricted"} else "not_applicable",
+                    "risk_event_id": risk_event_id,
                 })
 
         return enrich_dataset(data, self.load_type, self.scd_type, FINANCE_SPEC)

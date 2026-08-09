@@ -79,6 +79,35 @@ def visit_temporal_validation(data: dict[str, list[dict[str, Any]]]) -> list[dic
     return [{"check": "claim_not_submitted_before_visit", "table": "claims", "failures": failures}]
 
 
+def prior_authorization_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
+    allowed_statuses = {"Approved", "Denied", "Pending"}
+    procedure_codes = {row["procedure_id"]: row.get("cpt_code") for row in data.get("procedures", []) if "procedure_id" in row}
+    failures = 0
+    for row in data.get("prior_authorizations", []):
+        try:
+            status = row.get("authorization_status")
+            failures += status not in allowed_statuses
+            failures += Decimal(str(row["approved_amount"])) < 0
+            if row.get("procedure_id") in procedure_codes:
+                failures += row.get("procedure_code") != procedure_codes[row["procedure_id"]]
+            if status == "Approved":
+                approved = datetime.fromisoformat(str(row["approved_at"]))
+                requested = datetime.fromisoformat(str(row["requested_at"]))
+                failures += approved <= requested
+                failures += Decimal(str(row["approved_amount"])) <= 0
+                failures += row.get("expiration_date") == "not_applicable"
+                failures += row.get("denial_reason") != "not_applicable"
+            if status == "Denied":
+                failures += row.get("denial_reason") == "not_applicable"
+                failures += row.get("approved_amount") not in {"0.00", "0"}
+            if status == "Pending":
+                failures += row.get("approved_at") != "not_applicable"
+                failures += row.get("denial_reason") != "not_applicable"
+        except (InvalidOperation, KeyError, ValueError, TypeError):
+            failures += 1
+    return [{"check": "prior_authorization_status_and_dates_valid", "table": "prior_authorizations", "failures": failures}]
+
+
 BUSINESS_RULES = (
     patient_age_validation,
     payment_amount_validation,
@@ -86,4 +115,5 @@ BUSINESS_RULES = (
     cpt_validation,
     claim_lifecycle_validation,
     visit_temporal_validation,
+    prior_authorization_validation,
 )

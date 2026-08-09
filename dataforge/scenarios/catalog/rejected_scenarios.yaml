@@ -1,0 +1,2403 @@
+version: 1.0.0
+rejected_scenario_count: 36
+scenarios:
+- scenario_id: retail_customer_near_duplicate_rejected_01
+  domain: retail
+  business_process: customer
+  entity: customer
+  scenario_name: Rejected Retail Customer Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: customers
+    id_column: customer_id
+    affected_rate_default: 0.03
+  primary_table: customers
+  related_tables:
+  - customers
+  required_columns:
+  - customer_id
+  - email
+  - first_name
+  - last_name
+  - phone
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: customers
+    columns:
+    - customer_id
+    - email
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - retail
+  - customer
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: banking_customer_onboarding_near_duplicate_rejected_02
+  domain: banking
+  business_process: customer_onboarding
+  entity: customer
+  scenario_name: Rejected Banking Customer Onboarding Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: customers
+    id_column: country
+    affected_rate_default: 0.03
+  primary_table: customers
+  related_tables:
+  - customers
+  required_columns:
+  - country
+  - customer_id
+  - customer_name
+  - customer_type
+  - state
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: customers
+    columns:
+    - country
+    - customer_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - banking
+  - customer_onboarding
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: healthcare_visits_near_duplicate_rejected_03
+  domain: healthcare
+  business_process: visits
+  entity: visit
+  scenario_name: Rejected Healthcare Visits Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: visits
+    id_column: patient_id
+    affected_rate_default: 0.03
+  primary_table: visits
+  related_tables:
+  - visits
+  required_columns:
+  - patient_id
+  - provider_id
+  - visit_date
+  - visit_id
+  - visit_type
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: visits
+    columns:
+    - patient_id
+    - provider_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - healthcare
+  - visits
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: manufacturing_work_orders_near_duplicate_rejected_04
+  domain: manufacturing
+  business_process: work_orders
+  entity: work_order
+  scenario_name: Rejected Manufacturing Work Orders Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: work_orders
+    id_column: factory_id
+    affected_rate_default: 0.03
+  primary_table: work_orders
+  related_tables:
+  - work_orders
+  required_columns:
+  - factory_id
+  - line_id
+  - planned_quantity
+  - product_id
+  - work_order_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: work_orders
+    columns:
+    - factory_id
+    - line_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - manufacturing
+  - work_orders
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: telecommunications_data_usage_near_duplicate_rejected_05
+  domain: telecommunications
+  business_process: data_usage
+  entity: data_session
+  scenario_name: Rejected Telecommunications Data Usage Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: data_sessions
+    id_column: device_id
+    affected_rate_default: 0.03
+  primary_table: data_sessions
+  related_tables:
+  - data_sessions
+  required_columns:
+  - device_id
+  - session_id
+  - sim_id
+  - subscription_id
+  - tower_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: data_sessions
+    columns:
+    - device_id
+    - session_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - telecommunications
+  - data_usage
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: logistics_carrier_management_near_duplicate_rejected_06
+  domain: logistics
+  business_process: carrier_management
+  entity: carrier
+  scenario_name: Rejected Logistics Carrier Management Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: carriers
+    id_column: amount
+    affected_rate_default: 0.03
+  primary_table: carriers
+  related_tables:
+  - carriers
+  required_columns:
+  - amount
+  - event_timestamp
+  - exception_alert_id
+  - reason_code
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: carriers
+    columns:
+    - amount
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - logistics
+  - carrier_management
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - carriers
+  proposed_columns:
+  - amount
+  - exception_alert_id
+  - reason_code
+  implementation_dependencies:
+    tables:
+    - carriers
+    columns:
+    - amount
+    - exception_alert_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: finance_portfolio_near_duplicate_rejected_07
+  domain: finance
+  business_process: portfolio
+  entity: portfolio
+  scenario_name: Rejected Finance Portfolio Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: portfolios
+    id_column: amount
+    affected_rate_default: 0.03
+  primary_table: portfolios
+  related_tables:
+  - portfolios
+  required_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - risk_event_id
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: portfolios
+    columns:
+    - amount
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - finance
+  - portfolio
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - portfolios
+  proposed_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - risk_event_id
+  - status
+  implementation_dependencies:
+    tables:
+    - portfolios
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    - risk_event_id
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: insurance_settlement_near_duplicate_rejected_08
+  domain: insurance
+  business_process: settlement
+  entity: settlement
+  scenario_name: Rejected Insurance Settlement Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: settlements
+    id_column: claim_id
+    affected_rate_default: 0.03
+  primary_table: settlements
+  related_tables:
+  - settlements
+  required_columns:
+  - claim_id
+  - settlement_amount
+  - settlement_date
+  - settlement_id
+  - settlement_status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: settlements
+    columns:
+    - claim_id
+    - settlement_amount
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - insurance
+  - settlement
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: education_fees_near_duplicate_rejected_09
+  domain: education
+  business_process: fees
+  entity: fee_payment
+  scenario_name: Rejected Education Fees Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: fee_payments
+    id_column: academic_standing_event_id
+    affected_rate_default: 0.03
+  primary_table: fee_payments
+  related_tables:
+  - fee_payments
+  required_columns:
+  - academic_standing_event_id
+  - amount
+  - event_timestamp
+  - reason_code
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: fee_payments
+    columns:
+    - academic_standing_event_id
+    - amount
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - education
+  - fees
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - fee_payments
+  proposed_columns:
+  - academic_standing_event_id
+  - amount
+  - event_timestamp
+  - reason_code
+  implementation_dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - academic_standing_event_id
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: ecommerce_fulfillment_near_duplicate_rejected_10
+  domain: ecommerce
+  business_process: fulfillment
+  entity: shipment
+  scenario_name: Rejected Ecommerce Fulfillment Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: shipments
+    id_column: carrier
+    affected_rate_default: 0.03
+  primary_table: shipments
+  related_tables:
+  - shipments
+  required_columns:
+  - carrier
+  - order_id
+  - shipment_id
+  - shipment_status
+  - tracking_number
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: shipments
+    columns:
+    - carrier
+    - order_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - ecommerce
+  - fulfillment
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: retail_refunds_near_duplicate_rejected_11
+  domain: retail
+  business_process: refunds
+  entity: return
+  scenario_name: Rejected Retail Refunds Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: returns
+    id_column: customer_id
+    affected_rate_default: 0.03
+  primary_table: returns
+  related_tables:
+  - returns
+  required_columns:
+  - customer_id
+  - product_id
+  - return_id
+  - return_reason
+  - sale_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: returns
+    columns:
+    - customer_id
+    - product_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - retail
+  - refunds
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: banking_loans_near_duplicate_rejected_12
+  domain: banking
+  business_process: loans
+  entity: transfer
+  scenario_name: Rejected Banking Loans Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: transfers
+    id_column: currency
+    affected_rate_default: 0.03
+  primary_table: transfers
+  related_tables:
+  - transfers
+  required_columns:
+  - currency
+  - destination_account_id
+  - source_account_id
+  - transfer_amount
+  - transfer_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: transfers
+    columns:
+    - currency
+    - destination_account_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - banking
+  - loans
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: healthcare_patient_registration_near_duplicate_rejected_13
+  domain: healthcare
+  business_process: patient_registration
+  entity: patient
+  scenario_name: Rejected Healthcare Patient Registration Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: patients
+    id_column: dob
+    affected_rate_default: 0.03
+  primary_table: patients
+  related_tables:
+  - patients
+  required_columns:
+  - dob
+  - first_name
+  - gender
+  - last_name
+  - patient_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: patients
+    columns:
+    - dob
+    - first_name
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - healthcare
+  - patient_registration
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: manufacturing_machine_operations_near_duplicate_rejected_14
+  domain: manufacturing
+  business_process: machine_operations
+  entity: machine
+  scenario_name: Rejected Manufacturing Machine Operations Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: machines
+    id_column: line_id
+    affected_rate_default: 0.03
+  primary_table: machines
+  related_tables:
+  - machines
+  required_columns:
+  - line_id
+  - machine_id
+  - machine_name
+  - machine_type
+  - manufacturer
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: machines
+    columns:
+    - line_id
+    - machine_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - manufacturing
+  - machine_operations
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: telecommunications_plans_near_duplicate_rejected_15
+  domain: telecommunications
+  business_process: plans
+  entity: plan
+  scenario_name: Rejected Telecommunications Plans Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: plans
+    id_column: monthly_fee
+    affected_rate_default: 0.03
+  primary_table: plans
+  related_tables:
+  - plans
+  required_columns:
+  - monthly_fee
+  - plan_id
+  - plan_name
+  - plan_type
+  - voice_minutes_included
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: plans
+    columns:
+    - monthly_fee
+    - plan_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - telecommunications
+  - plans
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: logistics_tracking_near_duplicate_rejected_16
+  domain: logistics
+  business_process: tracking
+  entity: tracking_event
+  scenario_name: Rejected Logistics Tracking Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: tracking_events
+    id_column: event_id
+    affected_rate_default: 0.03
+  primary_table: tracking_events
+  related_tables:
+  - tracking_events
+  required_columns:
+  - event_id
+  - event_timestamp
+  - event_type
+  - location
+  - shipment_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: tracking_events
+    columns:
+    - event_id
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - logistics
+  - tracking
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: finance_transactions_near_duplicate_rejected_17
+  domain: finance
+  business_process: transactions
+  entity: transaction
+  scenario_name: Rejected Finance Transactions Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: transactions
+    id_column: account_id
+    affected_rate_default: 0.03
+  primary_table: transactions
+  related_tables:
+  - transactions
+  required_columns:
+  - account_id
+  - transaction_amount
+  - transaction_id
+  - transaction_timestamp
+  - transaction_type
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: transactions
+    columns:
+    - account_id
+    - transaction_amount
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - finance
+  - transactions
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: insurance_coverage_near_duplicate_rejected_18
+  domain: insurance
+  business_process: coverage
+  entity: policie
+  scenario_name: Rejected Insurance Coverage Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: policies
+    id_column: agent_id
+    affected_rate_default: 0.03
+  primary_table: policies
+  related_tables:
+  - policies
+  required_columns:
+  - agent_id
+  - customer_id
+  - policy_id
+  - policy_status
+  - policy_type
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: policies
+    columns:
+    - agent_id
+    - customer_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - insurance
+  - coverage
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: education_assignments_near_duplicate_rejected_19
+  domain: education
+  business_process: assignments
+  entity: assignment_submission
+  scenario_name: Rejected Education Assignments Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: assignment_submissions
+    id_column: assignment_id
+    affected_rate_default: 0.03
+  primary_table: assignment_submissions
+  related_tables:
+  - assignment_submissions
+  required_columns:
+  - assignment_id
+  - marks_obtained
+  - student_id
+  - submission_date
+  - submission_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: assignment_submissions
+    columns:
+    - assignment_id
+    - marks_obtained
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - education
+  - assignments
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: ecommerce_product_views_near_duplicate_rejected_20
+  domain: ecommerce
+  business_process: product_views
+  entity: product_view
+  scenario_name: Rejected Ecommerce Product Views Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: product_views
+    id_column: amount
+    affected_rate_default: 0.03
+  primary_table: product_views
+  related_tables:
+  - product_views
+  required_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - seller_payout_id
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: product_views
+    columns:
+    - amount
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - ecommerce
+  - product_views
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - product_views
+  proposed_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - seller_payout_id
+  implementation_dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    - seller_payout_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: retail_inventory_near_duplicate_rejected_21
+  domain: retail
+  business_process: inventory
+  entity: inventory
+  scenario_name: Rejected Retail Inventory Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: inventory
+    id_column: inventory_id
+    affected_rate_default: 0.03
+  primary_table: inventory
+  related_tables:
+  - inventory
+  required_columns:
+  - inventory_id
+  - product_id
+  - quantity_on_hand
+  - reorder_level
+  - store_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: inventory
+    columns:
+    - inventory_id
+    - product_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - retail
+  - inventory
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: banking_reconciliation_near_duplicate_rejected_22
+  domain: banking
+  business_process: reconciliation
+  entity: ledger_entrie
+  scenario_name: Rejected Banking Reconciliation Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: ledger_entries
+    id_column: amount
+    affected_rate_default: 0.03
+  primary_table: ledger_entries
+  related_tables:
+  - ledger_entries
+  required_columns:
+  - amount
+  - card_authorization_id
+  - event_timestamp
+  - reason_code
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: ledger_entries
+    columns:
+    - amount
+    - card_authorization_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - banking
+  - reconciliation
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - ledger_entries
+  proposed_columns:
+  - card_authorization_id
+  - event_timestamp
+  - reason_code
+  implementation_dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - card_authorization_id
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: healthcare_compliance_near_duplicate_rejected_23
+  domain: healthcare
+  business_process: compliance
+  entity: diagnose
+  scenario_name: Rejected Healthcare Compliance Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: diagnoses
+    id_column: diagnosis_description
+    affected_rate_default: 0.03
+  primary_table: diagnoses
+  related_tables:
+  - diagnoses
+  required_columns:
+  - diagnosis_description
+  - diagnosis_id
+  - icd10_code
+  - severity
+  - visit_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: diagnoses
+    columns:
+    - diagnosis_description
+    - diagnosis_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - healthcare
+  - compliance
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: manufacturing_reconciliation_near_duplicate_rejected_24
+  domain: manufacturing
+  business_process: reconciliation
+  entity: production_batche
+  scenario_name: Rejected Manufacturing Reconciliation Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: production_batches
+    id_column: batch_id
+    affected_rate_default: 0.03
+  primary_table: production_batches
+  related_tables:
+  - production_batches
+  required_columns:
+  - batch_id
+  - batch_number
+  - line_id
+  - product_id
+  - work_order_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: production_batches
+    columns:
+    - batch_id
+    - batch_number
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - manufacturing
+  - reconciliation
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: telecommunications_streaming_operations_near_duplicate_rejected_25
+  domain: telecommunications
+  business_process: streaming_operations
+  entity: data_session
+  scenario_name: Rejected Telecommunications Streaming Operations Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: data_sessions
+    id_column: device_id
+    affected_rate_default: 0.03
+  primary_table: data_sessions
+  related_tables:
+  - data_sessions
+  required_columns:
+  - device_id
+  - session_id
+  - sim_id
+  - subscription_id
+  - tower_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: data_sessions
+    columns:
+    - device_id
+    - session_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - telecommunications
+  - streaming_operations
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: logistics_reconciliation_near_duplicate_rejected_26
+  domain: logistics
+  business_process: reconciliation
+  entity: shipment
+  scenario_name: Rejected Logistics Reconciliation Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: shipments
+    id_column: customer_id
+    affected_rate_default: 0.03
+  primary_table: shipments
+  related_tables:
+  - shipments
+  required_columns:
+  - customer_id
+  - destination_warehouse_id
+  - shipment_id
+  - shipment_type
+  - source_warehouse_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: shipments
+    columns:
+    - customer_id
+    - destination_warehouse_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - logistics
+  - reconciliation
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: finance_market_data_near_duplicate_rejected_27
+  domain: finance
+  business_process: market_data
+  entity: market_data
+  scenario_name: Rejected Finance Market Data Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: market_data
+    id_column: amount
+    affected_rate_default: 0.03
+  primary_table: market_data
+  related_tables:
+  - market_data
+  required_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - risk_event_id
+  - status
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: market_data
+    columns:
+    - amount
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - finance
+  - market_data
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 3
+    data_model_fit_score: 2
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 2
+    training_value_score: 3
+    total_score: 17
+    tier: C
+  implementation_readiness: needs_table
+  table_support_status: requires_new_table
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables:
+  - market_data
+  proposed_columns:
+  - amount
+  - event_timestamp
+  - reason_code
+  - risk_event_id
+  - status
+  implementation_dependencies:
+    tables:
+    - market_data
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    - risk_event_id
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: insurance_premium_near_duplicate_rejected_28
+  domain: insurance
+  business_process: premium
+  entity: premium
+  scenario_name: Rejected Insurance Premium Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: premiums
+    id_column: due_date
+    affected_rate_default: 0.03
+  primary_table: premiums
+  related_tables:
+  - premiums
+  required_columns:
+  - due_date
+  - payment_date
+  - policy_id
+  - premium_amount
+  - premium_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: premiums
+    columns:
+    - due_date
+    - payment_date
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - insurance
+  - premium
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: education_enrollment_near_duplicate_rejected_29
+  domain: education
+  business_process: enrollment
+  entity: enrollment
+  scenario_name: Rejected Education Enrollment Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: enrollments
+    id_column: enrollment_date
+    affected_rate_default: 0.03
+  primary_table: enrollments
+  related_tables:
+  - enrollments
+  required_columns:
+  - enrollment_date
+  - enrollment_id
+  - enrollment_status
+  - section_id
+  - student_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: enrollments
+    columns:
+    - enrollment_date
+    - enrollment_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - education
+  - enrollment
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: ecommerce_reviews_near_duplicate_rejected_30
+  domain: ecommerce
+  business_process: reviews
+  entity: review
+  scenario_name: Rejected Ecommerce Reviews Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: reviews
+    id_column: customer_id
+    affected_rate_default: 0.03
+  primary_table: reviews
+  related_tables:
+  - reviews
+  required_columns:
+  - customer_id
+  - order_id
+  - product_id
+  - rating
+  - review_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: reviews
+    columns:
+    - customer_id
+    - order_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - ecommerce
+  - reviews
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: retail_pricing_near_duplicate_rejected_31
+  domain: retail
+  business_process: pricing
+  entity: product
+  scenario_name: Rejected Retail Pricing Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: products
+    id_column: category_id
+    affected_rate_default: 0.03
+  primary_table: products
+  related_tables:
+  - products
+  required_columns:
+  - category_id
+  - product_id
+  - product_name
+  - sku
+  - supplier_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: products
+    columns:
+    - category_id
+    - product_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - retail
+  - pricing
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: banking_cards_near_duplicate_rejected_32
+  domain: banking
+  business_process: cards
+  entity: treasury_position
+  scenario_name: Rejected Banking Cards Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: treasury_positions
+    id_column: branch_id
+    affected_rate_default: 0.03
+  primary_table: treasury_positions
+  related_tables:
+  - treasury_positions
+  required_columns:
+  - branch_id
+  - cash_position
+  - currency
+  - position_date
+  - position_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: treasury_positions
+    columns:
+    - branch_id
+    - cash_position
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - banking
+  - cards
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: healthcare_care_coordination_near_duplicate_rejected_33
+  domain: healthcare
+  business_process: care_coordination
+  entity: provider
+  scenario_name: Rejected Healthcare Care Coordination Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: providers
+    id_column: city
+    affected_rate_default: 0.03
+  primary_table: providers
+  related_tables:
+  - providers
+  required_columns:
+  - city
+  - provider_id
+  - provider_name
+  - specialty
+  - state
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: providers
+    columns:
+    - city
+    - provider_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - healthcare
+  - care_coordination
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: manufacturing_capacity_near_duplicate_rejected_34
+  domain: manufacturing
+  business_process: capacity
+  entity: production_line
+  scenario_name: Rejected Manufacturing Capacity Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: production_lines
+    id_column: capacity_per_hour
+    affected_rate_default: 0.03
+  primary_table: production_lines
+  related_tables:
+  - production_lines
+  required_columns:
+  - capacity_per_hour
+  - factory_id
+  - line_id
+  - line_name
+  - product_category
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: production_lines
+    columns:
+    - capacity_per_hour
+    - factory_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - manufacturing
+  - capacity
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: telecommunications_billing_near_duplicate_rejected_35
+  domain: telecommunications
+  business_process: billing
+  entity: invoice
+  scenario_name: Rejected Telecommunications Billing Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: invoices
+    id_column: billing_account_id
+    affected_rate_default: 0.03
+  primary_table: invoices
+  related_tables:
+  - invoices
+  required_columns:
+  - billing_account_id
+  - invoice_id
+  - invoice_month
+  - total_sms_charges
+  - total_voice_charges
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: invoices
+    columns:
+    - billing_account_id
+    - invoice_id
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - telecommunications
+  - billing
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected
+- scenario_id: logistics_exceptions_near_duplicate_rejected_36
+  domain: logistics
+  business_process: exceptions
+  entity: tracking_event
+  scenario_name: Rejected Logistics Exceptions Near Duplicate
+  description: Rejected because it duplicates an active scenario without materially
+    different evidence.
+  failure_category: duplication
+  failure_primitive: duplicate_entity
+  primitive_parameters:
+    table: tracking_events
+    id_column: event_id
+    affected_rate_default: 0.03
+  primary_table: tracking_events
+  related_tables:
+  - tracking_events
+  required_columns:
+  - event_id
+  - event_timestamp
+  - event_type
+  - location
+  - shipment_id
+  business_rule: Rejected duplicate candidate.
+  mutation_strategy: Not active.
+  validator: duplicate_key_validator
+  validator_pattern: duplicate_key_validator
+  validator_parameters:
+    table: tracking_events
+    columns:
+    - event_id
+    - event_timestamp
+  expected_evidence:
+  - duplicate identifiers
+  severity: low
+  realism: basic
+  difficulty: easy
+  tags:
+  - logistics
+  - exceptions
+  - rejected
+  training_value: Low-value duplicate, retained for auditability.
+  status: rejected
+  version: 1.0.0
+  score:
+    business_realism_score: 4
+    data_model_fit_score: 5
+    enterprise_relevance_score: 4
+    detection_complexity_score: 3
+    demo_value_score: 5
+    training_value_score: 3
+    total_score: 24
+    tier: B
+  implementation_readiness: ready_now
+  table_support_status: fully_supported
+  rejected_reason: Semantic duplicate or low enterprise value.
+  proposed_tables: []
+  proposed_columns: []
+  implementation_dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+  execution_status: rejected

@@ -1,0 +1,1272 @@
+version: 0.4.0
+purpose: Rank blocked scenario capabilities by reusable execution leverage.
+leverage_score_formula: total_scenarios + tier_a_scenarios*3 + domains_reused*5 +
+  business_processes_reused*2 - implementation_complexity*3
+baseline_counts:
+  total_registered: 760
+  executable: 521
+  custom_reference: 10
+  runtime_capable: 531
+  specification_only: 229
+  rejected: 36
+after_batch_1_counts:
+  runtime_capable: 151
+after_batch_2_counts:
+  runtime_capable: 179
+after_batch_3_counts:
+  runtime_capable: 264
+after_batch_4_counts:
+  runtime_capable: 293
+after_batch_5_counts:
+  runtime_capable: 439
+after_batch_6_counts:
+  runtime_capable: 479
+after_batch_7_counts:
+  runtime_capable: 507
+after_batch_8_counts:
+  runtime_capable: 522
+after_batch_9_counts:
+  runtime_capable: 531
+rankings:
+  primitives:
+  - capability: distribution_shift
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 4
+    tier_b_scenarios: 3
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - data_quality_control
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - plant_operations
+    - production_planning
+    - quality
+    implementation_complexity: 4
+    leverage_score: 41
+    example_scenarios:
+    - healthcare_patient_registration_patient_distribution_shift_06
+    - manufacturing_machine_operations_machine_distribution_shift_05
+    - manufacturing_plant_operations_factorie_distribution_shift_07
+    - manufacturing_production_planning_production_order_distribution_shift_04
+    - manufacturing_quality_quality_check_distribution_shift_04
+    - retail_data_quality_control_categorie_distribution_shift_04
+    - telecommunications_network_outages_network_qos_sample_distribution_shift_03
+  - capability: format_corruption
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 2
+    tier_b_scenarios: 3
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - plant_operations
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 24
+    example_scenarios:
+    - healthcare_patient_registration_payment_format_corruption_05
+    - manufacturing_machine_operations_factorie_format_corruption_04
+    - manufacturing_plant_operations_factorie_format_corruption_06
+    - manufacturing_production_planning_production_order_format_corruption_03
+    - telecommunications_network_outages_network_event_format_corruption_02
+  - capability: schema_change
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 2
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 21
+    example_scenarios:
+    - healthcare_patient_registration_patient_schema_change_07
+    - manufacturing_machine_operations_machine_schema_change_06
+    - manufacturing_production_planning_production_order_schema_change_05
+    - telecommunications_network_outages_telecom_customer_schema_change_04
+  - capability: identity_mismatch
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 1
+    tier_b_scenarios: 4
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - plant_operations
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 21
+    example_scenarios:
+    - healthcare_patient_registration_prior_authorization_identity_mismatch_04
+    - manufacturing_machine_operations_machine_identity_mismatch_03
+    - manufacturing_plant_operations_inventory_identity_mismatch_05
+    - manufacturing_production_planning_production_order_identity_mismatch_02
+    - telecommunications_network_outages_network_event_identity_mismatch_01
+  - capability: rare_high_value_activity
+    total_blocked_scenarios: 3
+    tier_a_scenarios: 1
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 10
+    example_scenarios:
+    - manufacturing_machine_operations_sensor_reading_rare_high_value_activity_07
+    - manufacturing_production_planning_production_order_rare_high_value_activity_06
+    - telecommunications_network_outages_network_event_rare_high_value_activity_05
+  validators:
+  - capability: distribution_validator
+    total_blocked_scenarios: 10
+    tier_a_scenarios: 5
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - data_quality_control
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - plant_operations
+    - production_planning
+    - quality
+    implementation_complexity: 4
+    leverage_score: 47
+    example_scenarios:
+    - healthcare_patient_registration_patient_distribution_shift_06
+    - manufacturing_machine_operations_machine_distribution_shift_05
+    - manufacturing_machine_operations_sensor_reading_rare_high_value_activity_07
+    - manufacturing_plant_operations_factorie_distribution_shift_07
+    - manufacturing_production_planning_production_order_distribution_shift_04
+    - manufacturing_production_planning_production_order_rare_high_value_activity_06
+    - manufacturing_quality_quality_check_distribution_shift_04
+    - retail_data_quality_control_categorie_distribution_shift_04
+    - telecommunications_network_outages_network_event_rare_high_value_activity_05
+    - telecommunications_network_outages_network_qos_sample_distribution_shift_03
+  - capability: reconciliation_validator
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 4
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - insurance
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - billing
+    - inventory
+    - payments
+    - premium
+    implementation_complexity: 4
+    leverage_score: 32
+    example_scenarios:
+    - banking_ledger_imbalance
+    - insurance_premium_miscalculation
+    - retail_inventory_mismatch
+    - telecom_billing_mismatch
+  - capability: schema_validator
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 2
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 21
+    example_scenarios:
+    - healthcare_patient_registration_patient_schema_change_07
+    - manufacturing_machine_operations_machine_schema_change_06
+    - manufacturing_production_planning_production_order_schema_change_05
+    - telecommunications_network_outages_telecom_customer_schema_change_04
+  - capability: identity_validator
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 1
+    tier_b_scenarios: 4
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - machine_operations
+    - network_outages
+    - patient_registration
+    - plant_operations
+    - production_planning
+    implementation_complexity: 4
+    leverage_score: 21
+    example_scenarios:
+    - healthcare_patient_registration_prior_authorization_identity_mismatch_04
+    - manufacturing_machine_operations_machine_identity_mismatch_03
+    - manufacturing_plant_operations_inventory_identity_mismatch_05
+    - manufacturing_production_planning_production_order_identity_mismatch_02
+    - telecommunications_network_outages_network_event_identity_mismatch_01
+  tables:
+  - capability: refund_events
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - catalog
+    - fulfillment
+    - inventory
+    - order_management
+    - promotions
+    - reconciliation
+    - refunds
+    implementation_complexity: 5
+    leverage_score: 11
+    example_scenarios:
+    - retail_catalog_refund_event_stale_timestamp_03
+    - retail_fulfillment_refund_event_aggregate_mismatch_04
+    - retail_inventory_refund_event_negative_numeric_value_03
+    - retail_order_management_refund_event_capacity_exceeded_02
+    - retail_promotions_refund_event_timestamp_delay_01
+    - retail_reconciliation_refund_event_aggregate_mismatch_04
+    - retail_refunds_refund_event_timestamp_delay_04
+  - capability: claim_documents
+    total_blocked_scenarios: 6
+    tier_a_scenarios: 0
+    tier_b_scenarios: 6
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - compliance
+    - coverage
+    - fraud
+    - policy_lifecycle
+    - settlement
+    - underwriting
+    implementation_complexity: 5
+    leverage_score: 8
+    example_scenarios:
+    - insurance_compliance_claim_document_volume_spike_06
+    - insurance_coverage_claim_document_calculation_error_06
+    - insurance_fraud_claim_document_stale_timestamp_02
+    - insurance_policy_lifecycle_claim_document_volume_drop_01
+    - insurance_settlement_claim_document_invalid_state_transition_04
+    - insurance_underwriting_claim_document_volume_drop_05
+  - capability: network_qos_samples
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - data_usage
+    - network_outages
+    - plans
+    - streaming_operations
+    - support
+    implementation_complexity: 5
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_data_usage_network_qos_sample_sequence_gap_03
+    - telecommunications_network_outages_network_qos_sample_distribution_shift_03
+    - telecommunications_plans_network_qos_sample_volume_drop_03
+    - telecommunications_streaming_operations_network_qos_sample_settlement_delay_04
+    - telecommunications_support_network_qos_sample_availability_failure_05
+  - capability: ledger_entries
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - ledger
+    - reconciliation
+    implementation_complexity: 5
+    leverage_score: 1
+    example_scenarios:
+    - banking_ledger_ledger_entrie_future_timestamp_02
+    - banking_ledger_ledger_entrie_timestamp_delay_04
+    - banking_ledger_ledger_entrie_timestamp_out_of_order_05
+    - banking_ledger_ledger_entrie_value_below_threshold_01
+    - banking_reconciliation_ledger_entrie_calculation_error_03
+    - banking_reconciliation_ledger_entrie_calculation_error_06
+    - banking_reconciliation_ledger_entrie_cross_table_mismatch_02
+  - capability: product_views
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - product_views
+    - search
+    implementation_complexity: 5
+    leverage_score: 1
+    example_scenarios:
+    - ecommerce_product_views_product_view_capacity_exceeded_02
+    - ecommerce_product_views_product_view_volume_spike_03
+    - ecommerce_search_product_view_invalid_state_transition_05
+    - ecommerce_search_product_view_sequence_gap_04
+    - ecommerce_search_product_view_stale_timestamp_01
+    - ecommerce_search_product_view_timestamp_delay_02
+    - ecommerce_search_product_view_timestamp_out_of_order_03
+  - capability: fee_payments
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - fees
+    - holds
+    implementation_complexity: 5
+    leverage_score: 1
+    example_scenarios:
+    - education_fees_fee_payment_future_timestamp_02
+    - education_fees_fee_payment_stale_timestamp_03
+    - education_holds_fee_payment_future_timestamp_01
+    - education_holds_fee_payment_sequence_gap_05
+    - education_holds_fee_payment_stale_timestamp_02
+    - education_holds_fee_payment_timestamp_delay_03
+    - education_holds_fee_payment_timestamp_out_of_order_04
+  - capability: transactions
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - banking_fraud_transaction_future_timestamp_03
+    - banking_fraud_transaction_stale_timestamp_04
+    - banking_fraud_transaction_timestamp_out_of_order_06
+    - banking_fraud_transaction_value_above_threshold_01
+    - banking_fraud_transaction_value_below_threshold_02
+  - capability: refunds
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - refunds
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - ecommerce_refunds_refund_aggregate_mismatch_05
+    - ecommerce_refunds_refund_invalid_state_transition_04
+    - ecommerce_refunds_refund_sequence_gap_03
+    - ecommerce_refunds_refund_timestamp_delay_01
+    - ecommerce_refunds_refund_timestamp_out_of_order_02
+  - capability: online_activity
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - online_learning
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - education_online_learning_online_activity_duplicate_retry_04
+    - education_online_learning_online_activity_duplicate_transaction_05
+    - education_online_learning_online_activity_retry_burst_03
+    - education_online_learning_online_activity_volume_drop_02
+    - education_online_learning_online_activity_volume_spike_01
+  - capability: routes
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - routing
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - logistics_routing_route_geographic_jump_01
+    - logistics_routing_route_geographic_jump_04
+    - logistics_routing_route_sequence_gap_03
+    - logistics_routing_route_sequence_gap_06
+    - logistics_routing_route_timestamp_delay_02
+  - capability: inventory_items
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - inventory
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - manufacturing_inventory_inventory_item_aggregate_mismatch_04
+    - manufacturing_inventory_inventory_item_capacity_exceeded_01
+    - manufacturing_inventory_inventory_item_capacity_exceeded_05
+    - manufacturing_inventory_inventory_item_inventory_oversell_02
+    - manufacturing_inventory_inventory_item_negative_numeric_value_03
+  - capability: production_orders
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - production_planning
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - manufacturing_production_planning_production_order_distribution_shift_04
+    - manufacturing_production_planning_production_order_format_corruption_03
+    - manufacturing_production_planning_production_order_identity_mismatch_02
+    - manufacturing_production_planning_production_order_rare_high_value_activity_06
+    - manufacturing_production_planning_production_order_schema_change_05
+  - capability: subscribers
+    total_blocked_scenarios: 5
+    tier_a_scenarios: 0
+    tier_b_scenarios: 5
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - subscriber_lifecycle
+    implementation_complexity: 5
+    leverage_score: -3
+    example_scenarios:
+    - telecommunications_subscriber_lifecycle_subscriber_coverage_limit_violation_05
+    - telecommunications_subscriber_lifecycle_subscriber_defect_rate_spike_01
+    - telecommunications_subscriber_lifecycle_subscriber_dropped_call_rate_spike_02
+    - telecommunications_subscriber_lifecycle_subscriber_settlement_delay_04
+    - telecommunications_subscriber_lifecycle_subscriber_temperature_threshold_breach_03
+  - capability: customers
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 0
+    tier_b_scenarios: 4
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - customer
+    implementation_complexity: 5
+    leverage_score: -4
+    example_scenarios:
+    - ecommerce_customer_customer_aggregate_mismatch_04
+    - ecommerce_customer_customer_invalid_state_transition_03
+    - ecommerce_customer_customer_sequence_gap_02
+    - ecommerce_customer_customer_timestamp_out_of_order_01
+  - capability: portfolios
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 0
+    tier_b_scenarios: 4
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - portfolio
+    implementation_complexity: 5
+    leverage_score: -4
+    example_scenarios:
+    - finance_portfolio_portfolio_aggregate_mismatch_05
+    - finance_portfolio_portfolio_cross_table_mismatch_06
+    - finance_portfolio_portfolio_invalid_state_transition_04
+    - finance_portfolio_portfolio_sequence_gap_03
+  - capability: maintenance_records
+    total_blocked_scenarios: 4
+    tier_a_scenarios: 0
+    tier_b_scenarios: 4
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - maintenance
+    implementation_complexity: 5
+    leverage_score: -4
+    example_scenarios:
+    - manufacturing_maintenance_maintenance_record_availability_failure_06
+    - manufacturing_maintenance_maintenance_record_duplicate_retry_04
+    - manufacturing_maintenance_maintenance_record_duplicate_transaction_05
+    - manufacturing_maintenance_maintenance_record_retry_burst_03
+  - capability: orders
+    total_blocked_scenarios: 3
+    tier_a_scenarios: 0
+    tier_b_scenarios: 3
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - orders
+    implementation_complexity: 5
+    leverage_score: -5
+    example_scenarios:
+    - finance_orders_order_stale_timestamp_03
+    - finance_orders_order_timestamp_delay_04
+    - finance_orders_order_value_below_threshold_01
+  - capability: carriers
+    total_blocked_scenarios: 3
+    tier_a_scenarios: 0
+    tier_b_scenarios: 3
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - carrier_management
+    implementation_complexity: 5
+    leverage_score: -5
+    example_scenarios:
+    - logistics_carrier_management_carrier_availability_failure_03
+    - logistics_carrier_management_carrier_duplicate_transaction_02
+    - logistics_carrier_management_carrier_policy_violation_06
+  - capability: downtime_events
+    total_blocked_scenarios: 3
+    tier_a_scenarios: 0
+    tier_b_scenarios: 3
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - downtime
+    implementation_complexity: 5
+    leverage_score: -5
+    example_scenarios:
+    - manufacturing_downtime_downtime_event_capacity_exceeded_03
+    - manufacturing_downtime_downtime_event_cross_table_mismatch_01
+    - manufacturing_downtime_downtime_event_volume_spike_04
+  - capability: products
+    total_blocked_scenarios: 2
+    tier_a_scenarios: 0
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - catalog
+    implementation_complexity: 5
+    leverage_score: -6
+    example_scenarios:
+    - ecommerce_catalog_product_sequence_gap_03
+    - ecommerce_catalog_product_timestamp_out_of_order_02
+  - capability: payment_attempts
+    total_blocked_scenarios: 2
+    tier_a_scenarios: 0
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - payments
+    implementation_complexity: 5
+    leverage_score: -6
+    example_scenarios:
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_payments_payment_attempt_calculation_error_03
+  columns:
+  - capability: amount
+    total_blocked_scenarios: 75
+    tier_a_scenarios: 0
+    tier_b_scenarios: 75
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    - education
+    - finance
+    - insurance
+    - logistics
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - carrier_management
+    - catalog
+    - compliance
+    - coverage
+    - customer
+    - downtime
+    - fees
+    - fraud
+    - holds
+    - inventory
+    - maintenance
+    - online_learning
+    - orders
+    - payments
+    - policy_lifecycle
+    - portfolio
+    - product_views
+    - production_planning
+    - refunds
+    - routing
+    - search
+    - settlement
+    - subscriber_lifecycle
+    - underwriting
+    implementation_complexity: 2
+    leverage_score: 152
+    example_scenarios:
+    - ecommerce_catalog_product_sequence_gap_03
+    - ecommerce_catalog_product_timestamp_out_of_order_02
+    - ecommerce_customer_customer_aggregate_mismatch_04
+    - ecommerce_customer_customer_invalid_state_transition_03
+    - ecommerce_customer_customer_sequence_gap_02
+    - ecommerce_customer_customer_timestamp_out_of_order_01
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_payments_payment_attempt_calculation_error_03
+    - ecommerce_product_views_product_view_capacity_exceeded_02
+    - ecommerce_product_views_product_view_volume_spike_03
+  - capability: actual_amount
+    total_blocked_scenarios: 35
+    tier_a_scenarios: 16
+    tier_b_scenarios: 19
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - finance
+    - healthcare
+    - insurance
+    - logistics
+    - retail
+    business_processes_affected:
+    - admissions
+    - compliance
+    - customer
+    - delivery
+    - diagnosis
+    - exceptions
+    - fulfillment
+    - grades
+    - graduation
+    - inventory
+    - payments
+    - pharmacy
+    - portfolio
+    - product_views
+    - reconciliation
+    - refunds
+    - visits
+    implementation_complexity: 2
+    leverage_score: 151
+    example_scenarios:
+    - banking_reconciliation_customer_aggregate_mismatch_01
+    - banking_reconciliation_ledger_entrie_calculation_error_03
+    - banking_reconciliation_ledger_entrie_calculation_error_06
+    - ecommerce_customer_customer_aggregate_mismatch_04
+    - ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_payments_payment_attempt_calculation_error_03
+    - ecommerce_product_views_marketplace_customer_calculation_error_01
+    - ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01
+    - ecommerce_refunds_refund_aggregate_mismatch_05
+  - capability: expected_amount
+    total_blocked_scenarios: 35
+    tier_a_scenarios: 16
+    tier_b_scenarios: 19
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - finance
+    - healthcare
+    - insurance
+    - logistics
+    - retail
+    business_processes_affected:
+    - admissions
+    - compliance
+    - customer
+    - delivery
+    - diagnosis
+    - exceptions
+    - fulfillment
+    - grades
+    - graduation
+    - inventory
+    - payments
+    - pharmacy
+    - portfolio
+    - product_views
+    - reconciliation
+    - refunds
+    - visits
+    implementation_complexity: 2
+    leverage_score: 151
+    example_scenarios:
+    - banking_reconciliation_customer_aggregate_mismatch_01
+    - banking_reconciliation_ledger_entrie_calculation_error_03
+    - banking_reconciliation_ledger_entrie_calculation_error_06
+    - ecommerce_customer_customer_aggregate_mismatch_04
+    - ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_payments_payment_attempt_calculation_error_03
+    - ecommerce_product_views_marketplace_customer_calculation_error_01
+    - ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01
+    - ecommerce_refunds_refund_aggregate_mismatch_05
+  - capability: scenario_status_code
+    total_blocked_scenarios: 33
+    tier_a_scenarios: 8
+    tier_b_scenarios: 25
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - education
+    - finance
+    - healthcare
+    - insurance
+    - logistics
+    - retail
+    business_processes_affected:
+    - accounts
+    - carrier_management
+    - compliance
+    - currency
+    - customer
+    - customer_onboarding
+    - deductible
+    - delivery
+    - exams
+    - exceptions
+    - fees
+    - inventory
+    - kyc
+    - ledger
+    - patient_registration
+    - positions
+    - premium
+    - provider_master
+    - reconciliation
+    - risk
+    - settlement
+    - shipment_creation
+    - support
+    - tracking
+    - transactions
+    - visits
+    - warehouse
+    implementation_complexity: 2
+    leverage_score: 140
+    example_scenarios:
+    - banking_accounts_customer_stale_timestamp_01
+    - banking_customer_onboarding_customer_availability_failure_04
+    - banking_fees_customer_negative_numeric_value_01
+    - banking_kyc_customer_invalid_datatype_01
+    - banking_ledger_ledger_entrie_timestamp_delay_04
+    - banking_reconciliation_customer_aggregate_mismatch_01
+    - banking_settlement_customer_settlement_delay_01
+    - education_exams_examination_result_future_timestamp_01
+    - finance_currency_customer_sequence_gap_04
+    - finance_positions_customer_invalid_state_transition_04
+  - capability: risk_score
+    total_blocked_scenarios: 30
+    tier_a_scenarios: 10
+    tier_b_scenarios: 20
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - healthcare
+    - insurance
+    - logistics
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - care_coordination
+    - checkout
+    - claims
+    - cold_chain
+    - compliance
+    - coverage
+    - customer
+    - customs
+    - diagnosis
+    - eligibility
+    - enrollment
+    - fraud
+    - gps
+    - order_management
+    - payments
+    - pharmacy
+    - procedures
+    - renewal
+    - routing
+    - subscriber_lifecycle
+    - support
+    - tower_operations
+    - underwriting
+    implementation_complexity: 2
+    leverage_score: 140
+    example_scenarios:
+    - banking_fraud_transaction_timestamp_out_of_order_06
+    - ecommerce_checkout_cart_item_invalid_state_transition_03
+    - education_enrollment_class_section_cross_table_mismatch_03
+    - healthcare_care_coordination_provider_policy_violation_06
+    - healthcare_claims_diagnose_invalid_reference_03
+    - healthcare_compliance_diagnose_calculation_error_03
+    - healthcare_diagnosis_diagnose_cross_table_mismatch_03
+    - healthcare_eligibility_claim_capacity_exceeded_03
+    - healthcare_eligibility_diagnose_retry_burst_06
+    - healthcare_payments_diagnose_calculation_error_03
+  - capability: event_timestamp
+    total_blocked_scenarios: 66
+    tier_a_scenarios: 0
+    tier_b_scenarios: 66
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - manufacturing
+    - telecommunications
+    business_processes_affected:
+    - catalog
+    - customer
+    - downtime
+    - fees
+    - fraud
+    - holds
+    - inventory
+    - ledger
+    - maintenance
+    - online_learning
+    - payments
+    - product_views
+    - production_planning
+    - reconciliation
+    - refunds
+    - search
+    - subscriber_lifecycle
+    implementation_complexity: 2
+    leverage_score: 119
+    example_scenarios:
+    - banking_fraud_transaction_future_timestamp_03
+    - banking_fraud_transaction_stale_timestamp_04
+    - banking_fraud_transaction_timestamp_out_of_order_06
+    - banking_fraud_transaction_value_above_threshold_01
+    - banking_fraud_transaction_value_below_threshold_02
+    - banking_ledger_ledger_entrie_future_timestamp_02
+    - banking_ledger_ledger_entrie_timestamp_delay_04
+    - banking_ledger_ledger_entrie_timestamp_out_of_order_05
+    - banking_ledger_ledger_entrie_value_below_threshold_01
+    - banking_reconciliation_ledger_entrie_calculation_error_03
+  - capability: reason_code
+    total_blocked_scenarios: 50
+    tier_a_scenarios: 0
+    tier_b_scenarios: 50
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    - finance
+    - insurance
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - catalog
+    - compliance
+    - coverage
+    - customer
+    - data_usage
+    - fraud
+    - fulfillment
+    - inventory
+    - network_outages
+    - order_management
+    - orders
+    - payments
+    - plans
+    - policy_lifecycle
+    - portfolio
+    - product_views
+    - promotions
+    - reconciliation
+    - refunds
+    - search
+    - settlement
+    - streaming_operations
+    - subscriber_lifecycle
+    - support
+    - underwriting
+    implementation_complexity: 2
+    leverage_score: 119
+    example_scenarios:
+    - ecommerce_catalog_product_sequence_gap_03
+    - ecommerce_catalog_product_timestamp_out_of_order_02
+    - ecommerce_customer_customer_aggregate_mismatch_04
+    - ecommerce_customer_customer_invalid_state_transition_03
+    - ecommerce_customer_customer_sequence_gap_02
+    - ecommerce_customer_customer_timestamp_out_of_order_01
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_payments_payment_attempt_calculation_error_03
+    - ecommerce_product_views_product_view_capacity_exceeded_02
+    - ecommerce_product_views_product_view_volume_spike_03
+  - capability: idempotency_key
+    total_blocked_scenarios: 35
+    tier_a_scenarios: 0
+    tier_b_scenarios: 35
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - healthcare
+    - insurance
+    - logistics
+    - retail
+    - telecommunications
+    business_processes_affected:
+    - billing
+    - care_coordination
+    - carrier_management
+    - customer_onboarding
+    - eligibility
+    - fraud
+    - online_learning
+    - payments
+    - plans
+    - policy_lifecycle
+    - product_views
+    - provider_master
+    - roaming
+    - shipment_creation
+    - student_lifecycle
+    - support
+    - underwriting
+    implementation_complexity: 2
+    leverage_score: 103
+    example_scenarios:
+    - banking_customer_onboarding_customer_duplicate_retry_02
+    - banking_customer_onboarding_customer_retry_burst_01
+    - banking_payments_payment_duplicate_retry_01
+    - ecommerce_payments_marketplace_customer_duplicate_retry_01
+    - ecommerce_payments_promotion_duplicate_retry_05
+    - ecommerce_product_views_promotion_retry_burst_05
+    - education_online_learning_online_activity_duplicate_retry_04
+    - education_online_learning_online_activity_retry_burst_03
+    - education_student_lifecycle_student_duplicate_retry_02
+    - education_student_lifecycle_student_retry_burst_01
+  - capability: reconciliation_group_id
+    total_blocked_scenarios: 6
+    tier_a_scenarios: 0
+    tier_b_scenarios: 6
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - ecommerce
+    - education
+    - logistics
+    business_processes_affected:
+    - carrier_management
+    - catalog
+    - fees
+    - payments
+    - product_views
+    - reconciliation
+    implementation_complexity: 2
+    leverage_score: 32
+    example_scenarios:
+    - banking_reconciliation_ledger_entrie_cross_table_mismatch_02
+    - ecommerce_catalog_product_timestamp_out_of_order_02
+    - ecommerce_payments_payment_attempt_aggregate_mismatch_02
+    - ecommerce_product_views_product_view_capacity_exceeded_02
+    - education_fees_fee_payment_future_timestamp_02
+    - logistics_carrier_management_carrier_duplicate_transaction_02
+  - capability: network_qos_sample_id
+    total_blocked_scenarios: 10
+    tier_a_scenarios: 0
+    tier_b_scenarios: 10
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - data_usage
+    - network_outages
+    - plans
+    - streaming_operations
+    - subscriber_lifecycle
+    - support
+    implementation_complexity: 2
+    leverage_score: 21
+    example_scenarios:
+    - telecommunications_data_usage_network_qos_sample_sequence_gap_03
+    - telecommunications_network_outages_network_qos_sample_distribution_shift_03
+    - telecommunications_plans_network_qos_sample_volume_drop_03
+    - telecommunications_streaming_operations_network_qos_sample_settlement_delay_04
+    - telecommunications_subscriber_lifecycle_subscriber_coverage_limit_violation_05
+    - telecommunications_subscriber_lifecycle_subscriber_defect_rate_spike_01
+    - telecommunications_subscriber_lifecycle_subscriber_dropped_call_rate_spike_02
+    - telecommunications_subscriber_lifecycle_subscriber_settlement_delay_04
+    - telecommunications_subscriber_lifecycle_subscriber_temperature_threshold_breach_03
+    - telecommunications_support_network_qos_sample_availability_failure_05
+  - capability: refund_event_id
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - catalog
+    - fulfillment
+    - inventory
+    - order_management
+    - promotions
+    - reconciliation
+    - refunds
+    implementation_complexity: 2
+    leverage_score: 20
+    example_scenarios:
+    - retail_catalog_refund_event_stale_timestamp_03
+    - retail_fulfillment_refund_event_aggregate_mismatch_04
+    - retail_inventory_refund_event_negative_numeric_value_03
+    - retail_order_management_refund_event_capacity_exceeded_02
+    - retail_promotions_refund_event_timestamp_delay_01
+    - retail_reconciliation_refund_event_aggregate_mismatch_04
+    - retail_refunds_refund_event_timestamp_delay_04
+  - capability: claim_document_id
+    total_blocked_scenarios: 6
+    tier_a_scenarios: 0
+    tier_b_scenarios: 6
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - compliance
+    - coverage
+    - fraud
+    - policy_lifecycle
+    - settlement
+    - underwriting
+    implementation_complexity: 2
+    leverage_score: 17
+    example_scenarios:
+    - insurance_compliance_claim_document_volume_spike_06
+    - insurance_coverage_claim_document_calculation_error_06
+    - insurance_fraud_claim_document_stale_timestamp_02
+    - insurance_policy_lifecycle_claim_document_volume_drop_01
+    - insurance_settlement_claim_document_invalid_state_transition_04
+    - insurance_underwriting_claim_document_volume_drop_05
+  - capability: status
+    total_blocked_scenarios: 7
+    tier_a_scenarios: 0
+    tier_b_scenarios: 7
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - orders
+    - portfolio
+    implementation_complexity: 2
+    leverage_score: 10
+    example_scenarios:
+    - finance_orders_order_stale_timestamp_03
+    - finance_orders_order_timestamp_delay_04
+    - finance_orders_order_value_below_threshold_01
+    - finance_portfolio_portfolio_aggregate_mismatch_05
+    - finance_portfolio_portfolio_cross_table_mismatch_06
+    - finance_portfolio_portfolio_invalid_state_transition_04
+    - finance_portfolio_portfolio_sequence_gap_03
+  parameters: []
+implementation_batches:
+- batch: 1
+  name: sequence_and_legacy_alias_unlock
+  rationale: 'Highest low-complexity runtime unlock: one generic validator, two sequence
+    primitives, duplicate-event support, and harmless legacy alias parameter support.'
+  primitives:
+  - timestamp_out_of_order
+  - sequence_gap
+  - duplicate_event
+  validators:
+  - sequence_validator
+  parameters:
+  - legacy_runtime_primitive
+  tables: []
+  columns: []
+  expected_scenarios_to_become_executable: 71
+  domains_affected:
+  - banking
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  estimated_implementation_complexity: low
+- batch: 2
+  name: cross_table_and_aggregate_reconciliation
+  rationale: High Tier-A/business value across all domains, but needs more careful
+    validator semantics than Batch 1.
+  primitives:
+  - cross_table_mismatch
+  - aggregate_mismatch
+  validators:
+  - cross_table_consistency_validator
+  - aggregate_balance_validator
+  tables: []
+  columns:
+  - expected_amount
+  - actual_amount
+  - reconciliation_group_id
+  estimated_implementation_complexity: medium
+- batch: 3
+  name: state_sla_and_volume_anomaly
+  rationale: Broad workflow coverage that may require richer status/time/volume metadata
+    and some schema expansion.
+  primitives:
+  - invalid_state_transition
+  - stale_timestamp
+  - timeout_violation
+  - volume_spike
+  - volume_drop
+  validators:
+  - state_transition_validator
+  - sla_validator
+  - volume_anomaly_validator
+  tables:
+  - carriers
+  - claim_documents
+  - customers
+  - downtime_events
+  - fee_payments
+  - inventory_items
+  - ledger_entries
+  - maintenance_records
+  - network_qos_samples
+  - online_activity
+  columns:
+  - scenario_status_code
+  - event_timestamp
+  - reason_code
+  estimated_implementation_complexity: medium-high
+- batch: 5
+  name: domain_native_schema_reconciliation
+  rationale: Corrected domain-native semantic mappings for existing columns without
+    adding broad new product behavior.
+  primitives: []
+  validators: []
+  tables: []
+  columns:
+  - domain-native amount/status/timestamp/reason/id semantics
+  metadata_only_newly_executable: 146
+  estimated_implementation_complexity: medium
+- batch: 6
+  name: finance_schema_depth
+  rationale: Added high-leverage finance-native market, risk, trade, and position
+    tables to unlock executable finance scenarios.
+  primitives: []
+  validators: []
+  tables:
+  - finance.trades
+  - finance.market_data
+  - finance.positions
+  - finance.risk_events
+  columns:
+  - finance.positions.position_reason
+  newly_executable: 40
+  estimated_implementation_complexity: medium-high
+- batch: 7
+  name: multi_domain_schema_depth
+  rationale: Added targeted high-leverage business tables across weaker domains instead
+    of deepening one already-strong domain.
+  primitives: []
+  validators: []
+  tables:
+  - ecommerce.seller_payouts
+  - education.academic_standing_events
+  - healthcare.prior_authorizations
+  - manufacturing.sensor_readings
+  columns:
+  - seller payout lifecycle fields
+  - academic standing GPA/credit fields
+  - prior authorization status/date/amount fields
+  - machine sensor measurement/quality fields
+  newly_executable: 28
+  estimated_implementation_complexity: medium-high
+- batch: 8
+  name: banking_card_authorization_and_logistics_exception_depth
+  rationale: Added the two highest-leverage deferred business tables from Batch 7
+    to unlock Banking card workflows and Logistics exception workflows.
+  primitives: []
+  validators: []
+  tables:
+  - banking.card_authorizations
+  - logistics.exception_alerts
+  columns:
+  - banking card authorization lifecycle, amount, response, and reason fields
+  - logistics exception alert lifecycle, severity, impact, and reason fields
+  newly_executable: 15
+  estimated_implementation_complexity: medium
+- batch: 9
+  name: scenario_v1_quality_audit_and_selective_manufacturing_depth
+  rationale: Paused pure unlock maximization to audit runtime-capable scenario quality,
+    then added only Manufacturing-native operational columns needed to move the weakest
+    domain above 60% runtime coverage.
+  primitives: []
+  validators: []
+  tables: []
+  columns:
+  - manufacturing.production_lines.risk_score
+  - manufacturing.production_lines.idempotency_key
+  - manufacturing.suppliers.idempotency_key
+  - manufacturing.work_orders.expected_amount
+  - manufacturing.work_orders.actual_amount
+  - manufacturing.work_orders.risk_score
+  - manufacturing.work_orders.idempotency_key
+  - manufacturing.quality_checks.scenario_status_code
+  - manufacturing.quality_checks.risk_score
+  - manufacturing.quality_checks.idempotency_key
+  - manufacturing.factories.planned_capacity_amount
+  newly_executable: 9
+  quality_audit_runtime_capable: 531
+  estimated_implementation_complexity: medium

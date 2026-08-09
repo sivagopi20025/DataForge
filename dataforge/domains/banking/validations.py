@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from typing import Any
 
-from .constants import ACCOUNT_STATUSES, BRANCH_STATUSES, CURRENCIES, PAYMENT_STATUSES, RECONCILIATION_SCENARIOS, TRANSFER_STATUSES, TREASURY_TRANSACTION_TYPES
+from .constants import ACCOUNT_STATUSES, BRANCH_STATUSES, CARD_AUTHORIZATION_STATUSES, CARD_DECLINE_REASONS, CARD_RESPONSE_CODES, CURRENCIES, PAYMENT_STATUSES, RECONCILIATION_SCENARIOS, TRANSFER_STATUSES, TREASURY_TRANSACTION_TYPES
 
 
 def branch_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
@@ -112,6 +113,55 @@ def treasury_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str,
     ]
 
 
+def card_authorization_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
+    accounts = {row["account_id"]: row for row in data.get("deposit_accounts", [])}
+    invalid_status = 0
+    invalid_currency = 0
+    invalid_response = 0
+    invalid_reason = 0
+    invalid_amount = 0
+    invalid_lifecycle = 0
+    for authorization in data.get("card_authorizations", []):
+        status = authorization.get("authorization_status")
+        invalid_status += status not in CARD_AUTHORIZATION_STATUSES
+        invalid_response += authorization.get("response_code") not in CARD_RESPONSE_CODES
+        invalid_reason += authorization.get("reason_code") not in CARD_DECLINE_REASONS
+        account = accounts.get(authorization.get("account_id"))
+        if account:
+            invalid_currency += authorization.get("currency") != account.get("currency")
+        else:
+            invalid_currency += authorization.get("currency") not in CURRENCIES
+        try:
+            amount = Decimal(str(authorization["authorization_amount"]))
+            invalid_amount += amount <= 0
+            authorized_at = datetime.fromisoformat(str(authorization["authorization_timestamp"]))
+            expires_at = datetime.fromisoformat(str(authorization["expires_at"]))
+            invalid_lifecycle += expires_at <= authorized_at
+            if status == "Captured":
+                captured_at = datetime.fromisoformat(str(authorization["captured_at"]))
+                invalid_lifecycle += captured_at < authorized_at or captured_at > expires_at
+                invalid_lifecycle += authorization.get("capture_reference") == "not_applicable"
+                invalid_lifecycle += authorization.get("reason_code") != "not_applicable"
+            elif status == "Declined":
+                invalid_lifecycle += authorization.get("captured_at") != "not_applicable"
+                invalid_lifecycle += authorization.get("capture_reference") != "not_applicable"
+                invalid_lifecycle += authorization.get("reason_code") == "not_applicable"
+            else:
+                invalid_lifecycle += authorization.get("captured_at") != "not_applicable"
+                invalid_lifecycle += authorization.get("capture_reference") != "not_applicable"
+                invalid_lifecycle += authorization.get("reason_code") != "not_applicable"
+        except (InvalidOperation, KeyError, ValueError, TypeError):
+            invalid_amount += 1
+    return [
+        {"check": "card_authorization_status_valid", "table": "card_authorizations", "failures": invalid_status},
+        {"check": "card_authorization_currency_matches_account", "table": "card_authorizations", "failures": invalid_currency},
+        {"check": "card_authorization_response_code_valid", "table": "card_authorizations", "failures": invalid_response},
+        {"check": "card_authorization_reason_code_valid", "table": "card_authorizations", "failures": invalid_reason},
+        {"check": "card_authorization_amount_positive", "table": "card_authorizations", "failures": invalid_amount},
+        {"check": "card_authorization_lifecycle_valid", "table": "card_authorizations", "failures": invalid_lifecycle},
+    ]
+
+
 def reconciliation_validation(data: dict[str, list[dict[str, Any]]]) -> list[dict[str, Any]]:
     invalid_tags = sum(
         1 for row in data.get("payments", []) + data.get("transfers", [])
@@ -142,6 +192,7 @@ BUSINESS_RULES = (
     account_validation,
     payment_validation,
     transfer_validation,
+    card_authorization_validation,
     treasury_validation,
     reconciliation_validation,
 )

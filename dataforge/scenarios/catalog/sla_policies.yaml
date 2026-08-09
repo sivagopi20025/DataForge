@@ -1,0 +1,26 @@
+version: 1.0.0
+description: Reusable generic SLA policies for Batch 3 age and duration validation.
+sla_policies:
+  generic_age_24h:
+    mode: age
+    threshold:
+      value: 24
+      unit: hours
+    supported_by:
+    - stale_timestamp
+    - sla_validator
+  generic_duration_24h:
+    mode: duration
+    threshold:
+      value: 24
+      unit: hours
+    supported_by:
+    - timestamp_delay
+    - timeout_violation
+    - sla_validator
+baseline_semantics:
+  preferred_order:
+  - explicit scenario SLA metadata
+  - primitive-generated baseline snapshot
+  - deterministic configured threshold
+  note: Batch 3 uses primitive-generated baseline rows when scenario specs do not yet declare explicit SLA policy IDs.

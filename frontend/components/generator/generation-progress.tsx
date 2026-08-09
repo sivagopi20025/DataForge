@@ -1,7 +1,7 @@
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { formatNumber, titleCase } from "@/lib/utils";
-import type { Domain, LoadType, OutputFormat } from "@/types/api";
+import type { DatabaseType, Domain, LoadType, OutputFormat } from "@/types/api";
 
 const steps = ["Generating", "Injecting Issues", "Validating", "Exporting", "Saving Metadata", "Completed"];
 
@@ -10,6 +10,7 @@ export function GenerationProgress({
   domain,
   loadType,
   format,
+  databaseType,
   records,
   tableCount,
 }: {
@@ -17,6 +18,7 @@ export function GenerationProgress({
   domain?: Domain;
   loadType?: LoadType;
   format?: OutputFormat;
+  databaseType?: DatabaseType;
   records?: number;
   tableCount?: number;
 }) {
@@ -37,7 +39,8 @@ export function GenerationProgress({
         <div className="mx-auto mt-5 grid max-w-2xl gap-3 rounded-2xl border border-border bg-muted/30 p-4 text-left sm:grid-cols-2 lg:grid-cols-4">
           {domain ? <SummaryPill label="Domain" value={titleCase(domain)} /> : null}
           {loadType ? <SummaryPill label="Load Type" value={titleCase(loadType)} /> : null}
-          {format ? <SummaryPill label="Format" value={format.toUpperCase()} /> : null}
+          {format ? <SummaryPill label="Format" value={format === "database" ? "Database" : format.toUpperCase()} /> : null}
+          {databaseType ? <SummaryPill label="Database" value={databaseType === "postgresql" ? "PostgreSQL" : databaseType === "mssql" ? "MSSQL" : "MySQL"} /> : null}
           {records ? <SummaryPill label="Records" value={formatNumber(records)} /> : null}
           {tableCount ? <SummaryPill label="Files" value={`${tableCount} selected`} /> : null}
         </div>

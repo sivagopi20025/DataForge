@@ -1,0 +1,836 @@
+version: 1.0.0
+primitives:
+- primitive_id: duplicate_entity
+  failure_category: duplication
+  description: Reusable primitive for Duplicate Entity.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - retail
+  scenario_count: 47
+  tier_a_scenario_count: 16
+  validator_patterns:
+  - duplicate_key_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: duplicate_event
+  failure_category: duplication
+  description: Reusable primitive for Duplicate Event.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - telecommunications
+  scenario_count: 5
+  tier_a_scenario_count: 5
+  validator_patterns:
+  - sequence_validator
+  implementation_complexity: medium
+  priority: low
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: missing_entity
+  failure_category: missing_data
+  description: Reusable primitive for Missing Entity.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - healthcare
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 9
+  tier_a_scenario_count: 9
+  validator_patterns:
+  - missing_record_validator
+  implementation_complexity: low
+  priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: invalid_reference
+  failure_category: referential_integrity
+  description: Reusable primitive for Invalid Reference.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - healthcare
+  - insurance
+  scenario_count: 4
+  tier_a_scenario_count: 4
+  validator_patterns:
+  - referential_integrity_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: orphan_child_record
+  failure_category: referential_integrity
+  description: Reusable primitive for Orphan Child Record.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: invalid_datatype
+  failure_category: invalid_value
+  description: Reusable primitive for Invalid Datatype.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  scenario_count: 5
+  tier_a_scenario_count: 5
+  validator_patterns:
+  - datatype_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: negative_numeric_value
+  failure_category: boundary_violation
+  description: Reusable primitive for Negative Numeric Value.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - insurance
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 13
+  tier_a_scenario_count: 13
+  validator_patterns:
+  - range_validator
+  implementation_complexity: low
+  priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: value_above_threshold
+  failure_category: threshold_violation
+  description: Reusable primitive for Value Above Threshold.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - education
+  - finance
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 39
+  tier_a_scenario_count: 39
+  validator_patterns:
+  - threshold_validator
+  implementation_complexity: low
+  priority: high
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: value_below_threshold
+  failure_category: threshold_violation
+  description: Reusable primitive for Value Below Threshold.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - retail
+  scenario_count: 16
+  tier_a_scenario_count: 16
+  validator_patterns:
+  - threshold_validator
+  implementation_complexity: medium
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: future_timestamp
+  failure_category: temporal
+  description: Reusable primitive for Future Timestamp.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 29
+  tier_a_scenario_count: 29
+  validator_patterns:
+  - temporal_order_validator
+  implementation_complexity: low
+  priority: high
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: stale_timestamp
+  failure_category: temporal
+  description: Reusable primitive for Stale Timestamp.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - insurance
+  - retail
+  scenario_count: 27
+  tier_a_scenario_count: 27
+  validator_patterns:
+  - sla_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: timestamp_delay
+  failure_category: temporal
+  description: Reusable primitive for Timestamp Delay.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - retail
+  scenario_count: 64
+  tier_a_scenario_count: 64
+  validator_patterns:
+  - sla_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: runtime_implemented
+- primitive_id: timestamp_out_of_order
+  failure_category: sequence
+  description: Reusable primitive for Timestamp Out Of Order.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - retail
+  - telecommunications
+  scenario_count: 50
+  tier_a_scenario_count: 50
+  validator_patterns:
+  - sequence_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: sequence_gap
+  failure_category: sequence
+  description: Reusable primitive for Sequence Gap.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - retail
+  - telecommunications
+  scenario_count: 48
+  tier_a_scenario_count: 48
+  validator_patterns:
+  - sequence_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: invalid_state_transition
+  failure_category: status_transition
+  description: Reusable primitive for Invalid State Transition.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  scenario_count: 49
+  tier_a_scenario_count: 49
+  validator_patterns:
+  - state_transition_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: aggregate_mismatch
+  failure_category: aggregate_mismatch
+  description: Reusable primitive for Aggregate Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 71
+  tier_a_scenario_count: 71
+  validator_patterns:
+  - aggregate_balance_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: cross_table_mismatch
+  failure_category: cross_table_mismatch
+  description: Reusable primitive for Cross Table Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 56
+  tier_a_scenario_count: 56
+  validator_patterns:
+  - cross_table_consistency_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: calculation_error
+  failure_category: calculation
+  description: Reusable primitive for Calculation Error.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 52
+  tier_a_scenario_count: 52
+  validator_patterns:
+  - calculation_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: runtime_implemented
+- primitive_id: capacity_exceeded
+  failure_category: capacity
+  description: Reusable primitive for Capacity Exceeded.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 32
+  tier_a_scenario_count: 32
+  validator_patterns:
+  - capacity_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: runtime_implemented
+- primitive_id: volume_spike
+  failure_category: volume_anomaly
+  description: Reusable primitive for Volume Spike.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - ecommerce
+  - education
+  - finance
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 25
+  tier_a_scenario_count: 25
+  validator_patterns:
+  - volume_anomaly_validator
+  implementation_complexity: high
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: volume_drop
+  failure_category: volume_anomaly
+  description: Reusable primitive for Volume Drop.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - manufacturing
+  - telecommunications
+  scenario_count: 18
+  tier_a_scenario_count: 18
+  validator_patterns:
+  - volume_anomaly_validator
+  implementation_complexity: medium
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: retry_burst
+  failure_category: retry
+  description: Reusable primitive for Retry Burst.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - telecommunications
+  scenario_count: 19
+  tier_a_scenario_count: 19
+  validator_patterns:
+  - sequence_validator
+  implementation_complexity: medium
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: duplicate_retry
+  failure_category: retry
+  description: Reusable primitive for Duplicate Retry.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - duplicate_key_validator
+  implementation_complexity: low
+  priority: high
+  status: existing
+  runtime_status: metadata_only
+- primitive_id: duplicate_transaction
+  failure_category: duplication
+  description: Reusable primitive for Duplicate Transaction.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - duplicate_key_validator
+  implementation_complexity: low
+  priority: high
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: availability_failure
+  failure_category: availability
+  description: Reusable primitive for Availability Failure.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - education
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - telecommunications
+  scenario_count: 15
+  tier_a_scenario_count: 15
+  validator_patterns:
+  - availability_validator
+  implementation_complexity: medium
+  priority: high
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: timeout_violation
+  failure_category: timeout
+  description: Reusable primitive for Timeout Violation.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 14
+  tier_a_scenario_count: 14
+  validator_patterns:
+  - sla_validator
+  implementation_complexity: medium
+  priority: medium
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: geographic_jump
+  failure_category: geographic
+  description: Reusable primitive for Geographic Jump.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - healthcare
+  - logistics
+  - manufacturing
+  scenario_count: 14
+  tier_a_scenario_count: 14
+  validator_patterns:
+  - geographic_validator
+  implementation_complexity: medium
+  priority: medium
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: policy_violation
+  failure_category: policy_violation
+  description: Reusable primitive for Policy Violation.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - ecommerce
+  - healthcare
+  - insurance
+  - logistics
+  - manufacturing
+  scenario_count: 15
+  tier_a_scenario_count: 15
+  validator_patterns:
+  - policy_validator
+  implementation_complexity: medium
+  priority: medium
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: identity_mismatch
+  failure_category: identity_mismatch
+  description: Reusable primitive for Identity Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  - manufacturing
+  - telecommunications
+  scenario_count: 5
+  tier_a_scenario_count: 5
+  validator_patterns:
+  - identity_validator
+  implementation_complexity: medium
+  priority: low
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: format_corruption
+  failure_category: data_format
+  description: Reusable primitive for Format Corruption.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  - manufacturing
+  - telecommunications
+  scenario_count: 5
+  tier_a_scenario_count: 2
+  validator_patterns:
+  - datatype_validator
+  implementation_complexity: medium
+  priority: low
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: distribution_shift
+  failure_category: distribution_anomaly
+  description: Reusable primitive for Distribution Shift.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 7
+  tier_a_scenario_count: 7
+  validator_patterns:
+  - distribution_validator
+  implementation_complexity: medium
+  priority: low
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: schema_change
+  failure_category: data_format
+  description: Reusable primitive for Schema Change.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  - manufacturing
+  - telecommunications
+  scenario_count: 4
+  tier_a_scenario_count: 2
+  validator_patterns:
+  - schema_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: metadata_only
+- primitive_id: rare_high_value_activity
+  failure_category: fraud_anomaly
+  description: Reusable primitive for Rare High Value Activity.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - manufacturing
+  - telecommunications
+  scenario_count: 3
+  tier_a_scenario_count: 3
+  validator_patterns:
+  - distribution_validator
+  implementation_complexity: medium
+  priority: low
+  status: proposed
+  runtime_status: metadata_only
+- primitive_id: defect_rate_spike
+  failure_category: threshold_violation
+  description: Reusable primitive for Defect Rate Spike.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - manufacturing
+  - retail
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: dropped_call_rate_spike
+  failure_category: threshold_violation
+  description: Reusable primitive for Dropped Call Rate Spike.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: temperature_threshold_breach
+  failure_category: threshold_violation
+  description: Reusable primitive for Temperature Threshold Breach.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - logistics
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: settlement_delay
+  failure_category: temporal
+  description: Reusable primitive for Settlement Delay.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - banking
+  - finance
+  - insurance
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: coverage_limit_violation
+  failure_category: policy_violation
+  description: Reusable primitive for Coverage Limit Violation.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - healthcare
+  - insurance
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: metadata_only
+- primitive_id: grade_formula_error
+  failure_category: calculation
+  description: Reusable primitive for Grade Formula Error.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - education
+  - telecommunications
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented
+- primitive_id: inventory_oversell
+  failure_category: capacity
+  description: Reusable primitive for Inventory Oversell.
+  parameters:
+    table: string
+    affected_rate: float
+  domains_using_it:
+  - ecommerce
+  - manufacturing
+  - retail
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  validator_patterns:
+  - scenario_specific_validator
+  implementation_complexity: low
+  priority: low
+  status: existing
+  runtime_status: runtime_implemented

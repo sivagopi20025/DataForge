@@ -6,6 +6,7 @@ from decimal import Decimal
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import person_name, unique_email
 from .constants import (
     CITIES,
     CLAIM_STATUSES,
@@ -38,7 +39,7 @@ class HealthcareGenerator:
         return min(value, maximum) if maximum else value
 
     def _person(self, number: int) -> tuple[str, str]:
-        return FIRST_NAMES[number % len(FIRST_NAMES)], LAST_NAMES[(number * 3) % len(LAST_NAMES)]
+        return person_name(number, "healthcare")
 
     def generate(self) -> Dataset:
         selected = self.selected_tables
@@ -47,9 +48,10 @@ class HealthcareGenerator:
         def need(table: str) -> bool:
             return full or table in selected
 
-        need_visits = full or bool(selected & {"visits", "diagnoses", "procedures", "claims", "payments"})
-        need_patients = full or bool(selected & {"patients", "visits", "diagnoses", "procedures", "claims", "payments"})
-        need_providers = full or bool(selected & {"providers", "visits", "diagnoses", "procedures", "claims", "payments"})
+        need_visits = full or bool(selected & {"visits", "diagnoses", "procedures", "prior_authorizations", "claims", "payments"})
+        need_patients = full or bool(selected & {"patients", "visits", "diagnoses", "procedures", "prior_authorizations", "claims", "payments"})
+        need_providers = full or bool(selected & {"providers", "visits", "diagnoses", "procedures", "prior_authorizations", "claims", "payments"})
+        need_procedures = full or bool(selected & {"procedures", "prior_authorizations"})
         need_claims = full or bool(selected & {"claims", "payments"})
 
         patient_count = min(75000, self._count(0.20, 100))
@@ -72,7 +74,7 @@ class HealthcareGenerator:
                     "gender": genders[i % len(genders)],
                     "dob": dob.isoformat(),
                     "phone": f"555-{i % 1000:03d}-{(i * 29) % 10000:04d}",
-                    "email": f"{first}.{last}.{i}@patient.example.test".lower(),
+                    "email": unique_email(first, last, 1000000 + i, "healthcare.patient"),
                     "city": city,
                     "state": state,
                     "country": "USA",
@@ -119,7 +121,7 @@ class HealthcareGenerator:
                     "severity": SEVERITIES[i % len(SEVERITIES)],
                 })
 
-        if need("procedures"):
+        if need_procedures:
             data["procedures"] = []
             for i, visit in enumerate(data["visits"], 1):
                 code, description = CPT_CODES[i % len(CPT_CODES)]
@@ -130,6 +132,37 @@ class HealthcareGenerator:
                     "cpt_code": code,
                     "procedure_description": description,
                     "procedure_cost": str(cost.quantize(Decimal("0.01"))),
+                })
+
+        if need("prior_authorizations"):
+            data["prior_authorizations"] = []
+            prior_auth_count = min(len(data["procedures"]), max(1, int(self.visit_records * 0.35)))
+            denial_reasons = ("not_medically_necessary", "coverage_inactive", "missing_documentation")
+            for i in range(1, prior_auth_count + 1):
+                procedure = data["procedures"][(i - 1) % len(data["procedures"])]
+                visit = data["visits"][(i - 1) % len(data["visits"])]
+                requested = datetime.fromisoformat(visit["visit_date"]) + timedelta(hours=2 + i % 48)
+                if i % 19 == 0:
+                    status = "Denied"
+                elif i % 13 == 0:
+                    status = "Pending"
+                else:
+                    status = "Approved"
+                approved_at = requested + timedelta(days=1 + i % 4)
+                procedure_cost = Decimal(str(procedure["procedure_cost"]))
+                approved_amount = procedure_cost * Decimal("0.80") if status == "Approved" else Decimal("0.00")
+                data["prior_authorizations"].append({
+                    "prior_authorization_id": 8000000 + i,
+                    "patient_id": visit["patient_id"],
+                    "provider_id": visit["provider_id"],
+                    "procedure_id": procedure["procedure_id"],
+                    "procedure_code": procedure["cpt_code"],
+                    "requested_at": requested.isoformat(),
+                    "approved_at": approved_at.isoformat() if status == "Approved" else "not_applicable",
+                    "authorization_status": status,
+                    "approved_amount": str(approved_amount.quantize(Decimal("0.01"))),
+                    "expiration_date": (approved_at + timedelta(days=30 + i % 150)).date().isoformat() if status == "Approved" else "not_applicable",
+                    "denial_reason": denial_reasons[i % len(denial_reasons)] if status == "Denied" else "not_applicable",
                 })
 
         if need_claims:

@@ -1,0 +1,208 @@
+version: 1.0.0
+purpose: Minimal UX/API metadata for rendering safe scenario configuration controls.
+configurable_controls:
+- records
+- seed
+- failure_plan
+defaults:
+  records: 1000
+  seed: 42
+  overlap_mode: non_overlapping
+scenario_examples:
+- scenario_id: banking_accounts_card_authorization_sequence_gap_04
+  domain: banking
+  primary_table: card_authorizations
+  default_primitive: sequence_gap
+  compatible_primitives:
+  - sequence_gap
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_deposit_account_aggregate_mismatch_06
+  domain: banking
+  primary_table: deposit_accounts
+  default_primitive: aggregate_mismatch
+  compatible_primitives:
+  - aggregate_mismatch
+  - cross_table_mismatch
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_deposit_account_cross_table_mismatch_07
+  domain: banking
+  primary_table: deposit_accounts
+  default_primitive: cross_table_mismatch
+  compatible_primitives:
+  - cross_table_mismatch
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_deposit_account_timestamp_delay_02
+  domain: banking
+  primary_table: deposit_accounts
+  default_primitive: timestamp_delay
+  compatible_primitives:
+  - timestamp_delay
+  - stale_timestamp
+  - timeout_violation
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_deposit_account_timestamp_out_of_order_03
+  domain: banking
+  primary_table: deposit_accounts
+  default_primitive: timestamp_out_of_order
+  compatible_primitives:
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_treasury_transaction_invalid_state_transition_05
+  domain: banking
+  primary_table: treasury_transactions
+  default_primitive: invalid_state_transition
+  compatible_primitives:
+  - invalid_state_transition
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_cards_card_authorization_value_below_threshold_02
+  domain: banking
+  primary_table: card_authorizations
+  default_primitive: value_below_threshold
+  compatible_primitives:
+  - value_below_threshold
+  - capacity_exceeded
+  - negative_numeric_value
+  - value_above_threshold
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_cards_payment_future_timestamp_03
+  domain: banking
+  primary_table: payments
+  default_primitive: future_timestamp
+  compatible_primitives:
+  - future_timestamp
+  - stale_timestamp
+  - timeout_violation
+  - timestamp_delay
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_cards_treasury_position_stale_timestamp_04
+  domain: banking
+  primary_table: treasury_positions
+  default_primitive: stale_timestamp
+  compatible_primitives:
+  - stale_timestamp
+  - timeout_violation
+  - timestamp_delay
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
+- scenario_id: banking_cards_treasury_position_timestamp_delay_05
+  domain: banking
+  primary_table: treasury_positions
+  default_primitive: timestamp_delay
+  compatible_primitives:
+  - timestamp_delay
+  - stale_timestamp
+  - timeout_violation
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
