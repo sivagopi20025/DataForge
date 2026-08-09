@@ -1,0 +1,296 @@
+version: 1.0.0
+purpose: Canonical taxonomy for scaling DataForge scenarios from 50 definitions toward
+  700-800 configuration-driven scenarios.
+domains:
+- banking
+- ecommerce
+- education
+- finance
+- healthcare
+- insurance
+- logistics
+- manufacturing
+- retail
+- telecommunications
+business_processes:
+- account_lifecycle
+- billing
+- claims
+- compliance
+- customer_lifecycle
+- delivery
+- education_outcomes
+- enrollment
+- fulfillment
+- inventory
+- manufacturing_operations
+- network_operations
+- orders
+- payments
+- policy_lifecycle
+- procurement
+- quality
+- reconciliation
+- returns
+- settlement
+- support
+- trading
+- transportation
+- visits
+business_entities:
+- account
+- assignment
+- batch
+- claim
+- customer
+- delivery
+- enrollment
+- invoice
+- ledger_entry
+- machine
+- order
+- payment
+- policy
+- product
+- provider
+- shipment
+- student
+- tower
+- trade
+- transaction
+- transfer
+- visit
+failure_categories:
+- duplication
+- missing_data
+- invalid_value
+- boundary_violation
+- referential_integrity
+- temporal
+- sequence
+- financial
+- aggregate_mismatch
+- status_transition
+- identity_mismatch
+- volume_anomaly
+- geographic
+- availability
+- retry
+- timeout
+- fraud_anomaly
+- capacity
+- policy_violation
+- calculation
+- data_format
+- cross_table_mismatch
+- distribution_anomaly
+- threshold_violation
+- lifecycle_violation
+severity_levels:
+- low
+- medium
+- high
+- critical
+- stress
+realism_levels:
+- basic
+- realistic
+- high
+- stress
+difficulty_levels:
+- easy
+- medium
+- hard
+- expert
+validator_categories:
+- uniqueness
+- not_null
+- schema
+- referential_integrity
+- reconciliation
+- business_rule
+- temporal_sequence
+- statistical
+- streaming_event
+- scenario_specific
+scenario_lifecycle_status:
+- draft
+- candidate
+- specification_only
+- implemented
+- reference_implemented
+- deprecated
+- rejected
+naming_conventions:
+  scenario_id: <domain>_<business_problem_slug>
+  failure_category: lower_snake_case canonical category from failure_categories
+  failure_primitive: lower_snake_case reusable primitive, parameterized by table/column/entity
+  validator_pattern: lower_snake_case reusable validator pattern or scenario_specific
+    for deep reference validators
+domain_business_processes:
+  retail:
+  - customer
+  - catalog
+  - pricing
+  - promotions
+  - order_management
+  - payments
+  - inventory
+  - stores
+  - fulfillment
+  - returns
+  - refunds
+  - suppliers
+  - reconciliation
+  - data_quality_control
+  banking:
+  - accounts
+  - customer_onboarding
+  - kyc
+  - transfers
+  - payments
+  - cards
+  - ledger
+  - settlement
+  - reconciliation
+  - fraud
+  - compliance
+  - loans
+  - fees
+  healthcare:
+  - patient_registration
+  - provider_master
+  - visits
+  - diagnosis
+  - procedures
+  - claims
+  - payments
+  - eligibility
+  - care_coordination
+  - pharmacy
+  - compliance
+  - reconciliation
+  manufacturing:
+  - plant_operations
+  - machine_operations
+  - production_planning
+  - work_orders
+  - quality
+  - maintenance
+  - downtime
+  - inventory
+  - suppliers
+  - capacity
+  - safety
+  - reconciliation
+  telecommunications:
+  - subscriber_lifecycle
+  - plans
+  - voice_usage
+  - sms_usage
+  - data_usage
+  - tower_operations
+  - network_outages
+  - roaming
+  - billing
+  - support
+  - fraud
+  - streaming_operations
+  - reconciliation
+  logistics:
+  - shipment_creation
+  - routing
+  - tracking
+  - gps
+  - warehouse
+  - carrier_management
+  - delivery
+  - cold_chain
+  - customs
+  - exceptions
+  - support
+  - billing
+  - reconciliation
+  finance:
+  - market_data
+  - trading
+  - orders
+  - transactions
+  - settlement
+  - positions
+  - portfolio
+  - pricing
+  - fees
+  - currency
+  - risk
+  - compliance
+  - reconciliation
+  insurance:
+  - customer
+  - policy_lifecycle
+  - underwriting
+  - premium
+  - claims
+  - coverage
+  - deductible
+  - settlement
+  - renewal
+  - fraud
+  - compliance
+  - reconciliation
+  education:
+  - student_lifecycle
+  - admissions
+  - enrollment
+  - courses
+  - attendance
+  - assignments
+  - exams
+  - grades
+  - fees
+  - holds
+  - graduation
+  - online_learning
+  - reconciliation
+  ecommerce:
+  - customer
+  - catalog
+  - search
+  - product_views
+  - cart
+  - checkout
+  - orders
+  - payments
+  - inventory
+  - fulfillment
+  - shipping
+  - returns
+  - refunds
+  - reviews
+  - marketplace_sellers
+  - reconciliation
+validator_patterns:
+- duplicate_key_validator
+- missing_record_validator
+- required_field_validator
+- datatype_validator
+- referential_integrity_validator
+- range_validator
+- threshold_validator
+- temporal_order_validator
+- sla_validator
+- state_transition_validator
+- aggregate_balance_validator
+- cross_table_consistency_validator
+- calculation_validator
+- volume_anomaly_validator
+- sequence_validator
+- policy_validator
+- geographic_validator
+- distribution_validator
+- reconciliation_validator
+- schema_validator
+- availability_validator
+- identity_validator
+- capacity_validator
+- scenario_specific_validator

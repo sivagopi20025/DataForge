@@ -1,0 +1,542 @@
+version: 1.0.0
+validator_patterns:
+- validator_pattern_id: duplicate_key_validator
+  description: Reusable validator pattern for Duplicate Key Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - duplication
+  - retry
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 45
+  tier_a_scenario_count: 14
+  current_implementation: true
+  priority: high
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - reconciliation
+- validator_pattern_id: missing_record_validator
+  description: Reusable validator pattern for Missing Record Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility: []
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 9
+  tier_a_scenario_count: 9
+  current_implementation: true
+  priority: medium
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: required_field_validator
+  description: Reusable validator pattern for Required Field Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility: []
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 0
+  tier_a_scenario_count: 0
+  current_implementation: true
+  priority: low
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: datatype_validator
+  description: Reusable validator pattern for Datatype Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - data_format
+  - invalid_value
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 10
+  tier_a_scenario_count: 7
+  current_implementation: true
+  priority: medium
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: referential_integrity_validator
+  description: Reusable validator pattern for Referential Integrity Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - referential_integrity
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 3
+  tier_a_scenario_count: 3
+  current_implementation: true
+  priority: low
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: range_validator
+  description: Reusable validator pattern for Range Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - boundary_violation
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 7
+  tier_a_scenario_count: 7
+  current_implementation: true
+  priority: low
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: threshold_validator
+  description: Reusable validator pattern for Threshold Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - threshold_violation
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 52
+  tier_a_scenario_count: 52
+  current_implementation: true
+  priority: high
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: temporal_order_validator
+  description: Reusable validator pattern for Temporal Order Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - temporal
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 29
+  tier_a_scenario_count: 29
+  current_implementation: true
+  priority: high
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: sla_validator
+  description: Reusable validator pattern for Sla Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - temporal
+  - timeout
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 104
+  tier_a_scenario_count: 104
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: state_transition_validator
+  description: Reusable validator pattern for State Transition Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - status_transition
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 49
+  tier_a_scenario_count: 49
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: aggregate_balance_validator
+  description: Reusable validator pattern for Aggregate Balance Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - aggregate_mismatch
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 71
+  tier_a_scenario_count: 71
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: cross_table_consistency_validator
+  description: Reusable validator pattern for Cross Table Consistency Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - cross_table_mismatch
+  - missing_data
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 56
+  tier_a_scenario_count: 56
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: calculation_validator
+  description: Reusable validator pattern for Calculation Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - calculation
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 51
+  tier_a_scenario_count: 51
+  current_implementation: false
+  priority: high
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: volume_anomaly_validator
+  description: Reusable validator pattern for Volume Anomaly Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - volume_anomaly
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 43
+  tier_a_scenario_count: 43
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: sequence_validator
+  description: Reusable validator pattern for Sequence Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - duplication
+  - retry
+  - sequence
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 122
+  tier_a_scenario_count: 122
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: policy_validator
+  description: Reusable validator pattern for Policy Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - policy_violation
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 16
+  tier_a_scenario_count: 16
+  current_implementation: false
+  priority: medium
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: geographic_validator
+  description: Reusable validator pattern for Geographic Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - geographic
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 14
+  tier_a_scenario_count: 14
+  current_implementation: false
+  priority: medium
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: distribution_validator
+  description: Reusable validator pattern for Distribution Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - distribution_anomaly
+  - fraud_anomaly
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 10
+  tier_a_scenario_count: 10
+  current_implementation: false
+  priority: medium
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: reconciliation_validator
+  description: Reusable validator pattern for Reconciliation Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility: []
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 4
+  tier_a_scenario_count: 4
+  current_implementation: true
+  priority: low
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: schema_validator
+  description: Reusable validator pattern for Schema Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - data_format
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 4
+  tier_a_scenario_count: 2
+  current_implementation: true
+  priority: medium
+  runtime_status: metadata_only
+  canonical_aliases:
+  - schema
+- validator_pattern_id: availability_validator
+  description: Reusable validator pattern for Availability Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - availability
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 15
+  tier_a_scenario_count: 15
+  current_implementation: false
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: identity_validator
+  description: Reusable validator pattern for Identity Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - identity_mismatch
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 5
+  tier_a_scenario_count: 5
+  current_implementation: false
+  priority: low
+  runtime_status: metadata_only
+  canonical_aliases: []
+- validator_pattern_id: capacity_validator
+  description: Reusable validator pattern for Capacity Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - capacity
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 31
+  tier_a_scenario_count: 31
+  current_implementation: false
+  priority: high
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- validator_pattern_id: scenario_specific_validator
+  description: Reusable validator pattern for Scenario Specific Validator.
+  inputs:
+  - table
+  - columns
+  - expected_count
+  - detected_count
+  primitive_compatibility:
+  - calculation
+  - capacity
+  - policy_violation
+  - temporal
+  - threshold_violation
+  expected_result_fields:
+  - validation_id
+  - status
+  - expected_count
+  - detected_count
+  - evidence
+  - reconciliation_status
+  scenario_count: 10
+  tier_a_scenario_count: 10
+  current_implementation: true
+  priority: high
+  runtime_status: metadata_only
+  canonical_aliases:
+  - business_rule
+  - scenario_specific

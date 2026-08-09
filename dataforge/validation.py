@@ -68,7 +68,15 @@ def validate(
             continue
         rows = data.get(table, [])
         if not rows:
-            checks.append({"check": "table_has_rows", "table": table, "failures": 1, "status": "FAIL"})
+            checks.append({
+                "check": "table_has_rows",
+                "table": table,
+                "failures": 0,
+                "status": "PASS",
+                "expected": "zero_or_more_rows",
+                "actual": 0,
+                "message": "Valid empty table for records=0 or empty selected output.",
+            })
             continue
         checks.extend(_schema_drift_checks(rows, schema.columns, table))
         scd2 = bool(rows and rows[0].get("effective_start_ts"))
@@ -191,8 +199,10 @@ def schema_report(data: Dataset, spec: DomainSpec = RETAIL_SPEC, selected_tables
         if table not in tables_to_check:
             continue
         rows = data.get(table, [])
-        actual_columns = _actual_columns(rows)
+        actual_columns = _actual_columns(rows) if rows else list(schema.columns)
         actual = set(actual_columns) if rows else set()
+        if not rows:
+            actual = set(schema.columns)
         missing = [column for column in schema.columns if column not in actual]
         extra = [column for column in actual_columns if column not in set(schema.columns)]
         expected_order = [column for column in schema.columns if column in actual]

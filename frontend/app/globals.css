@@ -11,7 +11,7 @@
   --card: 0 0% 100%;
   --primary: 238 92% 62%;
   --primary-foreground: 0 0% 100%;
-  --success: 149 72% 40%;
+  --success: 149 72% 24%;
   --warning: 37 92% 50%;
   --danger: 0 78% 57%;
 }
@@ -20,8 +20,15 @@
   box-sizing: border-box;
 }
 
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at top left, rgba(99, 102, 241, 0.16), transparent 34rem),
     linear-gradient(180deg, hsl(var(--background)), #f8fafc 42rem);
@@ -36,6 +43,8 @@ a {
 .timed-hover-popup {
   opacity: 0;
   visibility: hidden;
+  max-width: min(20rem, calc(100vw - 2rem));
+  overflow-wrap: anywhere;
 }
 
 .timed-hover-group:hover .timed-hover-popup,

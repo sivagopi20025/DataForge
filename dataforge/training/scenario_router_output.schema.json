@@ -1,0 +1,119 @@
+{
+  "description": "Structured target emitted by a future scenario-router SLM/LLM.\n\nThe router should select a scenario from the catalog and return normalized\nexecution intent. It must not invent domains, primitives, validators, or\nunsupported execution modes.",
+  "properties": {
+    "confidence": {
+      "description": "Router confidence for this scenario match.",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "domain": {
+      "description": "Canonical DataForge domain name.",
+      "title": "Domain",
+      "type": "string"
+    },
+    "execution_mode": {
+      "default": "batch",
+      "enum": [
+        "batch",
+        "streaming",
+        "specification_only"
+      ],
+      "title": "Execution Mode",
+      "type": "string"
+    },
+    "failure_primitive": {
+      "title": "Failure Primitive",
+      "type": "string"
+    },
+    "failure_rate": {
+      "default": 0.03,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Failure Rate",
+      "type": "number"
+    },
+    "missing_capabilities": {
+      "description": "Required primitives, validators, tables, columns, or parameters not currently executable.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Capabilities",
+      "type": "array"
+    },
+    "output_format": {
+      "default": "csv",
+      "enum": [
+        "csv",
+        "json",
+        "parquet",
+        "database"
+      ],
+      "title": "Output Format",
+      "type": "string"
+    },
+    "rationale": {
+      "description": "Short reason why this scenario matches the user request.",
+      "title": "Rationale",
+      "type": "string"
+    },
+    "realism_profile": {
+      "default": "realistic",
+      "title": "Realism Profile",
+      "type": "string"
+    },
+    "record_count": {
+      "default": 1000,
+      "maximum": 500000,
+      "minimum": 0,
+      "title": "Record Count",
+      "type": "integer"
+    },
+    "scenario_id": {
+      "description": "Canonical DataForge scenario identifier.",
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "selected_columns": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Columns",
+      "type": "array"
+    },
+    "selected_tables": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Tables",
+      "type": "array"
+    },
+    "severity": {
+      "default": "medium",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical",
+        "stress"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "validator_pattern": {
+      "title": "Validator Pattern",
+      "type": "string"
+    }
+  },
+  "required": [
+    "scenario_id",
+    "domain",
+    "confidence",
+    "failure_primitive",
+    "validator_pattern",
+    "rationale"
+  ],
+  "title": "ScenarioRouterOutput",
+  "type": "object"
+}

@@ -54,6 +54,7 @@ class DatasetRunRepository:
             self.db.scalars(
                 select(DatasetRun)
                 .order_by(DatasetRun.created_at.desc())
+                .options(selectinload(DatasetRun.validation_results))
                 .limit(limit)
                 .offset(offset)
             )

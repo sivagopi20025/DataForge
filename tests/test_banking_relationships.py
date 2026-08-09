@@ -7,7 +7,7 @@ def test_banking_relationships_have_no_orphans():
     data = BankingGenerator(150, seed=83).generate()
     report = relationship_report(data, BANKING_SPEC)
     assert report["overall_status"] == "PASS"
-    assert len(report["relationships"]) == 7
+    assert len(report["relationships"]) == 10
 
 
 def test_banking_relationship_validation_catches_payment_without_account():

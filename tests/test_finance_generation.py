@@ -20,3 +20,16 @@ def test_finance_generation_has_expected_tables_and_enterprise_columns():
 def test_finance_generation_includes_tagged_fraud_scenarios():
     data = FinanceGenerator(250, seed=42).generate()
     assert any(row["is_fraud_scenario"] for row in data["transactions"])
+
+
+def test_finance_investment_tables_have_healthy_baseline_invariants():
+    data = FinanceGenerator(250, seed=46).generate()
+    assert data["trades"]
+    assert data["market_data"]
+    assert data["positions"]
+    assert data["risk_events"]
+    assert all(0 <= int(row["risk_score"]) <= 100 for row in data["risk_events"])
+    assert all((row["trade_status"] == "Rejected") == (row["rejection_reason"] != "not_applicable") for row in data["trades"])
+    assert all((row["position_status"] in {"Closed", "Restricted"}) == (row["position_reason"] != "not_applicable") for row in data["positions"])
+    for quote in data["market_data"]:
+        assert float(quote["bid_price"]) <= float(quote["price"]) <= float(quote["ask_price"])

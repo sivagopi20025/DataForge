@@ -7,7 +7,7 @@ def test_healthcare_relationships_have_no_orphans():
     data = HealthcareGenerator(150, seed=32).generate()
     report = relationship_report(data, HEALTHCARE_SPEC)
     assert report["overall_status"] == "PASS"
-    assert len(report["relationships"]) == 8
+    assert len(report["relationships"]) == 11
 
 
 def test_healthcare_relationship_validation_catches_claim_without_visit():

@@ -1,0 +1,2887 @@
+version: 1.1.0
+generated_at_epoch: 1786220938
+remaining_specification_only: 229
+dependency_category_counts:
+  intentionally_deferred_low_value: 19
+  missing_column: 207
+  missing_runtime_capability: 28
+  missing_table: 99
+remaining_table_blockers:
+  banking.ledger_entries: 7
+  ecommerce.product_views: 7
+  education.fee_payments: 7
+  retail.refund_events: 7
+  insurance.claim_documents: 6
+  banking.transactions: 5
+  ecommerce.refunds: 5
+  education.online_activity: 5
+  logistics.routes: 5
+  manufacturing.inventory_items: 5
+  manufacturing.production_orders: 5
+  telecommunications.network_qos_samples: 5
+  telecommunications.subscribers: 5
+  ecommerce.customers: 4
+  finance.portfolios: 4
+  manufacturing.maintenance_records: 4
+  finance.orders: 3
+  logistics.carriers: 3
+  manufacturing.downtime_events: 3
+  ecommerce.products: 2
+  ecommerce.payment_attempts: 2
+remaining_column_blockers:
+  amount: 75
+  event_timestamp: 66
+  reason_code: 50
+  idempotency_key: 35
+  actual_amount: 35
+  expected_amount: 35
+  scenario_status_code: 33
+  risk_score: 30
+  network_qos_sample_id: 10
+  status: 7
+  refund_event_id: 7
+  reconciliation_group_id: 6
+  claim_document_id: 6
+remaining_primitive_blockers:
+  distribution_shift: 7
+  format_corruption: 5
+  identity_mismatch: 5
+  schema_change: 4
+  rare_high_value_activity: 3
+remaining_validator_blockers:
+  distribution_validator: 10
+  identity_validator: 5
+  reconciliation_validator: 4
+  schema_validator: 4
+scenario_classification:
+- scenario_id: banking_accounts_customer_stale_timestamp_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_customer_onboarding_customer_availability_failure_04
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_customer_onboarding_customer_duplicate_retry_02
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_customer_onboarding_customer_retry_burst_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fees_customer_negative_numeric_value_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fraud_transaction_future_timestamp_03
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - transactions
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fraud_transaction_stale_timestamp_04
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - transactions
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fraud_transaction_timestamp_out_of_order_06
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - transactions
+    columns:
+    - event_timestamp
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fraud_transaction_value_above_threshold_01
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - transactions
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_fraud_transaction_value_below_threshold_02
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - transactions
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_kyc_customer_invalid_datatype_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_ledger_ledger_entrie_future_timestamp_02
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_ledger_ledger_entrie_timestamp_delay_04
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - event_timestamp
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_ledger_ledger_entrie_timestamp_out_of_order_05
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_ledger_ledger_entrie_value_below_threshold_01
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_ledger_imbalance
+  domain: banking
+  implementation_readiness: needs_validator_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators:
+    - reconciliation_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_payments_payment_duplicate_retry_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_reconciliation_customer_aggregate_mismatch_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_reconciliation_ledger_entrie_calculation_error_03
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - actual_amount
+    - event_timestamp
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_reconciliation_ledger_entrie_calculation_error_06
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - actual_amount
+    - event_timestamp
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_reconciliation_ledger_entrie_cross_table_mismatch_02
+  domain: banking
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - ledger_entries
+    columns:
+    - event_timestamp
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: banking_settlement_customer_settlement_delay_01
+  domain: banking
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_catalog_product_sequence_gap_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - products
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_catalog_product_timestamp_out_of_order_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - products
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_checkout_cart_item_invalid_state_transition_03
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_customer_customer_aggregate_mismatch_04
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - customers
+    columns:
+    - actual_amount
+    - amount
+    - event_timestamp
+    - expected_amount
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_customer_customer_invalid_state_transition_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - customers
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_customer_customer_sequence_gap_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - customers
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_customer_customer_timestamp_out_of_order_01
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - customers
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_payments_marketplace_customer_duplicate_retry_01
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_payments_payment_attempt_aggregate_mismatch_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - payment_attempts
+    columns:
+    - actual_amount
+    - amount
+    - event_timestamp
+    - expected_amount
+    - reason_code
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_payments_payment_attempt_calculation_error_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - payment_attempts
+    columns:
+    - actual_amount
+    - amount
+    - event_timestamp
+    - expected_amount
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_payments_promotion_duplicate_retry_05
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_product_views_marketplace_customer_calculation_error_01
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_product_views_product_view_capacity_exceeded_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_product_views_product_view_volume_spike_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_product_views_promotion_retry_burst_05
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01
+  domain: ecommerce
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_refunds_refund_aggregate_mismatch_05
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refunds
+    columns:
+    - actual_amount
+    - amount
+    - event_timestamp
+    - expected_amount
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_refunds_refund_invalid_state_transition_04
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refunds
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_refunds_refund_sequence_gap_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refunds
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_refunds_refund_timestamp_delay_01
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refunds
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_refunds_refund_timestamp_out_of_order_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refunds
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_search_product_view_invalid_state_transition_05
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_search_product_view_sequence_gap_04
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_search_product_view_stale_timestamp_01
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_search_product_view_timestamp_delay_02
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: ecommerce_search_product_view_timestamp_out_of_order_03
+  domain: ecommerce
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - product_views
+    columns:
+    - amount
+    - event_timestamp
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_admissions_student_aggregate_mismatch_02
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_admissions_student_calculation_error_04
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_enrollment_class_section_cross_table_mismatch_03
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_exams_examination_result_future_timestamp_01
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_fees_fee_payment_future_timestamp_02
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_fees_fee_payment_stale_timestamp_03
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_grades_enrollment_calculation_error_02
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_grades_enrollment_calculation_error_05
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_graduation_student_aggregate_mismatch_02
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_holds_fee_payment_future_timestamp_01
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_holds_fee_payment_sequence_gap_05
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_holds_fee_payment_stale_timestamp_02
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_holds_fee_payment_timestamp_delay_03
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_holds_fee_payment_timestamp_out_of_order_04
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - fee_payments
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_online_learning_online_activity_duplicate_retry_04
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - online_activity
+    columns:
+    - amount
+    - event_timestamp
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_online_learning_online_activity_duplicate_transaction_05
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - online_activity
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_online_learning_online_activity_retry_burst_03
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - online_activity
+    columns:
+    - amount
+    - event_timestamp
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_online_learning_online_activity_volume_drop_02
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - online_activity
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_online_learning_online_activity_volume_spike_01
+  domain: education
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - online_activity
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_reconciliation_enrollment_calculation_error_03
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_student_lifecycle_student_duplicate_retry_02
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: education_student_lifecycle_student_retry_burst_01
+  domain: education
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_currency_customer_sequence_gap_04
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_orders_order_stale_timestamp_03
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - orders
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_orders_order_timestamp_delay_04
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - orders
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_orders_order_value_below_threshold_01
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - orders
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_portfolio_portfolio_aggregate_mismatch_05
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - portfolios
+    columns:
+    - actual_amount
+    - amount
+    - expected_amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_portfolio_portfolio_cross_table_mismatch_06
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - portfolios
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_portfolio_portfolio_invalid_state_transition_04
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - portfolios
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_portfolio_portfolio_sequence_gap_03
+  domain: finance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - portfolios
+    columns:
+    - amount
+    - reason_code
+    - status
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_positions_customer_invalid_state_transition_04
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_reconciliation_card_calculation_error_06
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_risk_customer_future_timestamp_04
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_settlement_customer_invalid_state_transition_04
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: finance_transactions_customer_invalid_state_transition_01
+  domain: finance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_care_coordination_provider_duplicate_retry_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_care_coordination_provider_policy_violation_06
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_claims_diagnose_invalid_reference_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_compliance_diagnose_aggregate_mismatch_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_compliance_diagnose_calculation_error_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_compliance_diagnose_capacity_exceeded_04
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_diagnosis_diagnose_calculation_error_04
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_diagnosis_diagnose_cross_table_mismatch_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_eligibility_claim_capacity_exceeded_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_eligibility_claim_duplicate_retry_07
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_eligibility_diagnose_retry_burst_06
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_patient_registration_patient_distribution_shift_06
+  domain: healthcare
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_patient_registration_patient_schema_change_07
+  domain: healthcare
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - schema_change
+    validators:
+    - schema_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_patient_registration_patient_timeout_violation_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_patient_registration_payment_format_corruption_05
+  domain: healthcare
+  implementation_readiness: needs_primitive_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - format_corruption
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_patient_registration_prior_authorization_identity_mismatch_04
+  domain: healthcare
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - identity_mismatch
+    validators:
+    - identity_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_payments_diagnose_calculation_error_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_payments_payment_duplicate_retry_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_payments_payment_duplicate_retry_05
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_pharmacy_diagnose_aggregate_mismatch_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_pharmacy_visit_calculation_error_05
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_procedures_diagnose_volume_drop_06
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_procedures_procedure_calculation_error_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_provider_master_patient_duplicate_transaction_04
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_provider_master_provider_duplicate_retry_03
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_provider_master_provider_retry_burst_02
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_reconciliation_patient_aggregate_mismatch_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_visits_patient_calculation_error_07
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_visits_patient_timestamp_delay_01
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: healthcare_visits_visit_aggregate_mismatch_05
+  domain: healthcare
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_compliance_claim_document_volume_spike_06
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_compliance_premium_cross_table_mismatch_03
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_coverage_claim_document_calculation_error_06
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_coverage_premium_invalid_state_transition_03
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_customer_customer_aggregate_mismatch_04
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_customer_customer_capacity_exceeded_07
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_customer_premium_calculation_error_06
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_deductible_customer_invalid_state_transition_01
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_fraud_claim_document_stale_timestamp_02
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_fraud_premium_timestamp_delay_03
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_policy_lifecycle_claim_document_volume_drop_01
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_policy_lifecycle_policie_duplicate_retry_03
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_policy_lifecycle_settlement_retry_burst_02
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_premium_customer_invalid_state_transition_04
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_premium_miscalculation
+  domain: insurance
+  implementation_readiness: needs_validator_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators:
+    - reconciliation_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_reconciliation_customer_aggregate_mismatch_01
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_renewal_policie_cross_table_mismatch_06
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_settlement_claim_document_invalid_state_transition_04
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_settlement_customer_settlement_delay_01
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_underwriting_claim_document_volume_drop_05
+  domain: insurance
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - claim_documents
+    columns:
+    - amount
+    - claim_document_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_underwriting_policie_capacity_exceeded_03
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_underwriting_policie_duplicate_retry_07
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: insurance_underwriting_premium_retry_burst_06
+  domain: insurance
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_carrier_management_carrier_availability_failure_03
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - carriers
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_carrier_management_carrier_duplicate_transaction_02
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - carriers
+    columns:
+    - amount
+    - reconciliation_group_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_carrier_management_carrier_policy_violation_06
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - carriers
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_carrier_management_customer_duplicate_retry_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_cold_chain_shipment_value_above_threshold_03
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_customs_shipment_sequence_gap_03
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_delivery_customer_aggregate_mismatch_04
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_exceptions_customer_invalid_state_transition_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_exceptions_tracking_event_aggregate_mismatch_02
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_exceptions_tracking_event_calculation_error_04
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_gps_gps_event_sequence_gap_03
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_reconciliation_customer_aggregate_mismatch_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_routing_route_geographic_jump_01
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - routes
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_routing_route_geographic_jump_04
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - routes
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_routing_route_sequence_gap_03
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - routes
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_routing_route_sequence_gap_06
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - routes
+    columns:
+    - amount
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_routing_route_timestamp_delay_02
+  domain: logistics
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - routes
+    columns:
+    - amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_shipment_creation_customer_availability_failure_04
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_shipment_creation_shipment_duplicate_retry_02
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_shipment_creation_shipment_retry_burst_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_support_customer_timestamp_delay_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_tracking_customer_geographic_jump_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: logistics_warehouse_customer_sequence_gap_01
+  domain: logistics
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_downtime_downtime_event_capacity_exceeded_03
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - downtime_events
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_downtime_downtime_event_cross_table_mismatch_01
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - downtime_events
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_downtime_downtime_event_volume_spike_04
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - downtime_events
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_inventory_inventory_item_aggregate_mismatch_04
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - inventory_items
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_inventory_inventory_item_capacity_exceeded_01
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - inventory_items
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_inventory_inventory_item_capacity_exceeded_05
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - inventory_items
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_inventory_inventory_item_inventory_oversell_02
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - inventory_items
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_inventory_inventory_item_negative_numeric_value_03
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - inventory_items
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_machine_operations_factorie_format_corruption_04
+  domain: manufacturing
+  implementation_readiness: needs_primitive_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - format_corruption
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_machine_operations_machine_distribution_shift_05
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_machine_operations_machine_identity_mismatch_03
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - identity_mismatch
+    validators:
+    - identity_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_machine_operations_machine_schema_change_06
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - schema_change
+    validators:
+    - schema_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_machine_operations_sensor_reading_rare_high_value_activity_07
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - rare_high_value_activity
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_maintenance_maintenance_record_availability_failure_06
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - maintenance_records
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_maintenance_maintenance_record_duplicate_retry_04
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - maintenance_records
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_maintenance_maintenance_record_duplicate_transaction_05
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - maintenance_records
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_maintenance_maintenance_record_retry_burst_03
+  domain: manufacturing
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - maintenance_records
+    columns:
+    - amount
+    - event_timestamp
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_plant_operations_factorie_distribution_shift_07
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_plant_operations_factorie_format_corruption_06
+  domain: manufacturing
+  implementation_readiness: needs_primitive_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - format_corruption
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_plant_operations_inventory_identity_mismatch_05
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - identity_mismatch
+    validators:
+    - identity_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_production_planning_production_order_distribution_shift_04
+  domain: manufacturing
+  implementation_readiness: needs_schema_primitive_validator
+  dependencies:
+    tables:
+    - production_orders
+    columns:
+    - amount
+    - event_timestamp
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_production_planning_production_order_format_corruption_03
+  domain: manufacturing
+  implementation_readiness: needs_schema_and_primitive
+  dependencies:
+    tables:
+    - production_orders
+    columns:
+    - amount
+    - event_timestamp
+    primitives:
+    - format_corruption
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_production_planning_production_order_identity_mismatch_02
+  domain: manufacturing
+  implementation_readiness: needs_schema_primitive_validator
+  dependencies:
+    tables:
+    - production_orders
+    columns:
+    - amount
+    - event_timestamp
+    primitives:
+    - identity_mismatch
+    validators:
+    - identity_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_production_planning_production_order_rare_high_value_activity_06
+  domain: manufacturing
+  implementation_readiness: needs_schema_primitive_validator
+  dependencies:
+    tables:
+    - production_orders
+    columns:
+    - amount
+    - event_timestamp
+    primitives:
+    - rare_high_value_activity
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_production_planning_production_order_schema_change_05
+  domain: manufacturing
+  implementation_readiness: needs_schema_primitive_validator
+  dependencies:
+    tables:
+    - production_orders
+    columns:
+    - amount
+    - event_timestamp
+    primitives:
+    - schema_change
+    validators:
+    - schema_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: manufacturing_quality_quality_check_distribution_shift_04
+  domain: manufacturing
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_catalog_refund_event_stale_timestamp_03
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_customer_promotion_invalid_state_transition_06
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_data_quality_control_categorie_distribution_shift_04
+  domain: retail
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_fulfillment_refund_event_aggregate_mismatch_04
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_inventory_categorie_aggregate_mismatch_04
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_inventory_inventory_capacity_exceeded_01
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - scenario_status_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_inventory_mismatch
+  domain: retail
+  implementation_readiness: needs_validator_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators:
+    - reconciliation_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_inventory_refund_event_negative_numeric_value_03
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_order_management_promotion_volume_spike_03
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_order_management_refund_event_capacity_exceeded_02
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_payments_payment_duplicate_retry_01
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_promotions_refund_event_timestamp_delay_01
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_reconciliation_categorie_aggregate_mismatch_01
+  domain: retail
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - actual_amount
+    - expected_amount
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_reconciliation_refund_event_aggregate_mismatch_04
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: retail_refunds_refund_event_timestamp_delay_04
+  domain: retail
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - refund_events
+    columns:
+    - reason_code
+    - refund_event_id
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecom_billing_mismatch
+  domain: telecommunications
+  implementation_readiness: needs_validator_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives: []
+    validators:
+    - reconciliation_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_billing_invoice_duplicate_retry_03
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_billing_invoice_retry_burst_02
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_data_usage_network_qos_sample_sequence_gap_03
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - network_qos_samples
+    columns:
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_fraud_billing_account_duplicate_retry_05
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_fraud_billing_account_retry_burst_04
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_network_outages_network_event_format_corruption_02
+  domain: telecommunications
+  implementation_readiness: needs_primitive_implementation
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - format_corruption
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_network_outages_network_event_identity_mismatch_01
+  domain: telecommunications
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - identity_mismatch
+    validators:
+    - identity_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_network_outages_network_event_rare_high_value_activity_05
+  domain: telecommunications
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - rare_high_value_activity
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_network_outages_network_qos_sample_distribution_shift_03
+  domain: telecommunications
+  implementation_readiness: needs_schema_primitive_validator
+  dependencies:
+    tables:
+    - network_qos_samples
+    columns:
+    - network_qos_sample_id
+    - reason_code
+    primitives:
+    - distribution_shift
+    validators:
+    - distribution_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_network_outages_telecom_customer_schema_change_04
+  domain: telecommunications
+  implementation_readiness: needs_primitive_and_validator
+  dependencies:
+    tables: []
+    columns: []
+    primitives:
+    - schema_change
+    validators:
+    - schema_validator
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_plans_network_qos_sample_volume_drop_03
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - network_qos_samples
+    columns:
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_plans_plan_duplicate_retry_05
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_plans_telecom_customer_retry_burst_04
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_roaming_call_detail_record_duplicate_retry_03
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_roaming_call_detail_record_retry_burst_02
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_streaming_operations_network_qos_sample_settlement_delay_04
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - network_qos_samples
+    columns:
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_call_detail_record_grade_formula_error_06
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_subscriber_coverage_limit_violation_05
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - subscribers
+    columns:
+    - amount
+    - event_timestamp
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_subscriber_defect_rate_spike_01
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - subscribers
+    columns:
+    - amount
+    - event_timestamp
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_subscriber_dropped_call_rate_spike_02
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - subscribers
+    columns:
+    - amount
+    - event_timestamp
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_subscriber_settlement_delay_04
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - subscribers
+    columns:
+    - amount
+    - event_timestamp
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_subscriber_lifecycle_subscriber_temperature_threshold_breach_03
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - subscribers
+    columns:
+    - amount
+    - event_timestamp
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_support_call_detail_record_timeout_violation_06
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_support_network_qos_sample_availability_failure_05
+  domain: telecommunications
+  implementation_readiness: needs_table
+  dependencies:
+    tables:
+    - network_qos_samples
+    columns:
+    - network_qos_sample_id
+    - reason_code
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_support_support_ticket_duplicate_retry_03
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_support_support_ticket_retry_burst_02
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - idempotency_key
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false
+- scenario_id: telecommunications_tower_operations_call_detail_record_availability_failure_06
+  domain: telecommunications
+  implementation_readiness: needs_columns
+  dependencies:
+    tables: []
+    columns:
+    - risk_score
+    primitives: []
+    validators: []
+    unsupported_parameters: []
+    custom_logic: false

@@ -1,0 +1,55 @@
+from __future__ import annotations
+
+DATE_COLUMNS = {
+    "marketplace_customers": "registration_date",
+    "sellers": "registration_date",
+    "seller_stores": "launch_date",
+    "product_categories": "created_at",
+    "marketplace_products": "created_at",
+    "product_listings": "created_at",
+    "carts": "created_at",
+    "cart_items": "added_at",
+    "orders": "order_date",
+    "order_items": "created_at",
+    "payments": "payment_date",
+    "shipments": "shipped_at",
+    "returns": "requested_at",
+    "seller_payouts": "created_at",
+    "reviews": "review_date",
+    "promotions": "start_date",
+}
+
+NUMERIC_COLUMNS = {
+    "sellers": "seller_rating",
+    "seller_stores": "store_rating",
+    "marketplace_products": "base_price",
+    "product_listings": "available_quantity",
+    "cart_items": "quantity",
+    "orders": "total_amount",
+    "order_items": "line_total",
+    "payments": "payment_amount",
+    "shipments": "shipping_cost",
+    "returns": "refund_amount",
+    "seller_payouts": "payout_amount",
+    "reviews": "rating",
+    "promotions": "discount_value",
+}
+
+TYPE_MISMATCH_COLUMNS = {
+    "marketplace_customers": "customer_segment",
+    "sellers": "business_type",
+    "seller_stores": "store_category",
+    "product_categories": "category_name",
+    "marketplace_products": "product_type",
+    "product_listings": "fulfillment_type",
+    "carts": "cart_status",
+    "cart_items": "unit_price",
+    "orders": "order_status",
+    "order_items": "item_status",
+    "payments": "payment_status",
+    "shipments": "shipment_status",
+    "returns": "return_status",
+    "seller_payouts": "payout_status",
+    "reviews": "review_status",
+    "promotions": "promotion_type",
+}

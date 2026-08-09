@@ -12,6 +12,14 @@ LOAN_TYPES = ("Home", "Auto", "Personal", "Education")
 LOAN_STATUSES = ("Active", "Closed", "Defaulted")
 PAYMENT_STATUSES = ("Pending", "Paid", "Failed", "Partial")
 FRAUD_SCENARIOS = ("large_transaction", "rapid_transactions", "duplicate_transaction", "cross_country", "suspicious_merchant")
+TRADE_SIDES = ("Buy", "Sell")
+TRADE_STATUSES = ("Executed", "Pending", "Rejected", "Cancelled", "Settled")
+POSITION_STATUSES = ("Open", "Closed", "Restricted")
+MARKET_STATUSES = ("Open", "Closed", "Halted")
+RISK_CATEGORIES = ("Low", "Medium", "High", "Critical")
+RISK_STATUSES = ("Open", "Reviewed", "Closed")
+RISK_REASONS = ("price_volatility", "large_notional", "concentration_limit", "market_halt", "manual_review")
+INSTRUMENT_SYMBOLS = ("AAPL", "MSFT", "GOOGL", "AMZN", "TSLA", "SPY", "QQQ", "BND", "VTI", "NVDA")
 
 CITIES = (
     ("Atlanta", "GA", "USA"),

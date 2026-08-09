@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 from datetime import datetime, timedelta, timezone
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
@@ -12,8 +13,41 @@ from backend.app.core.rate_limit import rate_limiter
 from backend.app.db.base import Base
 from backend.app.db.session import get_db
 from backend.app.main import create_app
-from backend.app.models import DatasetRun, GeneratedFile, User
+from backend.app.models import DatasetRun, GeneratedFile, GenerationJob, User
 from backend.app.services.retention import cleanup_expired_run_history, cleanup_generated_files, cleanup_stored_generated_files
+
+
+def test_production_requires_api_key(monkeypatch):
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.delenv("DATAFORGE_API_KEY", raising=False)
+    get_settings.cache_clear()
+
+    try:
+        with pytest.raises(RuntimeError, match="DATAFORGE_API_KEY is required"):
+            create_app()
+    finally:
+        get_settings.cache_clear()
+
+
+@pytest.mark.parametrize(
+    "cors_origins, error",
+    [
+        ("", "CORS_ORIGINS must include"),
+        ("*", "CORS_ORIGINS cannot include"),
+        ("http://app.example.com", "CORS_ORIGINS must use exact https"),
+    ],
+)
+def test_production_rejects_unsafe_cors_origins(monkeypatch, cors_origins, error):
+    monkeypatch.setenv("APP_ENV", "production")
+    monkeypatch.setenv("DATAFORGE_API_KEY", "secret-test-key")
+    monkeypatch.setenv("CORS_ORIGINS", cors_origins)
+    get_settings.cache_clear()
+
+    try:
+        with pytest.raises(RuntimeError, match=error):
+            create_app()
+    finally:
+        get_settings.cache_clear()
 
 
 def test_api_key_is_required_when_configured(tmp_path, monkeypatch):
@@ -41,6 +75,27 @@ def test_api_key_is_required_when_configured(tmp_path, monkeypatch):
     assert denied.status_code == 401
     assert allowed.status_code == 200
     Base.metadata.drop_all(bind=engine)
+    get_settings.cache_clear()
+
+
+def test_security_headers_are_added(client):
+    response = client.get("/health")
+
+    assert response.status_code == 200
+    assert response.headers["x-content-type-options"] == "nosniff"
+    assert response.headers["x-frame-options"] == "DENY"
+    assert response.headers["referrer-policy"] == "no-referrer"
+    assert "camera=()" in response.headers["permissions-policy"]
+
+
+def test_generate_rejects_records_above_configured_limit(client, monkeypatch):
+    monkeypatch.setenv("MAX_BATCH_RECORDS", "25")
+    get_settings.cache_clear()
+
+    response = client.post("/api/v1/generate", json={"domain": "retail", "records": 26})
+
+    assert response.status_code == 422
+    assert "records must be less than or equal to 25" in response.text
     get_settings.cache_clear()
 
 
@@ -244,6 +299,12 @@ def test_expired_run_history_cleanup_deletes_files_and_run_rows(db_session, tmp_
     )
     db_session.add_all([old_run, new_run])
     db_session.flush()
+    old_job = GenerationJob(
+        run_id=old_run.id,
+        status="completed",
+        request_payload="{}",
+        completed_at=old_run.completed_at,
+    )
     db_session.add_all(
         [
             GeneratedFile(
@@ -270,6 +331,7 @@ def test_expired_run_history_cleanup_deletes_files_and_run_rows(db_session, tmp_
             ),
         ]
     )
+    db_session.add(old_job)
     db_session.commit()
 
     from backend.app.services.storage import LocalStorageService
@@ -289,6 +351,56 @@ def test_expired_run_history_cleanup_deletes_files_and_run_rows(db_session, tmp_
     assert new_file.exists()
     assert db_session.get(DatasetRun, old_run.id) is None
     assert db_session.get(DatasetRun, new_run.id) is not None
+    assert db_session.get(GenerationJob, old_job.id).run_id is None
+
+
+def test_expired_run_history_cleanup_tolerates_unsafe_legacy_file_metadata(db_session, tmp_path):
+    output_dir = tmp_path / "backend-output"
+    output_dir.mkdir()
+    user = User(email="history-legacy-retention@example.test", plan="free")
+    db_session.add(user)
+    db_session.flush()
+    old_run = DatasetRun(
+        user_id=user.id,
+        domain="retail",
+        load_type="bulk",
+        format="json",
+        record_count=1,
+        status="completed",
+        started_at=datetime.now(timezone.utc) - timedelta(days=10),
+        completed_at=datetime.now(timezone.utc) - timedelta(days=10),
+    )
+    db_session.add(old_run)
+    db_session.flush()
+    db_session.add(
+        GeneratedFile(
+            run_id=old_run.id,
+            file_name="customers.json",
+            file_path="customers.json",
+            storage_backend="local",
+            object_key="",
+            file_format="json",
+            size_bytes=10,
+            file_size_mb=0.0,
+            content_type="application/json",
+        )
+    )
+    db_session.commit()
+
+    from backend.app.services.storage import LocalStorageService
+
+    result = cleanup_expired_run_history(
+        db_session,
+        retention_days=7,
+        storage=LocalStorageService(output_dir),
+        dry_run=False,
+        now=datetime.now(timezone.utc),
+    )
+    db_session.commit()
+
+    assert result.scanned == 1
+    assert result.deleted == 0
+    assert db_session.get(DatasetRun, old_run.id) is None
 
 
 def test_runs_api_removes_history_older_than_retention(tmp_path, monkeypatch):

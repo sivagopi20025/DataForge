@@ -34,8 +34,22 @@ class ValidationService:
                 validation_name=str(check.get("name", check.get("check", "validation"))),
                 status=str(check.get("status", "UNKNOWN")),
                 quality_score=quality_score,
-                expected_value=json.dumps(check.get("expected", check.get("expected_type")), default=str),
-                actual_value=json.dumps(check.get("actual", check.get("failures")), default=str),
+                expected_value=json.dumps(
+                    {
+                        "expected": check.get("expected", check.get("expected_type")),
+                        "table": check.get("table"),
+                        "column": check.get("column"),
+                        "message": check.get("message"),
+                    },
+                    default=str,
+                ),
+                actual_value=json.dumps(
+                    {
+                        "actual": check.get("actual", check.get("failures")),
+                        "failures": check.get("failures"),
+                    },
+                    default=str,
+                ),
             )
         self.db.commit()
         logger.info("validation_completed", extra={"run_id": run_id})

@@ -1,0 +1,1264 @@
+version: 1.0.0
+distinction:
+  failure_category: Business/quality class of failure.
+  failure_primitive: Reusable mutation strategy that can be parameterized across domains,
+    tables, and columns.
+categories:
+  duplication:
+    primitives:
+    - duplicate_entity
+    - duplicate_transaction
+    - duplicate_child_record
+    compatible_validators:
+    - uniqueness
+    - reconciliation
+    - scenario_specific
+  missing_data:
+    primitives:
+    - set_required_value_null
+    - remove_entity
+    - remove_child_record
+    compatible_validators:
+    - not_null
+    - row_count
+    - referential_integrity
+  invalid_value:
+    primitives:
+    - replace_with_invalid_enum
+    - replace_with_invalid_format
+    - datatype_mismatch
+    compatible_validators:
+    - accepted_values
+    - data_type
+    - business_rule
+  boundary_violation:
+    primitives:
+    - negative_numeric_value
+    - out_of_range_numeric_value
+    - future_or_invalid_date
+    compatible_validators:
+    - range
+    - date
+    - business_rule
+  referential_integrity:
+    primitives:
+    - break_foreign_key
+    - orphan_child_record
+    - missing_parent_reference
+    compatible_validators:
+    - referential_integrity
+    - scenario_specific
+  temporal:
+    primitives:
+    - late_event
+    - future_timestamp
+    - clock_skew
+    - settlement_delay
+    - invalid_date_sequence
+    compatible_validators:
+    - temporal_sequence
+    - streaming_event
+  sequence:
+    primitives:
+    - out_of_order_events
+    - invalid_status_sequence
+    - invalid_retry_sequence
+    compatible_validators:
+    - temporal_sequence
+    - scenario_specific
+  financial:
+    primitives:
+    - amount_miscalculation
+    - fee_miscalculation
+    - currency_conversion_error
+    - coverage_amount_exceeded
+    compatible_validators:
+    - reconciliation
+    - business_rule
+  aggregate_mismatch:
+    primitives:
+    - parent_child_total_mismatch
+    - ledger_imbalance
+    - inventory_reconciliation_mismatch
+    compatible_validators:
+    - reconciliation
+    - aggregate
+  status_transition:
+    primitives:
+    - invalid_status_transition
+    - stale_status
+    - terminal_state_reversal
+    compatible_validators:
+    - business_rule
+    - lifecycle
+  identity_mismatch:
+    primitives:
+    - duplicate_idempotency_key
+    - identity_reference_swap
+    - cross_customer_reference
+    compatible_validators:
+    - identity
+    - reconciliation
+  volume_anomaly:
+    primitives:
+    - burst_traffic
+    - missing_events
+    - unexpected_volume_spike
+    compatible_validators:
+    - statistical
+    - streaming_event
+  geographic:
+    primitives:
+    - gps_jump
+    - invalid_location_sequence
+    - region_mismatch
+    compatible_validators:
+    - geographic
+    - temporal_sequence
+  availability:
+    primitives:
+    - network_outage
+    - service_unavailable
+    - machine_downtime
+    compatible_validators:
+    - availability
+    - scenario_specific
+  retry:
+    primitives:
+    - duplicate_retry
+    - retry_without_original
+    - retry_timeout
+    compatible_validators:
+    - sequence
+    - idempotency
+  timeout:
+    primitives:
+    - delayed_alert
+    - processing_timeout
+    - late_approval
+    compatible_validators:
+    - temporal_sequence
+    - sla
+  fraud_anomaly:
+    primitives:
+    - suspicious_activity_burst
+    - rare_high_value_activity
+    - fraud_marker_inconsistency
+    compatible_validators:
+    - statistical
+    - business_rule
+  capacity:
+    primitives:
+    - capacity_overflow
+    - inventory_oversell
+    - course_overenrollment
+    compatible_validators:
+    - capacity
+    - business_rule
+  policy_violation:
+    primitives:
+    - eligibility_violation
+    - coverage_limit_violation
+    - registration_hold_violation
+    compatible_validators:
+    - policy
+    - business_rule
+  calculation:
+    primitives:
+    - grade_formula_error
+    - premium_miscalculation
+    - payment_total_miscalculation
+    compatible_validators:
+    - calculation
+    - reconciliation
+  data_format:
+    primitives:
+    - malformed_json
+    - schema_drift
+    - column_rename
+    - column_remove
+    - column_add
+    - datatype_change
+    compatible_validators:
+    - schema
+    - data_type
+  cross_table_mismatch:
+    primitives:
+    - related_table_status_mismatch
+    - parent_child_state_mismatch
+    compatible_validators:
+    - cross_table
+    - scenario_specific
+  distribution_anomaly:
+    primitives:
+    - class_imbalance
+    - outlier_cluster
+    - skew_shift
+    compatible_validators:
+    - statistical
+    - realism
+  threshold_violation:
+    primitives:
+    - temperature_threshold_breach
+    - defect_rate_spike
+    - dropped_call_rate_spike
+    compatible_validators:
+    - threshold
+    - scenario_specific
+  lifecycle_violation:
+    primitives:
+    - invalid_lifecycle_order
+    - missing_lifecycle_step
+    - post_terminal_update
+    compatible_validators:
+    - lifecycle
+    - temporal_sequence
+existing_generic_implementation:
+  module: dataforge.injector.FailureInjector
+  issue_types:
+  - null_values
+  - duplicate_records
+  - datatype_mismatch
+  - invalid_dates
+  - negative_values
+  - foreign_key_break
+  - schema_drift
+  - outliers
+  - missing_records
+  limitations:
+  - Generic primitives are table/column parameterized but not always business-process
+    aware.
+  - Schema drift is package/schema-version oriented and should remain separated from
+    ordinary row mutations.
+existing_reference_implementation:
+  module: dataforge.scenarios.mutations.apply_reference_scenario_mutations
+  scenario_ids:
+  - retail_payment_retry
+  - banking_duplicate_transfer
+  - healthcare_ghost_provider
+  - manufacturing_defect_spike
+  - telecom_tower_congestion
+  - logistics_cold_chain_failure
+  - finance_settlement_delay
+  - insurance_coverage_exceeded
+  - education_grade_calculation_error
+  - ecommerce_inventory_oversell
+  limitations:
+  - Currently selected by explicit reference scenario IDs; future phases should replace
+    branching with primitive registry dispatch.
+primitive_catalog:
+- primitive_id: duplicate_entity
+  category: duplication
+  description: Reusable primitive for Duplicate Entity.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - duplicate_key_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - duplicate_transaction
+- primitive_id: duplicate_event
+  category: duplication
+  description: Reusable primitive for Duplicate Event.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sequence_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: missing_entity
+  category: missing_data
+  description: Reusable primitive for Missing Entity.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - missing_record_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - missing_child_record
+  - remove_entity
+- primitive_id: invalid_reference
+  category: referential_integrity
+  description: Reusable primitive for Invalid Reference.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - referential_integrity_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - break_foreign_key
+  - orphan_child_record
+- primitive_id: orphan_child_record
+  category: referential_integrity
+  description: Reusable primitive for Orphan Child Record.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: invalid_datatype
+  category: invalid_value
+  description: Reusable primitive for Invalid Datatype.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - datatype_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - datatype_mismatch
+- primitive_id: negative_numeric_value
+  category: boundary_violation
+  description: Reusable primitive for Negative Numeric Value.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - range_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases: []
+- primitive_id: value_above_threshold
+  category: threshold_violation
+  description: Reusable primitive for Value Above Threshold.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - threshold_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - defect_rate_spike
+  - dropped_call_rate_spike
+  - out_of_range_numeric_value
+  - temperature_threshold_breach
+- primitive_id: value_below_threshold
+  category: threshold_violation
+  description: Reusable primitive for Value Below Threshold.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - threshold_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: future_timestamp
+  category: temporal
+  description: Reusable primitive for Future Timestamp.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - temporal_order_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - future_or_invalid_date
+- primitive_id: stale_timestamp
+  category: temporal
+  description: Reusable primitive for Stale Timestamp.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sla_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: timestamp_delay
+  category: temporal
+  description: Reusable primitive for Timestamp Delay.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sla_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - settlement_delay
+- primitive_id: timestamp_out_of_order
+  category: sequence
+  description: Reusable primitive for Timestamp Out Of Order.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sequence_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: sequence_gap
+  category: sequence
+  description: Reusable primitive for Sequence Gap.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sequence_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: invalid_state_transition
+  category: status_transition
+  description: Reusable primitive for Invalid State Transition.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - state_transition_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: aggregate_mismatch
+  category: aggregate_mismatch
+  description: Reusable primitive for Aggregate Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - aggregate_balance_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: cross_table_mismatch
+  category: cross_table_mismatch
+  description: Reusable primitive for Cross Table Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - cross_table_consistency_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: calculation_error
+  category: calculation
+  description: Reusable primitive for Calculation Error.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - calculation_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - grade_formula_error
+- primitive_id: capacity_exceeded
+  category: capacity
+  description: Reusable primitive for Capacity Exceeded.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - capacity_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: runtime_implemented
+  canonical_aliases:
+  - inventory_oversell
+- primitive_id: volume_spike
+  category: volume_anomaly
+  description: Reusable primitive for Volume Spike.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - volume_anomaly_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: volume_drop
+  category: volume_anomaly
+  description: Reusable primitive for Volume Drop.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - volume_anomaly_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: retry_burst
+  category: retry
+  description: Reusable primitive for Retry Burst.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sequence_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: duplicate_retry
+  category: retry
+  description: Reusable primitive for Duplicate Retry.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - duplicate_key_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: duplicate_transaction
+  category: duplication
+  description: Reusable primitive for Duplicate Transaction.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - duplicate_key_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: availability_failure
+  category: availability
+  description: Reusable primitive for Availability Failure.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - availability_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: timeout_violation
+  category: timeout
+  description: Reusable primitive for Timeout Violation.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - sla_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: geographic_jump
+  category: geographic
+  description: Reusable primitive for Geographic Jump.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - geographic_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: policy_violation
+  category: policy_violation
+  description: Reusable primitive for Policy Violation.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - policy_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: high
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases:
+  - coverage_limit_violation
+- primitive_id: identity_mismatch
+  category: identity_mismatch
+  description: Reusable primitive for Identity Mismatch.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - identity_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: format_corruption
+  category: data_format
+  description: Reusable primitive for Format Corruption.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - datatype_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: distribution_shift
+  category: distribution_anomaly
+  description: Reusable primitive for Distribution Shift.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - distribution_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: schema_change
+  category: data_format
+  description: Reusable primitive for Schema Change.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - schema_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: rare_high_value_activity
+  category: fraud_anomaly
+  description: Reusable primitive for Rare High Value Activity.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - distribution_validator
+  current_implementation_exists: false
+  current_implementation_mapping: null
+  implementation_priority: medium
+  status: proposed
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: defect_rate_spike
+  category: threshold_violation
+  description: Reusable primitive for Defect Rate Spike.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: dropped_call_rate_spike
+  category: threshold_violation
+  description: Reusable primitive for Dropped Call Rate Spike.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: temperature_threshold_breach
+  category: threshold_violation
+  description: Reusable primitive for Temperature Threshold Breach.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: settlement_delay
+  category: temporal
+  description: Reusable primitive for Settlement Delay.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: coverage_limit_violation
+  category: policy_violation
+  description: Reusable primitive for Coverage Limit Violation.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: grade_formula_error
+  category: calculation
+  description: Reusable primitive for Grade Formula Error.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []
+- primitive_id: inventory_oversell
+  category: capacity
+  description: Reusable primitive for Inventory Oversell.
+  parameters:
+    table: string
+    affected_rate: float
+    selector: string
+  supported_column_types:
+  - string
+  - number
+  - date
+  - timestamp
+  supported_relationship_types:
+  - same-table
+  - parent-child
+  - foreign-key
+  - event-stream
+  compatible_validator_patterns:
+  - scenario_specific_validator
+  current_implementation_exists: true
+  current_implementation_mapping: existing runtime primitive
+  implementation_priority: medium
+  status: existing
+  runtime_status: metadata_only
+  canonical_aliases: []

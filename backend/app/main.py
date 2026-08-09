@@ -20,6 +20,15 @@ logger = logging.getLogger(__name__)
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    if settings.app_env.lower() == "production":
+        if not settings.api_key:
+            raise RuntimeError("DATAFORGE_API_KEY is required when APP_ENV=production")
+        if not settings.cors_origins:
+            raise RuntimeError("CORS_ORIGINS must include at least one exact https:// origin when APP_ENV=production")
+        if "*" in settings.cors_origins:
+            raise RuntimeError("CORS_ORIGINS cannot include '*' when APP_ENV=production")
+        if not all(origin.startswith("https://") for origin in settings.cors_origins):
+            raise RuntimeError("CORS_ORIGINS must use exact https:// origins when APP_ENV=production")
     configure_logging(settings.log_level)
     app = FastAPI(title="DataForge Backend", version="0.6.0")
     app.state.SessionLocal = SessionLocal
@@ -40,6 +49,12 @@ def create_app() -> FastAPI:
             response = await call_next(request)
             status_code = response.status_code
             response.headers["x-request-id"] = request_id
+            response.headers.setdefault("X-Content-Type-Options", "nosniff")
+            response.headers.setdefault("X-Frame-Options", "DENY")
+            response.headers.setdefault("Referrer-Policy", "no-referrer")
+            response.headers.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+            if request.url.scheme == "https" or get_settings().app_env.lower() == "production":
+                response.headers.setdefault("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
             return response
         finally:
             duration_ms = round((time.perf_counter() - started) * 1000, 3)
@@ -58,8 +73,14 @@ def create_app() -> FastAPI:
                     AnalyticsAggregator(db).record_api_request()
                 finally:
                     db.close()
-            except Exception:
-                logger.exception("analytics_aggregation_failed", extra={"request_id": request_id})
+            except Exception as exc:
+                logger.warning(
+                    "analytics_aggregation_skipped",
+                    extra={
+                        "request_id": request_id,
+                        "reason": exc.__class__.__name__,
+                    },
+                )
 
     @app.exception_handler(ValueError)
     async def value_error_handler(_: Request, exc: ValueError) -> JSONResponse:

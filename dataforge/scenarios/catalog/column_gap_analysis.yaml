@@ -1,0 +1,18 @@
+version: 1.3.0
+column_blockers:
+  amount: 75
+  reason_code: 70
+  event_timestamp: 66
+  idempotency_key: 42
+  actual_amount: 37
+  expected_amount: 37
+  scenario_status_code: 34
+  risk_score: 34
+  card_authorization_id: 12
+  network_qos_sample_id: 10
+  exception_alert_id: 8
+  status: 7
+  refund_event_id: 7
+  reconciliation_group_id: 6
+  claim_document_id: 6
+remaining_specification_only: 238

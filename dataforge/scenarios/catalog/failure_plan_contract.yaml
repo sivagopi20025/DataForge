@@ -1,0 +1,24 @@
+version: 1.0.0
+purpose: UI/API contract for deterministic scenario failure-plan configuration.
+fields:
+  scenario_id: required string
+  seed: integer >= 0
+  overlap_mode:
+  - non_overlapping
+  - allow_overlap
+  failures:
+  - primitive: runtime primitive id compatible with the scenario
+    mode:
+    - percentage
+    - exact_count
+    value: 0 < percentage <= 1 or exact count >= 1
+    table: optional target table override
+    column: optional target column override
+    seed_offset: integer >= 0
+validation_rules:
+- scenario_id must match the selected scenario
+- primitive must be runtime implemented and compatible with the scenario failure category
+- percentage values must be between 0 and 1
+- exact counts must be at least 1
+- non_overlapping mode must avoid selecting the same target row for multiple failures
+  when possible

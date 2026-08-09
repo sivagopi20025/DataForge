@@ -1,0 +1,22 @@
+version: 1.0.0
+purpose: Mutation ground-truth contract used to reconcile selected, mutated, and independently
+  detected scenario failures.
+fields:
+  scenario_id: string
+  primitive: string
+  table: string or null
+  column: string or null
+  expected_count: integer >= 0
+  selected_count: integer >= 0
+  actual_mutated_count: integer >= 0
+  affected_entities: list of deterministic target locators
+  seed: integer >= 0
+  reconciliation_status:
+  - PASS
+  - PARTIAL
+  - FAIL
+invariants:
+- selected_count should equal actual_mutated_count unless a primitive reports skipped
+  ineligible targets
+- detected_count is owned by validator evidence, not primitive metadata
+- clean baseline validation must pass before mutation is trusted

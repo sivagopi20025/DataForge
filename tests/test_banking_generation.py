@@ -21,3 +21,5 @@ def test_banking_generation_includes_reconciliation_and_fraud_tags():
     data = BankingGenerator(300, seed=82).generate()
     assert any(row["is_fraud_scenario"] for row in data["payments"])
     assert any(row["is_reconciliation_scenario"] for row in data["payments"] + data["transfers"])
+    assert data["card_authorizations"]
+    assert {row["authorization_status"] for row in data["card_authorizations"]} <= {"Requested", "Approved", "Declined", "Captured", "Expired", "Reversed"}

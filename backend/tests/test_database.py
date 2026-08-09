@@ -13,6 +13,8 @@ def test_database_metadata_contains_required_tables(db_session):
         "issue_manifests",
         "validation_results",
         "admin_metrics",
+        "stream_sessions",
+        "stream_events",
     }
     assert expected <= set(inspector.get_table_names())
     assert expected <= set(Base.metadata.tables)

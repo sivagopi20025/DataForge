@@ -6,6 +6,7 @@ from decimal import Decimal
 
 from ...audit import enrich_dataset
 from ...model import Dataset
+from ...synthetic_values import person_name, unique_email
 from .schemas import RETAIL_SPEC
 
 
@@ -30,7 +31,7 @@ class RetailGenerator:
         return min(value, maximum) if maximum else value
 
     def _person(self, number: int) -> tuple[str, str]:
-        return FIRST_NAMES[number % len(FIRST_NAMES)], LAST_NAMES[(number * 3) % len(LAST_NAMES)]
+        return person_name(number, "retail")
 
     def generate(self) -> Dataset:
         counts = {
@@ -61,7 +62,8 @@ class RetailGenerator:
         data["customers"] = []
         for i in range(1, counts["customers"] + 1):
             first, last = self._person(i)
-            data["customers"].append({"customer_id": 100000 + i, "first_name": first, "last_name": last, "email": f"{first}.{last}.{i}@example.test".lower(), "phone": f"555-{i % 1000:03d}-{(i * 17) % 10000:04d}", "join_date": str(self.today - timedelta(days=i % 1800)), "loyalty_level": ("BRONZE", "SILVER", "GOLD", "PLATINUM")[i % 4]})
+            customer_id = 100000 + i
+            data["customers"].append({"customer_id": customer_id, "first_name": first, "last_name": last, "email": unique_email(first, last, customer_id, "retail.customer"), "phone": f"555-{i % 1000:03d}-{(i * 17) % 10000:04d}", "join_date": str(self.today - timedelta(days=i % 1800)), "loyalty_level": ("BRONZE", "SILVER", "GOLD", "PLATINUM")[i % 4]})
         data["products"] = []
         for i in range(1, counts["products"] + 1):
             cost = Decimal(self.rng.randrange(100, 20000)) / 100

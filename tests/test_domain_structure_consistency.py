@@ -13,6 +13,17 @@ def test_all_domains_have_standard_folder_structure():
         "fixtures.py",
         "constants.py",
     }
-    for domain in ("retail", "logistics", "healthcare", "finance", "insurance", "banking"):
+    for domain in (
+        "retail",
+        "logistics",
+        "healthcare",
+        "finance",
+        "insurance",
+        "banking",
+        "manufacturing",
+        "telecommunications",
+        "education",
+        "ecommerce",
+    ):
         files = {path.name for path in (root / domain).glob("*.py")}
         assert expected <= files
