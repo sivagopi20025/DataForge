@@ -319,8 +319,8 @@ def validate_expanded_scenario_library() -> list[str]:
     existing_ids = {scenario.scenario_id for scenario in all_scenarios()}
     if not existing_ids <= active_ids:
         errors.append(f"Expanded library missing existing scenario IDs: {sorted(existing_ids - active_ids)}")
-    if not (700 <= len(active) <= 800):
-        errors.append(f"Expanded active scenario count {len(active)} outside target range 700-800")
+    if not (700 <= len(active) <= 850):
+        errors.append(f"Expanded active scenario count {len(active)} outside target range 700-850")
     return errors
 
 

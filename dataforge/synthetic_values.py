@@ -91,12 +91,13 @@ def full_name(index: int, namespace: str = "default") -> str:
     return f"{first} {last}"
 
 
-def business_name(index: int, namespace: str = "business", suffix: str | None = None) -> str:
+def business_name(index: int, namespace: str = "business", suffix: str | None = None, *, include_index: bool = True) -> str:
     base = max(0, index - 1) + _namespace_offset(namespace)
     prefix = COMPANY_PREFIXES[(base * 19 + 5) % len(COMPANY_PREFIXES)]
     middle = LAST_NAMES[(base * 53 + 11) % len(LAST_NAMES)]
     ending = suffix or COMPANY_SUFFIXES[(base * 29 + 7) % len(COMPANY_SUFFIXES)]
-    return f"{prefix} {middle} {ending} {index:05d}"
+    name = f"{prefix} {middle} {ending}"
+    return f"{name} {index:05d}" if include_index else name
 
 
 def unique_email(first_name: str, last_name: str, entity_id: int | str, namespace: str = "dataforge") -> str:

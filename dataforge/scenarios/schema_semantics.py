@@ -275,7 +275,7 @@ class ColumnSemanticResolver:
             resolution = self.resolve(domain, table_value, normalized["id_column"])
             if resolution.resolved and resolution.semantic_role in {"entity_id", "parent_id"}:
                 normalized["id_column"] = resolution.resolved_column
-            elif normalized["id_column"] not in schema.columns:
+            elif normalized["id_column"] not in schema.columns or resolution.semantic_role not in {"entity_id", "parent_id"}:
                 normalized["id_column"] = schema.primary_key
         for key in ("column", "status_column", "timestamp_column", "start_timestamp_column", "end_timestamp_column", "group_key"):
             if isinstance(normalized.get(key), str):

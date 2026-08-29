@@ -58,14 +58,14 @@ def test_generic_executor_is_seed_deterministic_and_seed_variable() -> None:
     assert first.primitive_result["affected_entity_ids"] != third.primitive_result["affected_entity_ids"]
 
 
-def test_runtime_capable_subset_is_honest_and_not_forced_to_all_760() -> None:
+def test_runtime_capable_subset_is_honest_and_not_forced_to_all_810() -> None:
     items = expanded_scenario_items()
     executable = [item for item in items if item.execution_status == "executable"]
     custom = [item for item in items if item.execution_status == "custom_reference"]
     specification_only = [item for item in items if item.execution_status == "specification_only"]
-    assert len(items) == 760
-    assert len(executable) == 521
-    assert len(executable) + len(custom) == 531
+    assert len(items) == 810
+    assert len(executable) == 613
+    assert len(executable) + len(custom) == 623
     assert len(custom) == 10
     assert specification_only
 
@@ -109,7 +109,7 @@ def test_all_batch_2_promoted_scenarios_execute_end_to_end() -> None:
         for item in expanded_scenario_items()
         if item.execution_status == "executable" and item.failure_primitive == "cross_table_mismatch"
     ]
-    assert len(scenarios) == 49
+    assert len(scenarios) == 53
     assert len({item.domain for item in scenarios}) >= 8
     for scenario in scenarios:
         result = execute_generic_scenario(scenario, records=80, seed=207)
@@ -134,7 +134,7 @@ def test_all_batch_3_promoted_scenarios_execute_end_to_end() -> None:
         for item in expanded_scenario_items()
         if item.execution_status == "executable" and item.failure_primitive in batch_3_primitives and item.validator_pattern in {"state_transition_validator", "sla_validator", "volume_anomaly_validator"}
     ]
-    assert len(scenarios) == 147
+    assert len(scenarios) == 166
     assert len({item.domain for item in scenarios}) == 10
     for scenario in scenarios:
         result = execute_generic_scenario(scenario, records=80, seed=307)
@@ -157,7 +157,7 @@ def test_all_batch_4_promoted_scenarios_execute_end_to_end() -> None:
         for item in expanded_scenario_items()
         if item.execution_status == "executable" and item.failure_primitive in batch_4_primitives and item.validator_pattern in {"threshold_validator", "policy_validator", "availability_validator", "geographic_validator"}
     ]
-    assert len(scenarios) == 46
+    assert len(scenarios) == 51
     assert len({item.domain for item in scenarios}) >= 9
     for scenario in scenarios:
         result = execute_generic_scenario(scenario, records=80, seed=407)

@@ -1,83 +1,70 @@
-version: 1.5.0
-total_active_scenarios: 760
+version: 1.6.0
+total_active_scenarios: 810
 total_rejected_scenarios: 36
 execution_status_counts:
   custom_reference: 10
-  executable: 521
-  specification_only: 229
-runtime_capable: 531
-generic_executable: 521
+  executable: 613
+  specification_only: 187
+runtime_capable: 623
+generic_executable: 613
 custom_reference: 10
-specification_only: 229
+specification_only: 187
 count_by_domain:
-  banking: 80
-  ecommerce: 80
-  education: 65
-  finance: 80
-  healthcare: 80
-  insurance: 75
-  logistics: 75
-  manufacturing: 75
-  retail: 75
-  telecommunications: 75
+  banking: 85
+  ecommerce: 85
+  education: 70
+  finance: 85
+  healthcare: 85
+  insurance: 80
+  logistics: 80
+  manufacturing: 80
+  retail: 80
+  telecommunications: 80
 runtime_capable_by_domain:
-  banking: 58
-  ecommerce: 53
-  education: 43
-  finance: 67
-  healthcare: 50
-  insurance: 52
-  logistics: 52
+  banking: 66
+  ecommerce: 58
+  education: 51
+  finance: 73
+  healthcare: 72
+  insurance: 66
+  logistics: 64
   manufacturing: 49
-  retail: 60
-  telecommunications: 47
+  retail: 64
+  telecommunications: 60
 specification_only_by_domain:
-  banking: 22
+  banking: 19
   ecommerce: 27
-  education: 22
-  finance: 13
-  healthcare: 30
-  insurance: 23
-  logistics: 23
-  manufacturing: 26
-  retail: 15
-  telecommunications: 28
+  education: 19
+  finance: 12
+  healthcare: 13
+  insurance: 14
+  logistics: 16
+  manufacturing: 31
+  retail: 16
+  telecommunications: 20
 implementation_readiness_counts:
-  needs_columns: 108
+  needs_columns: 16
+  needs_custom_logic: 50
   needs_primitive_and_validator: 14
   needs_primitive_implementation: 4
   needs_schema_and_primitive: 1
   needs_schema_primitive_validator: 5
   needs_table: 93
   needs_validator_implementation: 14
-  ready_now: 521
-batch_9_summary:
-  purpose: Scenario Library V1 quality audit plus selective Manufacturing-native column
-    depth.
-  runtime_capable_before: 522
-  runtime_capable_after: 531
-  newly_executable: 9
-  newly_executable_by_domain:
-    manufacturing: 9
-  newly_executable_by_table:
-    production_lines: 1
-    work_orders: 2
-    quality_checks: 4
-    factories: 2
-  newly_executable_by_primitive:
-    retry_burst: 3
-    capacity_exceeded: 1
-    missing_entity: 1
-    aggregate_mismatch: 1
-    calculation_error: 1
-    duplicate_entity: 2
-  newly_executable_scenario_ids:
-  - manufacturing_capacity_production_line_retry_burst_06
-  - manufacturing_downtime_work_order_retry_burst_06
-  - manufacturing_inventory_work_order_inventory_oversell_06
-  - manufacturing_quality_quality_check_missing_child_record_03
-  - manufacturing_reconciliation_factorie_aggregate_mismatch_01
-  - manufacturing_suppliers_quality_check_calculation_error_01
-  - manufacturing_suppliers_quality_check_duplicate_retry_06
-  - manufacturing_suppliers_quality_check_retry_burst_05
-  - manufacturing_work_orders_factorie_duplicate_retry_04
+  ready_now: 613
+high_impact_candidate_summary:
+  added_scenarios: 50
+  added_per_domain:
+    banking: 5
+    ecommerce: 5
+    education: 5
+    finance: 5
+    healthcare: 5
+    insurance: 5
+    logistics: 5
+    manufacturing: 5
+    retail: 5
+    telecommunications: 5
+  execution_status: specification_only
+  reason: Require scenario-specific chained/concurrency/business-event mutation and
+    validator logic before runtime promotion.

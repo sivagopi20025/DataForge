@@ -3,11 +3,11 @@ purpose: Rank blocked scenario capabilities by reusable execution leverage.
 leverage_score_formula: total_scenarios + tier_a_scenarios*3 + domains_reused*5 +
   business_processes_reused*2 - implementation_complexity*3
 baseline_counts:
-  total_registered: 760
-  executable: 521
+  total_registered: 810
+  executable: 613
   custom_reference: 10
-  runtime_capable: 531
-  specification_only: 229
+  runtime_capable: 623
+  specification_only: 187
   rejected: 36
 after_batch_1_counts:
   runtime_capable: 151
@@ -663,9 +663,9 @@ rankings:
     - ecommerce_product_views_product_view_capacity_exceeded_02
     - ecommerce_product_views_product_view_volume_spike_03
   - capability: actual_amount
-    total_blocked_scenarios: 35
+    total_blocked_scenarios: 23
     tier_a_scenarios: 16
-    tier_b_scenarios: 19
+    tier_b_scenarios: 7
     tier_c_scenarios: 0
     domains_affected:
     - banking
@@ -681,21 +681,18 @@ rankings:
     - compliance
     - customer
     - delivery
-    - diagnosis
     - exceptions
     - fulfillment
-    - grades
     - graduation
     - inventory
     - payments
     - pharmacy
     - portfolio
-    - product_views
     - reconciliation
     - refunds
     - visits
     implementation_complexity: 2
-    leverage_score: 151
+    leverage_score: 133
     example_scenarios:
     - banking_reconciliation_customer_aggregate_mismatch_01
     - banking_reconciliation_ledger_entrie_calculation_error_03
@@ -704,13 +701,13 @@ rankings:
     - ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01
     - ecommerce_payments_payment_attempt_aggregate_mismatch_02
     - ecommerce_payments_payment_attempt_calculation_error_03
-    - ecommerce_product_views_marketplace_customer_calculation_error_01
     - ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01
     - ecommerce_refunds_refund_aggregate_mismatch_05
+    - education_admissions_student_aggregate_mismatch_02
   - capability: expected_amount
-    total_blocked_scenarios: 35
+    total_blocked_scenarios: 23
     tier_a_scenarios: 16
-    tier_b_scenarios: 19
+    tier_b_scenarios: 7
     tier_c_scenarios: 0
     domains_affected:
     - banking
@@ -726,21 +723,18 @@ rankings:
     - compliance
     - customer
     - delivery
-    - diagnosis
     - exceptions
     - fulfillment
-    - grades
     - graduation
     - inventory
     - payments
     - pharmacy
     - portfolio
-    - product_views
     - reconciliation
     - refunds
     - visits
     implementation_complexity: 2
-    leverage_score: 151
+    leverage_score: 133
     example_scenarios:
     - banking_reconciliation_customer_aggregate_mismatch_01
     - banking_reconciliation_ledger_entrie_calculation_error_03
@@ -749,114 +743,9 @@ rankings:
     - ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01
     - ecommerce_payments_payment_attempt_aggregate_mismatch_02
     - ecommerce_payments_payment_attempt_calculation_error_03
-    - ecommerce_product_views_marketplace_customer_calculation_error_01
     - ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01
     - ecommerce_refunds_refund_aggregate_mismatch_05
-  - capability: scenario_status_code
-    total_blocked_scenarios: 33
-    tier_a_scenarios: 8
-    tier_b_scenarios: 25
-    tier_c_scenarios: 0
-    domains_affected:
-    - banking
-    - education
-    - finance
-    - healthcare
-    - insurance
-    - logistics
-    - retail
-    business_processes_affected:
-    - accounts
-    - carrier_management
-    - compliance
-    - currency
-    - customer
-    - customer_onboarding
-    - deductible
-    - delivery
-    - exams
-    - exceptions
-    - fees
-    - inventory
-    - kyc
-    - ledger
-    - patient_registration
-    - positions
-    - premium
-    - provider_master
-    - reconciliation
-    - risk
-    - settlement
-    - shipment_creation
-    - support
-    - tracking
-    - transactions
-    - visits
-    - warehouse
-    implementation_complexity: 2
-    leverage_score: 140
-    example_scenarios:
-    - banking_accounts_customer_stale_timestamp_01
-    - banking_customer_onboarding_customer_availability_failure_04
-    - banking_fees_customer_negative_numeric_value_01
-    - banking_kyc_customer_invalid_datatype_01
-    - banking_ledger_ledger_entrie_timestamp_delay_04
-    - banking_reconciliation_customer_aggregate_mismatch_01
-    - banking_settlement_customer_settlement_delay_01
-    - education_exams_examination_result_future_timestamp_01
-    - finance_currency_customer_sequence_gap_04
-    - finance_positions_customer_invalid_state_transition_04
-  - capability: risk_score
-    total_blocked_scenarios: 30
-    tier_a_scenarios: 10
-    tier_b_scenarios: 20
-    tier_c_scenarios: 0
-    domains_affected:
-    - banking
-    - ecommerce
-    - education
-    - healthcare
-    - insurance
-    - logistics
-    - retail
-    - telecommunications
-    business_processes_affected:
-    - care_coordination
-    - checkout
-    - claims
-    - cold_chain
-    - compliance
-    - coverage
-    - customer
-    - customs
-    - diagnosis
-    - eligibility
-    - enrollment
-    - fraud
-    - gps
-    - order_management
-    - payments
-    - pharmacy
-    - procedures
-    - renewal
-    - routing
-    - subscriber_lifecycle
-    - support
-    - tower_operations
-    - underwriting
-    implementation_complexity: 2
-    leverage_score: 140
-    example_scenarios:
-    - banking_fraud_transaction_timestamp_out_of_order_06
-    - ecommerce_checkout_cart_item_invalid_state_transition_03
-    - education_enrollment_class_section_cross_table_mismatch_03
-    - healthcare_care_coordination_provider_policy_violation_06
-    - healthcare_claims_diagnose_invalid_reference_03
-    - healthcare_compliance_diagnose_calculation_error_03
-    - healthcare_diagnosis_diagnose_cross_table_mismatch_03
-    - healthcare_eligibility_claim_capacity_exceeded_03
-    - healthcare_eligibility_diagnose_retry_burst_06
-    - healthcare_payments_diagnose_calculation_error_03
+    - education_admissions_student_aggregate_mismatch_02
   - capability: event_timestamp
     total_blocked_scenarios: 66
     tier_a_scenarios: 0
@@ -949,51 +838,29 @@ rankings:
     - ecommerce_payments_payment_attempt_calculation_error_03
     - ecommerce_product_views_product_view_capacity_exceeded_02
     - ecommerce_product_views_product_view_volume_spike_03
-  - capability: idempotency_key
-    total_blocked_scenarios: 35
-    tier_a_scenarios: 0
-    tier_b_scenarios: 35
+  - capability: scenario_status_code
+    total_blocked_scenarios: 6
+    tier_a_scenarios: 5
+    tier_b_scenarios: 1
     tier_c_scenarios: 0
     domains_affected:
     - banking
-    - ecommerce
-    - education
     - healthcare
     - insurance
     - logistics
-    - retail
-    - telecommunications
     business_processes_affected:
-    - billing
-    - care_coordination
-    - carrier_management
-    - customer_onboarding
-    - eligibility
-    - fraud
-    - online_learning
-    - payments
-    - plans
-    - policy_lifecycle
-    - product_views
-    - provider_master
-    - roaming
-    - shipment_creation
-    - student_lifecycle
-    - support
-    - underwriting
+    - delivery
+    - ledger
+    - reconciliation
     implementation_complexity: 2
-    leverage_score: 103
+    leverage_score: 41
     example_scenarios:
-    - banking_customer_onboarding_customer_duplicate_retry_02
-    - banking_customer_onboarding_customer_retry_burst_01
-    - banking_payments_payment_duplicate_retry_01
-    - ecommerce_payments_marketplace_customer_duplicate_retry_01
-    - ecommerce_payments_promotion_duplicate_retry_05
-    - ecommerce_product_views_promotion_retry_burst_05
-    - education_online_learning_online_activity_duplicate_retry_04
-    - education_online_learning_online_activity_retry_burst_03
-    - education_student_lifecycle_student_duplicate_retry_02
-    - education_student_lifecycle_student_retry_burst_01
+    - banking_ledger_ledger_entrie_timestamp_delay_04
+    - banking_reconciliation_customer_aggregate_mismatch_01
+    - healthcare_reconciliation_patient_aggregate_mismatch_01
+    - insurance_reconciliation_customer_aggregate_mismatch_01
+    - logistics_delivery_customer_aggregate_mismatch_04
+    - logistics_reconciliation_customer_aggregate_mismatch_01
   - capability: reconciliation_group_id
     total_blocked_scenarios: 6
     tier_a_scenarios: 0
@@ -1021,8 +888,8 @@ rankings:
     - education_fees_fee_payment_future_timestamp_02
     - logistics_carrier_management_carrier_duplicate_transaction_02
   - capability: network_qos_sample_id
-    total_blocked_scenarios: 10
-    tier_a_scenarios: 0
+    total_blocked_scenarios: 11
+    tier_a_scenarios: 1
     tier_b_scenarios: 10
     tier_c_scenarios: 0
     domains_affected:
@@ -1035,7 +902,7 @@ rankings:
     - subscriber_lifecycle
     - support
     implementation_complexity: 2
-    leverage_score: 21
+    leverage_score: 25
     example_scenarios:
     - telecommunications_data_usage_network_qos_sample_sequence_gap_03
     - telecommunications_network_outages_network_qos_sample_distribution_shift_03
@@ -1047,6 +914,25 @@ rankings:
     - telecommunications_subscriber_lifecycle_subscriber_settlement_delay_04
     - telecommunications_subscriber_lifecycle_subscriber_temperature_threshold_breach_03
     - telecommunications_support_network_qos_sample_availability_failure_05
+  - capability: risk_score
+    total_blocked_scenarios: 3
+    tier_a_scenarios: 1
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    - healthcare
+    - logistics
+    business_processes_affected:
+    - fraud
+    - pharmacy
+    - routing
+    implementation_complexity: 2
+    leverage_score: 21
+    example_scenarios:
+    - banking_fraud_transaction_timestamp_out_of_order_06
+    - healthcare_pharmacy_diagnose_aggregate_mismatch_03
+    - logistics_routing_route_sequence_gap_06
   - capability: refund_event_id
     total_blocked_scenarios: 7
     tier_a_scenarios: 0
@@ -1095,6 +981,21 @@ rankings:
     - insurance_policy_lifecycle_claim_document_volume_drop_01
     - insurance_settlement_claim_document_invalid_state_transition_04
     - insurance_underwriting_claim_document_volume_drop_05
+  - capability: affected_work_order_id
+    total_blocked_scenarios: 2
+    tier_a_scenarios: 2
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - downtime
+    - suppliers
+    implementation_complexity: 2
+    leverage_score: 11
+    example_scenarios:
+    - manufacturing_downtime_not_linked_to_production_order
+    - manufacturing_supplier_recall_not_propagated_to_wip
   - capability: status
     total_blocked_scenarios: 7
     tier_a_scenarios: 0
@@ -1115,6 +1016,1294 @@ rankings:
     - finance_portfolio_portfolio_cross_table_mismatch_06
     - finance_portfolio_portfolio_invalid_state_transition_04
     - finance_portfolio_portfolio_sequence_gap_03
+  - capability: ach_cutoff_time
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_ach_same_day_cutoff_breach
+  - capability: same_day_settlement_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_ach_same_day_cutoff_breach
+  - capability: pre_debit_balance
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_double_spend_concurrent_debit
+  - capability: post_debit_balance
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_double_spend_concurrent_debit
+  - capability: overdraft_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_double_spend_concurrent_debit
+  - capability: fx_rate_timestamp
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - transfers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_fx_rate_staleness_at_execution
+  - capability: fx_rate_age_seconds
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - transfers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_fx_rate_staleness_at_execution
+  - capability: max_fx_staleness_seconds
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - transfers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_fx_rate_staleness_at_execution
+  - capability: reporting_period
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - compliance
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_reg_reporting_late_correction
+  - capability: reporting_cutoff_ts
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - compliance
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_reg_reporting_late_correction
+  - capability: correction_received_ts
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - compliance
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_reg_reporting_late_correction
+  - capability: card_present_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_card_not_present_burst_multi_geo
+  - capability: authorization_city
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_card_not_present_burst_multi_geo
+  - capability: authorization_country
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_card_not_present_burst_multi_geo
+  - capability: geo_velocity_km
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - banking
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - banking_card_not_present_burst_multi_geo
+  - capability: coupon_code
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - promotions
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_double_coupon_redemption_race
+  - capability: redemption_count
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - promotions
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_double_coupon_redemption_race
+  - capability: max_redemptions
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - promotions
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_double_coupon_redemption_race
+  - capability: checkout_session_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - promotions
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_double_coupon_redemption_race
+  - capability: gateway_event_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_payment_gateway_webhook_timeout_desync
+  - capability: webhook_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_payment_gateway_webhook_timeout_desync
+  - capability: client_retry_count
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_payment_gateway_webhook_timeout_desync
+  - capability: gateway_charge_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - payments
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_payment_gateway_webhook_timeout_desync
+  - capability: shipment_leg_count
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - shipping
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_partial_shipment_tracking_desync
+  - capability: tracking_event_count
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - shipping
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_partial_shipment_tracking_desync
+  - capability: order_delivery_state
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - shipping
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_partial_shipment_tracking_desync
+  - capability: chargeback_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - marketplace_sellers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_seller_payout_clawback_after_chargeback
+  - capability: clawback_amount
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - marketplace_sellers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_seller_payout_clawback_after_chargeback
+  - capability: seller_balance_after_clawback
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - ecommerce
+    business_processes_affected:
+    - marketplace_sellers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - ecommerce_seller_payout_clawback_after_chargeback
+  - capability: aid_disbursement_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - fees
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_financial_aid_disbursed_before_enrollment_verified
+  - capability: aid_verification_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - fees
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_financial_aid_disbursed_before_enrollment_verified
+  - capability: clawback_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - fees
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_financial_aid_disbursed_before_enrollment_verified
+  - capability: transcript_lock_ts
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - grades
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_grade_correction_after_transcript_lock
+  - capability: grade_correction_ts
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - grades
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_grade_correction_after_transcript_lock
+  - capability: snapshot_run_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - grades
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - education_grade_correction_after_transcript_lock
+  - capability: expected_settlement_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - settlement
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_trade_settlement_fail_t_plus_2
+  - capability: actual_settlement_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - settlement
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_trade_settlement_fail_t_plus_2
+  - capability: settlement_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - settlement
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_trade_settlement_fail_t_plus_2
+  - capability: opposite_trade_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - trading
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_wash_trade_duplicate_order_pair
+  - capability: surveillance_pattern
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - trading
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_wash_trade_duplicate_order_pair
+  - capability: custodian_statement_amount
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - reconciliation
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_month_end_nav_reconciliation_break
+  - capability: nav_close_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - finance
+    business_processes_affected:
+    - reconciliation
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - finance_month_end_nav_reconciliation_break
+  - capability: payer_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_duplicate_claim_across_payers
+  - capability: coordination_of_benefits_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_duplicate_claim_across_payers
+  - capability: mrn
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - patient_registration
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_patient_identity_merge_conflict
+  - capability: surviving_patient_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - patient_registration
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_patient_identity_merge_conflict
+  - capability: merged_patient_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - patient_registration
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_patient_identity_merge_conflict
+  - capability: readmission_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - care_coordination
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_readmission_within_30_days_unflagged
+  - capability: index_visit_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - care_coordination
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_readmission_within_30_days_unflagged
+  - capability: readmission_window_days
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - healthcare
+    business_processes_affected:
+    - care_coordination
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - healthcare_readmission_within_30_days_unflagged
+  - capability: cancellation_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_claim_submitted_after_policy_cancellation
+  - capability: loss_event_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_claim_submitted_after_policy_cancellation
+  - capability: endorsement_effective_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - premium
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_premium_not_recalculated_after_midterm_endorsement
+  - capability: risk_profile_after_endorsement
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - premium
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_premium_not_recalculated_after_midterm_endorsement
+  - capability: intake_channel
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_duplicate_claim_different_channels
+  - capability: loss_event_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - claims
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_duplicate_claim_different_channels
+  - capability: commission_amount
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - policy_lifecycle
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_commission_calculated_on_rescinded_policy
+  - capability: rescission_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - policy_lifecycle
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_commission_calculated_on_rescinded_policy
+  - capability: commission_reversal_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - insurance
+    business_processes_affected:
+    - policy_lifecycle
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - insurance_commission_calculated_on_rescinded_policy
+  - capability: carrier_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - carrier_management
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_carrier_label_failure_silent_ship
+  - capability: label_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - carrier_management
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_carrier_label_failure_silent_ship
+  - capability: carrier_api_response_code
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - carrier_management
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_carrier_label_failure_silent_ship
+  - capability: temperature_celsius
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - cold_chain
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_cold_chain_sensor_gap_masks_breach
+  - capability: temperature_threshold
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - cold_chain
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_cold_chain_sensor_gap_masks_breach
+  - capability: sensor_gap_start
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - cold_chain
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_cold_chain_sensor_gap_masks_breach
+  - capability: sensor_gap_end
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - cold_chain
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_cold_chain_sensor_gap_masks_breach
+  - capability: route_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - routing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_route_reassignment_orphans_tracking_events
+  - capability: previous_route_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - routing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_route_reassignment_orphans_tracking_events
+  - capability: new_route_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - routing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_route_reassignment_orphans_tracking_events
+  - capability: pick_task_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - warehouse
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_warehouse_double_pick_race
+  - capability: inventory_unit_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - warehouse
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_warehouse_double_pick_race
+  - capability: warehouse_stock_after_pick
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - logistics
+    business_processes_affected:
+    - warehouse
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - logistics_warehouse_double_pick_race
+  - capability: oee_impact_minutes
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - downtime
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - manufacturing_downtime_not_linked_to_production_order
+  - capability: recall_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - suppliers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - manufacturing_supplier_recall_not_propagated_to_wip
+  - capability: quarantine_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - manufacturing
+    business_processes_affected:
+    - suppliers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - manufacturing_supplier_recall_not_propagated_to_wip
+  - capability: reservation_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - fulfillment
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_bopis_reservation_never_released
+  - capability: reservation_expires_at
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - fulfillment
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_bopis_reservation_never_released
+  - capability: pickup_status
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - fulfillment
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_bopis_reservation_never_released
+  - capability: reserved_quantity
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - fulfillment
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_bopis_reservation_never_released
+  - capability: ordered_quantity
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - suppliers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_po_receipt_quantity_mismatch
+  - capability: received_quantity
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - suppliers
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_po_receipt_quantity_mismatch
+  - capability: points_expiration_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - customer
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_loyalty_points_redeemed_after_expiration
+  - capability: points_redeemed
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - customer
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_loyalty_points_redeemed_after_expiration
+  - capability: redemption_timestamp
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - retail
+    business_processes_affected:
+    - customer
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - retail_loyalty_points_redeemed_after_expiration
+  - capability: plan_change_ts
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - roaming
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_roaming_charge_stale_plan_rating
+  - capability: rating_plan_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - roaming
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_roaming_charge_stale_plan_rating
+  - capability: active_plan_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - roaming
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_roaming_charge_stale_plan_rating
+  - capability: previous_sim_id
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_sim_swap_fraud_pattern
+  - capability: sim_swap_timestamp
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_sim_swap_fraud_pattern
+  - capability: high_value_usage_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - fraud
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_sim_swap_fraud_pattern
+  - capability: dropped_call_rate
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - network_outages
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_outage_masks_dropped_call_spike
+  - capability: session_failure_rate
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - network_outages
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_outage_masks_dropped_call_spike
+  - capability: prepaid_balance_before
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_prepaid_balance_negative_race
+  - capability: prepaid_balance_after
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_prepaid_balance_negative_race
+  - capability: hard_stop_flag
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_prepaid_balance_negative_race
+  - capability: plan_upgrade_date
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_midcycle_upgrade_proration_error
+  - capability: proration_days
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_midcycle_upgrade_proration_error
+  - capability: proration_amount
+    total_blocked_scenarios: 1
+    tier_a_scenarios: 1
+    tier_b_scenarios: 0
+    tier_c_scenarios: 0
+    domains_affected:
+    - telecommunications
+    business_processes_affected:
+    - billing
+    implementation_complexity: 2
+    leverage_score: 5
+    example_scenarios:
+    - telecommunications_midcycle_upgrade_proration_error
+  - capability: idempotency_key
+    total_blocked_scenarios: 2
+    tier_a_scenarios: 0
+    tier_b_scenarios: 2
+    tier_c_scenarios: 0
+    domains_affected:
+    - education
+    business_processes_affected:
+    - online_learning
+    implementation_complexity: 2
+    leverage_score: 3
+    example_scenarios:
+    - education_online_learning_online_activity_duplicate_retry_04
+    - education_online_learning_online_activity_retry_burst_03
   parameters: []
 implementation_batches:
 - batch: 1

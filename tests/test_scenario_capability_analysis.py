@@ -7,7 +7,7 @@ from dataforge.scenarios.capability_analysis import build_capability_leverage_re
 
 def test_capability_leverage_report_ranks_reusable_capabilities() -> None:
     report = yaml.safe_load(open("dataforge/scenarios/catalog/capability_leverage_report.yaml", encoding="utf-8"))
-    assert report["baseline_counts"]["runtime_capable"] == 531
+    assert report["baseline_counts"]["runtime_capable"] == 623
     assert report["after_batch_1_counts"]["runtime_capable"] == 151
     assert report["after_batch_2_counts"]["runtime_capable"] == 179
     assert report["after_batch_3_counts"]["runtime_capable"] == 264

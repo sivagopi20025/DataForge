@@ -25,11 +25,11 @@ def test_scenario_api_lists_filters_and_searches(client):
 
 def test_scenario_library_api_exposes_registered_vs_runtime_capable_counts(client):
     summary = client.get("/api/v1/scenario-library/summary").json()
-    assert summary["total_registered"] == 760
+    assert summary["total_registered"] == 810
     assert summary["total_rejected"] == 36
     assert summary["runtime_registry_count"] == 50
-    assert summary["total_executable"] == 521
-    assert summary["total_runtime_capable"] == 531
+    assert summary["total_executable"] == 613
+    assert summary["total_runtime_capable"] == 623
     assert summary["total_specification_only"] > 0
     assert summary["execution_status_counts"]["executable"] == summary["total_executable"]
     assert summary["executable_by_domain"]
@@ -46,8 +46,8 @@ def test_scenario_library_api_exposes_registered_vs_runtime_capable_counts(clien
     assert "resolved_columns" in executable["items"][0]["semantic_requirements"]
 
     quality = client.get("/api/v1/scenario-library/quality-summary").json()
-    assert quality["total_runtime_capable"] == 531
-    assert quality["v1_ready"] == 531
+    assert quality["total_runtime_capable"] == 623
+    assert quality["v1_ready"] == 623
     assert quality["needs_fix"] == 0
 
 

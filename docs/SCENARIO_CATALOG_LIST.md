@@ -1,0 +1,1708 @@
+# DataForge Scenario Catalog List
+
+Total active scenarios: 760
+
+## Execution Status Summary
+
+- custom_reference: 10
+- executable: 613
+- specification_only: 137
+
+## Scenarios by Domain
+
+### Banking (80)
+
+- [EXEC] `banking_accounts_card_authorization_sequence_gap_04` — Banking Accounts Sequence Gap
+  - Process: accounts; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `banking_accounts_customer_stale_timestamp_01` — Banking Accounts Stale Timestamp
+  - Process: accounts; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_accounts_deposit_account_aggregate_mismatch_06` — Banking Accounts Aggregate Mismatch
+  - Process: accounts; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `banking_accounts_deposit_account_cross_table_mismatch_07` — Banking Accounts Cross Table Mismatch
+  - Process: accounts; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `banking_accounts_deposit_account_timestamp_delay_02` — Banking Accounts Timestamp Delay
+  - Process: accounts; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_accounts_deposit_account_timestamp_out_of_order_03` — Banking Accounts Timestamp Out Of Order
+  - Process: accounts; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `banking_accounts_treasury_transaction_invalid_state_transition_05` — Banking Accounts Invalid State Transition
+  - Process: accounts; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `banking_cards_card_authorization_value_below_threshold_02` — Banking Cards Value Below Threshold
+  - Process: cards; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_cards_payment_future_timestamp_03` — Banking Cards Future Timestamp
+  - Process: cards; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `banking_cards_treasury_position_stale_timestamp_04` — Banking Cards Stale Timestamp
+  - Process: cards; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_cards_treasury_position_timestamp_delay_05` — Banking Cards Timestamp Delay
+  - Process: cards; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_cards_treasury_position_timestamp_out_of_order_06` — Banking Cards Timestamp Out Of Order
+  - Process: cards; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `banking_cards_treasury_position_value_above_threshold_01` — Banking Cards Value Above Threshold
+  - Process: cards; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_compliance_card_authorization_sequence_gap_02` — Banking Compliance Sequence Gap
+  - Process: compliance; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `banking_compliance_payment_aggregate_mismatch_04` — Banking Compliance Aggregate Mismatch
+  - Process: compliance; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `banking_compliance_payment_calculation_error_06` — Banking Compliance Calculation Error
+  - Process: compliance; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `banking_compliance_payment_cross_table_mismatch_05` — Banking Compliance Cross Table Mismatch
+  - Process: compliance; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `banking_compliance_payment_invalid_state_transition_03` — Banking Compliance Invalid State Transition
+  - Process: compliance; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `banking_compliance_payment_timestamp_out_of_order_01` — Banking Compliance Timestamp Out Of Order
+  - Process: compliance; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `banking_customer_onboarding_card_authorization_policy_violation_07` — Banking Customer Onboarding Policy Violation
+  - Process: customer_onboarding; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `banking_customer_onboarding_customer_availability_failure_04` — Banking Customer Onboarding Availability Failure
+  - Process: customer_onboarding; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `banking_customer_onboarding_customer_duplicate_retry_02` — Banking Customer Onboarding Duplicate Retry
+  - Process: customer_onboarding; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `banking_customer_onboarding_customer_duplicate_transaction_03` — Banking Customer Onboarding Duplicate Transaction
+  - Process: customer_onboarding; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `banking_customer_onboarding_customer_geographic_jump_06` — Banking Customer Onboarding Geographic Jump
+  - Process: customer_onboarding; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `banking_customer_onboarding_customer_retry_burst_01` — Banking Customer Onboarding Retry Burst
+  - Process: customer_onboarding; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `banking_customer_onboarding_customer_timeout_violation_05` — Banking Customer Onboarding Timeout Violation
+  - Process: customer_onboarding; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `banking_fees_customer_negative_numeric_value_01` — Banking Fees Negative Numeric Value
+  - Process: fees; Primitive: `negative_numeric_value`; Validator: `range_validator`
+- [EXEC] `banking_fees_payment_future_timestamp_04` — Banking Fees Future Timestamp
+  - Process: fees; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `banking_fees_payment_stale_timestamp_05` — Banking Fees Stale Timestamp
+  - Process: fees; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_fees_payment_timestamp_delay_06` — Banking Fees Timestamp Delay
+  - Process: fees; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_fees_payment_value_above_threshold_02` — Banking Fees Value Above Threshold
+  - Process: fees; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_fees_payment_value_below_threshold_03` — Banking Fees Value Below Threshold
+  - Process: fees; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [SPEC] `banking_fraud_transaction_future_timestamp_03` — Banking Fraud Future Timestamp
+  - Process: fraud; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+  - Later blockers: tables=transactions; columns=event_timestamp
+- [SPEC] `banking_fraud_transaction_stale_timestamp_04` — Banking Fraud Stale Timestamp
+  - Process: fraud; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=transactions; columns=event_timestamp
+- [SPEC] `banking_fraud_transaction_timestamp_out_of_order_06` — Banking Fraud Timestamp Out Of Order
+  - Process: fraud; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=transactions; columns=event_timestamp, risk_score
+- [SPEC] `banking_fraud_transaction_value_above_threshold_01` — Banking Fraud Value Above Threshold
+  - Process: fraud; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=transactions; columns=event_timestamp
+- [SPEC] `banking_fraud_transaction_value_below_threshold_02` — Banking Fraud Value Below Threshold
+  - Process: fraud; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=transactions; columns=event_timestamp
+- [EXEC] `banking_fraud_treasury_transaction_timestamp_delay_05` — Banking Fraud Timestamp Delay
+  - Process: fraud; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_kyc_customer_future_timestamp_05` — Banking Kyc Future Timestamp
+  - Process: kyc; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `banking_kyc_customer_invalid_datatype_01` — Banking Kyc Invalid Datatype
+  - Process: kyc; Primitive: `invalid_datatype`; Validator: `datatype_validator`
+- [EXEC] `banking_kyc_customer_negative_numeric_value_02` — Banking Kyc Negative Numeric Value
+  - Process: kyc; Primitive: `negative_numeric_value`; Validator: `range_validator`
+- [EXEC] `banking_kyc_customer_stale_timestamp_06` — Banking Kyc Stale Timestamp
+  - Process: kyc; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_kyc_customer_value_above_threshold_03` — Banking Kyc Value Above Threshold
+  - Process: kyc; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_kyc_customer_value_below_threshold_04` — Banking Kyc Value Below Threshold
+  - Process: kyc; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_ledger_card_authorization_sequence_gap_06` — Banking Ledger Sequence Gap
+  - Process: ledger; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [SPEC] `banking_ledger_ledger_entrie_future_timestamp_02` — Banking Ledger Future Timestamp
+  - Process: ledger; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+  - Later blockers: tables=ledger_entries; columns=event_timestamp
+- [SPEC] `banking_ledger_ledger_entrie_timestamp_delay_04` — Banking Ledger Timestamp Delay
+  - Process: ledger; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=ledger_entries; columns=event_timestamp, scenario_status_code
+- [SPEC] `banking_ledger_ledger_entrie_timestamp_out_of_order_05` — Banking Ledger Timestamp Out Of Order
+  - Process: ledger; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=ledger_entries; columns=event_timestamp
+- [SPEC] `banking_ledger_ledger_entrie_value_below_threshold_01` — Banking Ledger Value Below Threshold
+  - Process: ledger; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=ledger_entries; columns=event_timestamp
+- [EXEC] `banking_ledger_payment_stale_timestamp_03` — Banking Ledger Stale Timestamp
+  - Process: ledger; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_loans_card_authorization_timestamp_out_of_order_06` — Banking Loans Timestamp Out Of Order
+  - Process: loans; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `banking_loans_payment_future_timestamp_03` — Banking Loans Future Timestamp
+  - Process: loans; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `banking_loans_transfer_stale_timestamp_04` — Banking Loans Stale Timestamp
+  - Process: loans; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `banking_loans_transfer_timestamp_delay_05` — Banking Loans Timestamp Delay
+  - Process: loans; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_loans_transfer_value_above_threshold_01` — Banking Loans Value Above Threshold
+  - Process: loans; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_loans_transfer_value_below_threshold_02` — Banking Loans Value Below Threshold
+  - Process: loans; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `banking_fraud_burst` — Banking Fraud Burst
+  - Process: payments; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `banking_ledger_imbalance` — Banking Ledger Imbalance
+  - Process: payments; Primitive: `negative_numeric_value`; Validator: `reconciliation_validator`
+  - Later blockers: validators=reconciliation_validator
+- [EXEC] `banking_missing_settlement` — Banking Missing Settlement
+  - Process: payments; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `banking_payments_payment_calculation_error_03` — Banking Payments Calculation Error
+  - Process: payments; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `banking_payments_payment_duplicate_retry_01` — Banking Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `banking_payments_treasury_transaction_aggregate_mismatch_02` — Banking Payments Aggregate Mismatch
+  - Process: payments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `banking_reconciliation_card_authorization_aggregate_mismatch_04` — Banking Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [SPEC] `banking_reconciliation_customer_aggregate_mismatch_01` — Banking Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, scenario_status_code
+- [SPEC] `banking_reconciliation_ledger_entrie_calculation_error_03` — Banking Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+  - Later blockers: tables=ledger_entries; columns=actual_amount, event_timestamp, expected_amount
+- [SPEC] `banking_reconciliation_ledger_entrie_calculation_error_06` — Banking Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+  - Later blockers: tables=ledger_entries; columns=actual_amount, event_timestamp, expected_amount
+- [SPEC] `banking_reconciliation_ledger_entrie_cross_table_mismatch_02` — Banking Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+  - Later blockers: tables=ledger_entries; columns=event_timestamp, reconciliation_group_id
+- [EXEC] `banking_reconciliation_treasury_transaction_cross_table_mismatch_05` — Banking Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `banking_settlement_customer_settlement_delay_01` — Banking Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_settlement_transfer_aggregate_mismatch_03` — Banking Settlement Aggregate Mismatch
+  - Process: settlement; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `banking_settlement_transfer_invalid_state_transition_04` — Banking Settlement Invalid State Transition
+  - Process: settlement; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `banking_settlement_transfer_settlement_delay_05` — Banking Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_settlement_transfer_timestamp_delay_02` — Banking Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_settlement_transfer_timestamp_delay_06` — Banking Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `banking_account_freeze` — Banking Account Freeze
+  - Process: transfers; Primitive: `invalid_reference`; Validator: `referential_integrity_validator`
+- [CUSTOM] `banking_duplicate_transfer` — Banking Duplicate Transfer
+  - Process: transfers; Primitive: `duplicate_entity`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `banking_transfers_card_authorization_timestamp_out_of_order_02` — Banking Transfers Timestamp Out Of Order
+  - Process: transfers; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `banking_transfers_payment_sequence_gap_03` — Banking Transfers Sequence Gap
+  - Process: transfers; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `banking_transfers_transfer_invalid_state_transition_04` — Banking Transfers Invalid State Transition
+  - Process: transfers; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `banking_transfers_transfer_timestamp_delay_01` — Banking Transfers Timestamp Delay
+  - Process: transfers; Primitive: `timestamp_delay`; Validator: `sla_validator`
+
+### Ecommerce (80)
+
+- [EXEC] `ecommerce_cart_cart_future_timestamp_02` — Ecommerce Cart Future Timestamp
+  - Process: cart; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `ecommerce_cart_cart_stale_timestamp_03` — Ecommerce Cart Stale Timestamp
+  - Process: cart; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `ecommerce_cart_cart_timestamp_delay_04` — Ecommerce Cart Timestamp Delay
+  - Process: cart; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `ecommerce_cart_cart_timestamp_out_of_order_05` — Ecommerce Cart Timestamp Out Of Order
+  - Process: cart; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_cart_cart_value_below_threshold_01` — Ecommerce Cart Value Below Threshold
+  - Process: cart; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `ecommerce_catalog_marketplace_customer_timestamp_delay_01` — Ecommerce Catalog Timestamp Delay
+  - Process: catalog; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `ecommerce_catalog_product_sequence_gap_03` — Ecommerce Catalog Sequence Gap
+  - Process: catalog; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=products; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_catalog_product_timestamp_out_of_order_02` — Ecommerce Catalog Timestamp Out Of Order
+  - Process: catalog; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=products; columns=amount, event_timestamp, reason_code, reconciliation_group_id
+- [EXEC] `ecommerce_catalog_promotion_aggregate_mismatch_05` — Ecommerce Catalog Aggregate Mismatch
+  - Process: catalog; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `ecommerce_catalog_seller_payout_invalid_state_transition_04` — Ecommerce Catalog Invalid State Transition
+  - Process: catalog; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `ecommerce_cart_abandonment` — E-commerce Cart Abandonment
+  - Process: checkout; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `ecommerce_checkout_cart_item_invalid_state_transition_03` — Ecommerce Checkout Invalid State Transition
+  - Process: checkout; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `ecommerce_checkout_order_timestamp_out_of_order_01` — Ecommerce Checkout Timestamp Out Of Order
+  - Process: checkout; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_checkout_seller_payout_sequence_gap_02` — Ecommerce Checkout Sequence Gap
+  - Process: checkout; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_order_status_mismatch` — E-commerce Order Status Mismatch
+  - Process: checkout; Primitive: `invalid_datatype`; Validator: `datatype_validator`
+- [SPEC] `ecommerce_customer_customer_aggregate_mismatch_04` — Ecommerce Customer Aggregate Mismatch
+  - Process: customer; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=customers; columns=actual_amount, amount, event_timestamp, expected_amount
+- [SPEC] `ecommerce_customer_customer_invalid_state_transition_03` — Ecommerce Customer Invalid State Transition
+  - Process: customer; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+  - Later blockers: tables=customers; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_customer_customer_sequence_gap_02` — Ecommerce Customer Sequence Gap
+  - Process: customer; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=customers; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_customer_customer_timestamp_out_of_order_01` — Ecommerce Customer Timestamp Out Of Order
+  - Process: customer; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=customers; columns=amount, event_timestamp, reason_code
+- [EXEC] `ecommerce_payment_retry` — E-commerce Payment Retry
+  - Process: customer; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [SPEC] `ecommerce_fulfillment_marketplace_customer_aggregate_mismatch_01` — Ecommerce Fulfillment Aggregate Mismatch
+  - Process: fulfillment; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `ecommerce_fulfillment_promotion_volume_spike_05` — Ecommerce Fulfillment Volume Spike
+  - Process: fulfillment; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `ecommerce_fulfillment_seller_payout_capacity_exceeded_04` — Ecommerce Fulfillment Capacity Exceeded
+  - Process: fulfillment; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `ecommerce_fulfillment_shipment_calculation_error_03` — Ecommerce Fulfillment Calculation Error
+  - Process: fulfillment; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `ecommerce_fulfillment_shipment_cross_table_mismatch_02` — Ecommerce Fulfillment Cross Table Mismatch
+  - Process: fulfillment; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [CUSTOM] `ecommerce_inventory_oversell` — E-commerce Inventory Oversell
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `ecommerce_inventory_product_listing_aggregate_mismatch_04` — Ecommerce Inventory Aggregate Mismatch
+  - Process: inventory; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `ecommerce_inventory_product_listing_capacity_exceeded_01` — Ecommerce Inventory Capacity Exceeded
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `ecommerce_inventory_product_listing_inventory_oversell_02` — Ecommerce Inventory Inventory Oversell
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `ecommerce_inventory_product_listing_negative_numeric_value_03` — Ecommerce Inventory Negative Numeric Value
+  - Process: inventory; Primitive: `negative_numeric_value`; Validator: `range_validator`
+- [EXEC] `ecommerce_marketplace_sellers_seller_availability_failure_02` — Ecommerce Marketplace Sellers Availability Failure
+  - Process: marketplace_sellers; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `ecommerce_marketplace_sellers_seller_duplicate_transaction_01` — Ecommerce Marketplace Sellers Duplicate Transaction
+  - Process: marketplace_sellers; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `ecommerce_marketplace_sellers_seller_geographic_jump_04` — Ecommerce Marketplace Sellers Geographic Jump
+  - Process: marketplace_sellers; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `ecommerce_marketplace_sellers_seller_policy_violation_05` — Ecommerce Marketplace Sellers Policy Violation
+  - Process: marketplace_sellers; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `ecommerce_marketplace_sellers_seller_timeout_violation_03` — Ecommerce Marketplace Sellers Timeout Violation
+  - Process: marketplace_sellers; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `ecommerce_orders_order_invalid_state_transition_05` — Ecommerce Orders Invalid State Transition
+  - Process: orders; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `ecommerce_orders_order_sequence_gap_04` — Ecommerce Orders Sequence Gap
+  - Process: orders; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_orders_order_stale_timestamp_01` — Ecommerce Orders Stale Timestamp
+  - Process: orders; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `ecommerce_orders_order_timestamp_delay_02` — Ecommerce Orders Timestamp Delay
+  - Process: orders; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `ecommerce_orders_order_timestamp_out_of_order_03` — Ecommerce Orders Timestamp Out Of Order
+  - Process: orders; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_payments_marketplace_customer_duplicate_retry_01` — Ecommerce Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [SPEC] `ecommerce_payments_payment_attempt_aggregate_mismatch_02` — Ecommerce Payments Aggregate Mismatch
+  - Process: payments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=payment_attempts; columns=actual_amount, amount, event_timestamp, expected_amount
+- [SPEC] `ecommerce_payments_payment_attempt_calculation_error_03` — Ecommerce Payments Calculation Error
+  - Process: payments; Primitive: `calculation_error`; Validator: `calculation_validator`
+  - Later blockers: tables=payment_attempts; columns=actual_amount, amount, event_timestamp, expected_amount
+- [EXEC] `ecommerce_payments_promotion_duplicate_retry_05` — Ecommerce Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `ecommerce_payments_seller_payout_timeout_violation_04` — Ecommerce Payments Timeout Violation
+  - Process: payments; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `ecommerce_product_views_marketplace_customer_calculation_error_01` — Ecommerce Product Views Calculation Error
+  - Process: product_views; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [SPEC] `ecommerce_product_views_product_view_capacity_exceeded_02` — Ecommerce Product Views Capacity Exceeded
+  - Process: product_views; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code, reconciliation_group_id
+- [SPEC] `ecommerce_product_views_product_view_volume_spike_03` — Ecommerce Product Views Volume Spike
+  - Process: product_views; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [EXEC] `ecommerce_product_views_promotion_retry_burst_05` — Ecommerce Product Views Retry Burst
+  - Process: product_views; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_product_views_seller_payout_volume_drop_04` — Ecommerce Product Views Volume Drop
+  - Process: product_views; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [SPEC] `ecommerce_reconciliation_marketplace_customer_aggregate_mismatch_01` — Ecommerce Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `ecommerce_reconciliation_order_calculation_error_03` — Ecommerce Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `ecommerce_reconciliation_order_cross_table_mismatch_02` — Ecommerce Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `ecommerce_reconciliation_promotion_cross_table_mismatch_05` — Ecommerce Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `ecommerce_reconciliation_seller_payout_aggregate_mismatch_04` — Ecommerce Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [SPEC] `ecommerce_refunds_refund_aggregate_mismatch_05` — Ecommerce Refunds Aggregate Mismatch
+  - Process: refunds; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=refunds; columns=actual_amount, amount, event_timestamp, expected_amount
+- [SPEC] `ecommerce_refunds_refund_invalid_state_transition_04` — Ecommerce Refunds Invalid State Transition
+  - Process: refunds; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+  - Later blockers: tables=refunds; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_refunds_refund_sequence_gap_03` — Ecommerce Refunds Sequence Gap
+  - Process: refunds; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=refunds; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_refunds_refund_timestamp_delay_01` — Ecommerce Refunds Timestamp Delay
+  - Process: refunds; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=refunds; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_refunds_refund_timestamp_out_of_order_02` — Ecommerce Refunds Timestamp Out Of Order
+  - Process: refunds; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=refunds; columns=amount, event_timestamp, reason_code
+- [EXEC] `ecommerce_refund_failure` — E-commerce Refund Failure
+  - Process: returns; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `ecommerce_returns_marketplace_customer_invalid_state_transition_04` — Ecommerce Returns Invalid State Transition
+  - Process: returns; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `ecommerce_returns_return_timestamp_delay_01` — Ecommerce Returns Timestamp Delay
+  - Process: returns; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `ecommerce_returns_return_timestamp_out_of_order_02` — Ecommerce Returns Timestamp Out Of Order
+  - Process: returns; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_returns_seller_payout_sequence_gap_03` — Ecommerce Returns Sequence Gap
+  - Process: returns; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_reviews_marketplace_customer_timestamp_delay_01` — Ecommerce Reviews Timestamp Delay
+  - Process: reviews; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `ecommerce_reviews_promotion_aggregate_mismatch_05` — Ecommerce Reviews Aggregate Mismatch
+  - Process: reviews; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `ecommerce_reviews_review_sequence_gap_03` — Ecommerce Reviews Sequence Gap
+  - Process: reviews; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_reviews_review_timestamp_out_of_order_02` — Ecommerce Reviews Timestamp Out Of Order
+  - Process: reviews; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_reviews_seller_payout_invalid_state_transition_04` — Ecommerce Reviews Invalid State Transition
+  - Process: reviews; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `ecommerce_search_product_view_invalid_state_transition_05` — Ecommerce Search Invalid State Transition
+  - Process: search; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_search_product_view_sequence_gap_04` — Ecommerce Search Sequence Gap
+  - Process: search; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_search_product_view_stale_timestamp_01` — Ecommerce Search Stale Timestamp
+  - Process: search; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_search_product_view_timestamp_delay_02` — Ecommerce Search Timestamp Delay
+  - Process: search; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [SPEC] `ecommerce_search_product_view_timestamp_out_of_order_03` — Ecommerce Search Timestamp Out Of Order
+  - Process: search; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=product_views; columns=amount, event_timestamp, reason_code
+- [EXEC] `ecommerce_shipping_shipment_aggregate_mismatch_04` — Ecommerce Shipping Aggregate Mismatch
+  - Process: shipping; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `ecommerce_shipping_shipment_cross_table_mismatch_05` — Ecommerce Shipping Cross Table Mismatch
+  - Process: shipping; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `ecommerce_shipping_shipment_invalid_state_transition_03` — Ecommerce Shipping Invalid State Transition
+  - Process: shipping; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `ecommerce_shipping_shipment_sequence_gap_02` — Ecommerce Shipping Sequence Gap
+  - Process: shipping; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `ecommerce_shipping_shipment_timestamp_out_of_order_01` — Ecommerce Shipping Timestamp Out Of Order
+  - Process: shipping; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+
+### Education (65)
+
+- [SPEC] `education_admissions_student_aggregate_mismatch_02` — Education Admissions Aggregate Mismatch
+  - Process: admissions; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `education_admissions_student_calculation_error_04` — Education Admissions Calculation Error
+  - Process: admissions; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_admissions_student_capacity_exceeded_05` — Education Admissions Capacity Exceeded
+  - Process: admissions; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `education_admissions_student_cross_table_mismatch_03` — Education Admissions Cross Table Mismatch
+  - Process: admissions; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_admissions_student_invalid_state_transition_01` — Education Admissions Invalid State Transition
+  - Process: admissions; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `education_assignments_assignment_submission_aggregate_mismatch_01` — Education Assignments Aggregate Mismatch
+  - Process: assignments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_assignments_assignment_submission_calculation_error_03` — Education Assignments Calculation Error
+  - Process: assignments; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_assignments_assignment_submission_capacity_exceeded_04` — Education Assignments Capacity Exceeded
+  - Process: assignments; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `education_assignments_assignment_submission_cross_table_mismatch_02` — Education Assignments Cross Table Mismatch
+  - Process: assignments; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_assignments_assignment_submission_volume_spike_05` — Education Assignments Volume Spike
+  - Process: assignments; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `education_attendance_academic_standing_event_cross_table_mismatch_03` — Education Attendance Cross Table Mismatch
+  - Process: attendance; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_attendance_attendance_aggregate_mismatch_02` — Education Attendance Aggregate Mismatch
+  - Process: attendance; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_attendance_attendance_invalid_state_transition_01` — Education Attendance Invalid State Transition
+  - Process: attendance; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `education_attendance_drop` — Education Attendance Drop
+  - Process: attendance; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `education_attendance_institution_calculation_error_04` — Education Attendance Calculation Error
+  - Process: attendance; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_courses_course_aggregate_mismatch_05` — Education Courses Aggregate Mismatch
+  - Process: courses; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_courses_course_invalid_state_transition_04` — Education Courses Invalid State Transition
+  - Process: courses; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `education_courses_course_sequence_gap_03` — Education Courses Sequence Gap
+  - Process: courses; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `education_courses_course_timestamp_delay_01` — Education Courses Timestamp Delay
+  - Process: courses; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `education_courses_course_timestamp_out_of_order_02` — Education Courses Timestamp Out Of Order
+  - Process: courses; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `education_duplicate_enrollment` — Education Duplicate Enrollment
+  - Process: enrollment; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `education_enrollment_academic_standing_event_aggregate_mismatch_02` — Education Enrollment Aggregate Mismatch
+  - Process: enrollment; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_enrollment_class_section_cross_table_mismatch_03` — Education Enrollment Cross Table Mismatch
+  - Process: enrollment; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_enrollment_enrollment_invalid_state_transition_01` — Education Enrollment Invalid State Transition
+  - Process: enrollment; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `education_graduation_eligibility_failure` — Education Graduation Eligibility Failure
+  - Process: enrollment; Primitive: `invalid_datatype`; Validator: `datatype_validator`
+- [EXEC] `education_exams_academic_standing_event_timestamp_delay_03` — Education Exams Timestamp Delay
+  - Process: exams; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `education_exams_examination_result_future_timestamp_01` — Education Exams Future Timestamp
+  - Process: exams; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `education_exams_examination_result_stale_timestamp_02` — Education Exams Stale Timestamp
+  - Process: exams; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `education_exams_institution_timestamp_out_of_order_04` — Education Exams Timestamp Out Of Order
+  - Process: exams; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [CUSTOM] `education_grade_calculation_error` — Education Grade Calculation Error
+  - Process: exams; Primitive: `calculation_error`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `education_fees_academic_standing_event_timestamp_delay_04` — Education Fees Timestamp Delay
+  - Process: fees; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `education_fees_fee_payment_future_timestamp_02` — Education Fees Future Timestamp
+  - Process: fees; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp, reconciliation_group_id
+- [SPEC] `education_fees_fee_payment_stale_timestamp_03` — Education Fees Stale Timestamp
+  - Process: fees; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [EXEC] `education_fees_fees_payment_timestamp_out_of_order_05` — Education Fees Timestamp Out Of Order
+  - Process: fees; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `education_fees_institution_value_below_threshold_01` — Education Fees Value Below Threshold
+  - Process: fees; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `education_grades_enrollment_calculation_error_02` — Education Grades Calculation Error
+  - Process: grades; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_grades_enrollment_calculation_error_05` — Education Grades Calculation Error
+  - Process: grades; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_grades_enrollment_cross_table_mismatch_03` — Education Grades Cross Table Mismatch
+  - Process: grades; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_grades_enrollment_grade_formula_error_01` — Education Grades Grade Formula Error
+  - Process: grades; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_grades_enrollment_grade_formula_error_04` — Education Grades Grade Formula Error
+  - Process: grades; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_graduation_academic_standing_event_calculation_error_04` — Education Graduation Calculation Error
+  - Process: graduation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_graduation_fees_payment_capacity_exceeded_05` — Education Graduation Capacity Exceeded
+  - Process: graduation; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `education_graduation_institution_invalid_state_transition_01` — Education Graduation Invalid State Transition
+  - Process: graduation; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `education_graduation_student_aggregate_mismatch_02` — Education Graduation Aggregate Mismatch
+  - Process: graduation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `education_graduation_student_cross_table_mismatch_03` — Education Graduation Cross Table Mismatch
+  - Process: graduation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [SPEC] `education_holds_fee_payment_future_timestamp_01` — Education Holds Future Timestamp
+  - Process: holds; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [SPEC] `education_holds_fee_payment_sequence_gap_05` — Education Holds Sequence Gap
+  - Process: holds; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [SPEC] `education_holds_fee_payment_stale_timestamp_02` — Education Holds Stale Timestamp
+  - Process: holds; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [SPEC] `education_holds_fee_payment_timestamp_delay_03` — Education Holds Timestamp Delay
+  - Process: holds; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [SPEC] `education_holds_fee_payment_timestamp_out_of_order_04` — Education Holds Timestamp Out Of Order
+  - Process: holds; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+  - Later blockers: tables=fee_payments; columns=amount, event_timestamp
+- [SPEC] `education_online_learning_online_activity_duplicate_retry_04` — Education Online Learning Duplicate Retry
+  - Process: online_learning; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+  - Later blockers: tables=online_activity; columns=amount, event_timestamp, idempotency_key
+- [SPEC] `education_online_learning_online_activity_duplicate_transaction_05` — Education Online Learning Duplicate Transaction
+  - Process: online_learning; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+  - Later blockers: tables=online_activity; columns=amount, event_timestamp
+- [SPEC] `education_online_learning_online_activity_retry_burst_03` — Education Online Learning Retry Burst
+  - Process: online_learning; Primitive: `retry_burst`; Validator: `sequence_validator`
+  - Later blockers: tables=online_activity; columns=amount, event_timestamp, idempotency_key
+- [SPEC] `education_online_learning_online_activity_volume_drop_02` — Education Online Learning Volume Drop
+  - Process: online_learning; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=online_activity; columns=amount, event_timestamp
+- [SPEC] `education_online_learning_online_activity_volume_spike_01` — Education Online Learning Volume Spike
+  - Process: online_learning; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=online_activity; columns=amount, event_timestamp
+- [EXEC] `education_reconciliation_academic_standing_event_aggregate_mismatch_04` — Education Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_reconciliation_enrollment_calculation_error_03` — Education Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `education_reconciliation_enrollment_cross_table_mismatch_02` — Education Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_reconciliation_fees_payment_cross_table_mismatch_05` — Education Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `education_reconciliation_institution_aggregate_mismatch_01` — Education Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `education_fee_hold` — Education Fee Hold
+  - Process: student_lifecycle; Primitive: `negative_numeric_value`; Validator: `policy_validator`
+- [EXEC] `education_student_lifecycle_academic_standing_event_duplicate_transaction_03` — Education Student Lifecycle Duplicate Transaction
+  - Process: student_lifecycle; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `education_student_lifecycle_institution_availability_failure_04` — Education Student Lifecycle Availability Failure
+  - Process: student_lifecycle; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `education_student_lifecycle_student_duplicate_retry_02` — Education Student Lifecycle Duplicate Retry
+  - Process: student_lifecycle; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `education_student_lifecycle_student_retry_burst_01` — Education Student Lifecycle Retry Burst
+  - Process: student_lifecycle; Primitive: `retry_burst`; Validator: `sequence_validator`
+
+### Finance (80)
+
+- [EXEC] `finance_compliance_payment_aggregate_mismatch_04` — Finance Compliance Aggregate Mismatch
+  - Process: compliance; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_compliance_payment_calculation_error_06` — Finance Compliance Calculation Error
+  - Process: compliance; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `finance_compliance_payment_cross_table_mismatch_05` — Finance Compliance Cross Table Mismatch
+  - Process: compliance; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `finance_compliance_payment_invalid_state_transition_03` — Finance Compliance Invalid State Transition
+  - Process: compliance; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_compliance_payment_sequence_gap_02` — Finance Compliance Sequence Gap
+  - Process: compliance; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_compliance_risk_event_timestamp_out_of_order_01` — Finance Compliance Timestamp Out Of Order
+  - Process: compliance; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_currency_customer_sequence_gap_04` — Finance Currency Sequence Gap
+  - Process: currency; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_currency_risk_event_timestamp_out_of_order_03` — Finance Currency Timestamp Out Of Order
+  - Process: currency; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_currency_transaction_aggregate_mismatch_06` — Finance Currency Aggregate Mismatch
+  - Process: currency; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_currency_transaction_invalid_state_transition_05` — Finance Currency Invalid State Transition
+  - Process: currency; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_currency_transaction_stale_timestamp_01` — Finance Currency Stale Timestamp
+  - Process: currency; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `finance_currency_transaction_timestamp_delay_02` — Finance Currency Timestamp Delay
+  - Process: currency; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_fees_card_timestamp_delay_06` — Finance Fees Timestamp Delay
+  - Process: fees; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_fees_transaction_future_timestamp_04` — Finance Fees Future Timestamp
+  - Process: fees; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `finance_fees_transaction_negative_numeric_value_01` — Finance Fees Negative Numeric Value
+  - Process: fees; Primitive: `negative_numeric_value`; Validator: `range_validator`
+- [EXEC] `finance_fees_transaction_stale_timestamp_05` — Finance Fees Stale Timestamp
+  - Process: fees; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `finance_fees_transaction_value_above_threshold_02` — Finance Fees Value Above Threshold
+  - Process: fees; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `finance_fees_transaction_value_below_threshold_03` — Finance Fees Value Below Threshold
+  - Process: fees; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `finance_market_data_card_capacity_exceeded_06` — Finance Market Data Capacity Exceeded
+  - Process: market_data; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `finance_market_data_market_data_aggregate_mismatch_03` — Finance Market Data Aggregate Mismatch
+  - Process: market_data; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_market_data_market_data_calculation_error_05` — Finance Market Data Calculation Error
+  - Process: market_data; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `finance_market_data_market_data_cross_table_mismatch_04` — Finance Market Data Cross Table Mismatch
+  - Process: market_data; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `finance_market_data_market_data_invalid_state_transition_02` — Finance Market Data Invalid State Transition
+  - Process: market_data; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_market_data_market_data_sequence_gap_01` — Finance Market Data Sequence Gap
+  - Process: market_data; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_market_data_market_data_volume_spike_07` — Finance Market Data Volume Spike
+  - Process: market_data; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `finance_orders_card_sequence_gap_06` — Finance Orders Sequence Gap
+  - Process: orders; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [SPEC] `finance_orders_order_stale_timestamp_03` — Finance Orders Stale Timestamp
+  - Process: orders; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=orders; columns=amount, reason_code, status
+- [SPEC] `finance_orders_order_timestamp_delay_04` — Finance Orders Timestamp Delay
+  - Process: orders; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=orders; columns=amount, reason_code, status
+- [SPEC] `finance_orders_order_value_below_threshold_01` — Finance Orders Value Below Threshold
+  - Process: orders; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=orders; columns=amount, reason_code, status
+- [EXEC] `finance_orders_payment_future_timestamp_02` — Finance Orders Future Timestamp
+  - Process: orders; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `finance_orders_risk_event_timestamp_out_of_order_05` — Finance Orders Timestamp Out Of Order
+  - Process: orders; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_portfolio_payment_timestamp_out_of_order_02` — Finance Portfolio Timestamp Out Of Order
+  - Process: portfolio; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [SPEC] `finance_portfolio_portfolio_aggregate_mismatch_05` — Finance Portfolio Aggregate Mismatch
+  - Process: portfolio; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=portfolios; columns=actual_amount, amount, expected_amount, reason_code
+- [SPEC] `finance_portfolio_portfolio_cross_table_mismatch_06` — Finance Portfolio Cross Table Mismatch
+  - Process: portfolio; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+  - Later blockers: tables=portfolios; columns=amount, reason_code, status
+- [SPEC] `finance_portfolio_portfolio_invalid_state_transition_04` — Finance Portfolio Invalid State Transition
+  - Process: portfolio; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+  - Later blockers: tables=portfolios; columns=amount, reason_code, status
+- [SPEC] `finance_portfolio_portfolio_sequence_gap_03` — Finance Portfolio Sequence Gap
+  - Process: portfolio; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=portfolios; columns=amount, reason_code, status
+- [EXEC] `finance_portfolio_risk_event_timestamp_delay_01` — Finance Portfolio Timestamp Delay
+  - Process: portfolio; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_positions_customer_invalid_state_transition_04` — Finance Positions Invalid State Transition
+  - Process: positions; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_positions_position_aggregate_mismatch_05` — Finance Positions Aggregate Mismatch
+  - Process: positions; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_positions_position_cross_table_mismatch_06` — Finance Positions Cross Table Mismatch
+  - Process: positions; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `finance_positions_position_sequence_gap_03` — Finance Positions Sequence Gap
+  - Process: positions; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_positions_position_timestamp_delay_01` — Finance Positions Timestamp Delay
+  - Process: positions; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_positions_position_timestamp_out_of_order_02` — Finance Positions Timestamp Out Of Order
+  - Process: positions; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_pricing_card_invalid_state_transition_06` — Finance Pricing Invalid State Transition
+  - Process: pricing; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_pricing_market_data_future_timestamp_01` — Finance Pricing Future Timestamp
+  - Process: pricing; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `finance_pricing_market_data_timestamp_delay_03` — Finance Pricing Timestamp Delay
+  - Process: pricing; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_pricing_market_data_timestamp_out_of_order_04` — Finance Pricing Timestamp Out Of Order
+  - Process: pricing; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_pricing_payment_stale_timestamp_02` — Finance Pricing Stale Timestamp
+  - Process: pricing; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `finance_pricing_risk_event_sequence_gap_05` — Finance Pricing Sequence Gap
+  - Process: pricing; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_reconciliation_card_calculation_error_06` — Finance Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `finance_reconciliation_payment_cross_table_mismatch_02` — Finance Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `finance_reconciliation_position_aggregate_mismatch_01` — Finance Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_reconciliation_position_aggregate_mismatch_04` — Finance Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_reconciliation_position_calculation_error_03` — Finance Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `finance_reconciliation_risk_event_cross_table_mismatch_05` — Finance Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `finance_risk_customer_future_timestamp_04` — Finance Risk Future Timestamp
+  - Process: risk; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `finance_risk_trade_negative_numeric_value_01` — Finance Risk Negative Numeric Value
+  - Process: risk; Primitive: `negative_numeric_value`; Validator: `range_validator`
+- [EXEC] `finance_risk_trade_stale_timestamp_05` — Finance Risk Stale Timestamp
+  - Process: risk; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `finance_risk_trade_timestamp_delay_06` — Finance Risk Timestamp Delay
+  - Process: risk; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_risk_trade_value_above_threshold_02` — Finance Risk Value Above Threshold
+  - Process: risk; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `finance_risk_trade_value_below_threshold_03` — Finance Risk Value Below Threshold
+  - Process: risk; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `finance_settlement_customer_invalid_state_transition_04` — Finance Settlement Invalid State Transition
+  - Process: settlement; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_settlement_risk_event_aggregate_mismatch_03` — Finance Settlement Aggregate Mismatch
+  - Process: settlement; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_settlement_transaction_settlement_delay_01` — Finance Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_settlement_transaction_settlement_delay_05` — Finance Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_settlement_transaction_timestamp_delay_02` — Finance Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_settlement_transaction_timestamp_delay_06` — Finance Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_trading_card_timestamp_delay_03` — Finance Trading Timestamp Delay
+  - Process: trading; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `finance_trading_risk_event_stale_timestamp_02` — Finance Trading Stale Timestamp
+  - Process: trading; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `finance_trading_trade_aggregate_mismatch_07` — Finance Trading Aggregate Mismatch
+  - Process: trading; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `finance_trading_trade_future_timestamp_01` — Finance Trading Future Timestamp
+  - Process: trading; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `finance_trading_trade_invalid_state_transition_06` — Finance Trading Invalid State Transition
+  - Process: trading; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `finance_trading_trade_sequence_gap_05` — Finance Trading Sequence Gap
+  - Process: trading; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `finance_trading_trade_timestamp_out_of_order_04` — Finance Trading Timestamp Out Of Order
+  - Process: trading; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `finance_currency_conversion_error` — Finance Currency Conversion Error
+  - Process: transactions; Primitive: `invalid_datatype`; Validator: `datatype_validator`
+- [EXEC] `finance_duplicate_trade` — Finance Duplicate Trade
+  - Process: transactions; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `finance_fee_miscalculation` — Finance Fee Miscalculation
+  - Process: transactions; Primitive: `negative_numeric_value`; Validator: `policy_validator`
+- [EXEC] `finance_month_end_spike` — Finance Month-End Spike
+  - Process: transactions; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [CUSTOM] `finance_settlement_delay` — Finance Settlement Delay
+  - Process: transactions; Primitive: `timestamp_delay`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `finance_transactions_customer_invalid_state_transition_01` — Finance Transactions Invalid State Transition
+  - Process: transactions; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+
+### Healthcare (80)
+
+- [EXEC] `healthcare_care_coordination_payment_geographic_jump_05` — Healthcare Care Coordination Geographic Jump
+  - Process: care_coordination; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `healthcare_care_coordination_provider_availability_failure_03` — Healthcare Care Coordination Availability Failure
+  - Process: care_coordination; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `healthcare_care_coordination_provider_duplicate_retry_01` — Healthcare Care Coordination Duplicate Retry
+  - Process: care_coordination; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_care_coordination_provider_duplicate_transaction_02` — Healthcare Care Coordination Duplicate Transaction
+  - Process: care_coordination; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_care_coordination_provider_policy_violation_06` — Healthcare Care Coordination Policy Violation
+  - Process: care_coordination; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `healthcare_care_coordination_provider_timeout_violation_04` — Healthcare Care Coordination Timeout Violation
+  - Process: care_coordination; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `healthcare_claims_claim_coverage_limit_violation_01` — Healthcare Claims Coverage Limit Violation
+  - Process: claims; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `healthcare_claims_claim_policy_violation_02` — Healthcare Claims Policy Violation
+  - Process: claims; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `healthcare_claims_claim_timestamp_delay_04` — Healthcare Claims Timestamp Delay
+  - Process: claims; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `healthcare_claims_diagnose_invalid_reference_03` — Healthcare Claims Invalid Reference
+  - Process: claims; Primitive: `invalid_reference`; Validator: `referential_integrity_validator`
+- [EXEC] `healthcare_duplicate_claim` — Healthcare Duplicate Claim
+  - Process: claims; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [CUSTOM] `healthcare_ghost_provider` — Healthcare Ghost Provider
+  - Process: claims; Primitive: `invalid_reference`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `healthcare_late_insurance_approval` — Healthcare Late Insurance Approval
+  - Process: claims; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [SPEC] `healthcare_compliance_diagnose_aggregate_mismatch_01` — Healthcare Compliance Aggregate Mismatch
+  - Process: compliance; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `healthcare_compliance_diagnose_calculation_error_03` — Healthcare Compliance Calculation Error
+  - Process: compliance; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_compliance_diagnose_capacity_exceeded_04` — Healthcare Compliance Capacity Exceeded
+  - Process: compliance; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `healthcare_compliance_diagnose_cross_table_mismatch_02` — Healthcare Compliance Cross Table Mismatch
+  - Process: compliance; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_compliance_diagnose_volume_spike_05` — Healthcare Compliance Volume Spike
+  - Process: compliance; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_compliance_prior_authorization_volume_drop_06` — Healthcare Compliance Volume Drop
+  - Process: compliance; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_diagnosis_diagnose_calculation_error_04` — Healthcare Diagnosis Calculation Error
+  - Process: diagnosis; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_diagnosis_diagnose_capacity_exceeded_05` — Healthcare Diagnosis Capacity Exceeded
+  - Process: diagnosis; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `healthcare_diagnosis_diagnose_cross_table_mismatch_03` — Healthcare Diagnosis Cross Table Mismatch
+  - Process: diagnosis; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_diagnosis_diagnose_invalid_state_transition_01` — Healthcare Diagnosis Invalid State Transition
+  - Process: diagnosis; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `healthcare_diagnosis_diagnose_volume_spike_06` — Healthcare Diagnosis Volume Spike
+  - Process: diagnosis; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_diagnosis_prior_authorization_aggregate_mismatch_02` — Healthcare Diagnosis Aggregate Mismatch
+  - Process: diagnosis; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `healthcare_missing_diagnosis` — Healthcare Missing Diagnosis
+  - Process: diagnosis; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `healthcare_eligibility_claim_capacity_exceeded_03` — Healthcare Eligibility Capacity Exceeded
+  - Process: eligibility; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `healthcare_eligibility_claim_cross_table_mismatch_01` — Healthcare Eligibility Cross Table Mismatch
+  - Process: eligibility; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_eligibility_claim_duplicate_retry_07` — Healthcare Eligibility Duplicate Retry
+  - Process: eligibility; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_eligibility_claim_volume_spike_04` — Healthcare Eligibility Volume Spike
+  - Process: eligibility; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_eligibility_diagnose_retry_burst_06` — Healthcare Eligibility Retry Burst
+  - Process: eligibility; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `healthcare_eligibility_payment_calculation_error_02` — Healthcare Eligibility Calculation Error
+  - Process: eligibility; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_eligibility_prior_authorization_volume_drop_05` — Healthcare Eligibility Volume Drop
+  - Process: eligibility; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [SPEC] `healthcare_patient_registration_patient_distribution_shift_06` — Healthcare Patient Registration Distribution Shift
+  - Process: patient_registration; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: primitives=distribution_shift; validators=distribution_validator
+- [EXEC] `healthcare_patient_registration_patient_geographic_jump_02` — Healthcare Patient Registration Geographic Jump
+  - Process: patient_registration; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `healthcare_patient_registration_patient_policy_violation_03` — Healthcare Patient Registration Policy Violation
+  - Process: patient_registration; Primitive: `policy_violation`; Validator: `policy_validator`
+- [SPEC] `healthcare_patient_registration_patient_schema_change_07` — Healthcare Patient Registration Schema Change
+  - Process: patient_registration; Primitive: `schema_change`; Validator: `schema_validator`
+  - Later blockers: primitives=schema_change; validators=schema_validator
+- [EXEC] `healthcare_patient_registration_patient_timeout_violation_01` — Healthcare Patient Registration Timeout Violation
+  - Process: patient_registration; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [SPEC] `healthcare_patient_registration_payment_format_corruption_05` — Healthcare Patient Registration Format Corruption
+  - Process: patient_registration; Primitive: `format_corruption`; Validator: `datatype_validator`
+  - Later blockers: primitives=format_corruption
+- [SPEC] `healthcare_patient_registration_prior_authorization_identity_mismatch_04` — Healthcare Patient Registration Identity Mismatch
+  - Process: patient_registration; Primitive: `identity_mismatch`; Validator: `identity_validator`
+  - Later blockers: primitives=identity_mismatch; validators=identity_validator
+- [EXEC] `healthcare_payments_diagnose_calculation_error_03` — Healthcare Payments Calculation Error
+  - Process: payments; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_payments_payment_aggregate_mismatch_06` — Healthcare Payments Aggregate Mismatch
+  - Process: payments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `healthcare_payments_payment_calculation_error_07` — Healthcare Payments Calculation Error
+  - Process: payments; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_payments_payment_duplicate_retry_01` — Healthcare Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_payments_payment_duplicate_retry_05` — Healthcare Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_payments_payment_timeout_violation_04` — Healthcare Payments Timeout Violation
+  - Process: payments; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `healthcare_payments_prior_authorization_aggregate_mismatch_02` — Healthcare Payments Aggregate Mismatch
+  - Process: payments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [SPEC] `healthcare_pharmacy_diagnose_aggregate_mismatch_03` — Healthcare Pharmacy Aggregate Mismatch
+  - Process: pharmacy; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, risk_score
+- [EXEC] `healthcare_pharmacy_prior_authorization_invalid_state_transition_02` — Healthcare Pharmacy Invalid State Transition
+  - Process: pharmacy; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `healthcare_pharmacy_visit_calculation_error_05` — Healthcare Pharmacy Calculation Error
+  - Process: pharmacy; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_pharmacy_visit_capacity_exceeded_06` — Healthcare Pharmacy Capacity Exceeded
+  - Process: pharmacy; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `healthcare_pharmacy_visit_cross_table_mismatch_04` — Healthcare Pharmacy Cross Table Mismatch
+  - Process: pharmacy; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_pharmacy_visit_sequence_gap_01` — Healthcare Pharmacy Sequence Gap
+  - Process: pharmacy; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `healthcare_invalid_procedure` — Healthcare Invalid Procedure
+  - Process: procedures; Primitive: `invalid_datatype`; Validator: `datatype_validator`
+- [EXEC] `healthcare_procedures_diagnose_volume_drop_06` — Healthcare Procedures Volume Drop
+  - Process: procedures; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_procedures_payment_cross_table_mismatch_02` — Healthcare Procedures Cross Table Mismatch
+  - Process: procedures; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_procedures_prior_authorization_volume_spike_05` — Healthcare Procedures Volume Spike
+  - Process: procedures; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_procedures_procedure_aggregate_mismatch_01` — Healthcare Procedures Aggregate Mismatch
+  - Process: procedures; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `healthcare_procedures_procedure_calculation_error_03` — Healthcare Procedures Calculation Error
+  - Process: procedures; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_procedures_procedure_capacity_exceeded_04` — Healthcare Procedures Capacity Exceeded
+  - Process: procedures; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `healthcare_provider_master_patient_duplicate_transaction_04` — Healthcare Provider Master Duplicate Transaction
+  - Process: provider_master; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_provider_master_prior_authorization_geographic_jump_07` — Healthcare Provider Master Geographic Jump
+  - Process: provider_master; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `healthcare_provider_master_provider_availability_failure_05` — Healthcare Provider Master Availability Failure
+  - Process: provider_master; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `healthcare_provider_master_provider_duplicate_retry_03` — Healthcare Provider Master Duplicate Retry
+  - Process: provider_master; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `healthcare_provider_master_provider_retry_burst_02` — Healthcare Provider Master Retry Burst
+  - Process: provider_master; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `healthcare_provider_master_provider_timeout_violation_06` — Healthcare Provider Master Timeout Violation
+  - Process: provider_master; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `healthcare_provider_master_provider_volume_drop_01` — Healthcare Provider Master Volume Drop
+  - Process: provider_master; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `healthcare_reconciliation_claim_aggregate_mismatch_04` — Healthcare Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `healthcare_reconciliation_claim_calculation_error_03` — Healthcare Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_reconciliation_claim_calculation_error_06` — Healthcare Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_reconciliation_claim_cross_table_mismatch_02` — Healthcare Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_reconciliation_claim_cross_table_mismatch_05` — Healthcare Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [SPEC] `healthcare_reconciliation_patient_aggregate_mismatch_01` — Healthcare Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, scenario_status_code
+- [EXEC] `healthcare_visits_patient_calculation_error_07` — Healthcare Visits Calculation Error
+  - Process: visits; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `healthcare_visits_patient_timestamp_delay_01` — Healthcare Visits Timestamp Delay
+  - Process: visits; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `healthcare_visits_visit_aggregate_mismatch_05` — Healthcare Visits Aggregate Mismatch
+  - Process: visits; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `healthcare_visits_visit_cross_table_mismatch_06` — Healthcare Visits Cross Table Mismatch
+  - Process: visits; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `healthcare_visits_visit_invalid_state_transition_04` — Healthcare Visits Invalid State Transition
+  - Process: visits; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `healthcare_visits_visit_sequence_gap_03` — Healthcare Visits Sequence Gap
+  - Process: visits; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `healthcare_visits_visit_timestamp_out_of_order_02` — Healthcare Visits Timestamp Out Of Order
+  - Process: visits; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+
+### Insurance (75)
+
+- [EXEC] `insurance_claims_claim_coverage_limit_violation_01` — Insurance Claims Coverage Limit Violation
+  - Process: claims; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `insurance_claims_claim_invalid_reference_03` — Insurance Claims Invalid Reference
+  - Process: claims; Primitive: `invalid_reference`; Validator: `referential_integrity_validator`
+- [EXEC] `insurance_claims_claim_policy_violation_02` — Insurance Claims Policy Violation
+  - Process: claims; Primitive: `policy_violation`; Validator: `policy_validator`
+- [CUSTOM] `insurance_coverage_exceeded` — Insurance Coverage Exceeded
+  - Process: claims; Primitive: `policy_violation`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `insurance_duplicate_claim` — Insurance Duplicate Claim
+  - Process: claims; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `insurance_suspicious_claim` — Insurance Suspicious Claim
+  - Process: claims; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `insurance_compliance_claim_aggregate_mismatch_02` — Insurance Compliance Aggregate Mismatch
+  - Process: compliance; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_compliance_claim_calculation_error_04` — Insurance Compliance Calculation Error
+  - Process: compliance; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `insurance_compliance_claim_capacity_exceeded_05` — Insurance Compliance Capacity Exceeded
+  - Process: compliance; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [SPEC] `insurance_compliance_claim_document_volume_spike_06` — Insurance Compliance Volume Spike
+  - Process: compliance; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_compliance_claim_invalid_state_transition_01` — Insurance Compliance Invalid State Transition
+  - Process: compliance; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `insurance_compliance_premium_cross_table_mismatch_03` — Insurance Compliance Cross Table Mismatch
+  - Process: compliance; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [SPEC] `insurance_coverage_claim_document_calculation_error_06` — Insurance Coverage Calculation Error
+  - Process: coverage; Primitive: `calculation_error`; Validator: `calculation_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_coverage_policie_aggregate_mismatch_04` — Insurance Coverage Aggregate Mismatch
+  - Process: coverage; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_coverage_policie_cross_table_mismatch_05` — Insurance Coverage Cross Table Mismatch
+  - Process: coverage; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_coverage_policie_sequence_gap_02` — Insurance Coverage Sequence Gap
+  - Process: coverage; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `insurance_coverage_policie_timestamp_out_of_order_01` — Insurance Coverage Timestamp Out Of Order
+  - Process: coverage; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `insurance_coverage_premium_invalid_state_transition_03` — Insurance Coverage Invalid State Transition
+  - Process: coverage; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `insurance_customer_customer_aggregate_mismatch_04` — Insurance Customer Aggregate Mismatch
+  - Process: customer; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `insurance_customer_customer_capacity_exceeded_07` — Insurance Customer Capacity Exceeded
+  - Process: customer; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `insurance_customer_customer_cross_table_mismatch_05` — Insurance Customer Cross Table Mismatch
+  - Process: customer; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_customer_customer_invalid_state_transition_03` — Insurance Customer Invalid State Transition
+  - Process: customer; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `insurance_customer_customer_sequence_gap_02` — Insurance Customer Sequence Gap
+  - Process: customer; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `insurance_customer_customer_timestamp_out_of_order_01` — Insurance Customer Timestamp Out Of Order
+  - Process: customer; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `insurance_customer_premium_calculation_error_06` — Insurance Customer Calculation Error
+  - Process: customer; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `insurance_deductible_claim_aggregate_mismatch_02` — Insurance Deductible Aggregate Mismatch
+  - Process: deductible; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_deductible_claim_calculation_error_04` — Insurance Deductible Calculation Error
+  - Process: deductible; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `insurance_deductible_claim_capacity_exceeded_05` — Insurance Deductible Capacity Exceeded
+  - Process: deductible; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `insurance_deductible_claim_cross_table_mismatch_03` — Insurance Deductible Cross Table Mismatch
+  - Process: deductible; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_deductible_claim_volume_spike_06` — Insurance Deductible Volume Spike
+  - Process: deductible; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `insurance_deductible_customer_invalid_state_transition_01` — Insurance Deductible Invalid State Transition
+  - Process: deductible; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `insurance_fraud_claim_document_stale_timestamp_02` — Insurance Fraud Stale Timestamp
+  - Process: fraud; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_fraud_claim_future_timestamp_01` — Insurance Fraud Future Timestamp
+  - Process: fraud; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `insurance_fraud_claim_invalid_state_transition_06` — Insurance Fraud Invalid State Transition
+  - Process: fraud; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `insurance_fraud_claim_sequence_gap_05` — Insurance Fraud Sequence Gap
+  - Process: fraud; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `insurance_fraud_claim_timestamp_out_of_order_04` — Insurance Fraud Timestamp Out Of Order
+  - Process: fraud; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `insurance_fraud_premium_timestamp_delay_03` — Insurance Fraud Timestamp Delay
+  - Process: fraud; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `insurance_policy_lifecycle_claim_document_volume_drop_01` — Insurance Policy Lifecycle Volume Drop
+  - Process: policy_lifecycle; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_policy_lifecycle_policie_availability_failure_05` — Insurance Policy Lifecycle Availability Failure
+  - Process: policy_lifecycle; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `insurance_policy_lifecycle_policie_duplicate_retry_03` — Insurance Policy Lifecycle Duplicate Retry
+  - Process: policy_lifecycle; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `insurance_policy_lifecycle_policie_duplicate_transaction_04` — Insurance Policy Lifecycle Duplicate Transaction
+  - Process: policy_lifecycle; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `insurance_policy_lifecycle_policie_timeout_violation_06` — Insurance Policy Lifecycle Timeout Violation
+  - Process: policy_lifecycle; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `insurance_policy_lifecycle_settlement_retry_burst_02` — Insurance Policy Lifecycle Retry Burst
+  - Process: policy_lifecycle; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `insurance_renewal_failure` — Insurance Renewal Failure
+  - Process: policy_lifecycle; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `insurance_premium_customer_invalid_state_transition_04` — Insurance Premium Invalid State Transition
+  - Process: premium; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `insurance_premium_miscalculation` — Insurance Premium Miscalculation
+  - Process: premium; Primitive: `negative_numeric_value`; Validator: `reconciliation_validator`
+  - Later blockers: validators=reconciliation_validator
+- [EXEC] `insurance_premium_premium_aggregate_mismatch_05` — Insurance Premium Aggregate Mismatch
+  - Process: premium; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_premium_premium_sequence_gap_03` — Insurance Premium Sequence Gap
+  - Process: premium; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `insurance_premium_premium_timestamp_delay_01` — Insurance Premium Timestamp Delay
+  - Process: premium; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `insurance_premium_premium_timestamp_out_of_order_02` — Insurance Premium Timestamp Out Of Order
+  - Process: premium; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `insurance_reconciliation_claim_aggregate_mismatch_04` — Insurance Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_reconciliation_claim_calculation_error_03` — Insurance Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `insurance_reconciliation_claim_calculation_error_06` — Insurance Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `insurance_reconciliation_claim_cross_table_mismatch_02` — Insurance Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_reconciliation_claim_cross_table_mismatch_05` — Insurance Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [SPEC] `insurance_reconciliation_customer_aggregate_mismatch_01` — Insurance Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, scenario_status_code
+- [EXEC] `insurance_renewal_policie_cross_table_mismatch_06` — Insurance Renewal Cross Table Mismatch
+  - Process: renewal; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_renewal_policie_invalid_state_transition_04` — Insurance Renewal Invalid State Transition
+  - Process: renewal; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `insurance_renewal_policie_sequence_gap_03` — Insurance Renewal Sequence Gap
+  - Process: renewal; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `insurance_renewal_policie_timestamp_delay_01` — Insurance Renewal Timestamp Delay
+  - Process: renewal; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `insurance_renewal_policie_timestamp_out_of_order_02` — Insurance Renewal Timestamp Out Of Order
+  - Process: renewal; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `insurance_renewal_settlement_aggregate_mismatch_05` — Insurance Renewal Aggregate Mismatch
+  - Process: renewal; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [SPEC] `insurance_settlement_claim_document_invalid_state_transition_04` — Insurance Settlement Invalid State Transition
+  - Process: settlement; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_settlement_customer_settlement_delay_01` — Insurance Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `insurance_settlement_settlement_aggregate_mismatch_03` — Insurance Settlement Aggregate Mismatch
+  - Process: settlement; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `insurance_settlement_settlement_settlement_delay_05` — Insurance Settlement Settlement Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `insurance_settlement_settlement_timestamp_delay_02` — Insurance Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `insurance_settlement_settlement_timestamp_delay_06` — Insurance Settlement Timestamp Delay
+  - Process: settlement; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `insurance_underwriting_claim_document_volume_drop_05` — Insurance Underwriting Volume Drop
+  - Process: underwriting; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=claim_documents; columns=amount, claim_document_id, reason_code
+- [EXEC] `insurance_underwriting_policie_capacity_exceeded_03` — Insurance Underwriting Capacity Exceeded
+  - Process: underwriting; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `insurance_underwriting_policie_cross_table_mismatch_01` — Insurance Underwriting Cross Table Mismatch
+  - Process: underwriting; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `insurance_underwriting_policie_duplicate_retry_07` — Insurance Underwriting Duplicate Retry
+  - Process: underwriting; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `insurance_underwriting_policie_volume_spike_04` — Insurance Underwriting Volume Spike
+  - Process: underwriting; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `insurance_underwriting_premium_retry_burst_06` — Insurance Underwriting Retry Burst
+  - Process: underwriting; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `insurance_underwriting_settlement_calculation_error_02` — Insurance Underwriting Calculation Error
+  - Process: underwriting; Primitive: `calculation_error`; Validator: `calculation_validator`
+
+### Logistics (75)
+
+- [EXEC] `logistics_billing_shipment_aggregate_mismatch_05` — Logistics Billing Aggregate Mismatch
+  - Process: billing; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `logistics_billing_shipment_invalid_state_transition_04` — Logistics Billing Invalid State Transition
+  - Process: billing; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `logistics_billing_shipment_sequence_gap_03` — Logistics Billing Sequence Gap
+  - Process: billing; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_billing_shipment_timestamp_delay_01` — Logistics Billing Timestamp Delay
+  - Process: billing; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_billing_shipment_timestamp_out_of_order_02` — Logistics Billing Timestamp Out Of Order
+  - Process: billing; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [SPEC] `logistics_carrier_management_carrier_availability_failure_03` — Logistics Carrier Management Availability Failure
+  - Process: carrier_management; Primitive: `availability_failure`; Validator: `availability_validator`
+  - Later blockers: tables=carriers; columns=amount
+- [SPEC] `logistics_carrier_management_carrier_duplicate_transaction_02` — Logistics Carrier Management Duplicate Transaction
+  - Process: carrier_management; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+  - Later blockers: tables=carriers; columns=amount, reconciliation_group_id
+- [SPEC] `logistics_carrier_management_carrier_policy_violation_06` — Logistics Carrier Management Policy Violation
+  - Process: carrier_management; Primitive: `policy_violation`; Validator: `policy_validator`
+  - Later blockers: tables=carriers; columns=amount
+- [EXEC] `logistics_carrier_management_customer_duplicate_retry_01` — Logistics Carrier Management Duplicate Retry
+  - Process: carrier_management; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `logistics_carrier_management_exception_alert_timeout_violation_04` — Logistics Carrier Management Timeout Violation
+  - Process: carrier_management; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `logistics_carrier_management_gps_event_geographic_jump_05` — Logistics Carrier Management Geographic Jump
+  - Process: carrier_management; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `logistics_cold_chain_delivery_record_temperature_threshold_breach_01` — Logistics Cold Chain Temperature Threshold Breach
+  - Process: cold_chain; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `logistics_cold_chain_delivery_record_temperature_threshold_breach_04` — Logistics Cold Chain Temperature Threshold Breach
+  - Process: cold_chain; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `logistics_cold_chain_delivery_record_timestamp_delay_05` — Logistics Cold Chain Timestamp Delay
+  - Process: cold_chain; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_cold_chain_delivery_record_value_above_threshold_06` — Logistics Cold Chain Value Above Threshold
+  - Process: cold_chain; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `logistics_cold_chain_exception_alert_timestamp_delay_02` — Logistics Cold Chain Timestamp Delay
+  - Process: cold_chain; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_cold_chain_shipment_value_above_threshold_03` — Logistics Cold Chain Value Above Threshold
+  - Process: cold_chain; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `logistics_customs_exception_alert_cross_table_mismatch_06` — Logistics Customs Cross Table Mismatch
+  - Process: customs; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_customs_shipment_aggregate_mismatch_05` — Logistics Customs Aggregate Mismatch
+  - Process: customs; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `logistics_customs_shipment_invalid_state_transition_04` — Logistics Customs Invalid State Transition
+  - Process: customs; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `logistics_customs_shipment_sequence_gap_03` — Logistics Customs Sequence Gap
+  - Process: customs; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_customs_shipment_timestamp_delay_01` — Logistics Customs Timestamp Delay
+  - Process: customs; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_customs_shipment_timestamp_out_of_order_02` — Logistics Customs Timestamp Out Of Order
+  - Process: customs; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [CUSTOM] `logistics_cold_chain_failure` — Logistics Cold Chain Failure
+  - Process: delivery; Primitive: `value_above_threshold`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [SPEC] `logistics_delivery_customer_aggregate_mismatch_04` — Logistics Delivery Aggregate Mismatch
+  - Process: delivery; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, scenario_status_code
+- [EXEC] `logistics_delivery_delivery_record_cross_table_mismatch_05` — Logistics Delivery Cross Table Mismatch
+  - Process: delivery; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_delivery_delivery_record_invalid_state_transition_03` — Logistics Delivery Invalid State Transition
+  - Process: delivery; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `logistics_delivery_delivery_record_sequence_gap_02` — Logistics Delivery Sequence Gap
+  - Process: delivery; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_delivery_delivery_record_timestamp_out_of_order_01` — Logistics Delivery Timestamp Out Of Order
+  - Process: delivery; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `logistics_exceptions_customer_invalid_state_transition_01` — Logistics Exceptions Invalid State Transition
+  - Process: exceptions; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [SPEC] `logistics_exceptions_tracking_event_aggregate_mismatch_02` — Logistics Exceptions Aggregate Mismatch
+  - Process: exceptions; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `logistics_exceptions_tracking_event_calculation_error_04` — Logistics Exceptions Calculation Error
+  - Process: exceptions; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `logistics_exceptions_tracking_event_capacity_exceeded_05` — Logistics Exceptions Capacity Exceeded
+  - Process: exceptions; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `logistics_exceptions_tracking_event_cross_table_mismatch_03` — Logistics Exceptions Cross Table Mismatch
+  - Process: exceptions; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_exceptions_tracking_event_volume_spike_06` — Logistics Exceptions Volume Spike
+  - Process: exceptions; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `logistics_gps_exception_alert_timestamp_delay_05` — Logistics Gps Timestamp Delay
+  - Process: gps; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_gps_gps_event_geographic_jump_01` — Logistics Gps Geographic Jump
+  - Process: gps; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `logistics_gps_gps_event_geographic_jump_04` — Logistics Gps Geographic Jump
+  - Process: gps; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `logistics_gps_gps_event_sequence_gap_03` — Logistics Gps Sequence Gap
+  - Process: gps; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_gps_gps_event_timestamp_delay_02` — Logistics Gps Timestamp Delay
+  - Process: gps; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_gps_jump` — Logistics GPS Jump
+  - Process: gps; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `logistics_reconciliation_customer_aggregate_mismatch_01` — Logistics Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount, scenario_status_code
+- [EXEC] `logistics_reconciliation_exception_alert_aggregate_mismatch_04` — Logistics Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `logistics_reconciliation_gps_event_cross_table_mismatch_05` — Logistics Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_reconciliation_shipment_calculation_error_03` — Logistics Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `logistics_reconciliation_shipment_cross_table_mismatch_02` — Logistics Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_routing_gps_event_timestamp_delay_05` — Logistics Routing Timestamp Delay
+  - Process: routing; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [SPEC] `logistics_routing_route_geographic_jump_01` — Logistics Routing Geographic Jump
+  - Process: routing; Primitive: `geographic_jump`; Validator: `geographic_validator`
+  - Later blockers: tables=routes; columns=amount
+- [SPEC] `logistics_routing_route_geographic_jump_04` — Logistics Routing Geographic Jump
+  - Process: routing; Primitive: `geographic_jump`; Validator: `geographic_validator`
+  - Later blockers: tables=routes; columns=amount
+- [SPEC] `logistics_routing_route_sequence_gap_03` — Logistics Routing Sequence Gap
+  - Process: routing; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=routes; columns=amount
+- [SPEC] `logistics_routing_route_sequence_gap_06` — Logistics Routing Sequence Gap
+  - Process: routing; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=routes; columns=amount, risk_score
+- [SPEC] `logistics_routing_route_timestamp_delay_02` — Logistics Routing Timestamp Delay
+  - Process: routing; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=routes; columns=amount
+- [EXEC] `logistics_customs_delay` — Logistics Customs Delay
+  - Process: shipment_creation; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `logistics_shipment_creation_customer_availability_failure_04` — Logistics Shipment Creation Availability Failure
+  - Process: shipment_creation; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `logistics_shipment_creation_exception_alert_duplicate_transaction_03` — Logistics Shipment Creation Duplicate Transaction
+  - Process: shipment_creation; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `logistics_shipment_creation_shipment_duplicate_retry_02` — Logistics Shipment Creation Duplicate Retry
+  - Process: shipment_creation; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `logistics_shipment_creation_shipment_retry_burst_01` — Logistics Shipment Creation Retry Burst
+  - Process: shipment_creation; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `logistics_shipment_creation_shipment_timeout_violation_05` — Logistics Shipment Creation Timeout Violation
+  - Process: shipment_creation; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `logistics_support_customer_timestamp_delay_01` — Logistics Support Timestamp Delay
+  - Process: support; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_support_driver_sequence_gap_03` — Logistics Support Sequence Gap
+  - Process: support; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_support_driver_timestamp_out_of_order_02` — Logistics Support Timestamp Out Of Order
+  - Process: support; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `logistics_support_exception_alert_invalid_state_transition_04` — Logistics Support Invalid State Transition
+  - Process: support; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `logistics_support_gps_event_aggregate_mismatch_05` — Logistics Support Aggregate Mismatch
+  - Process: support; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `logistics_late_delivery` — Logistics Late Delivery
+  - Process: tracking; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `logistics_lost_shipment` — Logistics Lost Shipment
+  - Process: tracking; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `logistics_tracking_customer_geographic_jump_01` — Logistics Tracking Geographic Jump
+  - Process: tracking; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `logistics_tracking_tracking_event_geographic_jump_04` — Logistics Tracking Geographic Jump
+  - Process: tracking; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `logistics_tracking_tracking_event_sequence_gap_03` — Logistics Tracking Sequence Gap
+  - Process: tracking; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_tracking_tracking_event_timestamp_delay_02` — Logistics Tracking Timestamp Delay
+  - Process: tracking; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `logistics_warehouse_customer_sequence_gap_01` — Logistics Warehouse Sequence Gap
+  - Process: warehouse; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `logistics_warehouse_warehouse_aggregate_mismatch_03` — Logistics Warehouse Aggregate Mismatch
+  - Process: warehouse; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `logistics_warehouse_warehouse_calculation_error_05` — Logistics Warehouse Calculation Error
+  - Process: warehouse; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `logistics_warehouse_warehouse_capacity_exceeded_06` — Logistics Warehouse Capacity Exceeded
+  - Process: warehouse; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `logistics_warehouse_warehouse_cross_table_mismatch_04` — Logistics Warehouse Cross Table Mismatch
+  - Process: warehouse; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `logistics_warehouse_warehouse_invalid_state_transition_02` — Logistics Warehouse Invalid State Transition
+  - Process: warehouse; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+
+### Manufacturing (75)
+
+- [EXEC] `manufacturing_capacity_factorie_volume_spike_04` — Manufacturing Capacity Volume Spike
+  - Process: capacity; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_capacity_production_line_calculation_error_02` — Manufacturing Capacity Calculation Error
+  - Process: capacity; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `manufacturing_capacity_production_line_capacity_exceeded_03` — Manufacturing Capacity Capacity Exceeded
+  - Process: capacity; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `manufacturing_capacity_production_line_cross_table_mismatch_01` — Manufacturing Capacity Cross Table Mismatch
+  - Process: capacity; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `manufacturing_capacity_production_line_retry_burst_06` — Manufacturing Capacity Retry Burst
+  - Process: capacity; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `manufacturing_capacity_production_line_volume_drop_05` — Manufacturing Capacity Volume Drop
+  - Process: capacity; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [SPEC] `manufacturing_downtime_downtime_event_capacity_exceeded_03` — Manufacturing Downtime Capacity Exceeded
+  - Process: downtime; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=downtime_events; columns=amount, event_timestamp
+- [SPEC] `manufacturing_downtime_downtime_event_cross_table_mismatch_01` — Manufacturing Downtime Cross Table Mismatch
+  - Process: downtime; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+  - Later blockers: tables=downtime_events; columns=amount, event_timestamp
+- [SPEC] `manufacturing_downtime_downtime_event_volume_spike_04` — Manufacturing Downtime Volume Spike
+  - Process: downtime; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=downtime_events; columns=amount, event_timestamp
+- [EXEC] `manufacturing_downtime_inventory_calculation_error_02` — Manufacturing Downtime Calculation Error
+  - Process: downtime; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `manufacturing_downtime_sensor_reading_volume_drop_05` — Manufacturing Downtime Volume Drop
+  - Process: downtime; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_downtime_work_order_retry_burst_06` — Manufacturing Downtime Retry Burst
+  - Process: downtime; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [SPEC] `manufacturing_inventory_inventory_item_aggregate_mismatch_04` — Manufacturing Inventory Aggregate Mismatch
+  - Process: inventory; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=inventory_items; columns=amount, event_timestamp
+- [SPEC] `manufacturing_inventory_inventory_item_capacity_exceeded_01` — Manufacturing Inventory Capacity Exceeded
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=inventory_items; columns=amount, event_timestamp
+- [SPEC] `manufacturing_inventory_inventory_item_capacity_exceeded_05` — Manufacturing Inventory Capacity Exceeded
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=inventory_items; columns=amount, event_timestamp
+- [SPEC] `manufacturing_inventory_inventory_item_inventory_oversell_02` — Manufacturing Inventory Inventory Oversell
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=inventory_items; columns=amount, event_timestamp
+- [SPEC] `manufacturing_inventory_inventory_item_negative_numeric_value_03` — Manufacturing Inventory Negative Numeric Value
+  - Process: inventory; Primitive: `negative_numeric_value`; Validator: `range_validator`
+  - Later blockers: tables=inventory_items; columns=amount, event_timestamp
+- [EXEC] `manufacturing_inventory_work_order_inventory_oversell_06` — Manufacturing Inventory Inventory Oversell
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [SPEC] `manufacturing_machine_operations_factorie_format_corruption_04` — Manufacturing Machine Operations Format Corruption
+  - Process: machine_operations; Primitive: `format_corruption`; Validator: `datatype_validator`
+  - Later blockers: primitives=format_corruption
+- [SPEC] `manufacturing_machine_operations_machine_distribution_shift_05` — Manufacturing Machine Operations Distribution Shift
+  - Process: machine_operations; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: primitives=distribution_shift; validators=distribution_validator
+- [EXEC] `manufacturing_machine_operations_machine_geographic_jump_01` — Manufacturing Machine Operations Geographic Jump
+  - Process: machine_operations; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [SPEC] `manufacturing_machine_operations_machine_identity_mismatch_03` — Manufacturing Machine Operations Identity Mismatch
+  - Process: machine_operations; Primitive: `identity_mismatch`; Validator: `identity_validator`
+  - Later blockers: primitives=identity_mismatch; validators=identity_validator
+- [EXEC] `manufacturing_machine_operations_machine_policy_violation_02` — Manufacturing Machine Operations Policy Violation
+  - Process: machine_operations; Primitive: `policy_violation`; Validator: `policy_validator`
+- [SPEC] `manufacturing_machine_operations_machine_schema_change_06` — Manufacturing Machine Operations Schema Change
+  - Process: machine_operations; Primitive: `schema_change`; Validator: `schema_validator`
+  - Later blockers: primitives=schema_change; validators=schema_validator
+- [SPEC] `manufacturing_machine_operations_sensor_reading_rare_high_value_activity_07` — Manufacturing Machine Operations Rare High Value Activity
+  - Process: machine_operations; Primitive: `rare_high_value_activity`; Validator: `distribution_validator`
+  - Later blockers: primitives=rare_high_value_activity; validators=distribution_validator
+- [EXEC] `manufacturing_maintenance_inventory_volume_drop_02` — Manufacturing Maintenance Volume Drop
+  - Process: maintenance; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [SPEC] `manufacturing_maintenance_maintenance_record_availability_failure_06` — Manufacturing Maintenance Availability Failure
+  - Process: maintenance; Primitive: `availability_failure`; Validator: `availability_validator`
+  - Later blockers: tables=maintenance_records; columns=amount, event_timestamp
+- [SPEC] `manufacturing_maintenance_maintenance_record_duplicate_retry_04` — Manufacturing Maintenance Duplicate Retry
+  - Process: maintenance; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+  - Later blockers: tables=maintenance_records; columns=amount, event_timestamp
+- [SPEC] `manufacturing_maintenance_maintenance_record_duplicate_transaction_05` — Manufacturing Maintenance Duplicate Transaction
+  - Process: maintenance; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+  - Later blockers: tables=maintenance_records; columns=amount, event_timestamp
+- [SPEC] `manufacturing_maintenance_maintenance_record_retry_burst_03` — Manufacturing Maintenance Retry Burst
+  - Process: maintenance; Primitive: `retry_burst`; Validator: `sequence_validator`
+  - Later blockers: tables=maintenance_records; columns=amount, event_timestamp
+- [EXEC] `manufacturing_maintenance_sensor_reading_volume_spike_01` — Manufacturing Maintenance Volume Spike
+  - Process: maintenance; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_plant_operations_factorie_availability_failure_01` — Manufacturing Plant Operations Availability Failure
+  - Process: plant_operations; Primitive: `availability_failure`; Validator: `availability_validator`
+- [SPEC] `manufacturing_plant_operations_factorie_distribution_shift_07` — Manufacturing Plant Operations Distribution Shift
+  - Process: plant_operations; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: primitives=distribution_shift; validators=distribution_validator
+- [SPEC] `manufacturing_plant_operations_factorie_format_corruption_06` — Manufacturing Plant Operations Format Corruption
+  - Process: plant_operations; Primitive: `format_corruption`; Validator: `datatype_validator`
+  - Later blockers: primitives=format_corruption
+- [EXEC] `manufacturing_plant_operations_factorie_geographic_jump_03` — Manufacturing Plant Operations Geographic Jump
+  - Process: plant_operations; Primitive: `geographic_jump`; Validator: `geographic_validator`
+- [EXEC] `manufacturing_plant_operations_factorie_timeout_violation_02` — Manufacturing Plant Operations Timeout Violation
+  - Process: plant_operations; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [SPEC] `manufacturing_plant_operations_inventory_identity_mismatch_05` — Manufacturing Plant Operations Identity Mismatch
+  - Process: plant_operations; Primitive: `identity_mismatch`; Validator: `identity_validator`
+  - Later blockers: primitives=identity_mismatch; validators=identity_validator
+- [EXEC] `manufacturing_plant_operations_sensor_reading_policy_violation_04` — Manufacturing Plant Operations Policy Violation
+  - Process: plant_operations; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `manufacturing_production_planning_factorie_defect_rate_spike_07` — Manufacturing Production Planning Defect Rate Spike
+  - Process: production_planning; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `manufacturing_production_planning_factorie_policy_violation_01` — Manufacturing Production Planning Policy Violation
+  - Process: production_planning; Primitive: `policy_violation`; Validator: `policy_validator`
+- [SPEC] `manufacturing_production_planning_production_order_distribution_shift_04` — Manufacturing Production Planning Distribution Shift
+  - Process: production_planning; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: tables=production_orders; columns=amount, event_timestamp; primitives=distribution_shift; validators=distribution_validator
+- [SPEC] `manufacturing_production_planning_production_order_format_corruption_03` — Manufacturing Production Planning Format Corruption
+  - Process: production_planning; Primitive: `format_corruption`; Validator: `datatype_validator`
+  - Later blockers: tables=production_orders; columns=amount, event_timestamp; primitives=format_corruption
+- [SPEC] `manufacturing_production_planning_production_order_identity_mismatch_02` — Manufacturing Production Planning Identity Mismatch
+  - Process: production_planning; Primitive: `identity_mismatch`; Validator: `identity_validator`
+  - Later blockers: tables=production_orders; columns=amount, event_timestamp; primitives=identity_mismatch; validators=identity_validator
+- [SPEC] `manufacturing_production_planning_production_order_rare_high_value_activity_06` — Manufacturing Production Planning Rare High Value Activity
+  - Process: production_planning; Primitive: `rare_high_value_activity`; Validator: `distribution_validator`
+  - Later blockers: tables=production_orders; columns=amount, event_timestamp; primitives=rare_high_value_activity; validators=distribution_validator
+- [SPEC] `manufacturing_production_planning_production_order_schema_change_05` — Manufacturing Production Planning Schema Change
+  - Process: production_planning; Primitive: `schema_change`; Validator: `schema_validator`
+  - Later blockers: tables=production_orders; columns=amount, event_timestamp; primitives=schema_change; validators=schema_validator
+- [CUSTOM] `manufacturing_defect_spike` — Manufacturing Defect Spike
+  - Process: quality; Primitive: `value_above_threshold`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `manufacturing_missing_quality_inspection` — Manufacturing Missing Quality Inspection
+  - Process: quality; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `manufacturing_quality_inventory_value_above_threshold_02` — Manufacturing Quality Value Above Threshold
+  - Process: quality; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `manufacturing_quality_quality_check_defect_rate_spike_01` — Manufacturing Quality Defect Rate Spike
+  - Process: quality; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `manufacturing_quality_quality_check_distribution_shift_04` — Manufacturing Quality Distribution Shift
+  - Process: quality; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: primitives=distribution_shift; validators=distribution_validator
+- [EXEC] `manufacturing_quality_quality_check_missing_child_record_03` — Manufacturing Quality Missing Child Record
+  - Process: quality; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `manufacturing_capacity_overflow` — Manufacturing Capacity Overflow
+  - Process: reconciliation; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `manufacturing_reconciliation_factorie_aggregate_mismatch_01` — Manufacturing Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `manufacturing_reconciliation_inventory_cross_table_mismatch_05` — Manufacturing Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `manufacturing_reconciliation_production_batche_calculation_error_03` — Manufacturing Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `manufacturing_reconciliation_production_batche_cross_table_mismatch_02` — Manufacturing Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `manufacturing_reconciliation_sensor_reading_aggregate_mismatch_04` — Manufacturing Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `manufacturing_machine_downtime` — Manufacturing Machine Downtime
+  - Process: safety; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `manufacturing_maintenance_delay` — Manufacturing Maintenance Delay
+  - Process: safety; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `manufacturing_safety_maintenance_order_aggregate_mismatch_02` — Manufacturing Safety Aggregate Mismatch
+  - Process: safety; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `manufacturing_safety_maintenance_order_calculation_error_04` — Manufacturing Safety Calculation Error
+  - Process: safety; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `manufacturing_safety_maintenance_order_cross_table_mismatch_03` — Manufacturing Safety Cross Table Mismatch
+  - Process: safety; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `manufacturing_safety_maintenance_order_invalid_state_transition_01` — Manufacturing Safety Invalid State Transition
+  - Process: safety; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `manufacturing_suppliers_factorie_volume_drop_04` — Manufacturing Suppliers Volume Drop
+  - Process: suppliers; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_suppliers_quality_check_calculation_error_01` — Manufacturing Suppliers Calculation Error
+  - Process: suppliers; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `manufacturing_suppliers_quality_check_capacity_exceeded_02` — Manufacturing Suppliers Capacity Exceeded
+  - Process: suppliers; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `manufacturing_suppliers_quality_check_duplicate_retry_06` — Manufacturing Suppliers Duplicate Retry
+  - Process: suppliers; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `manufacturing_suppliers_quality_check_retry_burst_05` — Manufacturing Suppliers Retry Burst
+  - Process: suppliers; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `manufacturing_suppliers_sensor_reading_volume_spike_03` — Manufacturing Suppliers Volume Spike
+  - Process: suppliers; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_work_orders_factorie_duplicate_retry_04` — Manufacturing Work Orders Duplicate Retry
+  - Process: work_orders; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `manufacturing_work_orders_sensor_reading_retry_burst_03` — Manufacturing Work Orders Retry Burst
+  - Process: work_orders; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `manufacturing_work_orders_work_order_availability_failure_06` — Manufacturing Work Orders Availability Failure
+  - Process: work_orders; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `manufacturing_work_orders_work_order_duplicate_transaction_05` — Manufacturing Work Orders Duplicate Transaction
+  - Process: work_orders; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `manufacturing_work_orders_work_order_volume_drop_02` — Manufacturing Work Orders Volume Drop
+  - Process: work_orders; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `manufacturing_work_orders_work_order_volume_spike_01` — Manufacturing Work Orders Volume Spike
+  - Process: work_orders; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+
+### Retail (75)
+
+- [EXEC] `retail_catalog_categorie_timestamp_delay_04` — Retail Catalog Timestamp Delay
+  - Process: catalog; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_catalog_product_future_timestamp_02` — Retail Catalog Future Timestamp
+  - Process: catalog; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_catalog_product_sequence_gap_06` — Retail Catalog Sequence Gap
+  - Process: catalog; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `retail_catalog_product_timestamp_out_of_order_05` — Retail Catalog Timestamp Out Of Order
+  - Process: catalog; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `retail_catalog_product_value_below_threshold_01` — Retail Catalog Value Below Threshold
+  - Process: catalog; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [SPEC] `retail_catalog_refund_event_stale_timestamp_03` — Retail Catalog Stale Timestamp
+  - Process: catalog; Primitive: `stale_timestamp`; Validator: `sla_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_customer_customer_future_timestamp_01` — Retail Customer Future Timestamp
+  - Process: customer; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_customer_customer_sequence_gap_05` — Retail Customer Sequence Gap
+  - Process: customer; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `retail_customer_customer_stale_timestamp_02` — Retail Customer Stale Timestamp
+  - Process: customer; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_customer_customer_timestamp_delay_03` — Retail Customer Timestamp Delay
+  - Process: customer; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_customer_customer_timestamp_out_of_order_04` — Retail Customer Timestamp Out Of Order
+  - Process: customer; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `retail_customer_promotion_invalid_state_transition_06` — Retail Customer Invalid State Transition
+  - Process: customer; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `retail_data_quality_control_categorie_defect_rate_spike_01` — Retail Data Quality Control Defect Rate Spike
+  - Process: data_quality_control; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_data_quality_control_categorie_defect_rate_spike_05` — Retail Data Quality Control Defect Rate Spike
+  - Process: data_quality_control; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `retail_data_quality_control_categorie_distribution_shift_04` — Retail Data Quality Control Distribution Shift
+  - Process: data_quality_control; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: primitives=distribution_shift; validators=distribution_validator
+- [EXEC] `retail_data_quality_control_categorie_missing_child_record_03` — Retail Data Quality Control Missing Child Record
+  - Process: data_quality_control; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [EXEC] `retail_data_quality_control_categorie_value_above_threshold_02` — Retail Data Quality Control Value Above Threshold
+  - Process: data_quality_control; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_fulfillment_categorie_timestamp_out_of_order_01` — Retail Fulfillment Timestamp Out Of Order
+  - Process: fulfillment; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [SPEC] `retail_fulfillment_refund_event_aggregate_mismatch_04` — Retail Fulfillment Aggregate Mismatch
+  - Process: fulfillment; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_fulfillment_shipment_cross_table_mismatch_05` — Retail Fulfillment Cross Table Mismatch
+  - Process: fulfillment; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `retail_fulfillment_shipment_invalid_state_transition_03` — Retail Fulfillment Invalid State Transition
+  - Process: fulfillment; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `retail_fulfillment_shipment_sequence_gap_02` — Retail Fulfillment Sequence Gap
+  - Process: fulfillment; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [SPEC] `retail_inventory_categorie_aggregate_mismatch_04` — Retail Inventory Aggregate Mismatch
+  - Process: inventory; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [EXEC] `retail_inventory_inventory_capacity_exceeded_01` — Retail Inventory Capacity Exceeded
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `retail_inventory_inventory_inventory_oversell_02` — Retail Inventory Inventory Oversell
+  - Process: inventory; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [SPEC] `retail_inventory_mismatch` — Retail Inventory Mismatch
+  - Process: inventory; Primitive: `negative_numeric_value`; Validator: `reconciliation_validator`
+  - Later blockers: validators=reconciliation_validator
+- [SPEC] `retail_inventory_refund_event_negative_numeric_value_03` — Retail Inventory Negative Numeric Value
+  - Process: inventory; Primitive: `negative_numeric_value`; Validator: `range_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_duplicate_order` — Retail Duplicate Order
+  - Process: order_management; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `retail_late_shipment` — Retail Late Shipment
+  - Process: order_management; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_order_management_promotion_volume_spike_03` — Retail Order Management Volume Spike
+  - Process: order_management; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [SPEC] `retail_order_management_refund_event_capacity_exceeded_02` — Retail Order Management Capacity Exceeded
+  - Process: order_management; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_order_management_sale_calculation_error_01` — Retail Order Management Calculation Error
+  - Process: order_management; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `retail_promotion_price_error` — Retail Promotion Price Error
+  - Process: order_management; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [CUSTOM] `retail_payment_retry` — Retail Payment Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `retail_payments_payment_aggregate_mismatch_02` — Retail Payments Aggregate Mismatch
+  - Process: payments; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `retail_payments_payment_calculation_error_03` — Retail Payments Calculation Error
+  - Process: payments; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `retail_payments_payment_duplicate_retry_01` — Retail Payments Duplicate Retry
+  - Process: payments; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `retail_payments_payment_timeout_violation_04` — Retail Payments Timeout Violation
+  - Process: payments; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `retail_pricing_categorie_timestamp_delay_04` — Retail Pricing Timestamp Delay
+  - Process: pricing; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_pricing_product_future_timestamp_02` — Retail Pricing Future Timestamp
+  - Process: pricing; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_pricing_product_sequence_gap_06` — Retail Pricing Sequence Gap
+  - Process: pricing; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `retail_pricing_product_stale_timestamp_03` — Retail Pricing Stale Timestamp
+  - Process: pricing; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_pricing_product_timestamp_out_of_order_05` — Retail Pricing Timestamp Out Of Order
+  - Process: pricing; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `retail_pricing_product_value_below_threshold_01` — Retail Pricing Value Below Threshold
+  - Process: pricing; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_promotions_promotion_aggregate_mismatch_05` — Retail Promotions Aggregate Mismatch
+  - Process: promotions; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `retail_promotions_promotion_cross_table_mismatch_06` — Retail Promotions Cross Table Mismatch
+  - Process: promotions; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `retail_promotions_promotion_invalid_state_transition_04` — Retail Promotions Invalid State Transition
+  - Process: promotions; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `retail_promotions_promotion_sequence_gap_03` — Retail Promotions Sequence Gap
+  - Process: promotions; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [SPEC] `retail_promotions_refund_event_timestamp_delay_01` — Retail Promotions Timestamp Delay
+  - Process: promotions; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_promotions_shipment_timestamp_out_of_order_02` — Retail Promotions Timestamp Out Of Order
+  - Process: promotions; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [SPEC] `retail_reconciliation_categorie_aggregate_mismatch_01` — Retail Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: columns=actual_amount, expected_amount
+- [SPEC] `retail_reconciliation_refund_event_aggregate_mismatch_04` — Retail Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_reconciliation_sale_calculation_error_03` — Retail Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `retail_reconciliation_sale_cross_table_mismatch_02` — Retail Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `retail_reconciliation_shipment_cross_table_mismatch_05` — Retail Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `retail_refunds_categorie_value_below_threshold_01` — Retail Refunds Value Below Threshold
+  - Process: refunds; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [SPEC] `retail_refunds_refund_event_timestamp_delay_04` — Retail Refunds Timestamp Delay
+  - Process: refunds; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=refund_events; columns=reason_code, refund_event_id
+- [EXEC] `retail_refunds_return_future_timestamp_02` — Retail Refunds Future Timestamp
+  - Process: refunds; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_refunds_return_stale_timestamp_03` — Retail Refunds Stale Timestamp
+  - Process: refunds; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_refunds_shipment_timestamp_out_of_order_05` — Retail Refunds Timestamp Out Of Order
+  - Process: refunds; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `retail_returns_return_future_timestamp_02` — Retail Returns Future Timestamp
+  - Process: returns; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_returns_return_stale_timestamp_03` — Retail Returns Stale Timestamp
+  - Process: returns; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_returns_return_timestamp_delay_04` — Retail Returns Timestamp Delay
+  - Process: returns; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_returns_return_timestamp_out_of_order_05` — Retail Returns Timestamp Out Of Order
+  - Process: returns; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `retail_returns_return_value_below_threshold_01` — Retail Returns Value Below Threshold
+  - Process: returns; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_stores_store_future_timestamp_03` — Retail Stores Future Timestamp
+  - Process: stores; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `retail_stores_store_stale_timestamp_04` — Retail Stores Stale Timestamp
+  - Process: stores; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_stores_store_timestamp_delay_05` — Retail Stores Timestamp Delay
+  - Process: stores; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_stores_store_value_above_threshold_01` — Retail Stores Value Above Threshold
+  - Process: stores; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_stores_store_value_below_threshold_02` — Retail Stores Value Below Threshold
+  - Process: stores; Primitive: `value_below_threshold`; Validator: `threshold_validator`
+- [EXEC] `retail_suppliers_supplier_invalid_state_transition_05` — Retail Suppliers Invalid State Transition
+  - Process: suppliers; Primitive: `invalid_state_transition`; Validator: `state_transition_validator`
+- [EXEC] `retail_suppliers_supplier_sequence_gap_04` — Retail Suppliers Sequence Gap
+  - Process: suppliers; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `retail_suppliers_supplier_stale_timestamp_01` — Retail Suppliers Stale Timestamp
+  - Process: suppliers; Primitive: `stale_timestamp`; Validator: `sla_validator`
+- [EXEC] `retail_suppliers_supplier_timestamp_delay_02` — Retail Suppliers Timestamp Delay
+  - Process: suppliers; Primitive: `timestamp_delay`; Validator: `sla_validator`
+- [EXEC] `retail_suppliers_supplier_timestamp_out_of_order_03` — Retail Suppliers Timestamp Out Of Order
+  - Process: suppliers; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+
+### Telecommunications (75)
+
+- [SPEC] `telecom_billing_mismatch` — Telecom Billing Mismatch
+  - Process: billing; Primitive: `negative_numeric_value`; Validator: `reconciliation_validator`
+  - Later blockers: validators=reconciliation_validator
+- [EXEC] `telecom_roaming_charge_error` — Telecom Roaming Charge Error
+  - Process: billing; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `telecommunications_billing_invoice_duplicate_retry_03` — Telecommunications Billing Duplicate Retry
+  - Process: billing; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_billing_invoice_duplicate_transaction_04` — Telecommunications Billing Duplicate Transaction
+  - Process: billing; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_billing_invoice_retry_burst_02` — Telecommunications Billing Retry Burst
+  - Process: billing; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_billing_invoice_volume_drop_01` — Telecommunications Billing Volume Drop
+  - Process: billing; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecom_network_outage` — Telecom Network Outage
+  - Process: data_usage; Primitive: `missing_entity`; Validator: `missing_record_validator`
+- [CUSTOM] `telecom_tower_congestion` — Telecom Tower Congestion
+  - Process: data_usage; Primitive: `value_above_threshold`; Validator: `scenario_specific_validator`
+  - Later blockers: validators=scenario_specific_validator
+- [EXEC] `telecommunications_data_usage_data_session_duplicate_event_01` — Telecommunications Data Usage Duplicate Event
+  - Process: data_usage; Primitive: `duplicate_event`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_data_usage_data_session_timestamp_out_of_order_02` — Telecommunications Data Usage Timestamp Out Of Order
+  - Process: data_usage; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [SPEC] `telecommunications_data_usage_network_qos_sample_sequence_gap_03` — Telecommunications Data Usage Sequence Gap
+  - Process: data_usage; Primitive: `sequence_gap`; Validator: `sequence_validator`
+  - Later blockers: tables=network_qos_samples; columns=network_qos_sample_id, reason_code
+- [EXEC] `telecommunications_data_usage_telecom_customer_volume_spike_04` — Telecommunications Data Usage Volume Spike
+  - Process: data_usage; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_fraud_billing_account_capacity_exceeded_01` — Telecommunications Fraud Capacity Exceeded
+  - Process: fraud; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `telecommunications_fraud_billing_account_duplicate_retry_05` — Telecommunications Fraud Duplicate Retry
+  - Process: fraud; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_fraud_billing_account_retry_burst_04` — Telecommunications Fraud Retry Burst
+  - Process: fraud; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_fraud_billing_account_volume_drop_03` — Telecommunications Fraud Volume Drop
+  - Process: fraud; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_fraud_billing_account_volume_spike_02` — Telecommunications Fraud Volume Spike
+  - Process: fraud; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_network_outages_network_event_defect_rate_spike_06` — Telecommunications Network Outages Defect Rate Spike
+  - Process: network_outages; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `telecommunications_network_outages_network_event_format_corruption_02` — Telecommunications Network Outages Format Corruption
+  - Process: network_outages; Primitive: `format_corruption`; Validator: `datatype_validator`
+  - Later blockers: primitives=format_corruption
+- [SPEC] `telecommunications_network_outages_network_event_identity_mismatch_01` — Telecommunications Network Outages Identity Mismatch
+  - Process: network_outages; Primitive: `identity_mismatch`; Validator: `identity_validator`
+  - Later blockers: primitives=identity_mismatch; validators=identity_validator
+- [SPEC] `telecommunications_network_outages_network_event_rare_high_value_activity_05` — Telecommunications Network Outages Rare High Value Activity
+  - Process: network_outages; Primitive: `rare_high_value_activity`; Validator: `distribution_validator`
+  - Later blockers: primitives=rare_high_value_activity; validators=distribution_validator
+- [SPEC] `telecommunications_network_outages_network_qos_sample_distribution_shift_03` — Telecommunications Network Outages Distribution Shift
+  - Process: network_outages; Primitive: `distribution_shift`; Validator: `distribution_validator`
+  - Later blockers: tables=network_qos_samples; columns=network_qos_sample_id, reason_code; primitives=distribution_shift; validators=distribution_validator
+- [SPEC] `telecommunications_network_outages_telecom_customer_schema_change_04` — Telecommunications Network Outages Schema Change
+  - Process: network_outages; Primitive: `schema_change`; Validator: `schema_validator`
+  - Later blockers: primitives=schema_change; validators=schema_validator
+- [SPEC] `telecommunications_plans_network_qos_sample_volume_drop_03` — Telecommunications Plans Volume Drop
+  - Process: plans; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+  - Later blockers: tables=network_qos_samples; columns=network_qos_sample_id, reason_code
+- [EXEC] `telecommunications_plans_plan_capacity_exceeded_01` — Telecommunications Plans Capacity Exceeded
+  - Process: plans; Primitive: `capacity_exceeded`; Validator: `capacity_validator`
+- [EXEC] `telecommunications_plans_plan_duplicate_retry_05` — Telecommunications Plans Duplicate Retry
+  - Process: plans; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_plans_plan_duplicate_transaction_06` — Telecommunications Plans Duplicate Transaction
+  - Process: plans; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_plans_plan_volume_spike_02` — Telecommunications Plans Volume Spike
+  - Process: plans; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_plans_telecom_customer_retry_burst_04` — Telecommunications Plans Retry Burst
+  - Process: plans; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_reconciliation_invoice_aggregate_mismatch_01` — Telecommunications Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `telecommunications_reconciliation_invoice_aggregate_mismatch_04` — Telecommunications Reconciliation Aggregate Mismatch
+  - Process: reconciliation; Primitive: `aggregate_mismatch`; Validator: `aggregate_balance_validator`
+- [EXEC] `telecommunications_reconciliation_invoice_calculation_error_03` — Telecommunications Reconciliation Calculation Error
+  - Process: reconciliation; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [EXEC] `telecommunications_reconciliation_invoice_cross_table_mismatch_02` — Telecommunications Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `telecommunications_reconciliation_invoice_cross_table_mismatch_05` — Telecommunications Reconciliation Cross Table Mismatch
+  - Process: reconciliation; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `telecommunications_roaming_call_detail_record_availability_failure_05` — Telecommunications Roaming Availability Failure
+  - Process: roaming; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `telecommunications_roaming_call_detail_record_duplicate_retry_03` — Telecommunications Roaming Duplicate Retry
+  - Process: roaming; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_roaming_call_detail_record_retry_burst_02` — Telecommunications Roaming Retry Burst
+  - Process: roaming; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_roaming_call_detail_record_timeout_violation_06` — Telecommunications Roaming Timeout Violation
+  - Process: roaming; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [EXEC] `telecommunications_roaming_call_detail_record_volume_drop_01` — Telecommunications Roaming Volume Drop
+  - Process: roaming; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_roaming_telecom_customer_duplicate_transaction_04` — Telecommunications Roaming Duplicate Transaction
+  - Process: roaming; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecom_sms_delay` — Telecom SMS Delay
+  - Process: sms_usage; Primitive: `future_timestamp`; Validator: `temporal_order_validator`
+- [EXEC] `telecommunications_sms_usage_sms_record_duplicate_event_05` — Telecommunications Sms Usage Duplicate Event
+  - Process: sms_usage; Primitive: `duplicate_event`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_sms_usage_sms_record_sequence_gap_03` — Telecommunications Sms Usage Sequence Gap
+  - Process: sms_usage; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_sms_usage_sms_record_timestamp_out_of_order_02` — Telecommunications Sms Usage Timestamp Out Of Order
+  - Process: sms_usage; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_sms_usage_sms_record_volume_spike_04` — Telecommunications Sms Usage Volume Spike
+  - Process: sms_usage; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_sms_usage_telecom_customer_duplicate_event_01` — Telecommunications Sms Usage Duplicate Event
+  - Process: sms_usage; Primitive: `duplicate_event`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_streaming_operations_data_session_dropped_call_rate_spike_02` — Telecommunications Streaming Operations Dropped Call Rate Spike
+  - Process: streaming_operations; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `telecommunications_streaming_operations_data_session_temperature_threshold_breach_03` — Telecommunications Streaming Operations Temperature Threshold Breach
+  - Process: streaming_operations; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [SPEC] `telecommunications_streaming_operations_network_qos_sample_settlement_delay_04` — Telecommunications Streaming Operations Settlement Delay
+  - Process: streaming_operations; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=network_qos_samples; columns=network_qos_sample_id, reason_code
+- [EXEC] `telecommunications_streaming_operations_support_ticket_coverage_limit_violation_05` — Telecommunications Streaming Operations Coverage Limit Violation
+  - Process: streaming_operations; Primitive: `policy_violation`; Validator: `policy_validator`
+- [EXEC] `telecommunications_streaming_operations_telecom_customer_defect_rate_spike_01` — Telecommunications Streaming Operations Defect Rate Spike
+  - Process: streaming_operations; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `telecommunications_subscriber_lifecycle_call_detail_record_grade_formula_error_06` — Telecommunications Subscriber Lifecycle Grade Formula Error
+  - Process: subscriber_lifecycle; Primitive: `calculation_error`; Validator: `calculation_validator`
+- [SPEC] `telecommunications_subscriber_lifecycle_subscriber_coverage_limit_violation_05` — Telecommunications Subscriber Lifecycle Coverage Limit Violation
+  - Process: subscriber_lifecycle; Primitive: `policy_violation`; Validator: `policy_validator`
+  - Later blockers: tables=subscribers; columns=amount, event_timestamp, network_qos_sample_id, reason_code
+- [SPEC] `telecommunications_subscriber_lifecycle_subscriber_defect_rate_spike_01` — Telecommunications Subscriber Lifecycle Defect Rate Spike
+  - Process: subscriber_lifecycle; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=subscribers; columns=amount, event_timestamp, network_qos_sample_id, reason_code
+- [SPEC] `telecommunications_subscriber_lifecycle_subscriber_dropped_call_rate_spike_02` — Telecommunications Subscriber Lifecycle Dropped Call Rate Spike
+  - Process: subscriber_lifecycle; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=subscribers; columns=amount, event_timestamp, network_qos_sample_id, reason_code
+- [SPEC] `telecommunications_subscriber_lifecycle_subscriber_settlement_delay_04` — Telecommunications Subscriber Lifecycle Settlement Delay
+  - Process: subscriber_lifecycle; Primitive: `timestamp_delay`; Validator: `sla_validator`
+  - Later blockers: tables=subscribers; columns=amount, event_timestamp, network_qos_sample_id, reason_code
+- [SPEC] `telecommunications_subscriber_lifecycle_subscriber_temperature_threshold_breach_03` — Telecommunications Subscriber Lifecycle Temperature Threshold Breach
+  - Process: subscriber_lifecycle; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+  - Later blockers: tables=subscribers; columns=amount, event_timestamp, network_qos_sample_id, reason_code
+- [EXEC] `telecommunications_support_call_detail_record_timeout_violation_06` — Telecommunications Support Timeout Violation
+  - Process: support; Primitive: `timeout_violation`; Validator: `sla_validator`
+- [SPEC] `telecommunications_support_network_qos_sample_availability_failure_05` — Telecommunications Support Availability Failure
+  - Process: support; Primitive: `availability_failure`; Validator: `availability_validator`
+  - Later blockers: tables=network_qos_samples; columns=network_qos_sample_id, reason_code
+- [EXEC] `telecommunications_support_support_ticket_duplicate_retry_03` — Telecommunications Support Duplicate Retry
+  - Process: support; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_support_support_ticket_duplicate_transaction_04` — Telecommunications Support Duplicate Transaction
+  - Process: support; Primitive: `duplicate_entity`; Validator: `duplicate_key_validator`
+- [EXEC] `telecommunications_support_support_ticket_retry_burst_02` — Telecommunications Support Retry Burst
+  - Process: support; Primitive: `retry_burst`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_support_support_ticket_volume_drop_01` — Telecommunications Support Volume Drop
+  - Process: support; Primitive: `volume_drop`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_tower_operations_call_detail_record_availability_failure_06` — Telecommunications Tower Operations Availability Failure
+  - Process: tower_operations; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `telecommunications_tower_operations_cell_tower_availability_failure_02` — Telecommunications Tower Operations Availability Failure
+  - Process: tower_operations; Primitive: `availability_failure`; Validator: `availability_validator`
+- [EXEC] `telecommunications_tower_operations_cell_tower_cross_table_mismatch_04` — Telecommunications Tower Operations Cross Table Mismatch
+  - Process: tower_operations; Primitive: `cross_table_mismatch`; Validator: `cross_table_consistency_validator`
+- [EXEC] `telecommunications_tower_operations_cell_tower_dropped_call_rate_spike_01` — Telecommunications Tower Operations Dropped Call Rate Spike
+  - Process: tower_operations; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `telecommunications_tower_operations_cell_tower_dropped_call_rate_spike_05` — Telecommunications Tower Operations Dropped Call Rate Spike
+  - Process: tower_operations; Primitive: `value_above_threshold`; Validator: `threshold_validator`
+- [EXEC] `telecommunications_tower_operations_cell_tower_volume_spike_03` — Telecommunications Tower Operations Volume Spike
+  - Process: tower_operations; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`
+- [EXEC] `telecommunications_voice_usage_call_detail_record_duplicate_event_01` — Telecommunications Voice Usage Duplicate Event
+  - Process: voice_usage; Primitive: `duplicate_event`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_voice_usage_call_detail_record_duplicate_event_05` — Telecommunications Voice Usage Duplicate Event
+  - Process: voice_usage; Primitive: `duplicate_event`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_voice_usage_call_detail_record_sequence_gap_03` — Telecommunications Voice Usage Sequence Gap
+  - Process: voice_usage; Primitive: `sequence_gap`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_voice_usage_call_detail_record_timestamp_out_of_order_02` — Telecommunications Voice Usage Timestamp Out Of Order
+  - Process: voice_usage; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_voice_usage_call_detail_record_timestamp_out_of_order_06` — Telecommunications Voice Usage Timestamp Out Of Order
+  - Process: voice_usage; Primitive: `timestamp_out_of_order`; Validator: `sequence_validator`
+- [EXEC] `telecommunications_voice_usage_telecom_customer_volume_spike_04` — Telecommunications Voice Usage Volume Spike
+  - Process: voice_usage; Primitive: `volume_spike`; Validator: `volume_anomaly_validator`

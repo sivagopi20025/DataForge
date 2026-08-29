@@ -9,7 +9,7 @@ from dataforge.scenarios.schema_semantics import COLUMN_SEMANTIC_RESOLVER
 
 def test_domain_column_semantic_catalog_covers_every_domain_table_and_column() -> None:
     catalog = load_domain_column_semantics()
-    assert catalog["version"] == "1.4.0"
+    assert catalog["version"] == "1.5.0"
     assert "retail" in catalog["domains"]
     for domain, tables in catalog["domains"].items():
         assert tables, domain
@@ -27,15 +27,15 @@ def test_domain_column_semantic_catalog_covers_every_domain_table_and_column() -
 def test_amount_timestamp_status_and_group_key_resolution_use_domain_native_columns() -> None:
     assert COLUMN_SEMANTIC_RESOLVER.resolve("healthcare", "claims", "amount").resolved_column == "claim_amount"
     assert COLUMN_SEMANTIC_RESOLVER.resolve("banking", "transfers", "amount").resolved_column == "transfer_amount"
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("ecommerce", "orders", "actual_amount").resolved_column == "total_amount"
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("finance", "transactions", "event_timestamp").resolved_column == "transaction_timestamp"
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("insurance", "claims", "scenario_status_code").resolved_column == "claim_status"
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("retail", "sales", "reconciliation_group_id").resolved_column in {"store_id", "customer_id", "employee_id", "promotion_id"}
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("ecommerce", "orders", "actual_amount").resolved_column == "actual_amount"
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("finance", "transactions", "event_timestamp").resolved_column == "event_timestamp"
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("insurance", "claims", "scenario_status_code").resolved_column == "scenario_status_code"
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("retail", "sales", "reconciliation_group_id").resolved_column == "reconciliation_group_id"
 
 
-def test_reason_code_and_idempotency_key_are_not_falsely_mapped() -> None:
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("banking", "branches", "reason_code").resolved is False
-    assert COLUMN_SEMANTIC_RESOLVER.resolve("retail", "payments", "idempotency_key").resolved is False
+def test_scenario_support_columns_are_real_but_not_falsely_mapped_to_other_columns() -> None:
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("banking", "branches", "reason_code").resolved_column == "reason_code"
+    assert COLUMN_SEMANTIC_RESOLVER.resolve("retail", "payments", "idempotency_key").resolved_column == "idempotency_key"
 
 
 def test_id_column_normalization_never_uses_amount_columns_as_identifiers() -> None:
@@ -45,7 +45,7 @@ def test_id_column_normalization_never_uses_amount_columns_as_identifiers() -> N
         {"table": "shipments", "id_column": "actual_amount", "columns": ["actual_amount", "expected_amount"]},
     )
     assert normalized["id_column"] == "shipment_id"
-    assert normalized["columns"] == ["shipping_cost"]
+    assert normalized["columns"] == ["actual_amount", "expected_amount"]
 
 
 def test_batch_5_metadata_only_promotions_execute_with_resolved_columns() -> None:

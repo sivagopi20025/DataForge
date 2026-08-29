@@ -26,9 +26,9 @@ BATCH_9_SCENARIOS = {
 def test_quality_audit_covers_every_runtime_capable_scenario() -> None:
     audit = yaml.safe_load(open("dataforge/scenarios/catalog/scenario_quality_audit.yaml", encoding="utf-8"))
     runtime = [item for item in expanded_scenario_items() if item.execution_status in {"executable", "custom_reference"}]
-    assert audit["total_runtime_capable"] == len(runtime) == 531
+    assert audit["total_runtime_capable"] == len(runtime) == 623
     assert len(audit["scenarios"]) == len(runtime)
-    assert audit["v1_ready"] == 531
+    assert audit["v1_ready"] == 623
     assert audit["needs_fix"] == 0
     assert set(audit["validator_independence_counts"]) <= {
         "strong_independent",
@@ -42,8 +42,8 @@ def test_quality_audit_covers_every_runtime_capable_scenario() -> None:
 def test_quality_summary_matches_audit_artifact() -> None:
     audit = yaml.safe_load(open("dataforge/scenarios/catalog/scenario_quality_audit.yaml", encoding="utf-8"))
     summary = build_scenario_quality_summary(audit)
-    assert summary["total_runtime_capable"] == 531
-    assert summary["v1_ready"] == 531
+    assert summary["total_runtime_capable"] == 623
+    assert summary["v1_ready"] == 623
     assert summary["needs_fix"] == 0
     assert summary["v1_quality_gate"]["requires_seed_determinism"] is True
 

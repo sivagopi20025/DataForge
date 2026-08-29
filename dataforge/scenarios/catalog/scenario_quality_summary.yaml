@@ -1,22 +1,22 @@
 version: 1.0.0
-total_runtime_capable: 531
-v1_ready: 531
+total_runtime_capable: 623
+v1_ready: 623
 needs_fix: 0
 validator_independence_counts:
   metadata_assisted: 9
-  partially_independent: 56
-  strong_independent: 466
+  partially_independent: 77
+  strong_independent: 537
 average_quality_score_by_domain:
-  banking: 9.77
-  ecommerce: 9.74
-  education: 9.71
-  finance: 9.74
-  healthcare: 9.73
-  insurance: 9.75
-  logistics: 9.76
-  manufacturing: 9.69
-  retail: 9.79
-  telecommunications: 9.8
+  banking: 9.76
+  ecommerce: 9.73
+  education: 9.67
+  finance: 9.73
+  healthcare: 9.69
+  insurance: 9.74
+  logistics: 9.75
+  manufacturing: 9.7
+  retail: 9.78
+  telecommunications: 9.79
 domains_needing_attention: {}
 audit_files:
   scenario_quality_audit: dataforge/scenarios/catalog/scenario_quality_audit.yaml

@@ -5,7 +5,7 @@ from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from .domains.retail.schemas import RETAIL_SPEC
-from .model import AUDIT_COLUMNS, Dataset, DomainSpec, SCD2_COLUMNS, TIME_HIERARCHY_COLUMNS
+from .model import AUDIT_COLUMNS, Dataset, DomainSpec, SCD2_COLUMNS, SCENARIO_SUPPORT_COLUMNS, TIME_HIERARCHY_COLUMNS
 from .reporting import build_validation_report
 
 
@@ -111,7 +111,7 @@ def validate(
                 failures += invalid and not (fk.nullable and value in ("", None))
             checks.append({"check": "referential_integrity", "table": table, "column": fk.column, "failures": failures, "status": "PASS" if failures == 0 else "FAIL"})
 
-        business_columns = [column for column in schema.columns if column not in set(AUDIT_COLUMNS) | set(TIME_HIERARCHY_COLUMNS) | set(SCD2_COLUMNS)]
+        business_columns = [column for column in schema.columns if column not in set(AUDIT_COLUMNS) | set(TIME_HIERARCHY_COLUMNS) | set(SCD2_COLUMNS) | set(SCENARIO_SUPPORT_COLUMNS)]
         for column in business_columns:
             if column not in rows[0]:
                 continue

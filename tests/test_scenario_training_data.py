@@ -15,7 +15,7 @@ def test_scenario_knowledge_jsonl_matches_active_catalog() -> None:
     path = TRAINING_DIR / "scenario_knowledge.jsonl"
     result = validate_scenario_knowledge_file(path)
     assert result.errors == []
-    assert result.row_count == len(expanded_scenario_items()) == 760
+    assert result.row_count == len(expanded_scenario_items()) == 810
 
 
 def test_instruction_seed_jsonl_has_five_valid_unique_prompts_per_scenario() -> None:

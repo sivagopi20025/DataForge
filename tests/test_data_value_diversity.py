@@ -15,8 +15,10 @@ from dataforge.domains.manufacturing.generators import ManufacturingGenerator
 from dataforge.domains.retail.generators import RetailGenerator
 from dataforge.domains.telecommunications.generators import TelecommunicationsGenerator
 from dataforge.exporter import export_run
+from dataforge.model import SCENARIO_SUPPORT_COLUMNS
 from dataforge.modes import build_artifacts
 from dataforge.synthetic_values import full_name
+from dataforge.validation import validate
 
 
 def _assert_no_small_sample_repetition(values: list[str]) -> None:
@@ -101,6 +103,7 @@ def test_banking_business_customer_names_are_not_generic_client_placeholders():
 
     assert business_rows
     assert all(" Client " not in row["customer_name"] for row in business_rows)
+    assert all(not row["customer_name"].split()[-1].isdigit() for row in business_rows)
     assert any("Capital" in row["customer_name"] or "Treasury" in row["customer_name"] for row in business_rows)
 
 
@@ -134,3 +137,35 @@ def test_generated_csv_exports_keep_headers_and_rows_aligned_for_all_domains(tmp
                 header = next(reader)
                 for row_index, row in enumerate(reader, 1):
                     assert len(row) == len(header), f"{domain}/{path.name} row {row_index} has shifted columns"
+
+
+def test_scenario_support_columns_are_generated_without_lowering_clean_quality():
+    for domain, generator_type in DOMAIN_GENERATORS.items():
+        spec = DOMAIN_SPECS[domain]
+        data = generator_type(40, seed=37).generate()
+        assert validate(data, spec)["quality_score"] == 100
+        for table, rows in data.items():
+            assert rows, f"{domain}/{table} should have rows for this sample"
+            assert set(SCENARIO_SUPPORT_COLUMNS) <= set(rows[0]), f"{domain}/{table} missing scenario support columns"
+            for row in rows[:10]:
+                assert row["idempotency_key"]
+                assert row["event_timestamp"]
+                assert row["expected_amount"] is not None
+                assert row["actual_amount"] is not None
+
+
+def test_scenario_support_enrichment_preserves_native_domain_reason_and_risk_values():
+    banking = BankingGenerator(300, seed=41).generate()
+    declined_authorizations = [row for row in banking["card_authorizations"] if row["authorization_status"] == "Declined"]
+    assert declined_authorizations
+    assert all(row["reason_code"] != "none" for row in declined_authorizations[:5])
+
+    manufacturing = ManufacturingGenerator(300, seed=42).generate()
+    warning_readings = [row for row in manufacturing["sensor_readings"] if row["quality_flag"] == "warning"]
+    assert warning_readings
+    assert all(row["reason_code"] == "maintenance_watch" for row in warning_readings[:5])
+
+    education = EducationGenerator(300, seed=43).generate()
+    non_good_standing = [row for row in education["academic_standing_events"] if row["standing_status"] != "good_standing"]
+    assert non_good_standing
+    assert all(row["reason_code"] != "none" for row in non_good_standing[:5])

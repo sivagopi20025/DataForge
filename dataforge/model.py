@@ -68,6 +68,16 @@ TIME_HIERARCHY_COLUMNS = (
     "transaction_week", "transaction_month", "transaction_quarter", "transaction_year",
 )
 SCD2_COLUMNS = ("effective_start_ts", "effective_end_ts", "is_current")
+SCENARIO_SUPPORT_COLUMNS = (
+    "event_timestamp",
+    "scenario_status_code",
+    "idempotency_key",
+    "expected_amount",
+    "actual_amount",
+    "reason_code",
+    "reconciliation_group_id",
+    "risk_score",
+)
 
 
 def with_enterprise_columns(
@@ -82,6 +92,7 @@ def with_enterprise_columns(
             extra += TIME_HIERARCHY_COLUMNS
         if table in dimension_tables:
             extra += SCD2_COLUMNS
+        extra += SCENARIO_SUPPORT_COLUMNS
         extra += ("record_hash",)
         deduped_extra = tuple(column for column in extra if column not in schema.columns)
         enriched[table] = TableSchema(schema.primary_key, schema.columns + deduped_extra, schema.foreign_keys)

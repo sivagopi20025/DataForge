@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import math
 import random
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
@@ -634,8 +635,10 @@ def volume_spike(context: PrimitiveExecutionContext) -> PrimitiveResult:
     affected_ids: list[Any] = []
     for offset, group in enumerate(selected_groups, 1):
         group_rows = [row for row in rows if row.get(group_column) == group]
-        baseline_rows.append({"baseline_id": f"VOL-SPIKE-{context.seed}-{offset:04d}", "table": table, "group_column": group_column, "group_value": group, "expected_count": len(group_rows), "anomaly_type": "spike", "threshold_ratio": "1.5"})
-        clone_count = max(1, int(len(group_rows) * Decimal("0.60")))
+        threshold_ratio = Decimal(str(context.parameters.get("threshold_ratio", "1.5")))
+        baseline_rows.append({"baseline_id": f"VOL-SPIKE-{context.seed}-{offset:04d}", "table": table, "group_column": group_column, "group_value": group, "expected_count": len(group_rows), "anomaly_type": "spike", "threshold_ratio": str(threshold_ratio)})
+        minimum_observed_count = math.ceil(float(Decimal(len(group_rows)) * threshold_ratio))
+        clone_count = max(1, minimum_observed_count - len(group_rows))
         clones = [copy.deepcopy(group_rows[index % len(group_rows)]) for index in range(clone_count)]
         for clone_offset, clone in enumerate(clones, 1):
             clone[id_column] = f"DF_SPIKE_{context.seed}_{offset}_{clone_offset}_{clone.get(id_column)}"

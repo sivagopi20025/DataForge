@@ -21,8 +21,8 @@ from dataforge.scenarios.catalog import (
 
 def test_expanded_scenario_library_has_target_size_unique_ids_and_valid_domains() -> None:
     items = expanded_scenario_items()
-    assert len(items) == 760
-    assert 700 <= len(items) <= 800
+    assert len(items) == 810
+    assert 700 <= len(items) <= 850
     assert len({item.scenario_id for item in items}) == len(items)
     assert {item.domain for item in items} == set(DOMAIN_SPECS)
     assert validate_expanded_scenario_library() == []
@@ -100,7 +100,7 @@ def test_table_and_column_gaps_are_explicitly_marked() -> None:
     domain_catalog = load_domain_table_catalog()
     coverage = load_scenario_table_coverage()["coverage"]
     coverage_by_id = {item["scenario_id"]: item for item in coverage}
-    assert len(coverage_by_id) == 760
+    assert len(coverage_by_id) == 810
 
     for item in expanded_scenario_items():
         row = coverage_by_id[item.scenario_id]

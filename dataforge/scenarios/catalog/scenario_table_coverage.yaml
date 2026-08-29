@@ -1,4 +1,4 @@
-version: 1.3.0
+version: 1.4.0
 coverage:
 - scenario_id: banking_accounts_card_authorization_sequence_gap_04
   domain: banking
@@ -16,11 +16,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_accounts_deposit_account_aggregate_mismatch_06
   domain: banking
   primary_table: deposit_accounts
@@ -194,21 +196,25 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_customer_onboarding_customer_duplicate_retry_02
   domain: banking
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_customer_onboarding_customer_duplicate_transaction_03
   domain: banking
   primary_table: customers
@@ -232,11 +238,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_customer_onboarding_customer_timeout_violation_05
   domain: banking
   primary_table: customers
@@ -251,11 +259,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_fees_payment_future_timestamp_04
   domain: banking
   primary_table: payments
@@ -380,11 +390,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_kyc_customer_negative_numeric_value_02
   domain: banking
   primary_table: customers
@@ -586,11 +598,13 @@ coverage:
   primary_table: payments
   related_tables:
   - payments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_payments_treasury_transaction_aggregate_mismatch_02
   domain: banking
   primary_table: treasury_transactions
@@ -675,11 +689,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: banking_settlement_transfer_aggregate_mismatch_03
   domain: banking
   primary_table: transfers
@@ -900,11 +916,13 @@ coverage:
   primary_table: cart_items
   related_tables:
   - cart_items
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: ecommerce_checkout_order_timestamp_out_of_order_01
   domain: ecommerce
   primary_table: orders
@@ -1191,11 +1209,13 @@ coverage:
   primary_table: marketplace_customers
   related_tables:
   - marketplace_customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: ecommerce_payments_payment_attempt_aggregate_mismatch_02
   domain: ecommerce
   primary_table: payment_attempts
@@ -1232,11 +1252,13 @@ coverage:
   primary_table: promotions
   related_tables:
   - promotions
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: ecommerce_payments_seller_payout_timeout_violation_04
   domain: ecommerce
   primary_table: seller_payouts
@@ -1253,12 +1275,14 @@ coverage:
   primary_table: marketplace_customers
   related_tables:
   - marketplace_customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: ecommerce_product_views_product_view_capacity_exceeded_02
   domain: ecommerce
   primary_table: product_views
@@ -1291,11 +1315,13 @@ coverage:
   primary_table: promotions
   related_tables:
   - promotions
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: ecommerce_product_views_seller_payout_volume_drop_04
   domain: ecommerce
   primary_table: seller_payouts
@@ -1645,12 +1671,14 @@ coverage:
   primary_table: students
   related_tables:
   - students
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_admissions_student_capacity_exceeded_05
   domain: education
   primary_table: students
@@ -1843,11 +1871,13 @@ coverage:
   primary_table: class_sections
   related_tables:
   - class_sections
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_enrollment_enrollment_invalid_state_transition_01
   domain: education
   primary_table: enrollments
@@ -1883,11 +1913,13 @@ coverage:
   primary_table: examination_results
   related_tables:
   - examination_results
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_exams_examination_result_stale_timestamp_02
   domain: education
   primary_table: examination_results
@@ -1976,23 +2008,27 @@ coverage:
   primary_table: enrollments
   related_tables:
   - enrollments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_grades_enrollment_calculation_error_05
   domain: education
   primary_table: enrollments
   related_tables:
   - enrollments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_grades_enrollment_cross_table_mismatch_03
   domain: education
   primary_table: enrollments
@@ -2207,12 +2243,14 @@ coverage:
   primary_table: enrollments
   related_tables:
   - enrollments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_reconciliation_enrollment_cross_table_mismatch_02
   domain: education
   primary_table: enrollments
@@ -2275,21 +2313,25 @@ coverage:
   primary_table: students
   related_tables:
   - students
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: education_student_lifecycle_student_retry_burst_01
   domain: education
   primary_table: students
   related_tables:
   - students
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_compliance_payment_aggregate_mismatch_04
   domain: finance
   primary_table: payments
@@ -2351,11 +2393,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_currency_risk_event_timestamp_out_of_order_03
   domain: finance
   primary_table: risk_events
@@ -2667,11 +2711,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_positions_position_aggregate_mismatch_05
   domain: finance
   primary_table: positions
@@ -2778,12 +2824,14 @@ coverage:
   primary_table: cards
   related_tables:
   - cards
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_reconciliation_payment_cross_table_mismatch_02
   domain: finance
   primary_table: payments
@@ -2836,11 +2884,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_risk_trade_negative_numeric_value_01
   domain: finance
   primary_table: trades
@@ -2891,11 +2941,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: finance_settlement_risk_event_aggregate_mismatch_03
   domain: finance
   primary_table: risk_events
@@ -3061,11 +3113,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_care_coordination_payment_geographic_jump_05
   domain: healthcare
   primary_table: payments
@@ -3089,11 +3143,13 @@ coverage:
   primary_table: providers
   related_tables:
   - providers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_care_coordination_provider_duplicate_transaction_02
   domain: healthcare
   primary_table: providers
@@ -3108,11 +3164,13 @@ coverage:
   primary_table: providers
   related_tables:
   - providers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_care_coordination_provider_timeout_violation_04
   domain: healthcare
   primary_table: providers
@@ -3154,11 +3212,13 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_duplicate_claim
   domain: healthcare
   primary_table: claims
@@ -3206,23 +3266,27 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_compliance_diagnose_capacity_exceeded_04
   domain: healthcare
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_compliance_diagnose_cross_table_mismatch_02
   domain: healthcare
   primary_table: diagnoses
@@ -3257,12 +3321,14 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_diagnosis_diagnose_capacity_exceeded_05
   domain: healthcare
   primary_table: diagnoses
@@ -3277,11 +3343,13 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_diagnosis_diagnose_invalid_state_transition_01
   domain: healthcare
   primary_table: diagnoses
@@ -3327,11 +3395,13 @@ coverage:
   primary_table: claims
   related_tables:
   - claims
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_eligibility_claim_cross_table_mismatch_01
   domain: healthcare
   primary_table: claims
@@ -3346,11 +3416,13 @@ coverage:
   primary_table: claims
   related_tables:
   - claims
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_eligibility_claim_volume_spike_04
   domain: healthcare
   primary_table: claims
@@ -3365,12 +3437,14 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_eligibility_payment_calculation_error_02
   domain: healthcare
   primary_table: payments
@@ -3432,11 +3506,13 @@ coverage:
   primary_table: patients
   related_tables:
   - patients
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_patient_registration_payment_format_corruption_05
   domain: healthcare
   primary_table: payments
@@ -3462,13 +3538,15 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_payments_payment_aggregate_mismatch_06
   domain: healthcare
   primary_table: payments
@@ -3492,21 +3570,25 @@ coverage:
   primary_table: payments
   related_tables:
   - payments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_payments_payment_duplicate_retry_05
   domain: healthcare
   primary_table: payments
   related_tables:
   - payments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_payments_payment_timeout_violation_04
   domain: healthcare
   primary_table: payments
@@ -3555,12 +3637,14 @@ coverage:
   primary_table: visits
   related_tables:
   - visits
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_pharmacy_visit_capacity_exceeded_06
   domain: healthcare
   primary_table: visits
@@ -3603,11 +3687,13 @@ coverage:
   primary_table: diagnoses
   related_tables:
   - diagnoses
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_procedures_payment_cross_table_mismatch_02
   domain: healthcare
   primary_table: payments
@@ -3642,11 +3728,13 @@ coverage:
   primary_table: procedures
   related_tables:
   - procedures
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_procedures_procedure_capacity_exceeded_04
   domain: healthcare
   primary_table: procedures
@@ -3661,11 +3749,13 @@ coverage:
   primary_table: patients
   related_tables:
   - patients
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_provider_master_prior_authorization_geographic_jump_07
   domain: healthcare
   primary_table: prior_authorizations
@@ -3691,21 +3781,25 @@ coverage:
   primary_table: providers
   related_tables:
   - providers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_provider_master_provider_retry_burst_02
   domain: healthcare
   primary_table: providers
   related_tables:
   - providers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_provider_master_provider_timeout_violation_06
   domain: healthcare
   primary_table: providers
@@ -3786,23 +3880,27 @@ coverage:
   primary_table: patients
   related_tables:
   - patients
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_visits_patient_timestamp_delay_01
   domain: healthcare
   primary_table: patients
   related_tables:
   - patients
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: healthcare_visits_visit_aggregate_mismatch_05
   domain: healthcare
   primary_table: visits
@@ -3964,11 +4062,13 @@ coverage:
   primary_table: premiums
   related_tables:
   - premiums
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_coverage_claim_document_calculation_error_06
   domain: insurance
   primary_table: claim_documents
@@ -4025,11 +4125,13 @@ coverage:
   primary_table: premiums
   related_tables:
   - premiums
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_customer_customer_aggregate_mismatch_04
   domain: insurance
   primary_table: customers
@@ -4046,11 +4148,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_customer_customer_cross_table_mismatch_05
   domain: insurance
   primary_table: customers
@@ -4092,11 +4196,13 @@ coverage:
   primary_table: premiums
   related_tables:
   - premiums
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_deductible_claim_aggregate_mismatch_02
   domain: insurance
   primary_table: claims
@@ -4147,11 +4253,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_fraud_claim_document_stale_timestamp_02
   domain: insurance
   primary_table: claim_documents
@@ -4208,11 +4316,13 @@ coverage:
   primary_table: premiums
   related_tables:
   - premiums
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_policy_lifecycle_claim_document_volume_drop_01
   domain: insurance
   primary_table: claim_documents
@@ -4242,11 +4352,13 @@ coverage:
   primary_table: policies
   related_tables:
   - policies
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_policy_lifecycle_policie_duplicate_transaction_04
   domain: insurance
   primary_table: policies
@@ -4270,11 +4382,13 @@ coverage:
   primary_table: settlements
   related_tables:
   - settlements
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_renewal_failure
   domain: insurance
   primary_table: policies
@@ -4290,11 +4404,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_premium_miscalculation
   domain: insurance
   primary_table: premiums
@@ -4403,11 +4519,13 @@ coverage:
   primary_table: policies
   related_tables:
   - policies
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_renewal_policie_invalid_state_transition_04
   domain: insurance
   primary_table: policies
@@ -4473,11 +4591,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_settlement_settlement_aggregate_mismatch_03
   domain: insurance
   primary_table: settlements
@@ -4534,11 +4654,13 @@ coverage:
   primary_table: policies
   related_tables:
   - policies
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_underwriting_policie_cross_table_mismatch_01
   domain: insurance
   primary_table: policies
@@ -4553,11 +4675,13 @@ coverage:
   primary_table: policies
   related_tables:
   - policies
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_underwriting_policie_volume_spike_04
   domain: insurance
   primary_table: policies
@@ -4572,12 +4696,14 @@ coverage:
   primary_table: premiums
   related_tables:
   - premiums
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: insurance_underwriting_settlement_calculation_error_02
   domain: insurance
   primary_table: settlements
@@ -4671,12 +4797,14 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_carrier_management_exception_alert_timeout_violation_04
   domain: logistics
   primary_table: exception_alerts
@@ -4749,11 +4877,13 @@ coverage:
   primary_table: shipments
   related_tables:
   - shipments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_customs_exception_alert_cross_table_mismatch_06
   domain: logistics
   primary_table: exception_alerts
@@ -4788,11 +4918,13 @@ coverage:
   primary_table: shipments
   related_tables:
   - shipments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_customs_shipment_timestamp_delay_01
   domain: logistics
   primary_table: shipments
@@ -4874,11 +5006,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_exceptions_tracking_event_aggregate_mismatch_02
   domain: logistics
   primary_table: tracking_events
@@ -4895,12 +5029,14 @@ coverage:
   primary_table: tracking_events
   related_tables:
   - tracking_events
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - actual_amount
   - expected_amount
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_exceptions_tracking_event_capacity_exceeded_05
   domain: logistics
   primary_table: tracking_events
@@ -4962,11 +5098,13 @@ coverage:
   primary_table: gps_events
   related_tables:
   - gps_events
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_gps_gps_event_timestamp_delay_02
   domain: logistics
   primary_table: gps_events
@@ -5117,11 +5255,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_shipment_creation_exception_alert_duplicate_transaction_03
   domain: logistics
   primary_table: exception_alerts
@@ -5138,21 +5278,25 @@ coverage:
   primary_table: shipments
   related_tables:
   - shipments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_shipment_creation_shipment_retry_burst_01
   domain: logistics
   primary_table: shipments
   related_tables:
   - shipments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_shipment_creation_shipment_timeout_violation_05
   domain: logistics
   primary_table: shipments
@@ -5167,11 +5311,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_support_driver_sequence_gap_03
   domain: logistics
   primary_table: drivers
@@ -5235,11 +5381,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_tracking_tracking_event_geographic_jump_04
   domain: logistics
   primary_table: tracking_events
@@ -5272,11 +5420,13 @@ coverage:
   primary_table: customers
   related_tables:
   - customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: logistics_warehouse_warehouse_aggregate_mismatch_03
   domain: logistics
   primary_table: warehouses
@@ -6177,11 +6327,13 @@ coverage:
   primary_table: promotions
   related_tables:
   - promotions
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: retail_data_quality_control_categorie_defect_rate_spike_01
   domain: retail
   primary_table: categories
@@ -6293,11 +6445,13 @@ coverage:
   primary_table: inventory
   related_tables:
   - inventory
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - scenario_status_code
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: retail_inventory_inventory_inventory_oversell_02
   domain: retail
   primary_table: inventory
@@ -6356,11 +6510,13 @@ coverage:
   primary_table: promotions
   related_tables:
   - promotions
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: retail_order_management_refund_event_capacity_exceeded_02
   domain: retail
   primary_table: refund_events
@@ -6428,11 +6584,13 @@ coverage:
   primary_table: payments
   related_tables:
   - payments
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: retail_payments_payment_timeout_violation_04
   domain: retail
   primary_table: payments
@@ -6818,11 +6976,13 @@ coverage:
   primary_table: invoices
   related_tables:
   - invoices
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_billing_invoice_duplicate_transaction_04
   domain: telecommunications
   primary_table: invoices
@@ -6837,11 +6997,13 @@ coverage:
   primary_table: invoices
   related_tables:
   - invoices
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_billing_invoice_volume_drop_01
   domain: telecommunications
   primary_table: invoices
@@ -6929,21 +7091,25 @@ coverage:
   primary_table: billing_accounts
   related_tables:
   - billing_accounts
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_fraud_billing_account_retry_burst_04
   domain: telecommunications
   primary_table: billing_accounts
   related_tables:
   - billing_accounts
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_fraud_billing_account_volume_drop_03
   domain: telecommunications
   primary_table: billing_accounts
@@ -7049,11 +7215,13 @@ coverage:
   primary_table: plans
   related_tables:
   - plans
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_plans_plan_duplicate_transaction_06
   domain: telecommunications
   primary_table: plans
@@ -7077,11 +7245,13 @@ coverage:
   primary_table: telecom_customers
   related_tables:
   - telecom_customers
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_reconciliation_invoice_aggregate_mismatch_01
   domain: telecommunications
   primary_table: invoices
@@ -7141,21 +7311,25 @@ coverage:
   primary_table: call_detail_records
   related_tables:
   - call_detail_records
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_roaming_call_detail_record_retry_burst_02
   domain: telecommunications
   primary_table: call_detail_records
   related_tables:
   - call_detail_records
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_roaming_call_detail_record_timeout_violation_06
   domain: telecommunications
   primary_table: call_detail_records
@@ -7292,11 +7466,13 @@ coverage:
   primary_table: call_detail_records
   related_tables:
   - call_detail_records
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_subscriber_lifecycle_subscriber_coverage_limit_violation_05
   domain: telecommunications
   primary_table: subscribers
@@ -7372,11 +7548,13 @@ coverage:
   primary_table: call_detail_records
   related_tables:
   - call_detail_records
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_support_network_qos_sample_availability_failure_05
   domain: telecommunications
   primary_table: network_qos_samples
@@ -7396,12 +7574,14 @@ coverage:
   primary_table: support_tickets
   related_tables:
   - support_tickets
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_support_support_ticket_duplicate_transaction_04
   domain: telecommunications
   primary_table: support_tickets
@@ -7416,11 +7596,13 @@ coverage:
   primary_table: support_tickets
   related_tables:
   - support_tickets
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - idempotency_key
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_support_support_ticket_volume_drop_01
   domain: telecommunications
   primary_table: support_tickets
@@ -7435,11 +7617,13 @@ coverage:
   primary_table: call_detail_records
   related_tables:
   - call_detail_records
-  table_support_status: requires_new_columns
+  table_support_status: fully_supported
   missing_tables: []
   missing_columns:
   - risk_score
-  execution_status: specification_only
+  execution_status: executable
+  proposed_tables: []
+  proposed_columns: []
 - scenario_id: telecommunications_tower_operations_cell_tower_availability_failure_02
   domain: telecommunications
   primary_table: cell_towers
@@ -7539,3 +7723,769 @@ coverage:
   missing_tables: []
   missing_columns: []
   execution_status: executable
+- scenario_id: banking_ach_same_day_cutoff_breach
+  domain: banking
+  primary_table: payments
+  related_tables:
+  - deposit_accounts
+  - payments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id001
+  - ach_cutoff_time
+  - same_day_settlement_flag
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id001
+- scenario_id: banking_double_spend_concurrent_debit
+  domain: banking
+  primary_table: payments
+  related_tables:
+  - deposit_accounts
+  - payments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id002
+  - pre_debit_balance
+  - post_debit_balance
+  - overdraft_flag
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id002
+- scenario_id: banking_fx_rate_staleness_at_execution
+  domain: banking
+  primary_table: transfers
+  related_tables:
+  - deposit_accounts
+  - transfers
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id003
+  - fx_rate_timestamp
+  - fx_rate_age_seconds
+  - max_fx_staleness_seconds
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id003
+- scenario_id: banking_reg_reporting_late_correction
+  domain: banking
+  primary_table: payments
+  related_tables:
+  - deposit_accounts
+  - payments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id004
+  - reporting_period
+  - reporting_cutoff_ts
+  - correction_received_ts
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id004
+- scenario_id: banking_card_not_present_burst_multi_geo
+  domain: banking
+  primary_table: card_authorizations
+  related_tables:
+  - branches
+  - card_authorizations
+  - customers
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id005
+  - card_present_flag
+  - authorization_city
+  - authorization_country
+  - geo_velocity_km
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id005
+- scenario_id: ecommerce_flash_sale_concurrent_checkout_oversell
+  domain: ecommerce
+  primary_table: order_items
+  related_tables:
+  - order_items
+  - orders
+  - product_listings
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id006 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id006
+- scenario_id: ecommerce_double_coupon_redemption_race
+  domain: ecommerce
+  primary_table: promotions
+  related_tables:
+  - orders
+  - payments
+  - promotions
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id007
+  - coupon_code
+  - redemption_count
+  - max_redemptions
+  - checkout_session_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id007
+- scenario_id: ecommerce_payment_gateway_webhook_timeout_desync
+  domain: ecommerce
+  primary_table: payments
+  related_tables:
+  - orders
+  - payments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id008
+  - gateway_event_id
+  - webhook_status
+  - client_retry_count
+  - gateway_charge_status
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id008
+- scenario_id: ecommerce_partial_shipment_tracking_desync
+  domain: ecommerce
+  primary_table: shipments
+  related_tables:
+  - orders
+  - shipments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id009
+  - shipment_leg_count
+  - tracking_event_count
+  - order_delivery_state
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id009
+- scenario_id: ecommerce_seller_payout_clawback_after_chargeback
+  domain: ecommerce
+  primary_table: seller_payouts
+  related_tables:
+  - orders
+  - payments
+  - returns
+  - seller_payouts
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id010
+  - chargeback_status
+  - clawback_amount
+  - seller_balance_after_clawback
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id010
+- scenario_id: education_duplicate_enrollment_race_across_sections
+  domain: education
+  primary_table: enrollments
+  related_tables:
+  - class_sections
+  - courses
+  - enrollments
+  - students
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id011 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id011
+- scenario_id: education_financial_aid_disbursed_before_enrollment_verified
+  domain: education
+  primary_table: fees_payments
+  related_tables:
+  - enrollments
+  - fees_payments
+  - students
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id012
+  - aid_disbursement_id
+  - aid_verification_status
+  - clawback_status
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id012
+- scenario_id: education_grade_correction_after_transcript_lock
+  domain: education
+  primary_table: examination_results
+  related_tables:
+  - academic_standing_events
+  - examination_results
+  - students
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id013
+  - transcript_lock_ts
+  - grade_correction_ts
+  - snapshot_run_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id013
+- scenario_id: education_late_drop_fee_miscalculated
+  domain: education
+  primary_table: fees_payments
+  related_tables:
+  - enrollments
+  - fees_payments
+  - students
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id014 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id014
+- scenario_id: education_lms_submission_duplicate_burst
+  domain: education
+  primary_table: assignment_submissions
+  related_tables:
+  - academic_standing_events
+  - assignment_submissions
+  - assignments
+  - students
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id015 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id015
+- scenario_id: finance_trade_settlement_fail_t_plus_2
+  domain: finance
+  primary_table: trades
+  related_tables:
+  - accounts
+  - positions
+  - trades
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id016
+  - expected_settlement_date
+  - actual_settlement_date
+  - settlement_status
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id016
+- scenario_id: finance_stale_market_data_used_in_valuation
+  domain: finance
+  primary_table: market_data
+  related_tables:
+  - market_data
+  - positions
+  - risk_events
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id017 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id017
+- scenario_id: finance_wash_trade_duplicate_order_pair
+  domain: finance
+  primary_table: trades
+  related_tables:
+  - accounts
+  - trades
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id018
+  - opposite_trade_id
+  - surveillance_pattern
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id018
+- scenario_id: finance_loan_payment_applied_to_closed_account
+  domain: finance
+  primary_table: payments
+  related_tables:
+  - customers
+  - loans
+  - payments
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id019 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id019
+- scenario_id: finance_month_end_nav_reconciliation_break
+  domain: finance
+  primary_table: positions
+  related_tables:
+  - accounts
+  - market_data
+  - positions
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id020
+  - custodian_statement_amount
+  - nav_close_date
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id020
+- scenario_id: healthcare_prior_auth_expired_before_claim_submission
+  domain: healthcare
+  primary_table: claims
+  related_tables:
+  - claims
+  - prior_authorizations
+  - procedures
+  - visits
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id021 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id021
+- scenario_id: healthcare_duplicate_claim_across_payers
+  domain: healthcare
+  primary_table: claims
+  related_tables:
+  - claims
+  - patients
+  - providers
+  - visits
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id022
+  - payer_id
+  - coordination_of_benefits_flag
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id022
+- scenario_id: healthcare_diagnosis_code_corrected_after_adjudication
+  domain: healthcare
+  primary_table: diagnoses
+  related_tables:
+  - claims
+  - diagnoses
+  - payments
+  - visits
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id023 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id023
+- scenario_id: healthcare_patient_identity_merge_conflict
+  domain: healthcare
+  primary_table: patients
+  related_tables:
+  - claims
+  - patients
+  - visits
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id024
+  - mrn
+  - surviving_patient_id
+  - merged_patient_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id024
+- scenario_id: healthcare_readmission_within_30_days_unflagged
+  domain: healthcare
+  primary_table: visits
+  related_tables:
+  - claims
+  - diagnoses
+  - patients
+  - visits
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id025
+  - readmission_flag
+  - index_visit_id
+  - readmission_window_days
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id025
+- scenario_id: insurance_claim_submitted_after_policy_cancellation
+  domain: insurance
+  primary_table: claims
+  related_tables:
+  - claims
+  - customers
+  - policies
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id026
+  - cancellation_date
+  - loss_event_date
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id026
+- scenario_id: insurance_settlement_exceeds_policy_coverage_limit
+  domain: insurance
+  primary_table: settlements
+  related_tables:
+  - claims
+  - policies
+  - settlements
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id027 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id027
+- scenario_id: insurance_premium_not_recalculated_after_midterm_endorsement
+  domain: insurance
+  primary_table: premiums
+  related_tables:
+  - customers
+  - policies
+  - premiums
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id028
+  - endorsement_effective_date
+  - risk_profile_after_endorsement
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id028
+- scenario_id: insurance_duplicate_claim_different_channels
+  domain: insurance
+  primary_table: claims
+  related_tables:
+  - claims
+  - customers
+  - policies
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id029
+  - intake_channel
+  - loss_event_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id029
+- scenario_id: insurance_commission_calculated_on_rescinded_policy
+  domain: insurance
+  primary_table: policies
+  related_tables:
+  - agents
+  - policies
+  - premiums
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id030
+  - commission_amount
+  - rescission_date
+  - commission_reversal_status
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id030
+- scenario_id: logistics_carrier_label_failure_silent_ship
+  domain: logistics
+  primary_table: shipments
+  related_tables:
+  - exception_alerts
+  - shipments
+  - tracking_events
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id031
+  - carrier_id
+  - label_status
+  - carrier_api_response_code
+  - tracking_number
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id031
+- scenario_id: logistics_cold_chain_sensor_gap_masks_breach
+  domain: logistics
+  primary_table: tracking_events
+  related_tables:
+  - exception_alerts
+  - gps_events
+  - shipments
+  - tracking_events
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id032
+  - temperature_celsius
+  - temperature_threshold
+  - sensor_gap_start
+  - sensor_gap_end
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id032
+- scenario_id: logistics_customs_delay_not_propagated_to_delivery_sla
+  domain: logistics
+  primary_table: delivery_records
+  related_tables:
+  - delivery_records
+  - exception_alerts
+  - shipments
+  - tracking_events
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id033 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id033
+- scenario_id: logistics_route_reassignment_orphans_tracking_events
+  domain: logistics
+  primary_table: tracking_events
+  related_tables:
+  - drivers
+  - gps_events
+  - shipments
+  - tracking_events
+  - vehicles
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id034
+  - route_id
+  - previous_route_id
+  - new_route_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id034
+- scenario_id: logistics_warehouse_double_pick_race
+  domain: logistics
+  primary_table: shipments
+  related_tables:
+  - exception_alerts
+  - shipments
+  - warehouses
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id035
+  - pick_task_id
+  - inventory_unit_id
+  - warehouse_stock_after_pick
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id035
+- scenario_id: manufacturing_work_order_completed_before_qc_inspection
+  domain: manufacturing
+  primary_table: work_orders
+  related_tables:
+  - production_batches
+  - quality_checks
+  - work_orders
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id036 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id036
+- scenario_id: manufacturing_sensor_drift_masks_defect_spike
+  domain: manufacturing
+  primary_table: sensor_readings
+  related_tables:
+  - defects
+  - machines
+  - quality_checks
+  - sensor_readings
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id037 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id037
+- scenario_id: manufacturing_downtime_not_linked_to_production_order
+  domain: manufacturing
+  primary_table: maintenance_orders
+  related_tables:
+  - machines
+  - maintenance_orders
+  - production_batches
+  - work_orders
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id038
+  - affected_work_order_id
+  - oee_impact_minutes
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id038
+- scenario_id: manufacturing_supplier_recall_not_propagated_to_wip
+  domain: manufacturing
+  primary_table: raw_materials
+  related_tables:
+  - inventory
+  - raw_materials
+  - suppliers
+  - work_orders
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id039
+  - recall_id
+  - quarantine_status
+  - affected_work_order_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id039
+- scenario_id: manufacturing_maintenance_deferred_past_safety_threshold
+  domain: manufacturing
+  primary_table: maintenance_orders
+  related_tables:
+  - machines
+  - maintenance_orders
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id040 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id040
+- scenario_id: retail_bopis_reservation_never_released
+  domain: retail
+  primary_table: inventory
+  related_tables:
+  - inventory
+  - products
+  - sales
+  - stores
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id041
+  - reservation_id
+  - reservation_expires_at
+  - pickup_status
+  - reserved_quantity
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id041
+- scenario_id: retail_pos_price_override_not_synced_online
+  domain: retail
+  primary_table: products
+  related_tables:
+  - products
+  - promotions
+  - sales
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id042 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id042
+- scenario_id: retail_return_without_original_sale_record
+  domain: retail
+  primary_table: returns
+  related_tables:
+  - customers
+  - products
+  - returns
+  - sales
+  table_support_status: fully_supported
+  missing_tables: []
+  missing_columns: &id043 []
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id043
+- scenario_id: retail_po_receipt_quantity_mismatch
+  domain: retail
+  primary_table: purchase_orders
+  related_tables:
+  - inventory
+  - purchase_orders
+  - shipments
+  - suppliers
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id044
+  - ordered_quantity
+  - received_quantity
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id044
+- scenario_id: retail_loyalty_points_redeemed_after_expiration
+  domain: retail
+  primary_table: customers
+  related_tables:
+  - customers
+  - payments
+  - sales
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id045
+  - points_expiration_date
+  - points_redeemed
+  - redemption_timestamp
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id045
+- scenario_id: telecommunications_roaming_charge_stale_plan_rating
+  domain: telecommunications
+  primary_table: call_detail_records
+  related_tables:
+  - call_detail_records
+  - invoices
+  - plans
+  - subscriptions
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id046
+  - plan_change_ts
+  - rating_plan_id
+  - active_plan_id
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id046
+- scenario_id: telecommunications_sim_swap_fraud_pattern
+  domain: telecommunications
+  primary_table: sim_cards
+  related_tables:
+  - call_detail_records
+  - data_sessions
+  - sim_cards
+  - subscriptions
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id047
+  - previous_sim_id
+  - sim_swap_timestamp
+  - high_value_usage_flag
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id047
+- scenario_id: telecommunications_outage_masks_dropped_call_spike
+  domain: telecommunications
+  primary_table: network_events
+  related_tables:
+  - call_detail_records
+  - cell_towers
+  - data_sessions
+  - network_events
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id048
+  - network_qos_sample_id
+  - dropped_call_rate
+  - session_failure_rate
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id048
+- scenario_id: telecommunications_prepaid_balance_negative_race
+  domain: telecommunications
+  primary_table: billing_accounts
+  related_tables:
+  - billing_accounts
+  - data_sessions
+  - invoices
+  - payments
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id049
+  - prepaid_balance_before
+  - prepaid_balance_after
+  - hard_stop_flag
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id049
+- scenario_id: telecommunications_midcycle_upgrade_proration_error
+  domain: telecommunications
+  primary_table: invoices
+  related_tables:
+  - billing_accounts
+  - invoices
+  - plans
+  - subscriptions
+  table_support_status: requires_new_columns
+  missing_tables: []
+  missing_columns: &id050
+  - plan_upgrade_date
+  - proration_days
+  - proration_amount
+  execution_status: specification_only
+  proposed_tables: []
+  proposed_columns: *id050

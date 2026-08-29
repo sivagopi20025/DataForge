@@ -5,7 +5,7 @@ import random
 from typing import Any
 
 from .domains.retail.schemas import RETAIL_SPEC
-from .model import AUDIT_COLUMNS, SCD2_COLUMNS, TIME_HIERARCHY_COLUMNS, Dataset, DomainSpec, FailureEvent
+from .model import AUDIT_COLUMNS, SCD2_COLUMNS, SCENARIO_SUPPORT_COLUMNS, TIME_HIERARCHY_COLUMNS, Dataset, DomainSpec, FailureEvent
 
 
 DATE_COLUMNS = RETAIL_SPEC.date_columns
@@ -115,6 +115,7 @@ class FailureInjector:
                 *AUDIT_COLUMNS,
                 *TIME_HIERARCHY_COLUMNS,
                 *SCD2_COLUMNS,
+                *SCENARIO_SUPPORT_COLUMNS,
             }]
             if not business_columns:
                 continue

@@ -53,7 +53,7 @@ class BankingGenerator:
         }
         suffix_pool = suffixes.get(customer_type, ("Financial Services",))
         suffix = suffix_pool[(index - 1) % len(suffix_pool)]
-        return business_name(index, f"banking.{customer_type.lower()}", suffix)
+        return business_name(index, f"banking.{customer_type.lower()}", suffix, include_index=False)
 
     def generate(self) -> Dataset:
         selected = self.selected_tables

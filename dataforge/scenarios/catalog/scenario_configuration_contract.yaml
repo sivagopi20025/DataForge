@@ -27,6 +27,27 @@ scenario_examples:
     failure_plan:
       contract: FailurePlan
       default_overlap_mode: non_overlapping
+- scenario_id: banking_accounts_customer_stale_timestamp_01
+  domain: banking
+  primary_table: customers
+  default_primitive: stale_timestamp
+  compatible_primitives:
+  - stale_timestamp
+  - timeout_violation
+  - timestamp_delay
+  - timestamp_out_of_order
+  configurable_fields:
+    records:
+      type: integer
+      minimum: 0
+      description: Primary transaction table record count.
+    seed:
+      type: integer
+      minimum: 0
+      description: Deterministic data and mutation selector seed.
+    failure_plan:
+      contract: FailurePlan
+      default_overlap_mode: non_overlapping
 - scenario_id: banking_accounts_deposit_account_aggregate_mismatch_06
   domain: banking
   primary_table: deposit_accounts
@@ -172,27 +193,6 @@ scenario_examples:
   - stale_timestamp
   - timeout_violation
   - timestamp_delay
-  - timestamp_out_of_order
-  configurable_fields:
-    records:
-      type: integer
-      minimum: 0
-      description: Primary transaction table record count.
-    seed:
-      type: integer
-      minimum: 0
-      description: Deterministic data and mutation selector seed.
-    failure_plan:
-      contract: FailurePlan
-      default_overlap_mode: non_overlapping
-- scenario_id: banking_cards_treasury_position_timestamp_delay_05
-  domain: banking
-  primary_table: treasury_positions
-  default_primitive: timestamp_delay
-  compatible_primitives:
-  - timestamp_delay
-  - stale_timestamp
-  - timeout_violation
   - timestamp_out_of_order
   configurable_fields:
     records:
