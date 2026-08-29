@@ -43,6 +43,18 @@ class BankingGenerator:
         value = max(minimum, int(self.payment_records * ratio))
         return min(value, maximum) if maximum else value
 
+    def _customer_name(self, index: int, customer_type: str) -> str:
+        if customer_type == "Individual":
+            return full_name(index, "banking.customer")
+        suffixes = {
+            "Business": ("Banking Services", "Treasury Services", "Operating Company", "Merchant Group"),
+            "Corporate": ("Holdings", "Capital Partners", "Global Finance", "Enterprise Group"),
+            "Government": ("Municipal Authority", "Public Finance", "Treasury Office", "Civic Trust"),
+        }
+        suffix_pool = suffixes.get(customer_type, ("Financial Services",))
+        suffix = suffix_pool[(index - 1) % len(suffix_pool)]
+        return business_name(index, f"banking.{customer_type.lower()}", suffix)
+
     def generate(self) -> Dataset:
         selected = self.selected_tables
         full = not selected
@@ -70,7 +82,7 @@ class BankingGenerator:
                 data["customers"].append({
                     "customer_id": 1300000 + i,
                     "customer_type": CUSTOMER_TYPES[i % len(CUSTOMER_TYPES)],
-                    "customer_name": full_name(i, "banking.customer") if CUSTOMER_TYPES[i % len(CUSTOMER_TYPES)] == "Individual" else business_name(i, "banking.business", "Client"),
+                    "customer_name": self._customer_name(i, CUSTOMER_TYPES[i % len(CUSTOMER_TYPES)]),
                     "country": country,
                     "state": state,
                     "city": city,

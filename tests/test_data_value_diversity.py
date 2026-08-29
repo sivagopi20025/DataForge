@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import csv
 from collections import Counter
 
+from dataforge.domains import DOMAIN_GENERATORS, DOMAIN_SPECS
 from dataforge.domains.banking.generators import BankingGenerator
 from dataforge.domains.ecommerce.generators import EcommerceGenerator
 from dataforge.domains.education.generators import EducationGenerator
@@ -12,6 +14,8 @@ from dataforge.domains.logistics.generators import LogisticsGenerator
 from dataforge.domains.manufacturing.generators import ManufacturingGenerator
 from dataforge.domains.retail.generators import RetailGenerator
 from dataforge.domains.telecommunications.generators import TelecommunicationsGenerator
+from dataforge.exporter import export_run
+from dataforge.modes import build_artifacts
 from dataforge.synthetic_values import full_name
 
 
@@ -88,3 +92,45 @@ def test_identity_values_are_diverse_across_domain_generators():
         if email_column:
             emails = [row[email_column] for row in rows]
             assert len(set(emails)) == len(emails)
+
+
+def test_banking_business_customer_names_are_not_generic_client_placeholders():
+    rows = BankingGenerator(100, seed=20).generate()["customers"]
+
+    business_rows = [row for row in rows if row["customer_type"] != "Individual"]
+
+    assert business_rows
+    assert all(" Client " not in row["customer_name"] for row in business_rows)
+    assert any("Capital" in row["customer_name"] or "Treasury" in row["customer_name"] for row in business_rows)
+
+
+def test_generated_csv_exports_keep_headers_and_rows_aligned_for_all_domains(tmp_path):
+    for domain, generator_type in DOMAIN_GENERATORS.items():
+        spec = DOMAIN_SPECS[domain]
+        data = generator_type(100, seed=31).generate()
+        run_dir = tmp_path / domain
+        export_run(
+            run_dir,
+            build_artifacts(data, "bulk", seed=31, spec=spec),
+            ["csv"],
+            {
+                "run_id": f"{domain}-alignment",
+                "domain": domain,
+                "requested_records": 100,
+                "realism_profile": "realistic",
+                "load_type": "bulk",
+                "output_formats": ["csv"],
+                "selected_tables": sorted(data),
+                "generated_at": "2026-08-15T00:00:00+00:00",
+            },
+            {},
+            [],
+            spec,
+        )
+
+        for path in (run_dir / "bulk").glob("*.csv"):
+            with path.open(newline="", encoding="utf-8") as handle:
+                reader = csv.reader(handle)
+                header = next(reader)
+                for row_index, row in enumerate(reader, 1):
+                    assert len(row) == len(header), f"{domain}/{path.name} row {row_index} has shifted columns"
